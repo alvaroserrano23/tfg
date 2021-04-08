@@ -1,0 +1,14 @@
+<header>
+    <ul>
+      <li id="logo"><a href="#">FyD</a></li> 
+      <li><a [routerLink]="['/sobre-nosotros']" [routerLinkActive]="['actived']">Sobre nosotros </a></li>  
+      <li><a [routerLink]="['/contacto']" [routerLinkActive]="['actived']" >Contacta con nosotros</a></li>
+      <li *ngIf="!userIsLogged"><button [routerLink]="['/register-login']" id="boton_regini" >Iniciar sesión</button></li>
+  </ul>
+</header>
+<section id="content">
+  <router-outlet></router-outlet>
+</section>
+<footer>
+  Find Your Doctor Enterprises &copy;
+</footer>

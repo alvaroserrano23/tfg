@@ -1,0 +1,253 @@
+/*Importar fuentes personalizadas*/
+@font-face{
+    font-family: "yanone";
+    src: url("fonts/yanone.ttf");
+}
+
+@font-face{
+    font-family: "finger";
+    src: url("fonts/finger.ttf");
+}
+
+@font-face{
+    font-family: "titilium";
+    src: url("fonts/titilium.ttf");
+}
+
+/*Estilos generales*/
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    
+    font-family: 'titilium';
+    font-size: 18px;
+    background: #1498d5;
+    background-attachment: fixed;
+
+}
+
+/*Barra de navegacion (header)*/
+
+header{
+    display: block;
+    width: 100%;
+    height: 90px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    position: fixed;
+    background: white;
+}
+
+header ul{
+    display: block;
+    width: 44%;
+    height: inherit;
+    margin: 0px auto;
+    margin-top: -3px;
+}
+
+header ul li{
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 90px;
+    padding-right: 20px;
+}
+
+header a{
+    display: block;
+    padding-right: 30px;
+    padding-left: 30px;
+    height: inherit;
+    text-decoration: none;
+    color: black;
+    transition: all 300ms;
+
+}
+
+header a:hover,
+.actived{
+    color: #1498d5;
+    transform:scale(1.2,1.2);
+}
+
+#logo a{
+    transition: color 500ms,transform 500ms;
+
+}
+#logo{
+    font-size: 25px;
+}
+
+#logo a:hover{
+    background: transparent;
+    color:black;
+    transform: scale(1.50,1.50);
+}
+
+#boton_regini{
+    transition: transform 500ms;
+    font-family: titilium;
+    border-radius: 20px;
+    border: 1px solid #1498d5;
+    background-color: #1498d5;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#boton_regini:hover{
+    border: 1px solid rgba(20,152,213,1);
+    background: rgba(20,152,213,0.8);
+    transform: scale(1.2,1.2);
+}
+
+/*Contenedor principal*/
+#content{
+    min-height: 740px;
+    height: auto;
+    padding-top:120px;
+    width: 75%;
+    margin: 0px auto;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    background: white;
+}
+
+/*Pie de pagina*/
+footer{
+    width:75%;
+    margin: 0px 400px;
+    padding-top: 40px;
+    color: rgba(0,0,0,0.5);
+}
+
+/* Sobre mi*/
+#title{
+    width: 70%;
+    margin:0px auto;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 100px;
+}
+
+#title h1{
+    font-family: "titilium";
+    font-size: 60px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.about{
+    padding: 0px 213px;
+}
+.about h2{
+    border-bottom: 1px solid #ccc;
+}
+
+/* Seccion con formulario*/
+.container{
+    padding: 50px;
+    padding-top: 10px;
+
+}
+
+.container h2{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: block;
+    padding: 0px 364px;
+    font-size: 45px;
+}
+
+form{
+    width: 50%;
+    padding: 0px 364px;
+}
+
+form label{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"]{
+    width: 64%;
+    padding:5px;
+    margin-bottom: 20px;
+}
+
+form textarea
+{
+    width: 64%;
+    padding: 5px;
+    padding-bottom: 100px;
+    margin-bottom: 20px;
+    font-family: 'Helvetica';
+}
+
+form button,
+form input[type="submit"]{
+    font-family: titilium;
+    border-radius: 20px;
+    border: 1px solid #1498d5;
+    background-color: #1498d5;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 130px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+form button:hover,
+form input[type="submit"]:hover{
+    border: 1px solid rgba(20,152,213,1);
+    background: rgba(20,152,213,0.8);
+
+}
+
+#button_doc{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#forgot{
+    padding: 0px 124px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#no_accP,#no_accD{
+    padding: 0px 70px;
+    margin-top: 20px;
+    margin-bottom: 20px;   
+}
+
+#no_accP,#no_accD:hover{
+     color:rgba(20,152,213,1);
+     cursor:pointer; 
+}
+
+#forgot:hover{
+    color:rgba(20,152,213,1);
+    cursor:pointer;
+}
+
+.form_error{
+    color: red;
+    font-size:17px;
+}
+
