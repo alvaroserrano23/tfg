@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//Prueba
+//Prueba 2S
 var PatientSchema = Schema({
 	name:String,
 	surname:String,
