@@ -2,7 +2,8 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-//
+
+//Prueba
 var PatientSchema = Schema({
 	name:String,
 	surname:String,
