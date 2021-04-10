@@ -60,7 +60,7 @@ var controller = {
 			return res.status(404).send({message: 'El userAuthentication no existe.'});
 		}
 
-		UserAuthentication.findOne({user: userAuthenticationUsername}).exec((err,patient) => {
+		UserAuthentication.findOne({user: userAuthenticationUsername}).exec((err,userAuthentication) => {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
 			if(!userAuthentication) return res.status(404).send({message: 'El UserAuthentication no existe.'});

@@ -6,43 +6,23 @@
 		<button id="button_pat" >Paciente</button>
 	</form>
 </div>
-<!-- Iniciar sesion Medico -->
-<div class="container" id="containerInDoc"  >
+<!-- Iniciar sesion Usuario -->
+<div class="container" id="containerInUser"  >
 	<h2>{{title2}}</h2>
 
-	<form #InDForm ="ngForm" (ngSubmit)="onSubmitInD(InDForm)" >
+	<form #InUForm ="ngForm" (ngSubmit)="onSubmitInU(InUForm)" >
 		<p>
 			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="doctor.user" placeholder="medico123" required />
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="userAuthentication.user" placeholder="usuario" required />
 		</p>
 		<p>
 			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="doctor.password" placeholder="**********" required/>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="userAuthentication.password" placeholder="**********" required/>
 			<span></span>
 		</p>
 		<p id="forgot">¿Olvidaste tu contraseña?</p>
 		<input type="submit" value ="Iniciar sesión"/>
-		<p id="no_accD">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
-	</form>	
-</div>
-
-<!-- Iniciar sesion Paciente -->
-<div class="container" id="containerInPat" >
-	<h2>{{title2}}</h2>
-
-	<form #InPForm ="ngForm" (ngSubmit)="onSubmitInP(InPForm)"  >
-		<p>
-			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="patient.user" placeholder="paciente123" required />
-		</p>
-		<p>
-			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="patient.password" placeholder="**********" required/>
-			<span></span>
-		</p>
-		<p id="forgot">¿Olvidaste tu contraseña?</p>
-		<input type="submit" value ="Iniciar sesión"/>
-		<p id="no_accP">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
+		<p id="no_accU">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
 	</form>	
 </div>
 
