@@ -24,8 +24,8 @@ export class RegisterLoginComponent implements OnInit {
   public botonDoctor:string;
 
   constructor(
-    private _patientService: PatientService,
-    private _doctorService: DoctorService
+    private patientService: PatientService,
+    private doctorService: DoctorService
     ) {
     //Titulos
   	this.title = "Tipo de cuenta";
@@ -76,42 +76,44 @@ export class RegisterLoginComponent implements OnInit {
 
   asignarValoresDeResponseDoctor(doctorResponse: any){
 
-    this.doctorEnBd._id = doctorResponse._id;
-    this.doctorEnBd._name = doctorResponse.name;
-    this.doctorEnBd._surname = doctorResponse.surname;
-    this.doctorEnBd._user = doctorResponse.user;
-    this.doctorEnBd._password = doctorResponse.password;
-    this.doctorEnBd._email = doctorResponse.email;
-    this.doctorEnBd._location = doctorResponse.location;
-    this.doctorEnBd._address = doctorResponse.address;
-    this.doctorEnBd._curriculum = doctorResponse.curriculum;
-    this.doctorEnBd._insurance = doctorResponse.insurance;
+    this.doctorEnBd.id = doctorResponse._id;
+    this.doctorEnBd.name = doctorResponse.name;
+    this.doctorEnBd.surname = doctorResponse.surname;
+    this.doctorEnBd.user = doctorResponse.user;
+    this.doctorEnBd.password = doctorResponse.password;
+    this.doctorEnBd.email = doctorResponse.email;
+    this.doctorEnBd.location = doctorResponse.location;
+    this.doctorEnBd.address = doctorResponse.address;
+    this.doctorEnBd.curriculum = doctorResponse.curriculum;
+    this.doctorEnBd.insurance = doctorResponse.insurance;
     
   
   }
 
   asignarValoresDeResponsePatient(patientResponse: any){
 
-    this.patientEnBd._id = patientResponse._id;
-    this.patientEnBd._name = patientResponse.name;
-    this.patientEnBd._surname = patientResponse.surname;
-    this.patientEnBd._user = patientResponse.user;
-    this.patientEnBd._password = patientResponse.password;
-    this.patientEnBd._email = patientResponse.email;
-    this.patientEnBd._location = patientResponse.location;
-    this.patientEnBd._address = patientResponse.address;
-    this.patientEnBd._insurance = patientResponse.insurance;
+    this.patientEnBd.id = patientResponse._id;
+    this.patientEnBd.name = patientResponse.name;
+    this.patientEnBd.surname = patientResponse.surname;
+    this.patientEnBd.user = patientResponse.user;
+    this.patientEnBd.password = patientResponse.password;
+    this.patientEnBd.email = patientResponse.email;
+    this.patientEnBd.location = patientResponse.location;
+    this.patientEnBd.address = patientResponse.address;
+    this.patientEnBd.insurance = patientResponse.insurance;
     
   
   }
   onSubmitInD(form){
-    this._doctorService.getDoctorByUsername(this.doctor._user).subscribe(
+    this.doctorService.getDoctorByUsername(this.doctor.user).subscribe(
   		response => {
   			if(response.doctor){
           this.asignarValoresDeResponseDoctor(response.doctor);
-          if(this.doctor._user == this.doctorEnBd._user 
-            && this.doctor._password == this.doctorEnBd._password ){
-            console.log("Iniciar Sesion");
+          if(this.doctor.user == this.doctorEnBd.user 
+            && this.doctor.password == this.doctorEnBd.password ){
+              alert("Datos correctos, sesión iniciada");
+          }else{
+            alert("Datos incorrectos");
           }
   			}
   		},
@@ -122,13 +124,15 @@ export class RegisterLoginComponent implements OnInit {
     
   }
    onSubmitInP(form){
-    this._patientService.getPatientByUsername(this.patient._user).subscribe(
+    this.patientService.getPatientByUsername(this.patient.user).subscribe(
   		response => {
   			if(response.patient){
           this.asignarValoresDeResponsePatient(response.patient);
-          if(this.patient._user == this.patientEnBd._user 
-            && this.patient._password == this.patientEnBd._password ){
-            console.log("Iniciar Sesion");
+          if(this.patient.user == this.patientEnBd.user 
+            && this.patient.password == this.patientEnBd.password ){
+              alert("Datos correctos, sesión iniciada");
+          }else{
+            alert("Datos incorrectos");
           }
   			}
   		},
@@ -139,7 +143,7 @@ export class RegisterLoginComponent implements OnInit {
   }
    onSubmitRegD(form){
     console.log(this.doctor);
-    this._doctorService.saveDoctor(this.doctor).subscribe(
+    this.doctorService.saveDoctor(this.doctor).subscribe(
         response => {
           console.log(response);
           },
@@ -150,7 +154,7 @@ export class RegisterLoginComponent implements OnInit {
   }
    onSubmitRegP(form){
     console.log(this.patient);
-    this._patientService.savePatient(this.patient).subscribe(
+    this.patientService.savePatient(this.patient).subscribe(
         response => {
           console.log(response);
           },

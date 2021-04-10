@@ -23,15 +23,15 @@ var controller = {
 			return res.status(404).send({message:"El doctor " +"'"+ params._user +"'"+ " ya existe"});
 		}*/
 		
-		doctor.name = params._name;
-		doctor.surname = params._surname;
-		doctor.user = params._user;
-		doctor.email = params._email;
-		doctor.password = params._password;
-		doctor.location = params._location;
-		doctor.address = params._addres;
-		doctor.curriculum = params._curriculum;
-		doctor.insurance = params._insurance;
+		doctor.name = params.name;
+		doctor.surname = params.surname;
+		doctor.user = params.user;
+		doctor.email = params.email;
+		doctor.password = params.password;
+		doctor.location = params.location;
+		doctor.address = params.addres;
+		doctor.curriculum = params.curriculum;
+		doctor.insurance = params.insurance;
 		
 		
 			doctor.save((err,doctorGuardado) =>{
