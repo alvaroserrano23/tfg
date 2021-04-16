@@ -9,7 +9,6 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RegisterLoginComponent } from './components/register-login/register-login.component';
 import { ErrorComponent } from './components/error/error.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     routing,
     HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule
+    FormsModule
   ],
   providers: [
     appRoutingProviders
