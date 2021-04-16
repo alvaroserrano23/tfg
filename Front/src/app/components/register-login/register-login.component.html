@@ -6,43 +6,32 @@
 		<button id="button_pat" >Paciente</button>
 	</form>
 </div>
-<!-- Iniciar sesion Medico -->
-<div class="container" id="containerInDoc"  >
+<!-- Iniciar sesion Usuario -->
+<div class="container" id="containerInUser"  >
 	<h2>{{title2}}</h2>
 
-	<form #InDForm ="ngForm" (ngSubmit)="onSubmitInD(InDForm)" >
+	<form #InUForm ="ngForm" (ngSubmit)="onSubmitInU(InUForm)" >
 		<p>
 			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="doctor._user" placeholder="medico123" required />
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="userAuthentication.user" placeholder="usuario" required />
 		</p>
 		<p>
 			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="doctor._password" placeholder="**********" required/>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="userAuthentication.password" placeholder="**********" required/>
 			<span></span>
 		</p>
 		<p id="forgot">¿Olvidaste tu contraseña?</p>
 		<input type="submit" value ="Iniciar sesión"/>
-		<p id="no_accD">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
-	</form>	
-</div>
-
-<!-- Iniciar sesion Paciente -->
-<div class="container" id="containerInPat" >
-	<h2>{{title2}}</h2>
-
-	<form #InPForm ="ngForm" (ngSubmit)="onSubmitInP(InPForm)"  >
-		<p>
-			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="patient._user" placeholder="paciente123" required />
-		</p>
-		<p>
-			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="patient._password" placeholder="**********" required/>
-			<span></span>
-		</p>
-		<p id="forgot">¿Olvidaste tu contraseña?</p>
-		<input type="submit" value ="Iniciar sesión"/>
-		<p id="no_accP">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
+		<p id="no_accU">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
+		<button mat-button color="primary">Primary</button>
+		<mat-form-field>
+			<mat-select [(value)]="selected">
+			  <mat-option>None</mat-option>
+			  <mat-option value="option1">Option 1</mat-option>
+			  <mat-option value="option2">Option 2</mat-option>
+			  <mat-option value="option3">Option 3</mat-option>
+			</mat-select>
+		  </mat-form-field>
 	</form>	
 </div>
 
@@ -52,56 +41,56 @@
 	<form #RegDForm ="ngForm" (ngSubmit)="onSubmitRegD(RegDForm)" >
 		<p>
 			<label for="name">Nombre</label>
-			<input type="text" name="name" #name="ngModel" [(ngModel)]="doctor._name"  required />
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="doctor.name"  required />
 			<span class="form_error" *ngIf="name.touched && !name.valid">
 				*El nombre es obligatorio
 			</span>
 		</p>
 		<p>
 			<label for="surname">Apellidos</label>
-			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="doctor._surname"  required />
+			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="doctor.surname"  required />
 			<span class="form_error" *ngIf="surname.touched && !surname.valid">
 				*Los apellidos son obligatorios
 			</span>
 		</p>
 		<p>
 			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="doctor._user"  required />
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="doctor.user"  required />
 			<span class="form_error" *ngIf="user.touched && !user.valid">
 				*El nombre de usuario es obligatorio
 			</span>
 		</p>
 		<p>
 			<label for="email">Email</label>
-			<input type="email" name="email" #email="ngModel" [(ngModel)]="doctor._email"  required />
+			<input type="email" name="email" #email="ngModel" [(ngModel)]="doctor.email"  required />
 			<span class="form_error" *ngIf="email.touched && !email.valid">
 				*El email no es valido
 			</span>
 		</p>
 		<p>
 			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="doctor._password" required/>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="doctor.password" required/>
 			<span class="form_error" *ngIf="password.touched && !password.valid">
 				*La contraseña es obligatoria
 			</span>
 		</p>
 		<p>
 			<label for="location">Localidad</label>
-			<input type="text" name="location" #location="ngModel" [(ngModel)]="doctor._location"  required />
+			<input type="text" name="location" #location="ngModel" [(ngModel)]="doctor.location"  required />
 			<span class="form_error" *ngIf="location.touched && !location.valid">
 				*La localidad es obligatoria
 			</span>
 		</p>
 		<p>
 			<label for="address">Dirección</label>
-			<input type="text" name="address" #address="ngModel" [(ngModel)]="doctor._address"  required />
+			<input type="text" name="address" #address="ngModel" [(ngModel)]="doctor.address"  required />
 			<span class="form_error" *ngIf="address.touched && !address.valid">
 				*La dirección es obligatoria
 			</span>
 		</p>
 		<p>
 			<label for="curriculum">Curriculum</label>
-			<input type="file" name="curriculum" #curriculum="ngModel" [(ngModel)]="doctor._curriculum"  required />
+			<input type="file" name="curriculum" #curriculum="ngModel" [(ngModel)]="doctor.curriculum"  required />
 			
 		</p>
 		<p>
@@ -123,32 +112,32 @@
 	<form #RegPForm ="ngForm" (ngSubmit)="onSubmitRegP(RegPForm)" >
 		<p>
 			<label for="name">Nombre</label>
-			<input type="text" name="name" #name="ngModel" [(ngModel)]="patient._name"  required />
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="patient.name"  required />
 		</p>
 		<p>
 			<label for="surname">Apellidos</label>
-			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="patient._surname"  required />
+			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="patient.surname"  required />
 		</p>
 		<p>
 			<label for="user">Usuario</label>
-			<input type="text" name="user" #user="ngModel" [(ngModel)]="patient._user"  required />
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="patient.user"  required />
 		</p>
 		<p>
 			<label for="email">Email</label>
-			<input type="email" name="email" #email="ngModel" [(ngModel)]="patient._email"  required />
+			<input type="email" name="email" #email="ngModel" [(ngModel)]="patient.email"  required />
 		</p>
 		<p>
 			<label for="subject">Contraseña</label>
-			<input type="password" name="password" #password="ngModel" [(ngModel)]="patient._password" required/>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="patient.password" required/>
 			<span></span>
 		</p>
 		<p>
 			<label for="location">Localidad</label>
-			<input type="text" name="location" #location="ngModel" [(ngModel)]="patient._location"  required />
+			<input type="text" name="location" #location="ngModel" [(ngModel)]="patient.location"  required />
 		</p>
 		<p>
 			<label for="address">Dirección</label>
-			<input type="text" name="address" #address="ngModel" [(ngModel)]="patient._address"  required />
+			<input type="text" name="address" #address="ngModel" [(ngModel)]="patient.address"  required />
 		</p>
 		<p>
 			<label for="aseguradora">Aseguradora</label>

@@ -10,15 +10,15 @@ var app = express();
 var patient_routes = require('./routes/patient');
 var appointment_routes = require('./routes/appointment');
 var doctor_routes = require('./routes/doctor');
+var userAuthentication_routes = require('./routes/userAuthentication');
 //Middlewares
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 
-// CORS
-
-
 //Rutas
+//UserAuthentication
+app.use('/api',userAuthentication_routes);
 //Patient
 app.use('/api',patient_routes);
 //Appointment
