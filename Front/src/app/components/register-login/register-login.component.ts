@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../models/patient';
 import { Doctor } from '../../models/doctor';
-import { UserAuthentication } from '../../models/userAuthentication';
 import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
-import { UserAuthenticationService } from '../../services/userAuthentication.service';
-
 import * as $ from "jquery";
 
 @Component({
   selector: 'app-register-login',
   templateUrl: './register-login.component.html',
   styleUrls: ['./register-login.component.css'],
-  providers: [PatientService,DoctorService,UserAuthenticationService]
+  providers: [PatientService,DoctorService]
 })
 export class RegisterLoginComponent implements OnInit {
 
@@ -24,15 +21,11 @@ export class RegisterLoginComponent implements OnInit {
   public doctor: Doctor;
   public doctorEnBd : Doctor;
   public patientEnBd : Patient;
-  public userAuthentication : UserAuthentication;
-  public userAuthenticationEnBd : UserAuthentication;
   public botonDoctor:string;
 
   constructor(
-    private patientService: PatientService,
-    private doctorService: DoctorService,
-    private UserAuthenticationService: UserAuthenticationService
-
+    private _patientService: PatientService,
+    private _doctorService: DoctorService
     ) {
     //Titulos
   	this.title = "Tipo de cuenta";
@@ -46,113 +39,107 @@ export class RegisterLoginComponent implements OnInit {
 
     this.doctor = new Doctor('','','','','','','','','','');
     this.doctorEnBd = new Doctor('','','','','','','','','','');
-    
-    this.userAuthentication = new UserAuthentication('','','','');
-    this.userAuthenticationEnBd = new UserAuthentication('','','','');
+
+ 
 
    }
  
   /*Contenedor de Iniciar sesion  -   Contenedor de registrar Paciente  -  Contenedor de registrar Doctor*/
   ngOnInit() {
+     $("#containerInPat").hide();
+     $("#containerInDoc").hide();
      $("#containerRegPat").hide();
      $("#containerRegDoc").hide();
-     $("#botonera").hide();
 
      //Boton Doctor
      $("#button_doc").click(function(e){
-        $("#containerRegDoc").show();
+        $("#containerInDoc").show();
         $("#botonera").hide(500);
       });
      //Boton Patient
      $("#button_pat").click(function(e){
-        $("#containerRegPat").show();
+        $("#containerInPat").show();
         $("#botonera").hide(500);
       });
 
-     $("#no_accU").click(function(e){
-       $("#containerInUser").hide(500);
-       $("#botonera").show(); 
+     $("#no_accD").click(function(e){
+       $("#containerInDoc").hide(500);
+       $("#containerRegDoc").show(); 
       });
 
+     $("#no_accP").click(function(e){
+       $("#containerInPat").hide(500);
+       $("#containerRegPat").show(); 
+      });
   
   }
 
-  asignarValoresDeResponseDoctor(userAuthenticationResponse: any){
-    this.doctorService.getDoctorByUsername(userAuthenticationResponse.user).subscribe(
-  		response => {
-        this.doctorEnBd.id = response.doctor._id;
-        this.doctorEnBd.name = response.doctor.name;
-        this.doctorEnBd.surname = response.doctor.surname;
-        this.doctorEnBd.user = response.doctor.user;
-        this.doctorEnBd.password = response.doctor.password;
-        this.doctorEnBd.email = response.doctor.email;
-        this.doctorEnBd.location = response.doctor.location;
-        this.doctorEnBd.address = response.doctor.address;
-        this.doctorEnBd.curriculum = response.doctor.curriculum;
-        this.doctorEnBd.insurance = response.doctor.insurance;
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
-  
-  }
+  asignarValoresDeResponseDoctor(doctorResponse: any){
 
-  asignarValoresDeResponsePatient(userAuthenticationResponse: any){
-    this.patientService.getPatientByUsername(userAuthenticationResponse.user).subscribe(
-  		response => {
-        this.patientEnBd.id = response.patient._id;
-        this.patientEnBd.name = response.patient.name;
-        this.patientEnBd.surname = response.patient.surname;
-        this.patientEnBd.user = response.patient.user;
-        this.patientEnBd.password = response.patient.password;
-        this.patientEnBd.email = response.patient.email;
-        this.patientEnBd.location = response.patient.location;
-        this.patientEnBd.address = response.patient.address;
-        this.patientEnBd.insurance = response.patient.insurance;
+    this.doctorEnBd._id = doctorResponse._id;
+    this.doctorEnBd._name = doctorResponse.name;
+    this.doctorEnBd._surname = doctorResponse.surname;
+    this.doctorEnBd._user = doctorResponse.user;
+    this.doctorEnBd._password = doctorResponse.password;
+    this.doctorEnBd._email = doctorResponse.email;
+    this.doctorEnBd._location = doctorResponse.location;
+    this.doctorEnBd._address = doctorResponse.address;
+    this.doctorEnBd._curriculum = doctorResponse.curriculum;
+    this.doctorEnBd._insurance = doctorResponse.insurance;
     
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
+  
   }
 
-  asignarValoresDeResponseAUsuario(userAuthenticationResponse : any){
-    this.userAuthenticationEnBd.id = userAuthenticationResponse._id;
-    this.userAuthenticationEnBd.user = userAuthenticationResponse.user;
-    this.userAuthenticationEnBd.password = userAuthenticationResponse.password;
-    this.userAuthenticationEnBd.role = userAuthenticationResponse.role;
-  }
+  asignarValoresDeResponsePatient(patientResponse: any){
 
-  onSubmitInU(form){
-    this.UserAuthenticationService.getUserAuthenticationByUsername(this.userAuthentication.user).subscribe(
+    this.patientEnBd._id = patientResponse._id;
+    this.patientEnBd._name = patientResponse.name;
+    this.patientEnBd._surname = patientResponse.surname;
+    this.patientEnBd._user = patientResponse.user;
+    this.patientEnBd._password = patientResponse.password;
+    this.patientEnBd._email = patientResponse.email;
+    this.patientEnBd._location = patientResponse.location;
+    this.patientEnBd._address = patientResponse.address;
+    this.patientEnBd._insurance = patientResponse.insurance;
+    
+  
+  }
+  onSubmitInD(form){
+    this._doctorService.getDoctorByUsername(this.doctor._user).subscribe(
   		response => {
-  			if(response.userAuthentication){
-          this.asignarValoresDeResponseAUsuario(response.userAuthentication);
-          if(response.userAuthentication.role == "Doctor"){
-            this.asignarValoresDeResponseDoctor(response.userAuthentication);
-          }else if(response.userAuthentication.role == "Patient"){
-            this.asignarValoresDeResponsePatient(response.userAuthentication);
-          }
-
-          if(this.userAuthentication.user == this.userAuthenticationEnBd.user 
-            && this.userAuthentication.password == this.userAuthenticationEnBd.password ){
-              alert("Datos correctos, sesión iniciada");
-          }else{
-            alert("Datos incorrectos");
+  			if(response.doctor){
+          this.asignarValoresDeResponseDoctor(response.doctor);
+          if(this.doctor._user == this.doctorEnBd._user 
+            && this.doctor._password == this.doctorEnBd._password ){
+            console.log("Iniciar Sesion");
           }
   			}
   		},
   		error => {
-        alert("Datos incorrectos");
+  			console.log(<any>error);
   		}
   	);
     
   }
+   onSubmitInP(form){
+    this._patientService.getPatientByUsername(this.patient._user).subscribe(
+  		response => {
+  			if(response.patient){
+          this.asignarValoresDeResponsePatient(response.patient);
+          if(this.patient._user == this.patientEnBd._user 
+            && this.patient._password == this.patientEnBd._password ){
+            console.log("Iniciar Sesion");
+          }
+  			}
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
+  	);
+  }
    onSubmitRegD(form){
     console.log(this.doctor);
-    this.doctorService.saveDoctor(this.doctor).subscribe(
+    this._doctorService.saveDoctor(this.doctor).subscribe(
         response => {
           console.log(response);
           },
@@ -163,7 +150,7 @@ export class RegisterLoginComponent implements OnInit {
   }
    onSubmitRegP(form){
     console.log(this.patient);
-    this.patientService.savePatient(this.patient).subscribe(
+    this._patientService.savePatient(this.patient).subscribe(
         response => {
           console.log(response);
           },

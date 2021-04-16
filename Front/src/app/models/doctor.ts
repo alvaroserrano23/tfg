@@ -1,15 +1,15 @@
 export class Doctor{
 	constructor(
-		public id:string,
-		public name:string,
-		public surname:string,
-		public user:string,
-		public email:string,
-		public password:string,
-		public location:string,
-		public address:string,
-		public curriculum:string,
-		public insurance:string
+		public _id:string,
+		public _name:string,
+		public _surname:string,
+		public _user:string,
+		public _email:string,
+		public _password:string,
+		public _location:string,
+		public _address:string,
+		public _curriculum:string,
+		public _insurance:string
 		){
 		
 	}
