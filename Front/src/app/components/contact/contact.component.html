@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
 	<h2>{{title}}</h2>
 
 	<form>
@@ -17,4 +17,46 @@
 		</p>
 		<input type="submit" value ="Enviar"/>
 	</form>	
+</div>-->
+
+<div class="container">
+    <h4 class="mb-3">{{title}}</h4>
+    <hr class="my-4">
+  <form class="needs-validation" novalidate>
+    <div class="row g-3">
+      <div class="col-12">
+        <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+        <input type="email" class="form-control" id="email" placeholder="tu@ejemplo.com">
+        <div class="invalid-feedback">
+          Por favor, introduce un email correcto.
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="subject" class="form-label">Asunto</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="subject" placeholder="Asunto" required>
+        <div class="invalid-feedback">
+            El asunto es obligatorio.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="message" class="form-label">Mensaje</label>
+        <div class="input-group has-validation">
+          <textarea class="form-control" id="mensaje" placeholder="Escribe aqui tu mensaje..." required ></textarea>
+        <div class="invalid-feedback">
+            El mensaje es obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <hr class="my-4">
+
+    <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar</button>
+  </form>
 </div>
