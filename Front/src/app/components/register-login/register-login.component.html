@@ -1,13 +1,33 @@
+<form class="form-signin">
+    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+
+    <div class="form-floating">
+      <input type="user" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Recúerdame
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+  </form>
+
 <!--Botonera-->
-<div class="container" id="botonera">
+<!--<div class="container" id="botonera">
 	<h2>{{title}}</h2>
 	<form>
 		<button id="button_doc" >Medico</button>
 		<button id="button_pat" >Paciente</button>
 	</form>
-</div>
+</div>-->
 <!-- Iniciar sesion Usuario -->
-<div class="container" id="containerInUser"  >
+<!--<div class="container" id="containerInUser"  >
 	<h2>{{title2}}</h2>
 
 	<form #InUForm ="ngForm" (ngSubmit)="onSubmitInU(InUForm)" >
@@ -24,10 +44,10 @@
 		<input type="submit" value ="Iniciar sesión"/>
 		<p id="no_accU">¿Aún no estas registrado? <b style="cursor:pointer">Registrate aqui</b></p>
 	</form>	
-</div>
+</div>-->
 
 <!-- Registrar Medico -->
-<div class="container" id="containerRegDoc" >
+<!--<div class="container" id="containerRegDoc" >
 	<h2>{{title3}}</h2>
 	<form #RegDForm ="ngForm" (ngSubmit)="onSubmitRegD(RegDForm)" >
 		<p>
@@ -96,9 +116,9 @@
      	</p>
      	<input type="submit" value ="Registrarse"/>
 	</form>
-</div>
+</div>-->
 <!-- Registrar Paciente -->
-<div class="container" id="containerRegPat" >
+<!--<div class="container" id="containerRegPat" >
 	<h2>{{title4}}</h2>
 	<form #RegPForm ="ngForm" (ngSubmit)="onSubmitRegP(RegPForm)" >
 		<p>
@@ -142,4 +162,4 @@
      	</p>
      	<input type="submit" value ="Registrarse"/>
 	</form>
-</div>
+</div>-->
