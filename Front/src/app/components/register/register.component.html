@@ -1,0 +1,282 @@
+<script src="/Front/src/assets/js/form-validation.js"></script>
+<!--Botonera-->
+<!--<form class="form-signin" id="botonera">
+	<h1 class="h3 mb-3 fw-normal">{{title}}</h1>
+	<div class="row g-2">
+		<div class="col-6">
+			<button class="btn btn-lg btn-primary" type="submit" id="button_doc">Medico</button>
+		</div>
+		<div class="col-6">
+			<button class="btn btn-lg btn-primary" type="submit" id="button_pat">Paciente</button>
+		</div>
+	</div>
+</form>-->
+
+<div class="row justify-content-center " id="botonera">
+	<div class="py-5 text-center">
+		<h2>{{title}}</h2>
+	</div>
+	<div class="col-md-2">
+		<div class="card" style="width: 18rem;">
+			<img src="assets/img/perfil1.png" width="100%" height="225">
+			<div class="card-body">
+			<h5 class="card-title">Médico</h5>
+			<p class="card-text">Selecciona este tipo de cuenta si deseas registrarte como médico,a continuación se le solicitaran una serie de datos.</p>
+			<a class="btn btn-primary" id="button_doc">Crear cuenta</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="card" style="width: 18rem;">
+			<img src="assets/img/perfil2.png" width="100%" height="225">
+			<div class="card-body">
+			<h5 class="card-title">Paciente</h5>
+			<p class="card-text">Selecciona este tipo de cuenta si deseas registrarte como paciente,a continuación se le solicitaran una serie de datos.</p>
+			<a class="btn btn-primary" id="button_pat">Crear cuenta</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Registrarse medico-->
+<div class="container" id="containerRegDoc">
+	  <div class="py-5 text-center">
+		<h2>{{title3}}</h2>
+		<p class="lead">Ingresa los datos que se solicitan a continuación para crear una cuenta como Médico.</p>
+	  </div>
+  
+	  <div class="row g-5">
+		
+		<div class=" ">
+		  <h4 class="mb-3">Datos personales</h4>
+		  <hr class="my-4">
+		  <form class="needs-validation" novalidate #RegDForm ="ngForm" (ngSubmit)="onSubmitRegD(RegDForm)">
+			<div class="row g-3">
+			  <div class="col-sm-6">
+				<label for="firstName" class="form-label">Nombre</label>
+				<input type="text" class="form-control" id="firstName" placeholder="" value="" name="name" #name="ngModel" [(ngModel)]="doctor.name"required>
+				<div class="invalid-feedback">
+				  El nombre es obligatorio.
+				</div>
+			  </div>
+  
+			  <div class="col-sm-6">
+				<label for="lastName" class="form-label">Apellidos</label>
+				<input type="text" class="form-control" id="lastName" placeholder="" value="" name="surname" #surname="ngModel" [(ngModel)]="doctor.surname" required>
+				<div class="invalid-feedback">
+				  Los apellidos son obligatorios.
+				</div>
+			  </div>
+  
+			  <div class="col-sm-6">
+				<label for="username" class="form-label">Usuario</label>
+				<div class="input-group has-validation">
+				  <span class="input-group-text">@</span>
+				  <input type="text" class="form-control" id="username" placeholder="Usuario" name="user" #user="ngModel" [(ngModel)]="doctor.user" required>
+				<div class="invalid-feedback">
+					El usuario es obligatorio.
+				  </div>
+				</div>
+			  </div>
+
+			  <div class="col-sm-6">
+				<label for="password" class="form-label">Contraseña</label>
+				<div class="input-group has-validation">
+				  <input type="password" class="form-control" id="password" placeholder="" name="password" #password="ngModel" [(ngModel)]="doctor.password" required>
+				<div class="invalid-feedback">
+					La contraseña es obligatoria.
+				  </div>
+				</div>
+			  </div>
+
+			  <div class="col-12">
+				<label for="email" class="form-label">Email</label>
+				<input type="email" class="form-control" id="email" placeholder="tu@ejemplo.com" name="email" #email="ngModel" [(ngModel)]="doctor.email" required>
+				<div class="invalid-feedback">
+				  Por favor, introduce un email correcto.
+				</div>
+			  </div>
+			</div>
+
+			<h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
+			<hr class="my-4">
+			<div class="row g-3">
+				<div class="col-6">
+					<label for="address" class="form-label">Dirección</label>
+					<input type="text" class="form-control" id="address" placeholder="23 4ºA C/Tecnicismo" name="address" #address="ngModel" [(ngModel)]="doctor.address" required>
+					<div class="invalid-feedback">
+					Por favor, introduce una dirección correcta.
+					</div>
+				</div>
+
+				<div class="col-6">
+					<label for="address" class="form-label">Localidad</label>
+					<input type="text" class="form-control" id="location" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="doctor.location" required>
+					<div class="invalid-feedback">
+					Por favor, introduce una localidad correcta.
+					</div>
+				</div>
+			</div>
+
+			<h4 class="mb-2" style="margin-top: 3%;">Datos profesionales</h4>
+			  <hr class="my-4">
+			  <div class="row g-3">
+			  <div class="col-md-5">
+				<label for="country" class="form-label">Aseguradora</label>
+				<select class="form-select" id="country" required>
+				  	<option value="">Seleccionar...</option>
+				  	<option >Sin aseguradora</option>
+		        	<option >DKV</option>
+					<option >MAPFRE</option>
+					<option >ASISA</option>
+					<option >Otra aseguradora</option>
+				</select>
+				<div class="invalid-feedback">
+				  Por favor, introduce una aseguradora correcta.
+				</div>
+			  </div>
+  
+			  <div class="col-md-4">
+				<label for="state" class="form-label">Curriculum</label>
+				<input type="file" class="custom-file-input" id="inputGroupFile02" name="curriculum" #curriculum="ngModel" [(ngModel)]="doctor.curriculum">
+				<div class="invalid-feedback">
+					Por favor,introduce un curriculum correcto.
+				</div>
+			  </div>
+			  </div>
+			<hr class="my-4">
+  
+			<div class="form-check">
+			  <input type="checkbox" class="form-check-input" id="same-address">
+			  <label class="form-check-label" for="same-address">Acepto los términos y condiciones.</label>
+			</div>
+  
+			<div class="form-check">
+			  <input type="checkbox" class="form-check-input" id="save-info">
+			  <label class="form-check-label" for="save-info">Quiero recibir información a mi email sobre las noticias de Find Your Doctor.</label>
+			</div>
+  
+			<hr class="my-4">
+  
+			<button class="w-100 btn btn-primary btn-lg" type="submit">Registrarse</button>
+		  </form>
+		</div>
+	  </div>
+
+  </div>
+<!-- Registrar Medico -->
+<!--<div class="container" id="containerRegDoc" >
+	<h2>{{title3}}</h2>
+	<form #RegDForm ="ngForm" (ngSubmit)="onSubmitRegD(RegDForm)" >
+		<p>
+			<label for="name">Nombre</label>
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="doctor.name"  required />
+			<span class="form_error" *ngIf="name.touched && !name.valid">
+				*El nombre es obligatorio
+			</span>
+		</p>
+		<p>
+			<label for="surname">Apellidos</label>
+			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="doctor.surname"  required />
+			<span class="form_error" *ngIf="surname.touched && !surname.valid">
+				*Los apellidos son obligatorios
+			</span>
+		</p>
+		<p>
+			<label for="user">Usuario</label>
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="doctor.user"  required />
+			<span class="form_error" *ngIf="user.touched && !user.valid">
+				*El nombre de usuario es obligatorio
+			</span>
+		</p>
+		<p>
+			<label for="email">Email</label>
+			<input type="email" name="email" #email="ngModel" [(ngModel)]="doctor.email"  required />
+			<span class="form_error" *ngIf="email.touched && !email.valid">
+				*El email no es valido
+			</span>
+		</p>
+		<p>
+			<label for="subject">Contraseña</label>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="doctor.password" required/>
+			<span class="form_error" *ngIf="password.touched && !password.valid">
+				*La contraseña es obligatoria
+			</span>
+		</p>
+		<p>
+			<label for="location">Localidad</label>
+			<input type="text" name="location" #location="ngModel" [(ngModel)]="doctor.location"  required />
+			<span class="form_error" *ngIf="location.touched && !location.valid">
+				*La localidad es obligatoria
+			</span>
+		</p>
+		<p>
+			<label for="address">Dirección</label>
+			<input type="text" name="address" #address="ngModel" [(ngModel)]="doctor.address"  required />
+			<span class="form_error" *ngIf="address.touched && !address.valid">
+				*La dirección es obligatoria
+			</span>
+		</p>
+		<p>
+			<label for="curriculum">Curriculum</label>
+			<input type="file" name="curriculum" #curriculum="ngModel" [(ngModel)]="doctor.curriculum"  required />
+			
+		</p>
+		<p>
+			<label for="aseguradora">Aseguradora</label>
+			<select>
+		        <option value="1">Sin aseguradora</option>
+		        <option value="2">DKV</option>
+		        <option value="3">MAPFRE</option>
+		        <option value="4">ASISA</option>
+		        <option value="5">Otra aseguradora</option>
+	         </select>
+     	</p>
+     	<input type="submit" value ="Registrarse"/>
+	</form>
+</div>-->
+<!-- Registrar Paciente -->
+<!--<div class="container" id="containerRegPat" >
+	<h2>{{title4}}</h2>
+	<form #RegPForm ="ngForm" (ngSubmit)="onSubmitRegP(RegPForm)" >
+		<p>
+			<label for="name">Nombre</label>
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="patient.name"  required />
+		</p>
+		<p>
+			<label for="surname">Apellidos</label>
+			<input type="text" name="surname" #surname="ngModel" [(ngModel)]="patient.surname"  required />
+		</p>
+		<p>
+			<label for="user">Usuario</label>
+			<input type="text" name="user" #user="ngModel" [(ngModel)]="patient.user"  required />
+		</p>
+		<p>
+			<label for="email">Email</label>
+			<input type="email" name="email" #email="ngModel" [(ngModel)]="patient.email"  required />
+		</p>
+		<p>
+			<label for="subject">Contraseña</label>
+			<input type="password" name="password" #password="ngModel" [(ngModel)]="patient.password" required/>
+			<span></span>
+		</p>
+		<p>
+			<label for="location">Localidad</label>
+			<input type="text" name="location" #location="ngModel" [(ngModel)]="patient.location"  required />
+		</p>
+		<p>
+			<label for="address">Dirección</label>
+			<input type="text" name="address" #address="ngModel" [(ngModel)]="patient.address"  required />
+		</p>
+		<p>
+			<label for="aseguradora">Aseguradora</label>
+			<select>
+		        <option value="1">Sin aseguradora</option>
+		        <option value="2">DKV</option>
+		        <option value="3">MAPFRE</option>
+		        <option value="4">ASISA</option>
+		        <option value="5">Otra aseguradora</option>
+	         </select>
+     	</p>
+     	<input type="submit" value ="Registrarse"/>
+	</form>
+</div>-->

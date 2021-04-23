@@ -53,4 +53,9 @@ body{
     border-top-right-radius: 0;
   }
   
+  #forgot:hover{
+    color:#0d6efd;
+    cursor:pointer;
+}
+
 

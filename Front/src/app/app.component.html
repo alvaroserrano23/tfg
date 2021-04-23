@@ -23,8 +23,8 @@
     </ul>
 
     <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/register-login']">Login</button>
-      <button type="button" class="btn btn-primary">Sign-up</button>
+      <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
     </div>
   </header>
 </div>
@@ -32,7 +32,7 @@
 
   <router-outlet></router-outlet>
 
-<footer class="p-3 p-md-5 mt-5 bg-light text-muted text-center text-small ">
+<footer class="p-3 p-md-5 mt-5 bg-light text-muted text-center text-small " id="pie_pagina">
   <p class="mb-1">&copy; 2021 Find Your Doctor Enterprises</p>
   <ul class="bd-footer-links ps-0 mb-3">
     <li class="d-inline-block"><a href="https://github.com/alvaroserrano23">GitHub</a></li>

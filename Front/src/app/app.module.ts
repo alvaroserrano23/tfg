@@ -7,20 +7,22 @@ import { routing, appRoutingProviders } from './app.routing';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { RegisterLoginComponent } from './components/register-login/register-login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     ContactComponent,
-    RegisterLoginComponent,
     ErrorComponent,
     BuscadorComponent,
-    DoctorsComponent
+    DoctorsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

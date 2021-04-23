@@ -1,0 +1,24 @@
+<!-- Iniciar sesion Usuario -->
+<form class="form-signin" #InUForm ="ngForm" (ngSubmit)="onSubmitInU(InUForm)">
+    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+
+    <div class="form-floating">
+      <input type="user" name="user" class="form-control" id="floatingInput" placeholder="usuario" #user="ngModel" [(ngModel)]="userAuthentication.user" >
+      <label for="floatingInput">Usuario</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="contraseña" #password="ngModel" [(ngModel)]="userAuthentication.password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Recúerdame
+      </label>
+	  <label>
+		  <p id="forgot">¿Olvidaste tu contraseña?</p>
+	  </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
+	
+  </form>

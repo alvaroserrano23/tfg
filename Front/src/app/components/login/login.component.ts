@@ -6,17 +6,15 @@ import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
 
-import * as $ from "jquery";
 
 @Component({
-  selector: 'app-register-login',
-  templateUrl: './register-login.component.html',
-  styleUrls: ['./register-login.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
   providers: [PatientService,DoctorService,UserAuthenticationService]
 })
-export class RegisterLoginComponent implements OnInit {
-
-	public title:string;
+export class LoginComponent implements OnInit {
+  public title:string;
 	public title2:string;
   public title3:string;
   public title4:string;
@@ -28,12 +26,11 @@ export class RegisterLoginComponent implements OnInit {
   public userAuthenticationEnBd : UserAuthentication;
   public botonDoctor:string;
 
-  constructor(
-    private patientService: PatientService,
+  constructor(private patientService: PatientService,
     private doctorService: DoctorService,
     private UserAuthenticationService: UserAuthenticationService
-
-    ) {
+    
+    ) { 
     //Titulos
   	this.title = "Tipo de cuenta";
   	this.title2 = "Iniciar sesión";
@@ -50,33 +47,10 @@ export class RegisterLoginComponent implements OnInit {
     this.userAuthentication = new UserAuthentication('','','','');
     this.userAuthenticationEnBd = new UserAuthentication('','','','');
 
-   }
- 
-  /*Contenedor de Iniciar sesion  -   Contenedor de registrar Paciente  -  Contenedor de registrar Doctor*/
-  ngOnInit() {
-     $("#containerRegPat").hide();
-     $("#containerRegDoc").hide();
-     $("#botonera").hide();
+    }
 
-     //Boton Doctor
-     $("#button_doc").click(function(e){
-        $("#containerRegDoc").show();
-        $("#botonera").hide(500);
-      });
-     //Boton Patient
-     $("#button_pat").click(function(e){
-        $("#containerRegPat").show();
-        $("#botonera").hide(500);
-      });
-
-     $("#no_accU").click(function(e){
-       $("#containerInUser").hide(500);
-       $("#botonera").show(); 
-      });
-
-  
+  ngOnInit(): void {
   }
-
   asignarValoresDeResponseDoctor(userAuthenticationResponse: any){
     this.doctorService.getDoctorByUsername(userAuthenticationResponse.user).subscribe(
   		response => {
@@ -149,27 +123,5 @@ export class RegisterLoginComponent implements OnInit {
   		}
   	);
     
-  }
-   onSubmitRegD(form){
-    console.log(this.doctor);
-    this.doctorService.saveDoctor(this.doctor).subscribe(
-        response => {
-          console.log(response);
-          },
-        error =>{
-          console.log(<any>error);
-          }
-      );
-  }
-   onSubmitRegP(form){
-    console.log(this.patient);
-    this.patientService.savePatient(this.patient).subscribe(
-        response => {
-          console.log(response);
-          },
-        error =>{
-          console.log(<any>error);
-          }
-      );
   }
 }
