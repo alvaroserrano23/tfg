@@ -46,8 +46,8 @@ export class RegisterComponent implements OnInit {
     this.doctor = new Doctor('','','','','','','','','','');
     this.doctorEnBd = new Doctor('','','','','','','','','','');
     
-    this.userAuthentication = new UserAuthentication('','','','');
-    this.userAuthenticationEnBd = new UserAuthentication('','','','');
+    this.userAuthentication = new UserAuthentication('','','','','','');
+    this.userAuthenticationEnBd = new UserAuthentication('','','','','','');
 
    }
  

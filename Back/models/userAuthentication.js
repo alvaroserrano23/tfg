@@ -6,6 +6,8 @@ var Schema = mongoose.Schema;
 var UserAuthenticationSchema = Schema({
 	user:String,
 	password:String,
+	email:String,
+	code:String,
     role:String
 });
 

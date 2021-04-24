@@ -26,6 +26,8 @@ var controller = {
 		}*/
 		userAuthentication.user = params.user;
 		userAuthentication.password = params.password;
+		userAuthentication.email = params.email;
+		userAuthentication.code = params.code;
         userAuthentication.role = params.role;
 
 		userAuthentication.save((err,userAuthenticationStored) =>{
