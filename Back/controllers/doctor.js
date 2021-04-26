@@ -28,10 +28,13 @@ var controller = {
 		doctor.user = params.user;
 		doctor.email = params.email;
 		doctor.password = params.password;
+		doctor.province = params.province;
 		doctor.location = params.location;
 		doctor.address = params.addres;
+		doctor.cp = params.cp
 		doctor.curriculum = params.curriculum;
 		doctor.insurance = params.insurance;
+		doctor.numColegiado = params.numColegiado;
 		
 		
 			doctor.save((err,doctorGuardado) =>{

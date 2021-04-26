@@ -40,11 +40,11 @@ export class RegisterComponent implements OnInit {
     this.title4 = "Registrarse como Paciente";
     
     
-    this.patient = new Patient('','','','','','','','','');
-    this.patientEnBd = new Patient('','','','','','','','','');
+    this.patient = new Patient('','','','','','','','','','','');
+    this.patientEnBd = new Patient('','','','','','','','','','','');
 
-    this.doctor = new Doctor('','','','','','','','','','');
-    this.doctorEnBd = new Doctor('','','','','','','','','','');
+    this.doctor = new Doctor('','','','','','','','','','','','','');
+    this.doctorEnBd = new Doctor('','','','','','','','','','','','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','');
     this.userAuthenticationEnBd = new UserAuthentication('','','','','','');

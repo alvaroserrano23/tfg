@@ -6,10 +6,13 @@ export class Doctor{
 		public user:string,
 		public email:string,
 		public password:string,
+		public province:string,
 		public location:string,
 		public address:string,
+		public cp:string,
 		public curriculum:string,
-		public insurance:string
+		public insurance:string,
+		public numColegiado:string
 		){
 		
 	}

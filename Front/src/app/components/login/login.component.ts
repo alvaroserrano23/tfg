@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
     this.title5 = "¿Olvidaste tu contraseña?";
     
     
-    this.patient = new Patient('','','','','','','','','');
-    this.patientEnBd = new Patient('','','','','','','','','');
+    this.patient = new Patient('','','','','','','','','','','');
+    this.patientEnBd = new Patient('','','','','','','','','','','');
 
-    this.doctor = new Doctor('','','','','','','','','','');
-    this.doctorEnBd = new Doctor('','','','','','','','','','');
+    this.doctor = new Doctor('','','','','','','','','','','','','');
+    this.doctorEnBd = new Doctor('','','','','','','','','','','','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','');
     this.userAuthenticationEnBd = new UserAuthentication('','','','','','');
@@ -76,8 +76,10 @@ export class LoginComponent implements OnInit {
         this.doctorEnBd.user = response.doctor.user;
         this.doctorEnBd.password = response.doctor.password;
         this.doctorEnBd.email = response.doctor.email;
+        this.doctorEnBd.province = response.doctor.province;
         this.doctorEnBd.location = response.doctor.location;
         this.doctorEnBd.address = response.doctor.address;
+        this.doctorEnBd.cp = response.doctor.cp;
         this.doctorEnBd.curriculum = response.doctor.curriculum;
         this.doctorEnBd.insurance = response.doctor.insurance;
       },
@@ -97,8 +99,10 @@ export class LoginComponent implements OnInit {
         this.patientEnBd.user = response.patient.user;
         this.patientEnBd.password = response.patient.password;
         this.patientEnBd.email = response.patient.email;
+        this.patientEnBd.province = response.patient.province;
         this.patientEnBd.location = response.patient.location;
         this.patientEnBd.address = response.patient.address;
+        this.patientEnBd.cp = response.patient.cp;
         this.patientEnBd.insurance = response.patient.insurance;
     
       },

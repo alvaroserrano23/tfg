@@ -88,19 +88,36 @@
 			<h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
 			<hr class="my-4">
 			<div class="row g-3">
+
+				<div class="col-6">
+					<label for="province" class="form-label">Provincia</label>
+					<input type="text" class="form-control" id="province" placeholder="Salamanca" name="province" #province="ngModel" [(ngModel)]="doctor.province" required>
+					<div class="invalid-feedback">
+					Por favor, introduce una provincia correcta.
+					</div>
+				</div>
+
+				<div class="col-6">
+					<label for="location" class="form-label">Localidad</label>
+					<input type="text" class="form-control" id="location" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="doctor.location" required>
+					<div class="invalid-feedback">
+					Por favor, introduce una localidad correcta.
+					</div>
+				</div>
+			
 				<div class="col-6">
 					<label for="address" class="form-label">Dirección</label>
-					<input type="text" class="form-control" id="address" placeholder="23 4ºA C/Tecnicismo" name="address" #address="ngModel" [(ngModel)]="doctor.address" required>
+					<input type="text" class="form-control" id="address" placeholder="C/Tecnicismo 23 4ºA" name="address" #address="ngModel" [(ngModel)]="doctor.address" required>
 					<div class="invalid-feedback">
 					Por favor, introduce una dirección correcta.
 					</div>
 				</div>
 
 				<div class="col-6">
-					<label for="address" class="form-label">Localidad</label>
-					<input type="text" class="form-control" id="location" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="doctor.location" required>
+					<label for="cp" class="form-label">Codigo Postal</label>
+					<input type="text" class="form-control" id="cp" placeholder="37003" name="cp" #cp="ngModel" [(ngModel)]="doctor.cp" required>
 					<div class="invalid-feedback">
-					Por favor, introduce una localidad correcta.
+					Por favor, introduce un codigo postal correcto.
 					</div>
 				</div>
 			</div>
@@ -108,6 +125,13 @@
 			<h4 class="mb-2" style="margin-top: 3%;">Datos profesionales</h4>
 			  <hr class="my-4">
 			  <div class="row g-3">
+			  <div class="col-12">
+				<label for="numColegiado" class="form-label">Nº Colegiado</label>
+			 	 <input type="text" class="form-control" id="numColegiado" placeholder="XXYYZZZZZ" name="numColegiado" #numColegiado="ngModel" [(ngModel)]="doctor.numColegiado" required>
+			  	<div class="invalid-feedback">
+				Por favor, introduce un email correcto.
+			  	</div>  
+			  </div>
 			  <div class="col-md-5">
 				<label for="country" class="form-label">Aseguradora</label>
 				<select class="form-select" id="country" required>
@@ -210,48 +234,59 @@
 				Por favor, introduce un email correcto.
 			  </div>
 			</div>
+			<div class="col-12">
+				<label for="country" class="form-label">Aseguradora</label>
+				<select class="form-select" id="country" required>
+					  <option value="">Seleccionar...</option>
+					  <option >Sin aseguradora</option>
+					<option >DKV</option>
+					<option >MAPFRE</option>
+					<option >ASISA</option>
+					<option >Otra aseguradora</option>
+				</select>
+				<div class="invalid-feedback">
+				  Por favor, introduce una aseguradora correcta.
+				</div>
+			  </div>
 		  </div>
 
 		  <h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
 		  <hr class="my-4">
 		  <div class="row g-3">
-			  <div class="col-6">
-				  <label for="address" class="form-label">Dirección</label>
-				  <input type="text" class="form-control" id="address" placeholder="23 4ºA C/Tecnicismo" name="address" #address="ngModel" [(ngModel)]="patient.address" required>
-				  <div class="invalid-feedback">
-				  Por favor, introduce una dirección correcta.
-				  </div>
-			  </div>
 
-			  <div class="col-6">
-				  <label for="address" class="form-label">Localidad</label>
-				  <input type="text" class="form-control" id="location" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="patient.location" required>
-				  <div class="invalid-feedback">
-				  Por favor, introduce una localidad correcta.
-				  </div>
-			  </div>
-		  </div>
-
-		  <h4 class="mb-2" style="margin-top: 3%;">Datos profesionales</h4>
-			<hr class="my-4">
-			<div class="row g-3">
-			<div class="col-md-5">
-			  <label for="country" class="form-label">Aseguradora</label>
-			  <select class="form-select" id="country" required>
-					<option value="">Seleccionar...</option>
-					<option >Sin aseguradora</option>
-				  <option >DKV</option>
-				  <option >MAPFRE</option>
-				  <option >ASISA</option>
-				  <option >Otra aseguradora</option>
-			  </select>
-			  <div class="invalid-feedback">
-				Por favor, introduce una aseguradora correcta.
-			  </div>
+			<div class="col-6">
+				<label for="province" class="form-label">Provincia</label>
+				<input type="text" class="form-control" id="province" placeholder="Salamanca" name="province" #province="ngModel" [(ngModel)]="patient.province" required>
+				<div class="invalid-feedback">
+				Por favor, introduce una provincia correcta.
+				</div>
 			</div>
-			</div>
-		  <hr class="my-4">
 
+			<div class="col-6">
+				<label for="location" class="form-label">Localidad</label>
+				<input type="text" class="form-control" id="location" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="patient.location" required>
+				<div class="invalid-feedback">
+				Por favor, introduce una localidad correcta.
+				</div>
+			</div>
+		
+			<div class="col-6">
+				<label for="address" class="form-label">Dirección</label>
+				<input type="text" class="form-control" id="address" placeholder="C/Tecnicismo 23 4ºA" name="address" #address="ngModel" [(ngModel)]="patient.address" required>
+				<div class="invalid-feedback">
+				Por favor, introduce una dirección correcta.
+				</div>
+			</div>
+
+			<div class="col-6">
+				<label for="cp" class="form-label">Codigo Postal</label>
+				<input type="text" class="form-control" id="cp" placeholder="37003" name="cp" #cp="ngModel" [(ngModel)]="patient.cp" required>
+				<div class="invalid-feedback">
+				Por favor, introduce un codigo postal correcto.
+				</div>
+			</div>
+		</div>
+		<hr class="my-4">
 		  <div class="form-check">
 			<input type="checkbox" class="form-check-input" id="same-address">
 			<label class="form-check-label" for="same-address">Acepto los términos y condiciones.</label>

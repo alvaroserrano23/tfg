@@ -9,10 +9,13 @@ var DoctorSchema = Schema({
 	user:String,
 	email:String,
 	password:String,
+	province:String,
 	location:String,
 	address:String,
+	cp:String,
 	curriculum:String,
-	insurance:String
+	insurance:String,
+	numColegiado:String
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

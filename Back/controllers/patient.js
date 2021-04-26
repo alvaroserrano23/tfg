@@ -24,14 +24,15 @@ var controller = {
 		/*if(Patient.findOne(params._user)){
 			return res.status(404).send({message: 'El paciente ya existe'});
 		}*/
-		patient.name = params._name;
-		patient.surname = params._surname;
-		patient.user = params._user;
-		patient.email = params._email;
-		patient.password = params._password;
-		patient.location = params._location;
-		patient.address = params._address;
-		patient.insurance = params._insurance;
+		patient.name = params.name;
+		patient.surname = params.surname;
+		patient.user = params.user;
+		patient.email = params.email;
+		patient.password = params.password;
+		patient.province = params.pro
+		patient.location = params.location;
+		patient.address = params.address;
+		patient.insurance = params.insurance;
 
 		patient.save((err,patientStored) =>{
 			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
