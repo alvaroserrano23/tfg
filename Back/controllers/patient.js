@@ -17,13 +17,16 @@ var controller = {
 	},
 
 
-	savePatient: function(req,res){
+	savePatient: async function(req,res){
 		var patient = new Patient();
 
 		var params = req.body;
-		/*if(Patient.findOne(params.user)){
-			return res.status(404).send({message: 'El paciente ya existe'});
-		}*/
+
+		//Si el user existe no lo damos de alta
+		var user = await Patient.findOne({user : params.user});
+		if(user){
+			return res.status(404).send({message:"El paciente " +"'"+ params.user +"'"+ " ya existe"});
+		}
 		patient.name = params.name;
 		patient.surname = params.surname;
 		patient.user = params.user;

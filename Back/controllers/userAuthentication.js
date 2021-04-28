@@ -17,13 +17,16 @@ var controller = {
 	},
 
 
-	saveUserAuthentication: function(req,res){
+	saveUserAuthentication: async function(req,res){
 		var userAuthentication = new UserAuthentication();
 
 		var params = req.body;
-		/*if(UserAuthentication.findOne(params._user)){
-			return res.status(404).send({message: 'El paciente ya existe'});
-		}*/
+
+		//Si el user existe no lo damos de alta
+		var user = await UserAuthentication.findOne({user : params.user});
+		if(user){
+			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
+		}
 		userAuthentication.user = params.user;
 		userAuthentication.password = params.password;
 		userAuthentication.email = params.email;

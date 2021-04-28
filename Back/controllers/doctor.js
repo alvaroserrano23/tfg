@@ -15,14 +15,16 @@ var controller = {
 		});
 	},
 
-	saveDoctor: function(req,res){
+	saveDoctor: async function(req,res){
 		var doctor = new Doctor();
 		var params = req.body;
 
-		/*if( Doctor.find({ user: params._user })){
-			return res.status(404).send({message:"El doctor " +"'"+ params._user +"'"+ " ya existe"});
-		}*/
-		
+		//Si el user existe no lo damos de alta
+		var user = await Doctor.findOne({user : params.user});
+		if(user){
+			return res.status(404).send({message:"El doctor " +"'"+ params.user +"'"+ " ya existe"});
+		}
+
 		doctor.name = params.name;
 		doctor.surname = params.surname;
 		doctor.user = params.user;
@@ -37,13 +39,16 @@ var controller = {
 		doctor.numColegiado = params.numColegiado;
 		
 		
-			doctor.save((err,doctorGuardado) =>{
-				if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
+		doctor.save((err,doctorGuardado) =>{
+			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
 
-				if(!doctorGuardado) return res.status(404).send({message: 'No se ha podido guardar el doctor.'});
+			if(!doctorGuardado) return res.status(404).send({message: 'No se ha podido guardar el doctor.'});
 
-				return res.status(200).send({doctor:doctorGuardado});
-			});
+			return res.status(200).send({doctor:doctorGuardado});
+			
+		});
+
+		
 		
 	},
 
