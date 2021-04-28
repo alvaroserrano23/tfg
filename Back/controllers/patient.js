@@ -21,7 +21,7 @@ var controller = {
 		var patient = new Patient();
 
 		var params = req.body;
-		/*if(Patient.findOne(params._user)){
+		/*if(Patient.findOne(params.user)){
 			return res.status(404).send({message: 'El paciente ya existe'});
 		}*/
 		patient.name = params.name;
