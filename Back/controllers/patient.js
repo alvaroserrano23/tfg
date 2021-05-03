@@ -1,6 +1,9 @@
 'use strict'
 
 var Patient = require('../models/patient'); //Importar modelo
+var UserAuthentication = require('../models/userAuthentication');
+
+var jwt = require('jsonwebtoken');
 
 var controller = {
 
@@ -19,7 +22,7 @@ var controller = {
 
 	savePatient: async function(req,res){
 		var patient = new Patient();
-
+		var userAuthentication = new UserAuthentication();
 		var params = req.body;
 
 		//Si el user existe no lo damos de alta
@@ -37,12 +40,25 @@ var controller = {
 		patient.address = params.address;
 		patient.insurance = params.insurance;
 
-		patient.save((err,patientStored) =>{
+		patient.save(async (err,patientGuardado) =>{
 			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
 
-			if(!patientStored) return res.status(404).send({message: 'No se ha podido guardar el paciente.'});
+			if(!patientGuardado) return res.status(404).send({message: 'No se ha podido guardar el paciente.'});
 
-			return res.status(200).send({patient:patientStored});
+			console.log({patient: patientGuardado});
+			//Si no hay errores, rellenamos el userAuthentication con los datos del paciente
+			userAuthentication._id = patient._id;
+			userAuthentication.user = patient.user;
+			userAuthentication.password = patient.password;
+			userAuthentication.email = patient.email;
+			userAuthentication.role = "patient";
+			
+			await userAuthentication.save();
+
+			const token = await jwt.sign({_id: userAuthentication._id}, 'secretkey');
+			
+			return res.status(200).json({token});
+			
 		});
 	},
 
@@ -54,22 +70,6 @@ var controller = {
 		}
 
 		Patient.findById(patientId, (err,patient) => {
-			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
-
-			if(!patient) return res.status(404).send({message: 'El paciente no existe.'});
-
-			return res.status(200).send({patient});
-		});
-	},
-
-	getPatientByUsername:function(req,res){
-		var patientUsername = req.params.user;
-
-		if(patientUsername == null){
-			return res.status(404).send({message: 'El paciente no existe.'});
-		}
-
-		Patient.findOne({user: patientUsername}).exec((err,patient) => {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
 			if(!patient) return res.status(404).send({message: 'El paciente no existe.'});

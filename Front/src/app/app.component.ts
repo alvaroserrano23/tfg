@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserAuthenticationService } from './services/userAuthentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'proyecto-findyourdoctor';
-  public userIsLogged:boolean = false;
+  title = 'find your doctor';
+  constructor(public userAuthenticationService: UserAuthenticationService) {
+    //userAuthenticationService.getUser();
+  }
 }

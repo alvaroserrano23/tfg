@@ -1,5 +1,8 @@
 'use strict'
 var Doctor = require('../models/doctor'); //Importar modelo
+var UserAuthentication = require('../models/userAuthentication');
+
+var jwt = require('jsonwebtoken');
 
 var controller = {
 
@@ -17,6 +20,7 @@ var controller = {
 
 	saveDoctor: async function(req,res){
 		var doctor = new Doctor();
+		var userAuthentication = new UserAuthentication();
 		var params = req.body;
 
 		//Si el user existe no lo damos de alta
@@ -39,17 +43,27 @@ var controller = {
 		doctor.numColegiado = params.numColegiado;
 		
 		
-		doctor.save((err,doctorGuardado) =>{
+		doctor.save(async (err,doctorGuardado) =>{
 			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
 
 			if(!doctorGuardado) return res.status(404).send({message: 'No se ha podido guardar el doctor.'});
 
-			return res.status(200).send({doctor:doctorGuardado});
+			console.log({doctor:doctorGuardado});
+			//Si no hay errores, rellenamos el userAuthentication con los datos del doctor
+			userAuthentication._id = doctor._id;
+			userAuthentication.user = doctor.user;
+			userAuthentication.password = doctor.password;
+			userAuthentication.email = doctor.email;
+			userAuthentication.role = "doctor";
+			
+			await userAuthentication.save();
+
+			const token = await jwt.sign({_id: userAuthentication._id}, 'secretkey');
+			
+			return res.status(200).json({token});
 			
 		});
 
-		
-		
 	},
 
 	getDoctor: function(req,res){
@@ -60,22 +74,6 @@ var controller = {
 		}
 
 		Doctor.findById(doctorId, (err,doctor) => {
-			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
-
-			if(!doctor) return res.status(404).send({message: 'El doctor no existe.'});
-
-			return res.status(200).send({doctor});
-		});
-	},
-
-	getDoctorByUsername:function(req,res){
-		var doctorUsername = req.params.user;
-
-		if(doctorUsername == null){
-			return res.status(404).send({message: 'El doctor no existe.'});
-		}
-
-		Doctor.findOne({user: doctorUsername}).exec((err,doctor) => {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
 			if(!doctor) return res.status(404).send({message: 'El doctor no existe.'});

@@ -37,11 +37,11 @@
 		<div class=" ">
 		  <h4 class="mb-3">Datos personales</h4>
 		  <hr class="my-4">
-		  <form class="needs-validation" novalidate #RegDForm ="ngForm" (ngSubmit)="onSubmitRegD(RegDForm)">
+		  <form class="needs-validation" novalidate  (submit)="onSubmitRegD()">
 			<div class="row g-3">
 			  <div class="col-sm-6">
 				<label for="firstName" class="form-label">Nombre</label>
-				<input type="text" class="form-control" placeholder="" value="" name="name" #name="ngModel" [(ngModel)]="doctor.name"required>
+				<input type="text" class="form-control" placeholder="" name="name" [(ngModel)]="doctor.name"required>
 				<div class="invalid-feedback">
 				  El nombre es obligatorio.
 				</div>
@@ -49,7 +49,7 @@
   
 			  <div class="col-sm-6">
 				<label for="lastName" class="form-label">Apellidos</label>
-				<input type="text" class="form-control"  placeholder="" value="" name="surname" #surname="ngModel" [(ngModel)]="doctor.surname" required>
+				<input type="text" class="form-control"  placeholder="" name="surname" [(ngModel)]="doctor.surname" required>
 				<div class="invalid-feedback">
 				  Los apellidos son obligatorios.
 				</div>
@@ -59,7 +59,7 @@
 				<label for="username" class="form-label">Usuario</label>
 				<div class="input-group has-validation">
 				  <span class="input-group-text">@</span>
-				  <input type="text" class="form-control"  placeholder="Usuario" name="user" #user="ngModel" [(ngModel)]="doctor.user" required>
+				  <input type="text" class="form-control"  placeholder="Usuario" name="user" [(ngModel)]="doctor.user" required>
 				<div class="invalid-feedback">
 					El usuario es obligatorio.
 				  </div>
@@ -69,7 +69,7 @@
 			  <div class="col-sm-6">
 				<label for="password" class="form-label">Contraseña</label>
 				<div class="input-group has-validation">
-				  <input type="password" class="form-control"  placeholder="" name="password" #password="ngModel" [(ngModel)]="doctor.password" required>
+				  <input type="password" class="form-control"  placeholder="" name="password" [(ngModel)]="doctor.password" required>
 				<div class="invalid-feedback">
 					La contraseña es obligatoria.
 				  </div>
@@ -78,7 +78,7 @@
 
 			  <div class="col-12">
 				<label for="email" class="form-label">Email</label>
-				<input type="email" class="form-control"  placeholder="tu@ejemplo.com" name="email" #email="ngModel" [(ngModel)]="doctor.email" required>
+				<input type="email" class="form-control"  placeholder="tu@ejemplo.com" name="email" [(ngModel)]="doctor.email" required>
 				<div class="invalid-feedback">
 				  Por favor, introduce un email correcto.
 				</div>
@@ -91,7 +91,7 @@
 
 				<div class="col-6">
 					<label for="province" class="form-label">Provincia</label>
-					<input type="text" class="form-control"  placeholder="Salamanca" name="province" #province="ngModel" [(ngModel)]="doctor.province" required>
+					<input type="text" class="form-control"  placeholder="Salamanca" name="province" [(ngModel)]="doctor.province" required>
 					<div class="invalid-feedback">
 					Por favor, introduce una provincia correcta.
 					</div>
@@ -99,7 +99,7 @@
 
 				<div class="col-6">
 					<label for="location" class="form-label">Localidad</label>
-					<input type="text" class="form-control" placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="doctor.location" required>
+					<input type="text" class="form-control" placeholder="Salamanca" name="location" [(ngModel)]="doctor.location" required>
 					<div class="invalid-feedback">
 					Por favor, introduce una localidad correcta.
 					</div>
@@ -107,7 +107,7 @@
 			
 				<div class="col-6">
 					<label for="address" class="form-label">Dirección</label>
-					<input type="text" class="form-control" placeholder="C/Tecnicismo 23 4ºA" name="address" #address="ngModel" [(ngModel)]="doctor.address" required>
+					<input type="text" class="form-control" placeholder="C/Tecnicismo 23 4ºA" name="address" [(ngModel)]="doctor.address" required>
 					<div class="invalid-feedback">
 					Por favor, introduce una dirección correcta.
 					</div>
@@ -115,7 +115,7 @@
 
 				<div class="col-6">
 					<label for="cp" class="form-label">Codigo Postal</label>
-					<input type="text" class="form-control" placeholder="37003" name="cp" #cp="ngModel" [(ngModel)]="doctor.cp" required>
+					<input type="text" class="form-control" placeholder="37003" name="cp" [(ngModel)]="doctor.cp" required>
 					<div class="invalid-feedback">
 					Por favor, introduce un codigo postal correcto.
 					</div>
@@ -127,7 +127,7 @@
 			  <div class="row g-3">
 			  <div class="col-12">
 				<label for="numColegiado" class="form-label">Nº Colegiado</label>
-			 	 <input type="text" class="form-control"  placeholder="XXYYZZZZZ" name="numColegiado" #numColegiado="ngModel" [(ngModel)]="doctor.numColegiado" required>
+			 	 <input type="text" class="form-control"  placeholder="XXYYZZZZZ" name="numColegiado" [(ngModel)]="doctor.numColegiado" required>
 			  	<div class="invalid-feedback">
 				Por favor, introduce un email correcto.
 			  	</div>  
@@ -149,7 +149,7 @@
   
 			  <div class="col-md-4">
 				<label for="state" class="form-label">Curriculum</label>
-				<input type="file" class="custom-file-input" id="inputGroupFile02" name="curriculum" #curriculum="ngModel" [(ngModel)]="doctor.curriculum">
+				<input type="file" class="custom-file-input" id="inputGroupFile02" name="curriculum" [(ngModel)]="doctor.curriculum">
 				<div class="invalid-feedback">
 					Por favor,introduce un curriculum correcto.
 				</div>
@@ -188,11 +188,11 @@
 	  <div class=" ">
 		<h4 class="mb-3">Datos personales</h4>
 		<hr class="my-4">
-		<form class="needs-validation" novalidate #RegPForm ="ngForm" (ngSubmit)="onSubmitRegP(RegPForm)">
+		<form class="needs-validation" novalidate (submit)="onSubmitRegP()">
 		  <div class="row g-3">
 			<div class="col-sm-6">
 			  <label for="firstName" class="form-label">Nombre</label>
-			  <input type="text" class="form-control"  placeholder="" value="" name="name" #name="ngModel" [(ngModel)]="patient.name"required>
+			  <input type="text" class="form-control"  placeholder="" name="name" [(ngModel)]="patient.name"required>
 			  <div class="invalid-feedback">
 				El nombre es obligatorio.
 			  </div>
@@ -200,7 +200,7 @@
 
 			<div class="col-sm-6">
 			  <label for="lastName" class="form-label">Apellidos</label>
-			  <input type="text" class="form-control"  placeholder="" value="" name="surname" #surname="ngModel" [(ngModel)]="patient.surname" required>
+			  <input type="text" class="form-control"  placeholder="" name="surname" [(ngModel)]="patient.surname" required>
 			  <div class="invalid-feedback">
 				Los apellidos son obligatorios.
 			  </div>
@@ -210,7 +210,7 @@
 			  <label for="username" class="form-label">Usuario</label>
 			  <div class="input-group has-validation">
 				<span class="input-group-text">@</span>
-				<input type="text" class="form-control"  placeholder="Usuario" name="user" #user="ngModel" [(ngModel)]="patient.user" required>
+				<input type="text" class="form-control"  placeholder="Usuario" name="user" [(ngModel)]="patient.user" required>
 			  <div class="invalid-feedback">
 				  El usuario es obligatorio.
 				</div>
@@ -220,7 +220,7 @@
 			<div class="col-sm-6">
 			  <label for="password" class="form-label">Contraseña</label>
 			  <div class="input-group has-validation">
-				<input type="password" class="form-control"  placeholder="" name="password" #password="ngModel" [(ngModel)]="patient.password" required>
+				<input type="password" class="form-control"  placeholder="" name="password" [(ngModel)]="patient.password" required>
 			  <div class="invalid-feedback">
 				  La contraseña es obligatoria.
 				</div>
@@ -229,7 +229,7 @@
 
 			<div class="col-12">
 			  <label for="email" class="form-label">Email</label>
-			  <input type="email" class="form-control"  placeholder="tu@ejemplo.com" name="email" #email="ngModel" [(ngModel)]="patient.email" required>
+			  <input type="email" class="form-control"  placeholder="tu@ejemplo.com" name="email" [(ngModel)]="patient.email" required>
 			  <div class="invalid-feedback">
 				Por favor, introduce un email correcto.
 			  </div>
@@ -256,7 +256,7 @@
 
 			<div class="col-6">
 				<label for="province" class="form-label">Provincia</label>
-				<input type="text" class="form-control"  placeholder="Salamanca" name="province" #province="ngModel" [(ngModel)]="patient.province" required>
+				<input type="text" class="form-control"  placeholder="Salamanca" name="province" [(ngModel)]="patient.province" required>
 				<div class="invalid-feedback">
 				Por favor, introduce una provincia correcta.
 				</div>
@@ -264,7 +264,7 @@
 
 			<div class="col-6">
 				<label for="location" class="form-label">Localidad</label>
-				<input type="text" class="form-control"  placeholder="Salamanca" name="location" #location="ngModel" [(ngModel)]="patient.location" required>
+				<input type="text" class="form-control"  placeholder="Salamanca" name="location" [(ngModel)]="patient.location" required>
 				<div class="invalid-feedback">
 				Por favor, introduce una localidad correcta.
 				</div>
@@ -272,7 +272,7 @@
 		
 			<div class="col-6">
 				<label for="address" class="form-label">Dirección</label>
-				<input type="text" class="form-control"  placeholder="C/Tecnicismo 23 4ºA" name="address" #address="ngModel" [(ngModel)]="patient.address" required>
+				<input type="text" class="form-control"  placeholder="C/Tecnicismo 23 4ºA" name="address" [(ngModel)]="patient.address" required>
 				<div class="invalid-feedback">
 				Por favor, introduce una dirección correcta.
 				</div>
@@ -280,7 +280,7 @@
 
 			<div class="col-6">
 				<label for="cp" class="form-label">Codigo Postal</label>
-				<input type="text" class="form-control"  placeholder="37003" name="cp" #cp="ngModel" [(ngModel)]="patient.cp" required>
+				<input type="text" class="form-control"  placeholder="37003" name="cp" [(ngModel)]="patient.cp" required>
 				<div class="invalid-feedback">
 				Por favor, introduce un codigo postal correcto.
 				</div>

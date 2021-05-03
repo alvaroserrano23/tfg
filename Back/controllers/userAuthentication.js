@@ -1,6 +1,10 @@
 'use strict'
 
 var UserAuthentication = require('../models/userAuthentication'); //Importar modelo
+var Doctor = require('../models/doctor');
+var Patient = require('../models/patient');
+
+var jwt = require('jsonwebtoken');
 
 var controller = {
 
@@ -16,30 +20,30 @@ var controller = {
 		});
 	},
 
-
-	saveUserAuthentication: async function(req,res){
+	loginAuth: async function(req,res){
+		var params = req.body;
+		var user = await Doctor.findOne({user : params.user});
 		var userAuthentication = new UserAuthentication();
 
-		var params = req.body;
-
-		//Si el user existe no lo damos de alta
-		var user = await UserAuthentication.findOne({user : params.user});
-		if(user){
-			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
+		if(!user){
+			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
 		}
+
+		if(user.password !== params.password) return res.status(401).send('Contraseña incorrecta');
 		userAuthentication.user = params.user;
 		userAuthentication.password = params.password;
-		userAuthentication.email = params.email;
-		userAuthentication.code = params.code;
-        userAuthentication.role = params.role;
+		userAuthentication.email = params.password;
+		if(params.user.numColegiado){
+			userAuthentication.role = "doctor";
+		}else{
+			userAuthentication.role= "patient";
+		}
 
-		userAuthentication.save((err,userAuthenticationStored) =>{
-			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
+		const token = jwt.sign({_id:userAuthentication._id},'secret_key');
 
-			if(!userAuthenticationStored) return res.status(404).send({message: 'No se ha podido guardar el userAuthentication.'});
-
-			return res.status(200).send({userAuthentication:userAuthenticationStored});
-		});
+		console.log(params.user);
+		return res.status(200).json({token});
+		
 	},
 
 	getUserAuthentication: function(req,res){
@@ -53,22 +57,6 @@ var controller = {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
 			if(!userAuthentication) return res.status(404).send({message: 'El userAuthentication no existe.'+userAuthentication});
-
-			return res.status(200).send({userAuthentication});
-		});
-	},
-
-	getUserAuthenticationByUsername:function(req,res){
-		var userAuthenticationUsername = req.params.user;
-
-		if(userAuthenticationUsername == null){
-			return res.status(404).send({message: 'El userAuthentication no existe.'});
-		}
-
-		UserAuthentication.findOne({user: userAuthenticationUsername}).exec((err,userAuthentication) => {
-			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
-
-			if(!userAuthentication) return res.status(404).send({message: 'El UserAuthentication no existe.'});
 
 			return res.status(200).send({userAuthentication});
 		});

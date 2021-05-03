@@ -1,12 +1,3 @@
-<!--<header>
-    <ul>
-      <li id="logo"><a href="#">FyD</a></li> 
-      <li><a [routerLink]="['/sobre-nosotros']" [routerLinkActive]="['actived']">Sobre nosotros </a></li>  
-      <li><a [routerLink]="['/contacto']" [routerLinkActive]="['actived']" >Contacta con nosotros</a></li>
-      <li *ngIf="!userIsLogged"><button [routerLink]="['/register-login']" id="boton_regini" >Iniciar sesión</button></li>
-  </ul>
-</header>
--->
 <div class="b-example-divider"></div>
 
 <div class="container">
@@ -23,9 +14,22 @@
     </ul>
 
     <div class="col-md-3 text-end">
-      <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
-      <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
-    </div>
+      <ng-container *ngIf="!userAuthenticationService.loggedIn();else loggedIn">
+        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
+      </ng-container>
+      </div>
+      <ng-template #loggedIn>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+            <li><a class="dropdown-item" href="#">Citas</a></li>
+            <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </ng-template>
   </header>
 </div>
 

@@ -7,6 +7,7 @@ import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
 
 import * as $ from "jquery";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,16 +24,14 @@ export class LoginComponent implements OnInit {
   public title6:string;
   public patient:Patient;
   public doctor: Doctor;
-  public doctorEnBd : Doctor;
-  public patientEnBd : Patient;
-  public userAuthentication : UserAuthentication;
-  public userAuthenticationEnBd : UserAuthentication;
-  public botonDoctor:string;
+  public userAuthentication: UserAuthentication;
 
-  constructor(private patientService: PatientService,
+  constructor(
+    private patientService: PatientService,
     private doctorService: DoctorService,
-    private UserAuthenticationService: UserAuthenticationService
-    
+    private UserAuthenticationService: UserAuthenticationService,
+    private router: Router
+
     ) { 
     //Titulos
   	this.title = "Tipo de cuenta";
@@ -43,14 +42,10 @@ export class LoginComponent implements OnInit {
     
     
     this.patient = new Patient('','','','','','','','','','','');
-    this.patientEnBd = new Patient('','','','','','','','','','','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','');
-    this.doctorEnBd = new Doctor('','','','','','','','','','','','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','');
-    this.userAuthenticationEnBd = new UserAuthentication('','','','','','');
-
     }
 
   ngOnInit(): void {
@@ -66,59 +61,6 @@ export class LoginComponent implements OnInit {
       $("#container_forgot").show();
       $("#formInU").hide(500);
     });
-  }
-  asignarValoresDeResponseDoctor(userAuthenticationResponse: any){
-    this.doctorService.getDoctorByUsername(userAuthenticationResponse.user).subscribe(
-  		response => {
-        this.doctorEnBd.id = response.doctor._id;
-        this.doctorEnBd.name = response.doctor.name;
-        this.doctorEnBd.surname = response.doctor.surname;
-        this.doctorEnBd.user = response.doctor.user;
-        this.doctorEnBd.password = response.doctor.password;
-        this.doctorEnBd.email = response.doctor.email;
-        this.doctorEnBd.province = response.doctor.province;
-        this.doctorEnBd.location = response.doctor.location;
-        this.doctorEnBd.address = response.doctor.address;
-        this.doctorEnBd.cp = response.doctor.cp;
-        this.doctorEnBd.curriculum = response.doctor.curriculum;
-        this.doctorEnBd.insurance = response.doctor.insurance;
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
-  
-  }
-
-  asignarValoresDeResponsePatient(userAuthenticationResponse: any){
-    this.patientService.getPatientByUsername(userAuthenticationResponse.user).subscribe(
-  		response => {
-        this.patientEnBd.id = response.patient._id;
-        this.patientEnBd.name = response.patient.name;
-        this.patientEnBd.surname = response.patient.surname;
-        this.patientEnBd.user = response.patient.user;
-        this.patientEnBd.password = response.patient.password;
-        this.patientEnBd.email = response.patient.email;
-        this.patientEnBd.province = response.patient.province;
-        this.patientEnBd.location = response.patient.location;
-        this.patientEnBd.address = response.patient.address;
-        this.patientEnBd.cp = response.patient.cp;
-        this.patientEnBd.insurance = response.patient.insurance;
-    
-      },
-      error => {
-        console.log(<any>error);
-      }
-    );
-  }
-
-  asignarValoresDeResponseAUsuario(userAuthenticationResponse : any){
-    this.userAuthenticationEnBd.id = userAuthenticationResponse._id;
-    this.userAuthenticationEnBd.user = userAuthenticationResponse.user;
-    this.userAuthenticationEnBd.password = userAuthenticationResponse.password;
-    this.userAuthenticationEnBd.email = userAuthenticationResponse.email;
-    this.userAuthenticationEnBd.code = userAuthenticationResponse.code;
-    this.userAuthenticationEnBd.role = userAuthenticationResponse.role;
   }
 
   onSubmitForgotPassword(form){
@@ -138,30 +80,17 @@ export class LoginComponent implements OnInit {
   onSubmitNuevaContrasenaForm(form){
 
   }
-  onSubmitInU(form){
-    this.UserAuthenticationService.getUserAuthenticationByUsername(this.userAuthentication.user).subscribe(
-  		response => {
-  			if(response.userAuthentication){
-          this.asignarValoresDeResponseAUsuario(response.userAuthentication);
-          if(response.userAuthentication.role == "Doctor"){
-            this.asignarValoresDeResponseDoctor(response.userAuthentication);
-          }else if(response.userAuthentication.role == "Patient"){
-            this.asignarValoresDeResponsePatient(response.userAuthentication);
-          }
-
-          if(this.userAuthentication.user == this.userAuthenticationEnBd.user 
-            && this.userAuthentication.password == this.userAuthenticationEnBd.password ){
-              $("#botonera").show(); 
-              alert("Datos correctos, sesión iniciada");
-          }else{
-            alert("Datos incorrectos");
-          }
-  			}
-  		},
-  		error => {
-        alert("Datos incorrectos");
-  		}
-  	);
-    
+ 
+  onSubmitInU() {
+    this.UserAuthenticationService.loginAuth(this.userAuthentication)
+      .subscribe(
+        res => {
+          console.log(res.userAuthentication);
+          alert("Se ha iniciado sesión correctamente");
+          localStorage.setItem('token', res.token);
+          this.router.navigate(['/sobre-nosotros']);
+        },
+        err => console.log(err)
+      )
   }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
 
@@ -12,6 +13,9 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import {UserAuthGuard} from './user-auth.guard';
+import {UserAuthenticationService} from './services/userAuthentication.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,14 @@ import { RegisterComponent } from './components/register/register.component';
     FormsModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserAuthGuard,
+    UserAuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

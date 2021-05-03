@@ -18,7 +18,7 @@ export class PatientService{
 		return 'Prueba';
 	}
 
-	savePatient(patient: Patient){
+	savePatient(patient: Patient): Observable<any>{
 		let params = JSON.stringify(patient);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 

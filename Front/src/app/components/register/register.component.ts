@@ -5,6 +5,7 @@ import { UserAuthentication } from '../../models/userAuthentication';
 import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
+import { Router } from '@angular/router';
 
 import * as $ from "jquery";
 
@@ -25,13 +26,13 @@ export class RegisterComponent implements OnInit {
   public doctorEnBd : Doctor;
   public patientEnBd : Patient;
   public userAuthentication : UserAuthentication;
-  public userAuthenticationEnBd : UserAuthentication;
   public botonDoctor:string;
 
   constructor(
     private patientService: PatientService,
     private doctorService: DoctorService,
-    private UserAuthenticationService: UserAuthenticationService
+    private UserAuthenticationService: UserAuthenticationService,
+    private router: Router
 
     ) {
     //Titulos
@@ -41,13 +42,10 @@ export class RegisterComponent implements OnInit {
     
     
     this.patient = new Patient('','','','','','','','','','','');
-    this.patientEnBd = new Patient('','','','','','','','','','','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','');
-    this.doctorEnBd = new Doctor('','','','','','','','','','','','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','');
-    this.userAuthenticationEnBd = new UserAuthentication('','','','','','');
 
    }
  
@@ -75,22 +73,31 @@ export class RegisterComponent implements OnInit {
   
   }
 
-   onSubmitRegD(form){
+   onSubmitRegD(){
     console.log(this.doctor);
+
     this.doctorService.saveDoctor(this.doctor).subscribe(
-        response => {
-          console.log(response);
-          },
-        error =>{
-          console.log(<any>error);
-          }
-      );
+      response => {
+        console.log(response);
+        localStorage.setItem('token', response.token);
+          //this.router.navigate(['/private']);
+        alert("Se ha registrado" + this.doctor.user);
+        },
+      error =>{
+        console.log(<any>error);
+        }
+    );
+    
   }
-   onSubmitRegP(form){
+   onSubmitRegP(){
     console.log(this.patient);
+
     this.patientService.savePatient(this.patient).subscribe(
-        response => {
-          console.log(response);
+        res => {
+          console.log(res);
+          localStorage.setItem('token',res.token);
+          //this.router.navigate(['/private']);
+          alert("Se ha registrado" + this.patient.user);
           },
         error =>{
           console.log(<any>error);
