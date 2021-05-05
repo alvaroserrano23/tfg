@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import {UserAuthGuard} from './user-auth.guard';
 import {UserAuthenticationService} from './services/userAuthentication.service';
+import {DoctorService} from './services/doctor.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {UserAuthenticationService} from './services/userAuthentication.service';
     appRoutingProviders,
     UserAuthGuard,
     UserAuthenticationService,
+    DoctorService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

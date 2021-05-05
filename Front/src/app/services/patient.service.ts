@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Global } from './global';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { Patient } from '../models/patient';
-import { Global } from './global'; 
+import { Observable } from 'rxjs/Observable';
+@Injectable({
+  providedIn: 'root'
+})
+export class PatientService {
 
-@Injectable()
-export class PatientService{
-	public url:string;
+  public url:string;
 
 	constructor(
 		private _http: HttpClient

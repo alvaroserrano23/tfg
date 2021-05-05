@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Global } from './global';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { Doctor } from '../models/doctor';
-import { Global } from './global'; 
+import { Observable } from 'rxjs/Observable';
 
-@Injectable()
-export class DoctorService{
-	public url:string;
+@Injectable({
+  providedIn: 'root'
+})
+export class DoctorService {
+
+  public url:string;
 
 	constructor(
 		private _http: HttpClient
@@ -29,5 +32,9 @@ export class DoctorService{
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 
 		return this._http.get(this.url+'doctor/user/'+user,{headers: headers});
+	}
+
+	getDoctors(){
+		return this._http.get<any>(this.url+'/doctors');
 	}
 }
