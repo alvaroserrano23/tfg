@@ -88,9 +88,11 @@ export class LoginComponent implements OnInit {
           console.log(res.userAuthentication);
           alert("Se ha iniciado sesión correctamente");
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/sobre-nosotros']);
+          this.router.navigate(['']);
         },
-        err => console.log(err)
+        err => {
+          alert(err.error.message);
+        }
       )
   }
 }

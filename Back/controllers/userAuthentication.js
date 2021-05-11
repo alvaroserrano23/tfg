@@ -25,11 +25,11 @@ var controller = {
 		var user = await Doctor.findOne({user : params.user});
 		var userAuthentication = new UserAuthentication();
 
-		if(!user){
+		if(!user || user.user == ""){
 			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
 		}
 
-		if(user.password !== params.password) return res.status(401).send('Contraseña incorrecta');
+		if(user.password !== params.password) return res.status(401).send({message:'Contraseña incorrecta'});
 		userAuthentication.user = params.user;
 		userAuthentication.password = params.password;
 		userAuthentication.email = params.password;
