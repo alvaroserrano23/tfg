@@ -11,6 +11,7 @@ var patient_routes = require('./routes/patient');
 var appointment_routes = require('./routes/appointment');
 var doctor_routes = require('./routes/doctor');
 var userAuthentication_routes = require('./routes/userAuthentication');
+var mail_routes = require('./routes/mail');
 //Middlewares
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -25,5 +26,7 @@ app.use('/api',patient_routes);
 app.use('/api',appointment_routes);
 //Doctor
 app.use('/api',doctor_routes);
+//Mail
+app.use('/api',mail_routes);
 //exportar
 module.exports = app;
