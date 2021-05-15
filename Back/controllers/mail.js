@@ -19,7 +19,7 @@ let transporter = nodemailer.createTransport({
     from: mail.from, // sender address
     to: mail.to, // list of receivers
     subject: mail.subject, // Subject line
-    text: mail.message, // plain text body
+    text: mail.message +""+ mail.from, // plain text body
     //html: "<b>Hello world?</b>", // html body
     }); 
 
@@ -43,12 +43,13 @@ var controller = {
 	},
 
     sendEmail: function(req,res){
+      
         var mail = new Mail();
         mail.to = req.body.to;
         mail.from = req.body.from;
         mail.subject = req.body.subject;
         mail.message = req.body.message;
-
+        
         sendMail(mail,info => {
             console.log("El email se ha enviado correctamente.");
             res.send(info);

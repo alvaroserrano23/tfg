@@ -17,6 +17,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import {UserAuthGuard} from './user-auth.guard';
 import {UserAuthenticationService} from './services/userAuthentication.service';
 import {DoctorService} from './services/doctor.service';
+import {MailService} from './services/mail.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {DoctorService} from './services/doctor.service';
     UserAuthGuard,
     UserAuthenticationService,
     DoctorService,
+    MailService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
