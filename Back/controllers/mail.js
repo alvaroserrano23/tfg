@@ -1,8 +1,22 @@
 'use strict'
 const nodemailer = require("nodemailer");
 var Mail = require('../models/Mail');
+var contentHTML ="";
 
 async function sendMail(mail,callback){
+
+  if(mail.type == "contacto"){
+    contentHTML = `
+        <h1>Formulario de contacto</h1>
+        <ul>
+            <li>De: ${mail.from}</li>
+            <li>Asunto: ${mail.subject}</li>
+            <li>Mensaje: ${mail.message}</li>
+        </ul>
+    `;
+  }else{
+    contentHTML = "";
+  }
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -19,12 +33,12 @@ let transporter = nodemailer.createTransport({
     from: mail.from, // sender address
     to: mail.to, // list of receivers
     subject: mail.subject, // Subject line
-    text: mail.message +""+ mail.from, // plain text body
-    //html: "<b>Hello world?</b>", // html body
+    text: mail.message, // plain text body
+    html: contentHTML, // html body
     }); 
 
     let info = await transporter.sendMail(mailOptions);
-
+    
     callback(info);
 }
 
@@ -49,6 +63,7 @@ var controller = {
         mail.from = req.body.from;
         mail.subject = req.body.subject;
         mail.message = req.body.message;
+        mail.type = req.body.type;
         
         sendMail(mail,info => {
             console.log("El email se ha enviado correctamente.");

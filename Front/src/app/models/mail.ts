@@ -4,7 +4,8 @@ export class Mail{
 		public to:string,
 		public from:string,
 		public subject:string,
-		public message:string
+		public message:string,
+		public type:string
 		){
 
 		

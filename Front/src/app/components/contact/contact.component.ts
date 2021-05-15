@@ -18,7 +18,7 @@ export class ContactComponent implements OnInit {
   ) {
 
   	this.title = "Contacta con nosotros";
-    this.mail = new Mail('','','','','');
+    this.mail = new Mail('','','','','','');
    }
 
   ngOnInit() {
@@ -27,6 +27,7 @@ export class ContactComponent implements OnInit {
   onSubmitSendEmail(){
     console.log(this.mail);
     this.mail.to = "serviciocorreotfg@gmail.com";
+    this.mail.type = "contacto";
     
     this.mailService.sendEmail(this.mail).subscribe(
       res => {
