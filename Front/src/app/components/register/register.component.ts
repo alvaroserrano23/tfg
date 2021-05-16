@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../models/patient';
 import { Doctor } from '../../models/doctor';
-import { UserAuthentication } from '../../models/userAuthentication';
 import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
-import { UserAuthenticationService } from '../../services/userAuthentication.service';
-import { Router } from '@angular/router';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [PatientService,DoctorService,UserAuthenticationService]
+  providers: [PatientService,DoctorService,AlertService]
 })
 export class RegisterComponent implements OnInit {
 
@@ -24,14 +23,20 @@ export class RegisterComponent implements OnInit {
   public doctor: Doctor;
   public doctorEnBd : Doctor;
   public patientEnBd : Patient;
-  public userAuthentication : UserAuthentication;
   public botonDoctor:string;
+
+  formD: FormGroup;
+  formP: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
 
   constructor(
     private patientService: PatientService,
     private doctorService: DoctorService,
-    private UserAuthenticationService: UserAuthenticationService,
-    private router: Router
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
 
     ) {
     //Titulos
@@ -43,13 +48,25 @@ export class RegisterComponent implements OnInit {
     this.patient = new Patient('','','','','','','','','','','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','');
-    
-    this.userAuthentication = new UserAuthentication('','','','','','');
 
    }
  
   /*Contenedor de Iniciar sesion  -   Contenedor de registrar Paciente  -  Contenedor de registrar Doctor*/
   ngOnInit() {
+    this.formD = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.formP = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    
+
+    //JQUERY
      $("#containerRegPat").hide();
      $("#containerRegDoc").hide();
      $("#botonera").show();
@@ -72,8 +89,18 @@ export class RegisterComponent implements OnInit {
   
   }
 
+  get fD() { return this.formD.controls; }
+
+  get fP() { return this.formP.controls; }
+
+  inicializarDoctor(){
+    this.doctor = this.formD.value;
+
+  }
    onSubmitRegD(){
     console.log(this.doctor);
+
+    this.inicializarDoctor();
 
     this.doctorService.saveDoctor(this.doctor).subscribe(
       response => {

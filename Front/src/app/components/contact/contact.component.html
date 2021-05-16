@@ -37,7 +37,11 @@
     
 
     <hr class="my-4">
-
-    <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar</button>
+    <div class="form-group">
+    <button [disabled]="loading" class="w-100 btn btn-primary btn-lg" type="submit">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Enviar
+    </button>
+    </div>
   </form>
 </div>

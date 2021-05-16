@@ -14,11 +14,12 @@ import { DoctorsComponent } from './components/doctors/doctors.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import {UserAuthGuard} from './user-auth.guard';
-import {UserAuthenticationService} from './services/userAuthentication.service';
-import {DoctorService} from './services/doctor.service';
-import {MailService} from './services/mail.service';
+import { UserAuthGuard } from './user-auth.guard';
+import { UserAuthenticationService } from './services/userAuthentication.service';
+import { DoctorService } from './services/doctor.service';
+import { MailService } from './services/mail.service';
 import { AlertComponent } from './components/alert/alert.component';
+import { AlertService } from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AlertComponent } from './components/alert/alert.component';
     UserAuthenticationService,
     DoctorService,
     MailService,
+    AlertService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

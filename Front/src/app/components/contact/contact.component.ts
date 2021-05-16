@@ -9,7 +9,7 @@ import { AlertService } from 'src/app/services/alert.service';
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'],
-  providers: [MailService]
+  providers: [MailService,AlertService]
 })
 export class ContactComponent implements OnInit {
   form: FormGroup;
