@@ -7,7 +7,6 @@ import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
 import { Router } from '@angular/router';
 
-import * as $ from "jquery";
 
 @Component({
   selector: 'app-register',

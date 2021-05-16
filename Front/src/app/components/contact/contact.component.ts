@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Mail } from 'src/app/models/mail';
 import { MailService } from 'src/app/services/mail.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,12 +12,19 @@ import { MailService } from 'src/app/services/mail.service';
   providers: [MailService]
 })
 export class ContactComponent implements OnInit {
-
+  form: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
 	public title: string;
   public mail: Mail;
 
   constructor(
-    private mailService : MailService
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private mailService : MailService,
+    private alertService : AlertService
   ) {
 
   	this.title = "Contacta con nosotros";
@@ -22,19 +32,46 @@ export class ContactComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.mail.subject
+    this.form = this.formBuilder.group({
+      email: ['', Validators.required],
+      subject: ['', Validators.required],
+      message: ['',Validators.required]
+  });
+
+  // get return url from route parameters or default to '/'
+  this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  get f() { return this.form.controls; }
+
   onSubmitSendEmail(){
-    console.log(this.mail);
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+        return;
+    }
+    
+    this.loading = true;
     this.mail.to = "serviciocorreotfg@gmail.com";
     this.mail.type = "contacto";
+    this.mail.from = this.form.value.email;
+    this.mail.subject = this.form.value.subject;
+    this.mail.message = this.form.value.message;
     
     this.mailService.sendEmail(this.mail).subscribe(
       res => {
         console.log(res);
-        },
+        this.alertService.success('Tu correo se ha enviado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/contacto'], { relativeTo: this.route });  
+      },
       error =>{
-        console.log(<any>error);
+        this.alertService.error(error);
+        this.loading = false;
         }
     );
   }

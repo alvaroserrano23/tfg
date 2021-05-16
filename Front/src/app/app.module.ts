@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import {UserAuthGuard} from './user-auth.guard';
 import {UserAuthenticationService} from './services/userAuthentication.service';
 import {DoctorService} from './services/doctor.service';
 import {MailService} from './services/mail.service';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,15 @@ import {MailService} from './services/mail.service';
     BuscadorComponent,
     DoctorsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     appRoutingProviders,

@@ -1,34 +1,36 @@
 <div class="container">
     <h4 class="mb-3">{{title}}</h4>
     <hr class="my-4">
-  <form class="needs-validation" novalidate (submit)="onSubmitSendEmail()">
-    <div class="row g-3">
+  <form [formGroup]="form" (ngSubmit)="onSubmitSendEmail()">
+    <div class="form-row g-3">
       <div class="col-12">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" name="from" [(ngModel)]="mail.from" placeholder="tu@ejemplo.com" required>
-        <div class="invalid-feedback">
-          Por favor, introduce un email correcto.
-        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="tu@ejemplo.com" >
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">El email es obligatorio</div>
+          </div>
+      </div>
       </div>
 
       <div class="col-12">
-        <label for="subject" class="form-label">Asunto</label>
-        <div class="input-group has-validation">
-          <input type="text" class="form-control" name="subject" [(ngModel)]="mail.subject" placeholder="Asunto" required>
-        <div class="invalid-feedback">
-            El asunto es obligatorio.
+        <div class="form-group">
+          <label for="subject" class="form-label">Asunto</label>
+          <input type="text" formControlName="subject" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" placeholder="Asunto" >
+          <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+            <div *ngIf="f.subject.errors.required">El asunto es obligatorio</div>
           </div>
         </div>
       </div>
 
       <div class="col-12">
+        <div class="form-group">
         <label for="message" class="form-label">Mensaje</label>
-        <div class="input-group has-validation">
-          <textarea class="form-control" name="message" [(ngModel)]="mail.message" placeholder="Escribe aqui tu mensaje..." required ></textarea>
-        <div class="invalid-feedback">
-            El mensaje es obligatorio.
-          </div>
+        <textarea formControlName="message" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" placeholder="Escribe aqui tu mensaje..."  ></textarea>
+        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+          <div *ngIf="f.message.errors.required">El mensaje es obligatorio.</div>
         </div>
+      </div>
       </div>
     </div>
 

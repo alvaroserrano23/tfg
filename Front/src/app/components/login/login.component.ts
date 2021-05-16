@@ -6,7 +6,6 @@ import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
 
-import * as $ from "jquery";
 import { Router } from '@angular/router';
 
 @Component({
