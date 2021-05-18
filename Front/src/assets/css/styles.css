@@ -14,7 +14,7 @@
     src: url("fonts/titilium.ttf");
 }
  
-.componentes{
+.app-container{
   min-height: calc(100vh - 360px);
 }
 

@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private patientService: PatientService,
     private doctorService: DoctorService,
+    private alertService: AlertService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -54,13 +55,31 @@ export class RegisterComponent implements OnInit {
   /*Contenedor de Iniciar sesion  -   Contenedor de registrar Paciente  -  Contenedor de registrar Doctor*/
   ngOnInit() {
     this.formD = this.formBuilder.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', Validators.required],
+      province: ['', Validators.required],
+      location: ['', Validators.required],
+      address: ['', Validators.required],
+      cp:   ['', Validators.required],
+      numColegiado: ['', Validators.required],
+      user: ['', Validators.required],
       password: ['', Validators.required]
+      //insurance: ['',Validators.required]
+      //cv: ['',Validators.required]
     });
 
     this.formP = this.formBuilder.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', Validators.required],
+      province: ['', Validators.required],
+      location: ['', Validators.required],
+      address: ['', Validators.required],
+      cp:   ['', Validators.required],
+      user: ['', Validators.required],
       password: ['', Validators.required]
+      //insurance: ['',Validators.required]
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -93,40 +112,58 @@ export class RegisterComponent implements OnInit {
 
   get fP() { return this.formP.controls; }
 
-  inicializarDoctor(){
+   onSubmitRegD(){
+    
+
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formD.invalid) {
+        return;
+    }
     this.doctor = this.formD.value;
 
-  }
-   onSubmitRegD(){
-    console.log(this.doctor);
-
-    this.inicializarDoctor();
-
     this.doctorService.saveDoctor(this.doctor).subscribe(
-      response => {
-        console.log(response);
-        localStorage.setItem('token', response.token);
-          //this.router.navigate(['/private']);
-        alert("Se ha registrado" + this.doctor.user);
+      res => {
+        console.log(res);
+        localStorage.setItem('token',res.token);
+        this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate([''], { relativeTo: this.route });  
         },
       error =>{
-        console.log(<any>error);
+        this.alertService.error(error);
+        this.loading = false;
         }
     );
     
   }
    onSubmitRegP(){
-    console.log(this.patient);
+    
+
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formP.invalid) {
+        return;
+    }
+    this.patient = this.formP.value;
 
     this.patientService.savePatient(this.patient).subscribe(
         res => {
           console.log(res);
           localStorage.setItem('token',res.token);
-          //this.router.navigate(['/private']);
-          alert("Se ha registrado" + this.patient.user);
+          this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate([''], { relativeTo: this.route });  
           },
         error =>{
-          console.log(<any>error);
+          this.alertService.error(error);
+          this.loading = false;
           }
       );
   }
