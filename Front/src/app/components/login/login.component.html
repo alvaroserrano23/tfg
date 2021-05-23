@@ -1,23 +1,26 @@
 <!-- Iniciar sesion Usuario -->
-<form class="form-signin" id="formInU" (submit)="onSubmitInU()">
+<form class="form-signin" id="formInU" [formGroup]="form" (ngSubmit)="onSubmitInU()">
     <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
 
-    <div class="form-floating">
-      <input type="user" name="user" class="form-control" id="floatingInput" placeholder="usuario"  [(ngModel)]="userAuthentication.user" >
+    <div class="form-floating form-group">
+      <input type="user" name="user" formControlName="user" class="form-control" placeholder="usuario" [ngClass]="{ 'is-invalid': submitted && f.user.errors }" />
       <label for="floatingInput">Usuario</label>
+      <div *ngIf="submitted && f.user.errors" class="invalid-feedback">
+        <div *ngIf="f.user.errors.required">El usuario es obligatorio.</div>
+      </div>
     </div>
-    <div class="form-floating">
-      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="contraseña"  [(ngModel)]="userAuthentication.password">
+    <div class="form-floating form-group">
+      <input type="password" name="password" formControlName="password" class="form-control"  placeholder="contraseña" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
       <label for="floatingPassword">Contraseña</label>
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">La contraseña es obligatoria.</div>
+    </div>
     </div>
 
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Recúerdame
+      <label >
+        <p id="forgot">¿Olvidaste tu contraseña?</p>
       </label>
-	  <label>
-		  <p id="forgot">¿Olvidaste tu contraseña?</p>
-	  </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar sesión</button>
 	
@@ -27,20 +30,21 @@
   <div class="container" id="container_forgot">
     <div class="py-5 text-center">
       <h2>{{title5}}</h2>
-      <p class="lead">Introduce el email de tu cuenta para recuperar tu contraseña.</p>
+      <p class="lead">Introduce un email para recuperar tu contraseña.</p>
     </div>
   
     <div class="row g-5">
       
       <div class=" ">
       <hr class="my-4">
-      <form class="needs-validation" novalidate #ForgotPasswordForm ="ngForm" (ngSubmit)="onSubmitForgotPassword(ForgotPasswordForm)">
-        <div class="row ">
-        <div class="col">
-          <label for="email" class="form-label">Email</label>
-          <input type="text" class="form-control"  id="email" placeholder="tu@ejemplo.com" value="" name="email" #email="ngModel" [(ngModel)]="userAuthentication.email"required>
-          <div class="invalid-feedback">
-          Introduce un email correcto.
+      <form [formGroup]="formPass1" (ngSubmit)="onSubmitForgotPassword()">
+        <div class="form-row ">
+        <div class="form-group col">
+          <label for="email">Email</label>
+          <input type="email" formControlName="email" class="form-control" placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fPass1.email.errors }"/>
+          <div *ngIf="submitted && fPass1.email.errors" class="invalid-feedback">
+            <div *ngIf="fPass1.email.errors.required">El email es obligatorio.</div>
+            <div *ngIf="fPass1.email.errors.email">Introduce un email correcto.</div>
           </div>
         </div>
         </div>
@@ -62,14 +66,14 @@
       
       <div class=" ">
       <hr class="my-4">
-      <form class="needs-validation" novalidate #CodigoRecuperacionForm ="ngForm" (ngSubmit)="onSubmitCodigoRecuperacionForm(CodigoRecuperacionForm)">
-        <div class="row ">
-        <div class="col">
+      <form [formGroup]="formPass2" (ngSubmit)="onSubmitCodigoRecuperacionForm()">
+        <div class="form-row ">
+          <div class="form-group col">
           <label for="code" class="form-label">Codigo de recuperación</label>
-          <input type="text" class="form-control" placeholder="" value="" name="code" #code="ngModel" [(ngModel)]="userAuthentication.user"required>
-          <div class="invalid-feedback">
-          El codigo de recuperación es incorrecto.
-          </div>
+          <input type="text" formControlName="code" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && fPass2.code.errors }"/>
+          <div *ngIf="submitted && fPass2.code.errors" class="invalid-feedback">
+            <div *ngIf="fPass2.code.errors.required">El codigo de recuperación es obligatorio.</div>
+        </div>
         </div>
         </div>
         <hr class="my-4">
@@ -90,21 +94,21 @@
       
       <div class=" ">
       <hr class="my-4">
-      <form class="needs-validation" novalidate #NuevaContrasenaForm ="ngForm" (ngSubmit)="onSubmitNuevaContrasenaForm(NuevaContrasenaForm)">
+      <form  [formGroup]="formPass3" (ngSubmit)="onSubmitNuevaContrasenaForm()">
         <div class="row g-2">
-        <div class="col">
+        <div class="form-group col">
           <label for="password1" class="form-label">Nueva contraseña</label>
-          <input type="text" class="form-control" placeholder="" value="" name="password" #password="ngModel" [(ngModel)]="userAuthentication.password"required>
-          <div class="invalid-feedback">
-          La contraseña es obligatoria
-          </div>
+          <input type="password" formControlName="password1" class="form-control" [ngClass]="{ 'is-invalid': submitted && fPass3.password1.errors }" />
+          <div *ngIf="submitted && fPass3.password1.errors" class="invalid-feedback">
+            <div *ngIf="fPass3.password1.errors.required">La contraseña es obligatoria.</div>
         </div>
-        <div class="col">
-          <label for="password2" class="form-label">Repite la contraseña</label>
-          <input type="password" class="form-control" required>
-          <div class="invalid-feedback">
-          La contraseña es obligatoria
-          </div>
+        </div>
+        <div class="form-group col">
+          <label for="password2" class="form-label">Nueva contraseña</label>
+          <input type="password" formControlName="password2" class="form-control" [ngClass]="{ 'is-invalid': submitted && fPass3.password2.errors }" />
+          <div *ngIf="submitted && fPass3.password2.errors" class="invalid-feedback">
+            <div *ngIf="fPass3.password2.errors.required">La contraseña es obligatoria.</div>
+        </div>
         </div>
         </div>
         <hr class="my-4">

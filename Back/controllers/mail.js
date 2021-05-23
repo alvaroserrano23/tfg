@@ -1,6 +1,7 @@
 'use strict'
 const nodemailer = require("nodemailer");
 var Mail = require('../models/Mail');
+var UserAuthentication = require('../models/userAuthentication');
 var contentHTML ="";
 
 async function sendMail(mail,callback){
@@ -14,6 +15,13 @@ async function sendMail(mail,callback){
             <li>Mensaje: ${mail.message}</li>
         </ul>
     `;
+  }else if(mail.type="recuperarcontraseña"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    contentHTML = `
+    <h1>Recuperación de contraseña</h1>
+    <p>Hola ${mail.to}, este es tu código de recuperación de contraseña:</p>
+`;
+
   }else{
     contentHTML = "";
   }
