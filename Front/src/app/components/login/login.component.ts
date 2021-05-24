@@ -60,7 +60,9 @@ export class LoginComponent implements OnInit {
     this.doctor = new Doctor('','','','','','','','','','','','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','');
-    }
+      
+    this.mail = new Mail('','','','','','');
+  }
 
   ngOnInit(): void {
     //Jquery
@@ -81,7 +83,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.formPass1 = this.formBuilder.group({
-      email: ['', Validators.required, Validators.email]
+      email: ['', [Validators.required, Validators.email]]
     });
     this.formPass2 = this.formBuilder.group({
       code: ['', Validators.required]
@@ -92,11 +94,11 @@ export class LoginComponent implements OnInit {
     });
 
   }
-
-  get f() { return this.form.controls; }
   get fPass1() { return this.formPass1.controls; }
   get fPass2() { return this.formPass2.controls; }
   get fPass3() { return this.formPass3.controls; }
+  get f() { return this.form.controls; }
+ 
 
   onSubmitForgotPassword(){
 

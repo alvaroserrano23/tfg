@@ -38,7 +38,7 @@
       <div class=" ">
       <hr class="my-4">
       <form [formGroup]="formPass1" (ngSubmit)="onSubmitForgotPassword()">
-        <div class="form-row ">
+        <div class="row ">
         <div class="form-group col">
           <label for="email">Email</label>
           <input type="email" formControlName="email" class="form-control" placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fPass1.email.errors }"/>
@@ -67,7 +67,7 @@
       <div class=" ">
       <hr class="my-4">
       <form [formGroup]="formPass2" (ngSubmit)="onSubmitCodigoRecuperacionForm()">
-        <div class="form-row ">
+        <div class="row ">
           <div class="form-group col">
           <label for="code" class="form-label">Codigo de recuperación</label>
           <input type="text" formControlName="code" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && fPass2.code.errors }"/>
@@ -104,7 +104,7 @@
         </div>
         </div>
         <div class="form-group col">
-          <label for="password2" class="form-label">Nueva contraseña</label>
+          <label for="password2" class="form-label">Repite nueva contraseña</label>
           <input type="password" formControlName="password2" class="form-control" [ngClass]="{ 'is-invalid': submitted && fPass3.password2.errors }" />
           <div *ngIf="submitted && fPass3.password2.errors" class="invalid-feedback">
             <div *ngIf="fPass3.password2.errors.required">La contraseña es obligatoria.</div>
