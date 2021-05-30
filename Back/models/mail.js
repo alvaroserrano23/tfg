@@ -8,7 +8,8 @@ var MailSchema = Schema({
 	from:String,
 	subject:String,
 	message:String,
-	type:String
+	type:String,
+	code:String
 });
 
 module.exports = mongoose.model('Mail', MailSchema);

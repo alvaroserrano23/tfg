@@ -51,4 +51,7 @@ export class UserAuthenticationService{
 		return localStorage.getItem('token');
 	}
 
+	generateCode(mail){
+		return this._http.post<any>(this.url+'generate-code',mail);
+	}
 }

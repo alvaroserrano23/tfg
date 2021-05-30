@@ -3,6 +3,7 @@
 var UserAuthentication = require('../models/userAuthentication'); //Importar modelo
 var Doctor = require('../models/doctor');
 var Patient = require('../models/patient');
+var Utils = require('../Utils');
 
 var jwt = require('jsonwebtoken');
 
@@ -29,7 +30,7 @@ var controller = {
 			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
 		}
 
-		if(user.password !== params.password) return res.status(401).send({message:'Contraseña incorrecta'});
+		if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
 		userAuthentication.user = params.user;
 		userAuthentication.password = params.password;
 		userAuthentication.email = params.password;
@@ -84,6 +85,22 @@ var controller = {
 
 			return res.status(200).send({patient:userAuthenticationUpdated});
 		});
+
+	},
+	generateCode: async function(req,res){
+		var params = req.body;
+		var user = await Doctor.findOne({email : params.email});
+		var userAuthentication = new UserAuthentication();
+
+		if(!user){
+			return res.status(404).send({message:"Falso: Usuario existe, se envia correo"});
+		}
+		const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		userAuthentication.code= Math.random().toString(36).substring(0,6);
+		UserAuthentication.updateOne(userAuthentication.user,userAuthentication.code);
+
+		return userAuthentication.code;
+
 
 	},
 

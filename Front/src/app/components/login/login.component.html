@@ -38,15 +38,13 @@
       <div class=" ">
       <hr class="my-4">
       <form [formGroup]="formPass1" (ngSubmit)="onSubmitForgotPassword()">
-        <div class="row ">
-        <div class="form-group col">
+        <div class="form-group">
           <label for="email">Email</label>
           <input type="email" formControlName="email" class="form-control" placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fPass1.email.errors }"/>
           <div *ngIf="submitted && fPass1.email.errors" class="invalid-feedback">
             <div *ngIf="fPass1.email.errors.required">El email es obligatorio.</div>
             <div *ngIf="fPass1.email.errors.email">Introduce un email correcto.</div>
           </div>
-        </div>
         </div>
         <hr class="my-4">
         <button class="w-100 btn btn-primary btn-lg" type="submit">Enviar</button>

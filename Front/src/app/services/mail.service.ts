@@ -3,6 +3,7 @@ import { Global } from './global';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Mail } from '../models/mail';
 import { Observable } from 'rxjs/Observable';
+import { UserAuthenticationService } from './userAuthentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ import { Observable } from 'rxjs/Observable';
 export class MailService {
 
   public url:string;
-
+ 
 	constructor(
-		private _http: HttpClient
+		private _http: HttpClient,
+		private userAuthenticationService: UserAuthenticationService
 	){
 		this.url = Global.url;
 	}
@@ -23,6 +25,9 @@ export class MailService {
 
   sendEmail(mail): Observable<any>{
     return this._http.post<any>(this.url+'sendEmail', mail);
+  }
 
+  sendEmailRecuperacion(mail): Observable<any>{
+	  return this._http.post<any>(this.url+'sendEmail', mail);
   }
 }

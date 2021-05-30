@@ -5,7 +5,8 @@ export class Mail{
 		public from:string,
 		public subject:string,
 		public message:string,
-		public type:string
+		public type:string,
+		public code:string
 		){
 
 		

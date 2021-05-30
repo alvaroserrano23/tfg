@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     
     this.userAuthentication = new UserAuthentication('','','','','','');
       
-    this.mail = new Mail('','','','','','');
+    this.mail = new Mail('','','','','','','');
   }
 
   ngOnInit(): void {
@@ -94,15 +94,16 @@ export class LoginComponent implements OnInit {
     });
 
   }
+  get f() { return this.form.controls; }
   get fPass1() { return this.formPass1.controls; }
   get fPass2() { return this.formPass2.controls; }
   get fPass3() { return this.formPass3.controls; }
-  get f() { return this.form.controls; }
+  
  
 
   onSubmitForgotPassword(){
 
-    this.submitted == true;
+    this.submitted = true;
     this.alertService.clear();
 
     if(this.formPass1.invalid){
@@ -110,24 +111,25 @@ export class LoginComponent implements OnInit {
     }
 
     this.alertService.success('Te hemos enviado un correo con un codigo de recuperación', { keepAfterRouteChange: true });
-    this.mail.to = this.form.value.email;
+    this.mail.to = this.formPass1.value.email;
     this.mail.type = "recuperarcontraseña";
-    this.mailService.sendEmail(this.mail).subscribe(
-      res =>{
-        $("#container_forgot").hide();
-        $("#container_sms").show();
-        console.log(res);
-      },
-      err => {
-        this.alertService.error(err);
-      }
-    );
-      
-
+    var response = this.UserAuthenticationService.generateCode(this.mail.to).subscribe();
+    if(response){
+      this.mailService.sendEmail(this.mail).subscribe(
+        res =>{
+          $("#container_forgot").hide();
+          $("#container_sms").show();
+          console.log(res);
+        },
+        err => {
+          this.alertService.error(err);
+        }
+      );
+    }  
   }
 
   onSubmitCodigoRecuperacionForm(){
-    this.submitted == true;
+    this.submitted = true;
     this.alertService.clear();
 
     if(this.formPass2.invalid){
@@ -140,7 +142,7 @@ export class LoginComponent implements OnInit {
     
   }
   onSubmitNuevaContrasenaForm(){
-    this.submitted == true;
+    this.submitted = true;
     this.alertService.clear();
 
     if(this.formPass3.invalid){
