@@ -14,7 +14,7 @@
           <div class="carousel-caption text-start">
             <h1>Búsquedas parametrizables</h1>
             <p>La aplicación web más sencilla , para que encuentres el profesional a tu gusto.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#">Buscar</a></p>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
           <div class="carousel-caption">
             <h1>Gestiona tus citas online</h1>
             <p>Te ofrecemos la posibilidad de solicitar/revisar/cancelar tus citas online.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+            <p><a class="btn btn-lg btn-primary" [routerLink]="['/login']">Vamos!</a></p>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           <div class="carousel-caption text-end">
             <h1>Sistema de opiniones</h1>
             <p>Da tu opinión sobre un doctor , o si buscas uno consulta las suyas.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+            <p><a class="btn btn-lg btn-primary" [routerLink]="['/medicos']">Ver doctores</a></p>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
     </button>
   </div>
   <!--Buscador-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="buscador">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-md-center" >
         <form class="d-flex w-50 me-3">

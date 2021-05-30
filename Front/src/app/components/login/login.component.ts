@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
       $("#container_forgot").show();
       $("#formInU").hide(500);
     });
-
+    
     this.form = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
