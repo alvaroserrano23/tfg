@@ -18,19 +18,11 @@ export class AppComponent {
 
   ngOnInit(): void {
     
-    this.isLogged = this.userAuthenticationService.loggedIn();
   }
 
-  getUserByToken(){
-    if(this.isLogged){
-      this.userAuthenticationService.getUserByToken().subscribe(
-        response =>{
-          console.log(response);
-        },
-        error =>{
-          console.log(<any>error);
-        }
-      );
+  getUserAuthenticationB(){
+    if(this.userAuthenticationService.loggedIn()){
+      let userAuth = this.userAuthenticationService.getUserAuthentication();
     }
   }
   

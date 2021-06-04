@@ -169,8 +169,8 @@ export class LoginComponent implements OnInit {
         res => {
           console.log(res.userAuthentication);
           this.alertService.success('Se ha iniciado sesión correctamente', { keepAfterRouteChange: true });
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('userAuthentication', res.userAuthentication);
+          localStorage.setItem('token', res.userAuthentication.token);
+          localStorage.setItem('userAuthentication', JSON.stringify(res.userAuthentication));
           this.router.navigate(['']);
         },
         err => {

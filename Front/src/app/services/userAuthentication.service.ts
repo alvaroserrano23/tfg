@@ -33,6 +33,10 @@ export class UserAuthenticationService{
 		return this._http.get(this.url+'userAuth/user/'+user,{headers: headers});
 	}
 
+	getUserAuthentication(){
+		return localStorage.getItem('userAuthentication');	
+	}
+
 	loginAuth(userAuthentication) :Observable<any>{
 		return this._http.post<any>(this.url+'login-auth', userAuthentication);
 	}
@@ -44,6 +48,7 @@ export class UserAuthenticationService{
 	
 	logout() {
 		localStorage.removeItem('token');
+		localStorage.removeItem('userAuthentication');
 		this.router.navigate(['']);
 	}
 
@@ -55,8 +60,5 @@ export class UserAuthenticationService{
 		return this._http.post<any>(this.url+'generate-code',mail);
 	}
 
-	getUserByToken(){
-		var token = localStorage.getItem('token');
-		return this._http.get(this.url+'getUserByToken'+token);
-	}
+
 }
