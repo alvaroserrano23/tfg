@@ -12,7 +12,10 @@ export class Doctor{
 		public cp:string,
 		public curriculum:string,
 		public insurance:string,
-		public numColegiado:string
+		public numColegiado:string,
+		public numOpiniones:number,
+		public imagen:string,
+		public especialidad:string
 		){
 		
 	}

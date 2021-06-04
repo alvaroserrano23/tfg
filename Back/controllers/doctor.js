@@ -28,7 +28,7 @@ var controller = {
 		if(user){
 			return res.status(404).send({message:"El doctor " +"'"+ params.user +"'"+ " ya existe"});
 		}
-
+		
 		doctor.name = params.name;
 		doctor.surname = params.surname;
 		doctor.user = params.user;

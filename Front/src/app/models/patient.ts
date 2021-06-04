@@ -10,7 +10,9 @@ export class Patient{
 		public location:string,
 		public address:string,
 		public cp:string,
-		public insurance:string
+		public insurance:string,
+		public numOpiniones:number,
+		public imagen:string
 
 	){}	
 	

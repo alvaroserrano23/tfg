@@ -37,4 +37,10 @@ export class DoctorService {
 	getDoctors(){
 		return this._http.get<any>(this.url+'/doctors');
 	}
+
+	getDoctor(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'doctor/'+id,{headers:headers});
+	}
 }

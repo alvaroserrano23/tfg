@@ -9,6 +9,7 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { DoctorsComponent } from './components/doctors/doctors.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -18,6 +19,7 @@ const appRoutes : Routes = [
 	{path: 'register', component : RegisterComponent},
 	{path: 'login', component : LoginComponent},
 	{path: 'contacto' , component : ContactComponent },
+	{path: 'doctor/:id',component: DetailComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

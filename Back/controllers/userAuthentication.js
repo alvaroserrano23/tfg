@@ -40,10 +40,10 @@ var controller = {
 			userAuthentication.role= "patient";
 		}
 
-		const token = jwt.sign({_id:userAuthentication._id},'secret_key');
+		userAuthentication.token = jwt.sign({_id:userAuthentication._id},'secret_key');
 
 		console.log(params.user);
-		return res.status(200).json({token});
+		return res.status(200).send({userAuthentication});
 		
 	},
 
@@ -114,6 +114,25 @@ var controller = {
 
 			return res.status(200).send({userAuthenticationRemoved});
 		});
+	},
+
+	getUserByToken: function(req,res){
+		if (req.headers && req.headers.authorization) {
+			var authorization = req.headers.authorization.split(' ')[1],
+				decoded;
+			try {
+				decoded = jwt.verify(authorization, secret.secretToken);
+			} catch (e) {
+				return res.status(401).send('unauthorized');
+			}
+			var userId = decoded.id;
+			// Fetch the user by id 
+			UserAuthentication.findOne({_id: userId}).then(function(user){
+				// Do something with the user
+				return res.status(200).send(user);
+			});
+		}
+		return res.send(500);
 	}
 
 };

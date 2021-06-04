@@ -8,7 +8,8 @@ var UserAuthenticationSchema = Schema({
 	password:String,
 	email:String,
 	code:String,
-    role:String
+    role:String,
+	token:String
 });
 
 module.exports = mongoose.model('UserAuthentication', UserAuthenticationSchema);

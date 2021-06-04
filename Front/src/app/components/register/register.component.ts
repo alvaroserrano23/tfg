@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
     this.title4 = "Registrarse como Paciente";
     
     
-    this.patient = new Patient('','','','','','','','','','','');
+    this.patient = new Patient('','','','','','','','','','','',0,'');
 
-    this.doctor = new Doctor('','','','','','','','','','','','','');
+    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','');
 
    }
  
@@ -64,7 +64,8 @@ export class RegisterComponent implements OnInit {
       cp:   ['', Validators.required],
       numColegiado: ['', Validators.required],
       user: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      especialidad: ['',Validators.required]
       //insurance: ['',Validators.required]
       //cv: ['',Validators.required]
     });

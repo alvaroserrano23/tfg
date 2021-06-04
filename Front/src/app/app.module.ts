@@ -20,6 +20,7 @@ import { DoctorService } from './services/doctor.service';
 import { MailService } from './services/mail.service';
 import { AlertComponent } from './components/alert/alert.component';
 import { AlertService } from './services/alert.service';
+import { DetailComponent } from './components/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AlertService } from './services/alert.service';
     DoctorsComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent
+    AlertComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

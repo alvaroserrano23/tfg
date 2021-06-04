@@ -54,4 +54,9 @@ export class UserAuthenticationService{
 	generateCode(mail){
 		return this._http.post<any>(this.url+'generate-code',mail);
 	}
+
+	getUserByToken(){
+		var token = localStorage.getItem('token');
+		return this._http.get(this.url+'getUserByToken'+token);
+	}
 }

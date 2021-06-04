@@ -13,4 +13,5 @@ router.get('/userAuths',userAuthenticationController.getUserAuthentications);
 router.put('/userAuth/:id',userAuthenticationController.updateUserAuthentication); 
 router.delete('/userAuth/:id',userAuthenticationController.deleteUserAuthentication); 
 router.post('/generate-code',userAuthenticationController.generateCode);
+router.get('/getUserByToken/:token',userAuthenticationController.getUserByToken);
 module.exports = router;

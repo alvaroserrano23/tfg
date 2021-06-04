@@ -1,0 +1,39 @@
+<div class="container" *ngIf="doctor">
+	<div class="bg-light p-5 rounded mt-3">
+		<div class="row">
+			<div class="col">
+				<div class="image" >
+				<!--<img src="{{url+'get-image/'+project.image}}"/>-->
+				</div>
+				<h1>{{doctor.name}} {{doctor.surname}}</h1>
+				<p>{{doctor.email}}</p>
+			</div>
+			<div class="col">
+				<h3>Datos profesionales
+					<hr>
+				</h3>
+				<p><b>Especialidad:</b> {{doctor.Especialidad}}</p>
+				<p><b>Nº Colegiado:</b> {{doctor.numColegiado}}</p>
+				<p><b>Aseguradora:</b> {{doctor.insurance}}</p>
+				<p><b>CV:</b> {{doctor.cv}}</p>
+				
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<h3>Dirección consulta<hr></h3>
+			<p><b>Direccción:</b> {{doctor.address}}</p>
+			<p><b>Localidad:</b> {{doctor.location}}</p>
+			<p><b>Provincia:</b> {{doctor.province}}</p>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/medicos']">Volver</button></div>
+			<div class="col-md-1"><button type="button" style="width: 100px" class="btn btn-primary" [routerLink]="['/']">Pedir cita</button></div>
+			
+		</div>
+
+	</div>
+	
+    
+</div>

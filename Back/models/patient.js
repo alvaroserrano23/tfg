@@ -13,7 +13,9 @@ var PatientSchema = Schema({
 	location:String,
 	address:String,
 	cp:String,
-	insurance:String
+	insurance:String,
+	numOpiniones:Number,
+	imgen:String
 });
 
 module.exports = mongoose.model('Patient', PatientSchema);

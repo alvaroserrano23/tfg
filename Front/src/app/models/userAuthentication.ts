@@ -5,7 +5,8 @@ export class UserAuthentication{
 		public password:string,
 		public email:string,
 		public code:string,
-		public role:string
+		public role:string,
+		public token:string
 		){
 		
 	}

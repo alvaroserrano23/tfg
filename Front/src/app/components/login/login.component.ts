@@ -55,11 +55,11 @@ export class LoginComponent implements OnInit {
     this.title5 = "¿Olvidaste tu contraseña?";
     
     
-    this.patient = new Patient('','','','','','','','','','','');
+    this.patient = new Patient('','','','','','','','','','','',0,'');
 
-    this.doctor = new Doctor('','','','','','','','','','','','','');
+    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','');
     
-    this.userAuthentication = new UserAuthentication('','','','','','');
+    this.userAuthentication = new UserAuthentication('','','','','','','');
       
     this.mail = new Mail('','','','','','','');
   }
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
       $("#container_forgot").show();
       $("#formInU").hide(500);
     });
-    
+
     this.form = this.formBuilder.group({
       user: ['', Validators.required],
       password: ['', Validators.required]
@@ -170,10 +170,12 @@ export class LoginComponent implements OnInit {
           console.log(res.userAuthentication);
           this.alertService.success('Se ha iniciado sesión correctamente', { keepAfterRouteChange: true });
           localStorage.setItem('token', res.token);
+          localStorage.setItem('userAuthentication', res.userAuthentication);
           this.router.navigate(['']);
         },
         err => {
           this.alertService.error(err);
+          console.log(err);
           this.loading = false;
         }
       )
