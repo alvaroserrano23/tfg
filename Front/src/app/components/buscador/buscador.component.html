@@ -25,7 +25,8 @@
           <div class="carousel-caption">
             <h1>Gestiona tus citas online</h1>
             <p>Te ofrecemos la posibilidad de solicitar/revisar/cancelar tus citas online.</p>
-            <p><a class="btn btn-lg btn-primary" [routerLink]="['/login']">Vamos!</a></p>
+            <p><a class="btn btn-lg btn-primary" *ngIf="!userAuthenticationService.loggedIn()" [routerLink]="['/login']">Vamos!</a></p>
+            <!--<p><a class="btn btn-lg btn-primary" #loggedIn [routerLink]="['/']">Vamos!</a></p>-->
           </div>
         </div>
       </div>

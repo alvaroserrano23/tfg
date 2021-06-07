@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import { UserAuthentication } from '../models/userAuthentication';
 import { Global } from './global'; 
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class UserAuthenticationService{
 	public url:string;
+	private userSubject: BehaviorSubject<UserAuthentication>;
+    public user: Observable<UserAuthentication>;
 
 	constructor(
 		private _http: HttpClient,
 		private router: Router
 	){
 		this.url = Global.url;
+		this.userSubject = new BehaviorSubject<UserAuthentication>(JSON.parse(localStorage.getItem('userAuthentication')));
+        this.user = this.userSubject.asObservable();
 	}
+
+	public get userValue(): UserAuthentication {
+        return this.userSubject.value;
+    }
 
 	testService(){
 		return 'Prueba';
@@ -38,7 +47,13 @@ export class UserAuthenticationService{
 	}
 
 	loginAuth(userAuthentication) :Observable<any>{
-		return this._http.post<any>(this.url+'login-auth', userAuthentication);
+		return this._http.post<any>(this.url+'login-auth', userAuthentication)
+			.pipe(map(user=>{
+				localStorage.setItem('userAuthentication',JSON.stringify(user));
+				localStorage.setItem('token',userAuthentication.token);
+				this.userSubject.next(user);
+				return user;
+			}));
 	}
 
 	loggedIn() {

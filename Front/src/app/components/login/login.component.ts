@@ -11,6 +11,7 @@ import { AlertService } from 'src/app/services/alert.service';
 import { MailService } from 'src/app/services/mail.service';
 import { Mail } from 'src/app/models/mail';
 import { error } from 'jquery';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -165,13 +166,12 @@ export class LoginComponent implements OnInit {
     this.userAuthentication = this.form.value;
     this.loading = true;
     this.UserAuthenticationService.loginAuth(this.userAuthentication)
+      .pipe(first())
       .subscribe(
         res => {
           console.log(res.userAuthentication);
-          this.alertService.success('Se ha iniciado sesión correctamente', { keepAfterRouteChange: true });
-          localStorage.setItem('token', res.userAuthentication.token);
-          localStorage.setItem('userAuthentication', JSON.stringify(res.userAuthentication));
           this.router.navigate(['']);
+        
         },
         err => {
           this.alertService.error(err);

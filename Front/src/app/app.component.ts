@@ -13,18 +13,7 @@ export class AppComponent {
   public isLogged : boolean;
 
   constructor(public userAuthenticationService: UserAuthenticationService) {
-    
+    this.userLogged = this.userAuthenticationService.userValue;
   }
-
-  ngOnInit(): void {
-    
-  }
-
-  getUserAuthenticationB(){
-    if(this.userAuthenticationService.loggedIn()){
-      let userAuth = this.userAuthenticationService.getUserAuthentication();
-    }
-  }
-  
   
 }
