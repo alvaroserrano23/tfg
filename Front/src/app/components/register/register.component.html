@@ -140,9 +140,9 @@
 								<div *ngIf="fD.especialidad.errors.required">La especialidad es obligatoria.</div>
 							</div>  
 						</div>
-						<div class="col-md-5">
-							<label for="country" class="form-label">Aseguradora</label>
-							<select class="form-select" required>
+						<div class="col-md-5 form-group">
+							<label for="insurance" class="form-label">Aseguradora</label>
+							<select class="form-select" formControlName="insurance" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.insurance.errors }" required>
 								<option value="">Seleccionar...</option>
 								<option >Sin aseguradora</option>
 								<option >DKV</option>
@@ -151,16 +151,16 @@
 								<option >Otra aseguradora</option>
 							</select>
 							<div class="invalid-feedback">
-								Por favor, introduce una aseguradora correcta.
+								Por favor, introduce una aseguradora.
 							</div>
 						</div>
 
 						<div class="col-md-3">
-						<label for="state" class="form-label">Curriculum</label>
-						<input type="file" class="custom-file-input" id="inputGroupFile02" name="curriculum" >
-						<div class="invalid-feedback">
-							Por favor,introduce un curriculum correcto.
-						</div>
+						<label for="cv" class="form-label">Curriculum</label>
+						<input type="file">
+						<!--<div class="invalid-feedback">
+							Por favor,introduce un curriculum.
+						</div>-->
 						</div>
 				</div>
 			<hr class="my-4">
@@ -285,20 +285,20 @@
 					<div *ngIf="fP.cp.errors.required">El codigo postal es obligatorio.</div>
 				</div>
 			</div>
-			<div class="col-12">
-				<label for="country" class="form-label">Aseguradora</label>
-				<select class="form-select" id="country" required>
-					  <option value="">Seleccionar...</option>
-					  <option >Sin aseguradora</option>
+			<div class="col-12 form-group">
+				<label for="insurance" class="form-label">Aseguradora</label>
+				<select class="form-select" formControlName="insurance" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.insurance.errors }" required>
+					<option value="">Seleccionar...</option>
+					<option >Sin aseguradora</option>
 					<option >DKV</option>
 					<option >MAPFRE</option>
 					<option >ASISA</option>
 					<option >Otra aseguradora</option>
 				</select>
 				<div class="invalid-feedback">
-				  Por favor, introduce una aseguradora correcta.
+					Por favor, introduce una aseguradora correcta.
 				</div>
-			  </div>
+			</div>
 		</div>
 
 		<hr class="my-4">

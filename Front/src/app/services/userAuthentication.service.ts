@@ -50,7 +50,7 @@ export class UserAuthenticationService{
 		return this._http.post<any>(this.url+'login-auth', userAuthentication)
 			.pipe(map(user=>{
 				localStorage.setItem('userAuthentication',JSON.stringify(user));
-				localStorage.setItem('token',userAuthentication.token);
+				localStorage.setItem('token',user.userAuthentication.token);
 				this.userSubject.next(user);
 				return user;
 			}));

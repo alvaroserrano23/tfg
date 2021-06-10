@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col">
 				<div class="image" >
-				<!--<img src="{{url+'get-image/'+project.image}}"/>-->
+					<img src="{{url+'get-image/'+doctor.imagen}}"/>
 				</div>
 				<h1>{{doctor.name}} {{doctor.surname}}</h1>
 				<p>{{doctor.email}}</p>
@@ -12,7 +12,7 @@
 				<h3>Datos profesionales
 					<hr>
 				</h3>
-				<p><b>Especialidad:</b> {{doctor.Especialidad}}</p>
+				<p><b>Especialidad:</b> {{doctor.especialidad}}</p>
 				<p><b>Nº Colegiado:</b> {{doctor.numColegiado}}</p>
 				<p><b>Aseguradora:</b> {{doctor.insurance}}</p>
 				<p><b>CV:</b> {{doctor.cv}}</p>
@@ -25,6 +25,11 @@
 			<p><b>Direccción:</b> {{doctor.address}}</p>
 			<p><b>Localidad:</b> {{doctor.location}}</p>
 			<p><b>Provincia:</b> {{doctor.province}}</p>
+		</div>
+
+		<br>
+		<div class="row">
+			<h3>Opiniones<hr></h3>
 		</div>
 
 		<div class="row justify-content-md-center">

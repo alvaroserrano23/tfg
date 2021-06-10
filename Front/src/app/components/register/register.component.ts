@@ -65,8 +65,8 @@ export class RegisterComponent implements OnInit {
       numColegiado: ['', Validators.required],
       user: ['', Validators.required],
       password: ['', Validators.required],
-      especialidad: ['',Validators.required]
-      //insurance: ['',Validators.required]
+      especialidad: ['',Validators.required],
+      insurance: ['',Validators.required]
       //cv: ['',Validators.required]
     });
 
@@ -79,8 +79,8 @@ export class RegisterComponent implements OnInit {
       address: ['', Validators.required],
       cp:   ['', Validators.required],
       user: ['', Validators.required],
-      password: ['', Validators.required]
-      //insurance: ['',Validators.required]
+      password: ['', Validators.required],
+      insurance: ['',Validators.required]
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -126,11 +126,12 @@ export class RegisterComponent implements OnInit {
         return;
     }
     this.doctor = this.formD.value;
-
+    
     this.doctorService.saveDoctor(this.doctor).subscribe(
       res => {
         console.log(res);
         localStorage.setItem('token',res.token);
+        localStorage.setItem('doctor',JSON.stringify(this.doctor));
         this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate([''], { relativeTo: this.route });  
         },

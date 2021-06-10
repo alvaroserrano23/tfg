@@ -3,6 +3,8 @@ var Doctor = require('../models/doctor'); //Importar modelo
 var UserAuthentication = require('../models/userAuthentication');
 
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var path = require('path');
 
 var controller = {
 
@@ -34,13 +36,17 @@ var controller = {
 		doctor.user = params.user;
 		doctor.email = params.email;
 		doctor.password = params.password;
+		doctor.address = params.address;
 		doctor.province = params.province;
 		doctor.location = params.location;
-		doctor.address = params.addres;
 		doctor.cp = params.cp
 		doctor.curriculum = params.curriculum;
 		doctor.insurance = params.insurance;
 		doctor.numColegiado = params.numColegiado;
+		doctor.especialidad = params.especialidad;
+		doctor.cv = params.cv;
+		doctor.numOpiniones = params.numOpiniones;
+		doctor.imagen = 'perfil1.png';
 		
 		
 		doctor.save(async (err,doctorGuardado) =>{
@@ -116,6 +122,54 @@ var controller = {
 			if(!doctorId) return res.status(404).send({message: 'No existe el doctor'});
 
 			return res.status(200).send({doctorRemoved});
+		});
+	},
+
+	uploadImage: function(req,res){
+		var doctorId = req.params.id;
+		var fileName = 'Imagen no subida...';
+
+		if(req.files){
+			var filePath = req.files.imagen.path;
+			var fileSplit = filePath.split('\\');
+			var fileName = fileSplit[1];
+			var extSplit = fileName.split('.');
+			var fileExt = extSplit[1];
+
+			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
+			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
+				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
+				
+				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});
+				return res.status(200).send({
+					doctor: doctorUpdated
+				});
+			});
+			}else{
+				fs.unlink(filePath,(err)=>{
+					return res.status(200).send({message: 'La extension no es valida'});
+				});
+			} 
+
+		}else{
+			return res.status(200).send({
+				message: fileName
+			})
+		}
+	},
+
+	getImageFile: function(req,res){
+		var file = req.params.imagen;
+		var path_file = './imagenes/'+file;
+
+		fs.exists(path_file,(exists)=>{
+			if(exists){
+				return res.sendFile(path.resolve(path_file));
+			}else{
+				return res.status(200).send({
+					message: "No existe la imagen..."
+				})
+			}
 		});
 	}
 
