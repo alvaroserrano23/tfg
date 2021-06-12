@@ -23,22 +23,29 @@ var controller = {
 
 	loginAuth: async function(req,res){
 		var params = req.body;
-		var user = await Doctor.findOne({user : params.user});
 		var userAuthentication = new UserAuthentication();
 
-		if(!user || user.user == ""){
-			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
+		var user = await Doctor.findOne({user : params.user});
+		if(!user || user.user == ""){ //si doctor no existe probamos con paciente
+			user = await Patient.findOne({user : params.user});
+			if(!user || user.user == ""){ //si no existe ni doctor ni paciente devolvemos error
+				return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
+			}else{
+				//Paciente
+				if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
+				userAuthentication = params;
+				userAuthentication.role = "patient";
+				userAuthentication.token = jwt.sign({_id:userAuthentication._id},'secret_key');
+				console.log(params.user);
+				return res.status(200).send({userAuthentication});
+
+			}
 		}
 
+		//Doctor
 		if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-		userAuthentication.user = params.user;
-		userAuthentication.password = params.password;
-		userAuthentication.email = params.password;
-		if(params.user.numColegiado){
-			userAuthentication.role = "doctor";
-		}else{
-			userAuthentication.role= "patient";
-		}
+		userAuthentication = params;
+		userAuthentication.role = "doctor";
 
 		userAuthentication.token = jwt.sign({_id:userAuthentication._id},'secret_key');
 

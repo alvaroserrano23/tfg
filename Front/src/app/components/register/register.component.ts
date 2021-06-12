@@ -130,10 +130,10 @@ export class RegisterComponent implements OnInit {
     this.doctorService.saveDoctor(this.doctor).subscribe(
       res => {
         console.log(res);
-        localStorage.setItem('token',res.token);
-        localStorage.setItem('doctor',JSON.stringify(this.doctor));
+        /*localStorage.setItem('token',res.token);
+        localStorage.setItem('doctor',JSON.stringify(this.doctor));*/
         this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate([''], { relativeTo: this.route });  
+        this.router.navigate(['/login'], { relativeTo: this.route });  
         },
       error =>{
         this.alertService.error(error);
@@ -159,9 +159,8 @@ export class RegisterComponent implements OnInit {
     this.patientService.savePatient(this.patient).subscribe(
         res => {
           console.log(res);
-          localStorage.setItem('token',res.token);
           this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
-          this.router.navigate([''], { relativeTo: this.route });  
+          this.router.navigate(['/login'], { relativeTo: this.route });  
           },
         error =>{
           this.alertService.error(error);

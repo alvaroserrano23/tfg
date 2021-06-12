@@ -24,7 +24,7 @@ export class AppComponent {
     if(this.userAuthenticationService.userValue != null){
       this.userLogged = this.userAuthenticationService.userValue;
       
-      if (this.userLogged.role == "Doctor"){
+      if (this.userLogged.role == "doctor"){
         this.userAuthenticationService.getUserAuthenticationB(this.userLogged).subscribe(
           res => {
             this.doctorLogged = res;
@@ -35,7 +35,7 @@ export class AppComponent {
             console.log(err);
           }
         )
-      }else if ( this.userLogged.role == "Patient" ){
+      }else if ( this.userLogged.role == "patient" ){
         this.userAuthenticationService.getUserAuthenticationB(this.userLogged).subscribe(
           res => {
             this.patientLogged = res;
