@@ -126,7 +126,7 @@ export class RegisterComponent implements OnInit {
         return;
     }
     this.doctor = this.formD.value;
-    
+    this.doctor.numOpiniones = 0;
     this.doctorService.saveDoctor(this.doctor).subscribe(
       res => {
         console.log(res);
