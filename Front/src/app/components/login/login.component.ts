@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
     this.title5 = "¿Olvidaste tu contraseña?";
     
     
-    this.patient = new Patient('','','','','','','','','','','',0,'');
+    this.patient = new Patient('','','','','','','','','','','',0,'','');
 
-    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','');
+    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','','');
       
@@ -169,8 +169,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          console.log(res.userAuthentication);
-          this.router.navigate(['']);
+          console.log(res);
+          this.router.navigate([''])
+          .then(() => {
+            window.location.reload();
+          });
+
         
         },
         err => {

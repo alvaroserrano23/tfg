@@ -11,44 +11,17 @@ import { Patient } from './models/patient';
 })
 export class AppComponent {
   title = 'find your doctor';
-  public userLogged : UserAuthentication;
   public doctorLogged: Doctor;
   public patientLogged: Patient;
-  public isLogged : boolean;
 
   constructor(public userAuthenticationService: UserAuthenticationService) {
-    this.userLogged = new UserAuthentication('','','','','','','');
-    this.patientLogged = new Patient('','','','','','','','','','','',0,'');
-    this.doctorLogged = new Doctor('','','','','','','','','','','','','',0,'','');
     
-    if(this.userAuthenticationService.userValue != null){
-      this.userLogged = this.userAuthenticationService.userValue;
-      
-      if (this.userLogged.role == "doctor"){
-        this.userAuthenticationService.getUserAuthenticationB(this.userLogged).subscribe(
-          res => {
-            this.doctorLogged = res;
-            console.log(res);
-          },
-
-          err =>{
-            console.log(err);
-          }
-        )
-      }else if ( this.userLogged.role == "patient" ){
-        this.userAuthenticationService.getUserAuthenticationB(this.userLogged).subscribe(
-          res => {
-            this.patientLogged = res;
-            console.log(res);
-          },
-
-          err =>{
-            console.log(err);
-          }
-        )
-      }
-
+    if(this.userAuthenticationService.userValueD != null){
+      this.doctorLogged = this.userAuthenticationService.userValueD;
+    }else if(this.userAuthenticationService.userValueP != null){
+      this.patientLogged = this.userAuthenticationService.userValueP;
     }
+    //userAuthenticationService.limpiarItems();
   }
   
 }

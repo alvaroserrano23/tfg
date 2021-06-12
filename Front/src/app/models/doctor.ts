@@ -15,7 +15,8 @@ export class Doctor{
 		public numColegiado:string,
 		public numOpiniones:number,
 		public imagen:string,
-		public especialidad:string
+		public especialidad:string,
+		public token:string
 		){
 		
 	}

@@ -23,7 +23,6 @@ var controller = {
 
 	loginAuth: async function(req,res){
 		var params = req.body;
-		var userAuthentication = new UserAuthentication();
 
 		var user = await Doctor.findOne({user : params.user});
 		if(!user || user.user == ""){ //si doctor no existe probamos con paciente
@@ -33,24 +32,23 @@ var controller = {
 			}else{
 				//Paciente
 				if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-				userAuthentication = params;
-				userAuthentication.role = "patient";
-				userAuthentication.token = jwt.sign({_id:userAuthentication._id},'secret_key');
-				console.log(params.user);
-				return res.status(200).send({userAuthentication});
+				var patient = new Patient();
+				patient = user;
+				patient.token = jwt.sign({_id:patient._id},'secret_key');
+				console.log(patient);
+				return res.status(200).send({patient});
 
 			}
 		}
 
 		//Doctor
 		if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-		userAuthentication = params;
-		userAuthentication.role = "doctor";
+		var doctor = new Doctor();
+		doctor = user;
+		doctor.token = jwt.sign({_id:doctor._id},'secret_key');
 
-		userAuthentication.token = jwt.sign({_id:userAuthentication._id},'secret_key');
-
-		console.log(params.user);
-		return res.status(200).send({userAuthentication});
+		console.log(doctor);
+		return res.status(200).send({doctor});
 		
 	},
 

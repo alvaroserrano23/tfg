@@ -13,16 +13,14 @@
       <li><a [routerLink]="['/sobre-nosotros']" class="nav-link px-2 link-dark" >Sobre nosotros</a></li>
     </ul>
 
-    <div class="col-md-3 text-end">
-      <ng-container *ngIf="!userAuthenticationService.loggedIn();else loggedIn">
-        <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
-        <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
-      </ng-container>
-      </div>
-      <ng-template #loggedIn>
-        <div class="nav-item dropdown">
+    <div class="col-md-3 text-end" [ngSwitch]="userAuthenticationService.loggedIn()">
+        <div *ngSwitchCase="''">
+          <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
+          <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
+        </div>
+        <div class="nav-item dropdown" *ngSwitchCase="'patientLogged'">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
-            {{userLogged.userAuthentication.user}}
+            {{patientLogged.user}}
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdown01">
             <li><a class="dropdown-item" href="#">Ver perfil</a></li>
@@ -31,7 +29,18 @@
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
           </ul>
         </div>
-      </ng-template>
+        <div class="nav-item dropdown" *ngSwitchCase="'doctorLogged'">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
+            {{doctorLogged.user}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+            <li><a class="dropdown-item" href="#">Citas</a></li>
+            <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
   </header>
 </div>
 

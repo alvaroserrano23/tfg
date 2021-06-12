@@ -12,7 +12,8 @@ export class Patient{
 		public cp:string,
 		public insurance:string,
 		public numOpiniones:number,
-		public imagen:string
+		public imagen:string,
+		public token:string
 
 	){}	
 	
