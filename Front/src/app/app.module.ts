@@ -21,6 +21,10 @@ import { MailService } from './services/mail.service';
 import { AlertComponent } from './components/alert/alert.component';
 import { AlertService } from './services/alert.service';
 import { DetailComponent } from './components/detail/detail.component';
+import { NavegacionComponent } from './components/navegacion/navegacion.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { DatosComponent } from './components/datos/datos.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { DetailComponent } from './components/detail/detail.component';
     LoginComponent,
     RegisterComponent,
     AlertComponent,
-    DetailComponent
+    DetailComponent,
+    NavegacionComponent,
+    PerfilComponent,
+    DatosComponent,
+    CitasComponent
   ],
   imports: [
     BrowserModule,

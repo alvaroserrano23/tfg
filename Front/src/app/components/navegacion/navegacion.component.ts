@@ -4,11 +4,12 @@ import { Doctor } from '../../models/doctor';
 import { Patient } from '../../models/patient';
 
 @Component({
-selector: 'app-buscador',
-  templateUrl: './buscador.component.html',
-  styleUrls: ['./buscador.component.css']
+  selector: 'app-navegacion',
+  templateUrl: './navegacion.component.html',
+  styleUrls: ['./navegacion.component.css']
 })
-export class BuscadorComponent implements OnInit {
+export class NavegacionComponent implements OnInit {
+  title = 'find your doctor';
   public doctorLogged: Doctor;
   public patientLogged: Patient;
 
@@ -19,7 +20,6 @@ export class BuscadorComponent implements OnInit {
       this.patientLogged = this.userAuthenticationService.userValueP;
     }
     //userAuthenticationService.limpiarItems();
-
   }
 
   ngOnInit(): void {

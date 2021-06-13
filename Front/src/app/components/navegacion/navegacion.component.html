@@ -1,0 +1,54 @@
+<div class="container" [ngSwitch]="userAuthenticationService.loggedIn()">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <img src="assets/img/imagen4.PNG" width="40" height="40" box-sizing="border-box" class="d-inline-block align-top" alt="">
+      </a>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="''">
+        <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
+        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark">Médicos</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
+        <li><a [routerLink]="['/sobre-nosotros']" class="nav-link px-2 link-dark" >Sobre nosotros</a></li>
+      </ul>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'patientLogged'">
+        <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
+        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark">Médicos</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
+        <li><a [routerLink]="['/']" class="nav-link px-2 link-dark" >Dar opinion</a></li>
+      </ul>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'doctorLogged'">
+        <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
+        <li><a [routerLink]="['/']" class="nav-link px-2 link-dark">Historial médico pacientes</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
+        <li><a [routerLink]="['/']" class="nav-link px-2 link-dark" >Valoraciones</a></li>
+      </ul>
+  
+      <div class="col-md-3 text-end">
+          <div *ngSwitchCase="''">
+            <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
+            <button type="button" class="btn btn-primary" [routerLink]="['/register']">Registrarse</button>
+          </div>
+          <div class="nav-item dropdown" *ngSwitchCase="'patientLogged'">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
+              {{patientLogged.user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+              <li><a class="dropdown-item" href="#">Citas</a></li>
+              <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
+          <div class="nav-item dropdown" *ngSwitchCase="'doctorLogged'">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
+              {{doctorLogged.user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+              <li><a class="dropdown-item" href="#">Citas</a></li>
+              <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </div>
+    </header>
+  </div>
