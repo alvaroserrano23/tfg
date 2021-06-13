@@ -32,4 +32,17 @@ export class PatientService {
 
 		return this._http.get(this.url+'patient/user/'+user,{headers: headers});
 	}
+
+	getPatient(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'patient/'+id,{headers:headers});
+	}
+
+	updatePatient(patient:Patient) :Observable<any>{
+		let params = JSON.stringify(patient);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'patient/'+patient.id,params,{headers:headers});	
+	}
 }

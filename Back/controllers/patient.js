@@ -35,9 +35,10 @@ var controller = {
 		patient.user = params.user;
 		patient.email = params.email;
 		patient.password = params.password;
-		patient.province = params.pro
+		patient.province = params.province;
 		patient.location = params.location;
 		patient.address = params.address;
+		patient.cp = params.cp;
 		patient.insurance = params.insurance;
 		patient.imagen = params.imagen;
 

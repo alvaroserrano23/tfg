@@ -10,6 +10,9 @@ import { DoctorsComponent } from './components/doctors/doctors.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DetailComponent } from './components/detail/detail.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { DatosComponent } from './components/datos/datos.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -20,6 +23,12 @@ const appRoutes : Routes = [
 	{path: 'login', component : LoginComponent},
 	{path: 'contacto' , component : ContactComponent },
 	{path: 'doctor/:id',component: DetailComponent},
+	{path: 'perfil-patient/:id',component: PerfilComponent},
+	{path: 'perfil-doctor/:id', component: PerfilComponent},
+	{path: 'datos-patient/:id', component: DatosComponent},
+	{path: 'datos-doctor/:id', component: DatosComponent},
+	{path: 'citas-patient/:id', component: CitasComponent},
+	{path: 'citas-doctor/:id',component: CitasComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

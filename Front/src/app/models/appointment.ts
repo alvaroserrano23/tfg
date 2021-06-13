@@ -5,7 +5,8 @@ export class Appointment{
 		public patient:string,
 		public date:string,
 		public hour:string,
-		public place:string
+		public place:string,
+		public status:string
 		){
 
 		

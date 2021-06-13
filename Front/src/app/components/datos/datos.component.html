@@ -1,1 +1,259 @@
-<p>datos works!</p>
+<div class="container" *ngIf="doctor">
+	<div class="py-5 text-center">
+	<h2>Datos de la cuenta</h2>
+	</div>
+  
+	<div class="row g-5">
+		<div class=" ">
+			<h4 class="mb-3">Datos personales</h4>
+			<hr class="my-4">
+			<form [formGroup]="formD"  (ngSubmit)="onSubmitRegD()">
+			
+				<div class="row g-3">
+					<div class="col-sm-6 form-group">
+						<label for="name" class="form-label">Nombre</label>
+						<input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.name.errors }" [(ngModel)]="doctor.name" />
+                        <div *ngIf="submitted && fD.name.errors" class="invalid-feedback">
+							<div *ngIf="fD.name.errors.required">El nombre es obligatorio.</div>
+						</div>
+					</div>
+				
+					<div class="col-sm-6 form-group">
+						<label for="surname" class="form-label">Apellidos</label>
+						<input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.surname.errors }" [(ngModel)]="doctor.surname" />
+						<div *ngIf="submitted && fD.surname.errors" class="invalid-feedback">
+							<div *ngIf="fD.surname.errors.required">Los apellidos son obligatorios.</div>
+						</div>
+					</div>
+				
+					<div class="col-sm-6 form-group">
+						<label for="user" class="form-label">Usuario</label>
+						<div class="input-group">
+						<span class="input-group-text">@</span>
+						<input type="text" formControlName="user" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.user.errors }" [(ngModel)]="doctor.user"/>
+						<div *ngIf="submitted && fD.user.errors" class="invalid-feedback">
+							<div *ngIf="fD.user.errors.required">El usuario es obligatorio.</div>
+						</div>
+						</div>
+					</div>
+
+
+					<div class="col-sm-6 form-group">
+						<label for="password" class="form-label">Contraseña</label>
+						<div class="input-group">
+							<input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.password.errors }" [(ngModel)]="doctor.password"/>
+							<div *ngIf="submitted && fD.password.errors" class="invalid-feedback">
+								<div *ngIf="fD.password.errors.required">La contraseña es obligatoria.</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 form-group">
+						<label for="email" class="form-label">Email</label>
+						<input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.email.errors }" [(ngModel)]="doctor.email"/>
+						<div *ngIf="submitted && fD.email.errors" class="invalid-feedback">
+							<div *ngIf="fD.email.errors.required">El email es obligatorio</div>
+						</div>
+					</div>
+				</div>
+
+			<h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
+			<hr class="my-4">
+			<div class="row g-3">
+
+				<div class="col-6 form-group">
+					<label for="province" class="form-label">Provincia</label>
+					<input type="text" formControlName="province" class="form-control"[ngClass]="{ 'is-invalid': submitted && fD.province.errors }" [(ngModel)]="doctor.province"/>
+					<div *ngIf="submitted && fD.province.errors"class="invalid-feedback">
+						<div *ngIf="fD.province.errors.required">La provincia es obligatoria.</div>
+					</div>
+				</div>
+
+				<div class="col-6 form-group">
+					<label for="location" class="form-label">Localidad</label>
+					<input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.location.errors }" [(ngModel)]="doctor.location"/>
+					<div *ngIf="submitted && fD.location.errors"class="invalid-feedback">
+						<div *ngIf="fD.location.errors.required">La localidad es obligatoria.</div>
+					</div>
+				</div>
+			
+				<div class="col-6 form-group">
+					<label for="address" class="form-label">Dirección</label>
+					<input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.address.errors }" [(ngModel)]="doctor.address"/>
+					<div *ngIf="submitted && fD.address.errors" class="invalid-feedback">
+						<div *ngIf="fD.address.errors.required">La dirección es obligatoria.</div>
+					</div>
+				</div>
+
+				<div class="col-6 form-group">
+					<label for="cp" class="form-label">Codigo Postal</label>
+					<input type="text" formControlName="cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.cp.errors }" [(ngModel)]="doctor.cp"/>
+					<div *ngIf="submitted && fD.cp.errors" class="invalid-feedback">
+						<div *ngIf="fD.cp.errors.required">El codigo postal es obligatorio.</div>
+					</div>
+				</div>
+			</div>
+
+			<h4 class="mb-2" style="margin-top: 3%;">Datos profesionales</h4>
+				<hr class="my-4">
+					<div class="row g-3">
+						<div class="col-md-6 form-group">
+							<label for="numColegiado" class="form-label">Nº Colegiado</label>
+							<input type="text" formControlName="numColegiado" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.numColegiado.errors }" [(ngModel)]="doctor.numColegiado"/>
+							<div *ngIf="submitted && fD.numColegiado.errors" class="invalid-feedback">
+								<div *ngIf="fD.numColegiado.errors.required">El numero de colegiado es obligatorio.</div>
+							</div>  
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="especialidad" class="form-label">Especialidad</label>
+							<input type="text" formControlName="especialidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.especialidad.errors }" [(ngModel)]="doctor.especialidad"/>
+							<div *ngIf="submitted && fD.especialidad.errors" class="invalid-feedback">
+								<div *ngIf="fD.especialidad.errors.required">La especialidad es obligatoria.</div>
+							</div>  
+						</div>
+						<div class="col-md-5 form-group">
+							<label for="insurance" class="form-label">Aseguradora</label>
+                            <input type="text" formControlName="insurance" class="form-control" [ngClass]="{ 'is-invalid': submitted && fD.insurance.errors }" [(ngModel)]="doctor.insurance"/>
+							<div class="invalid-feedback">
+								Por favor, introduce una aseguradora.
+							</div>
+						</div>
+
+						<div class="col-md-3">
+						<label for="cv" class="form-label">Curriculum</label>
+						<input type="file">
+                        {{doctor.cv}}
+						<!--<div class="invalid-feedback">
+							Por favor,introduce un curriculum.
+						</div>-->
+						</div>
+				</div>
+			<hr class="my-4">
+			
+			<div class="form-group">
+				<button [disabled]="loading" class="w-100 btn btn-primary btn-lg" type="submit">
+				  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				  Guardar
+				</button>
+			</div>
+			</form>
+		</div>
+	</div>
+
+  </div>
+  <div class="container" *ngIf="patient">
+	<div class="py-5 text-center">
+	  <h2>Datos de la cuenta</h2>
+	</div>
+
+	<div class="row g-5">
+	  
+	  <div class=" ">
+		<h4 class="mb-3">Datos personales</h4>
+		<hr class="my-4">
+		<form [formGroup]="formP"  (ngSubmit)="onSubmitRegP()">
+			
+			<div class="row g-3">
+				<div class="col-sm-6 form-group">
+					<label for="name" class="form-label">Nombre</label>
+					<input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.name.errors }" [ngModel]="patient.name"/>
+					<div *ngIf="submitted && fP.name.errors" class="invalid-feedback">
+						<div *ngIf="fP.name.errors.required">El nombre es obligatorio.</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 form-group">
+					<label for="surname" class="form-label">Apellidos</label>
+					<input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.surname.errors }" [ngModel]="patient.surname"/>
+					<div *ngIf="submitted && fP.surname.errors" class="invalid-feedback">
+						<div *ngIf="fP.surname.errors.required">Los apellidos son obligatorios.</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 form-group">
+					<label for="user" class="form-label">Usuario</label>
+					<div class="input-group">
+					<span class="input-group-text">@</span>
+					<input type="text" formControlName="user" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.user.errors }" [ngModel]="patient.user"/>
+					<div *ngIf="submitted && fP.user.errors" class="invalid-feedback">
+						<div *ngIf="fP.user.errors.required">El usuario es obligatorio.</div>
+					</div>
+					</div>
+				</div>
+
+
+				<div class="col-sm-6 form-group">
+					<label for="password" class="form-label">Contraseña</label>
+					<div class="input-group">
+						<input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.password.errors }" [ngModel]="patient.password"/>
+						<div *ngIf="submitted && fP.password.errors" class="invalid-feedback">
+							<div *ngIf="fP.password.errors.required">La contraseña es obligatoria.</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 form-group">
+					<label for="email" class="form-label">Email</label>
+					<input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.email.errors }" [ngModel]="patient.email"/>
+					<div *ngIf="submitted && fP.email.errors" class="invalid-feedback">
+						<div *ngIf="fP.email.errors.required">El email es obligatorio</div>
+					</div>
+				</div>
+			</div>
+
+		<h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
+		<hr class="my-4">
+		<div class="row g-3">
+
+			<div class="col-6 form-group">
+				<label for="province" class="form-label">Provincia</label>
+				<input type="text" formControlName="province" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.province.errors }" [ngModel]="patient.province"/>
+				<div *ngIf="submitted && fP.province.errors"class="invalid-feedback">
+					<div *ngIf="fP.province.errors.required">La provincia es obligatoria.</div>
+				</div>
+			</div>
+
+			<div class="col-6 form-group">
+				<label for="location" class="form-label">Localidad</label>
+				<input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.location.errors }" [ngModel]="patient.location"/>
+				<div *ngIf="submitted && fP.location.errors"class="invalid-feedback">
+					<div *ngIf="fP.location.errors.required">La localidad es obligatoria.</div>
+				</div>
+			</div>
+		
+			<div class="col-6 form-group">
+				<label for="address" class="form-label">Dirección</label>
+				<input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.address.errors }" [ngModel]="patient.address"/>
+				<div *ngIf="submitted && fP.address.errors" class="invalid-feedback">
+					<div *ngIf="fP.address.errors.required">La dirección es obligatoria.</div>
+				</div>
+			</div>
+
+			<div class="col-6 form-group">
+				<label for="cp" class="form-label">Codigo Postal</label>
+				<input type="text" formControlName="cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.cp.errors }" [ngModel]="patient.cp"/>
+				<div *ngIf="submitted && fP.cp.errors" class="invalid-feedback">
+					<div *ngIf="fP.cp.errors.required">El codigo postal es obligatorio.</div>
+				</div>
+			</div>
+			<div class="col-12 form-group">
+				<label for="insurance" class="form-label">Aseguradora</label>
+				<input type="text" formControlName="insurance" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.insurance.errors }" [(ngModel)]="patient.insurance"/>
+				<div class="invalid-feedback">
+					Por favor, introduce una aseguradora.
+				</div>
+			</div>
+		</div>
+
+		  <hr class="my-4">
+		  <div class="form-group">
+			<button [disabled]="loading" class="w-100 btn btn-primary btn-lg" type="submit">
+			  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+			  Guardar
+			</button>
+			</div>
+		</form>
+	  </div>
+	</div>
+
+</div>

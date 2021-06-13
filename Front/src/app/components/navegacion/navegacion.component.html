@@ -32,9 +32,9 @@
               {{patientLogged.user}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-              <li><a class="dropdown-item" href="#">Ver perfil</a></li>
-              <li><a class="dropdown-item" href="#">Citas</a></li>
-              <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/perfil-patient', patientLogged._id]">Ver perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/citas-patient', patientLogged._id]">Citas</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/datos-patient', patientLogged._id]">Datos de la cuenta</a></li>
               <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
             </ul>
           </div>
@@ -43,9 +43,9 @@
               {{doctorLogged.user}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-              <li><a class="dropdown-item" href="#">Ver perfil</a></li>
-              <li><a class="dropdown-item" href="#">Citas</a></li>
-              <li><a class="dropdown-item" href="#">Datos de la cuenta</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/perfil-doctor', doctorLogged._id]">Ver perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/citas-doctor', doctorLogged._id]">Citas</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/datos-doctor', doctorLogged._id]">Datos de la cuenta</a></li>
               <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
             </ul>
           </div>

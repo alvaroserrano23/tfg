@@ -18,7 +18,8 @@ var DoctorSchema = Schema({
 	numColegiado:String,
 	numOpiniones:Number,
 	imagen:String,
-	especialidad:String
+	especialidad:String,
+	token:String
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

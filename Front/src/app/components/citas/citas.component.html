@@ -1,1 +1,158 @@
-<p>citas works!</p>
+<div *ngIf="doctor">
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Asunto</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Paciente</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Hora</th>
+        <th scope="col">Dirección consulta</th>
+        <th style="width: 10%;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Revisión análisis</th>
+        <td>El paciente vendrá a consulta para 
+            revisar los análisis con su médico
+            de cabecera.</td>
+        <td>Luis Fernández 
+            Martín</td>
+        <td>04/06/2021</td>
+        <td>17:00</td>
+        <td>C/Crespo Rascón 4,
+            Madrid</td>
+            <td style="white-space: nowrap">
+                <a  class="btn btn-sm btn-primary mr-1">Aceptar</a>
+                <button class="btn btn-sm btn-danger btn-delete-user" >Rechazar
+                </button>
+            </td>
+      </tr>
+      <tr>
+        <th scope="row">Consulta médica</th>
+        <td>El paciente vendrá a consulta para 
+            hablar con el médico sobre su 
+            siguiente operación quirúrgica.</td>
+        <td>Juana Pepítez
+            Ordoñez</td>
+        <td>25/03/2021</td>
+        <td>10:00</td>
+        <td>C/Mirador de Álava1,
+            Bilbao</td>
+            <td style="white-space: nowrap">
+                <a  class="btn btn-sm btn-primary mr-1">Aceptar</a>
+                <button class="btn btn-sm btn-danger btn-delete-user" >Rechazar
+                </button>
+            </td>
+      </tr>
+      <tr>
+        <th scope="row">Donación de sangre</th>
+        <td>El paciente irá al hospital de la
+            dirección que se le indica para la 
+            donación de sangre.</td>
+        <td>Juan Marcos de Dios</td>
+        <td>05/07/2021</td>
+        <td>09:00</td>
+        <td>C/La Castañeda 34,
+            Barcelona</td>
+            <td style="white-space: nowrap">
+                <a  class="btn btn-sm btn-primary mr-1">Aceptar</a>
+                <button class="btn btn-sm btn-danger btn-delete-user" >Rechazar
+                </button>
+            </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="patient">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Asunto</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Dirección consulta</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Revisión análisis</th>
+            <td>El paciente vendrá a consulta para 
+                revisar los análisis con su médico
+                de cabecera.</td>
+            <td>Juan Ignacio do Santos
+                Martín</td>
+            <td>04/06/2021</td>
+            <td>17:00</td>
+            <td>C/Crespo Rascón 4,
+                Madrid</td>
+            <td>Rechazada</td>
+          </tr>
+          <tr>
+            <th scope="row">Consulta médica</th>
+            <td>El paciente vendrá a consulta para 
+                hablar con el médico sobre su 
+                siguiente operación quirúrgica.</td>
+            <td>María Luisa Sánchez
+                Cabaña</td>
+            <td>25/03/2021</td>
+            <td>10:00</td>
+            <td>C/Mirador de Álava1,
+                Bilbao</td>
+                <td>Finalizada</td>
+          </tr>
+          <tr>
+            <th scope="row">Donación de sangre</th>
+            <td>El paciente irá al hospital de la
+                dirección que se le indica para la 
+                donación de sangre.</td>
+            <td>Carla Montero
+                Ibáñez</td>
+            <td>05/07/2021</td>
+            <td>09:00</td>
+            <td>C/La Castañeda 34,
+                Barcelona</td>
+            <td>Aceptada</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<!--
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th >Asunto</th>
+            <th >Descripción</th>
+            <th >Paciente</th>
+            <th >Fecha</th>
+            <th >Hora</th>
+            <th >Dirección consulta</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="">
+            <td>C</td>
+            <td>B</td>
+            <td>A</td>
+            <td>C</td>
+            <td>B</td>
+            <td>A</td>
+            <td style="white-space: nowrap">
+                <a  class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="">
+                    <span *ngIf="" class=""></span>
+                    <span *ngIf="">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="">
+            <td colspan="4" class="text-center">
+                <span class=""></span>
+            </td>
+        </tr>
+    </tbody>
+</table>-->

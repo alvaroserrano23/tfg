@@ -43,4 +43,11 @@ export class DoctorService {
 
 		return this._http.get(this.url+'doctor/'+id,{headers:headers});
 	}
+
+	updateDoctor(doctor:Doctor) :Observable<any>{
+		let params = JSON.stringify(doctor);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'doctor/'+doctor.id,params,{headers:headers});	
+	}
 }

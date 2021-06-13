@@ -1,1 +1,48 @@
-<p>perfil works!</p>
+<div class="container" *ngIf="doctor">
+	<div class="bg-light p-5 rounded mt-3">
+		<div class="row">
+			<div class="col">
+				<div class="image" >
+					<img src="{{url+'get-image/'+doctor.imagen}}"/>
+				</div>
+				<h1>{{doctor.name}} {{doctor.surname}}</h1>
+                <p>@{{doctor.user}}</p>
+				<p>{{doctor.email}}</p>
+			</div>
+		<br>
+		<div class="row">
+			<h3>Opiniones<hr></h3>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/']">Volver</button></div>
+			
+		</div>
+
+	</div>  
+</div>
+</div>
+<div class="container" *ngIf="patient">
+	<div class="bg-light p-5 rounded mt-3">
+		<div class="row">
+			<div class="col">
+				<div class="image" >
+					<img src="{{url+'get-image/'+patient.imagen}}"/>
+				</div>
+				<h1>{{patient.name}} {{patient.surname}}</h1>
+                <p>@{{patient.user}}</p>
+				<p>{{patient.email}}</p>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<h3>Opiniones<hr></h3>
+		</div>
+
+		<div class="row justify-content-md-center">
+			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/']">Volver</button></div>
+			
+		</div>
+
+	</div>  
+</div>
