@@ -13,6 +13,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosComponent } from './components/datos/datos.component';
 import { CitasComponent } from './components/citas/citas.component';
+import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -29,6 +30,7 @@ const appRoutes : Routes = [
 	{path: 'datos-doctor/:id', component: DatosComponent},
 	{path: 'citas-patient/:id', component: CitasComponent},
 	{path: 'citas-doctor/:id',component: CitasComponent},
+	{path: 'pedir-cita',component: PedirCitaComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

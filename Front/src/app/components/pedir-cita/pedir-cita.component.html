@@ -1,0 +1,135 @@
+<div class="container" id="containerRegPat">
+	<div class="py-5 text-center">
+	  <h2>Pedir cita</h2>
+	  <p class="lead">Ingresa los datos que se solicitan a continuación para pedir cita con el doctor</p>
+	</div>
+
+	<div class="row g-5">
+	  
+	  <div class=" ">
+		<h4 class="mb-3">Datos personales</h4>
+		<hr class="my-4">
+		<form [formGroup]="form"  (ngSubmit)="onSubmit()">
+			
+			<div class="row g-3">
+				<div class="col-sm-6 form-group">
+					<label for="name" class="form-label">Nombre</label>
+					<input type="text" formControlName="name" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+					<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+						<div *ngIf="f.name.errors.required">El nombre es obligatorio.</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 form-group">
+					<label for="surname" class="form-label">Apellidos</label>
+					<input type="text" formControlName="surname" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && f.surname.errors }" />
+					<div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+						<div *ngIf="f.surname.errors.required">Los apellidos son obligatorios.</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 form-group">
+					<label for="user" class="form-label">Usuario</label>
+					<div class="input-group">
+					<span class="input-group-text">@</span>
+					<input type="text" formControlName="user" class="form-control"  placeholder="Usuario" [ngClass]="{ 'is-invalid': submitted && f.user.errors }" />
+					<div *ngIf="submitted && f.user.errors" class="invalid-feedback">
+						<div *ngIf="f.user.errors.required">El usuario es obligatorio.</div>
+					</div>
+					</div>
+				</div>
+
+
+				<div class="col-sm-6 form-group">
+					<label for="password" class="form-label">Contraseña</label>
+					<div class="input-group">
+						<input type="password" formControlName="password" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+						<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+							<div *ngIf="f.password.errors.required">La contraseña es obligatoria.</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 form-group">
+					<label for="email" class="form-label">Email</label>
+					<input type="email" formControlName="email" class="form-control"  placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+					<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+						<div *ngIf="f.email.errors.required">El email es obligatorio</div>
+					</div>
+				</div>
+			</div>
+
+		<h4 class="mb-2" style="margin-top: 3%;">Datos dirección</h4>
+		<hr class="my-4">
+		<div class="row g-3">
+
+			<div class="col-6 form-group">
+				<label for="province" class="form-label">Provincia</label>
+				<input type="text" formControlName="province" class="form-control"  placeholder="Salamanca" [ngClass]="{ 'is-invalid': submitted && f.province.errors }"/>
+				<div *ngIf="submitted && f.province.errors"class="invalid-feedback">
+					<div *ngIf="f.province.errors.required">La provincia es obligatoria.</div>
+				</div>
+			</div>
+
+			<div class="col-6 form-group">
+				<label for="location" class="form-label">Localidad</label>
+				<input type="text" formControlName="location" class="form-control" placeholder="Salamanca" [ngClass]="{ 'is-invalid': submitted && f.location.errors }"/>
+				<div *ngIf="submitted && f.location.errors"class="invalid-feedback">
+					<div *ngIf="f.location.errors.required">La localidad es obligatoria.</div>
+				</div>
+			</div>
+		
+			<div class="col-6 form-group">
+				<label for="address" class="form-label">Dirección</label>
+				<input type="text" formControlName="address" class="form-control" placeholder="C/Tecnicismo 23 4ºA" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"/>
+				<div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+					<div *ngIf="f.address.errors.required">La dirección es obligatoria.</div>
+				</div>
+			</div>
+
+			<div class="col-6 form-group">
+				<label for="cp" class="form-label">Codigo Postal</label>
+				<input type="text" formControlName="cp" class="form-control" placeholder="37003" [ngClass]="{ 'is-invalid': submitted && f.cp.errors }"/>
+				<div *ngIf="submitted && f.cp.errors" class="invalid-feedback">
+					<div *ngIf="f.cp.errors.required">El codigo postal es obligatorio.</div>
+				</div>
+			</div>
+			<div class="col-12 form-group">
+				<label for="insurance" class="form-label">Aseguradora</label>
+				<select class="form-select" formControlName="insurance" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.insurance.errors }" required>
+					<option value="">Seleccionar...</option>
+					<option >Sin aseguradora</option>
+					<option >DKV</option>
+					<option >MAPFRE</option>
+					<option >ASISA</option>
+					<option >Otra aseguradora</option>
+				</select>
+				<div class="invalid-feedback">
+					Por favor, introduce una aseguradora correcta.
+				</div>
+			</div>
+		</div>
+
+		<hr class="my-4">
+		  <div class="form-check">
+			<input type="checkbox" class="form-check-input">
+			<label class="form-check-label" for="same-address">Acepto los términos y condiciones.</label>
+		  </div>
+
+		  <div class="form-check">
+			<input type="checkbox" class="form-check-input">
+			<label class="form-check-label" for="save-info">Quiero recibir información a mi email sobre las noticias de Find Your Doctor.</label>
+		  </div>
+
+		  <hr class="my-4">
+		  <div class="form-group">
+			<button class="w-100 btn btn-primary btn-lg" type="submit">
+			  <span class="spinner-border spinner-border-sm mr-1"></span>
+			  Enviar
+			</button>
+			</div>
+		</form>
+	  </div>
+	</div>
+
+</div>
