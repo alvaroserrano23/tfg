@@ -3,7 +3,7 @@ import { Patient } from '../../models/patient';
 import { Doctor } from '../../models/doctor';
 import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators ,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 
@@ -54,33 +54,37 @@ export class RegisterComponent implements OnInit {
  
   /*Contenedor de Iniciar sesion  -   Contenedor de registrar Paciente  -  Contenedor de registrar Doctor*/
   ngOnInit() {
-    this.formD = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      email: ['', Validators.required],
-      province: ['', Validators.required],
-      location: ['', Validators.required],
-      address: ['', Validators.required],
-      cp:   ['', Validators.required],
-      numColegiado: ['', Validators.required],
-      user: ['', Validators.required],
-      password: ['', Validators.required],
-      especialidad: ['',Validators.required],
-      insurance: ['',Validators.required]
-      //cv: ['',Validators.required]
+    this.formD = new FormGroup({
+      name: new FormControl('',Validators.required),
+      surname: new FormControl('',Validators.required),
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      province: new FormControl('',Validators.required),
+      location: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      cp: new FormControl('',[Validators.required,Validators.pattern("/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/")]),
+      numColegiado: new FormControl('',[Validators.required,Validators.minLength(9)]),
+      user: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
+      especialidad: new FormControl('',Validators.required),
+      insurance: new FormControl('',Validators.required),
+      cv: new FormControl('',Validators.required)
     });
 
-    this.formP = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      email: ['', Validators.required],
-      province: ['', Validators.required],
-      location: ['', Validators.required],
-      address: ['', Validators.required],
-      cp:   ['', Validators.required],
-      user: ['', Validators.required],
-      password: ['', Validators.required],
-      insurance: ['',Validators.required]
+    this.formP = new FormGroup({
+      name: new FormControl('',Validators.required),
+      surname: new FormControl('',Validators.required),
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      province: new FormControl('',Validators.required),
+      location: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      cp: new FormControl('',[Validators.required,Validators.pattern("/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/")]),
+      user: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
+      insurance: new FormControl('',Validators.required)
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
