@@ -114,19 +114,14 @@ export class LoginComponent implements OnInit {
     this.alertService.success('Te hemos enviado un correo con un codigo de recuperación', { keepAfterRouteChange: true });
     this.mail.to = this.formPass1.value.email;
     this.mail.type = "recuperarcontraseña";
-    var response = this.UserAuthenticationService.generateCode(this.mail.to).subscribe();
-    if(response){
-      this.mailService.sendEmail(this.mail).subscribe(
-        res =>{
-          $("#container_forgot").hide();
-          $("#container_sms").show();
-          console.log(res);
-        },
-        err => {
-          this.alertService.error(err);
-        }
-      );
-    }  
+    this.UserAuthenticationService.generateCode(this.mail).subscribe(
+      res=>{
+        console.log(res);
+      },
+      err=>{
+        console.log(err);
+      }
+    ) 
   }
 
   onSubmitCodigoRecuperacionForm(){

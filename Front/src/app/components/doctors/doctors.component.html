@@ -15,7 +15,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm  btn-outline-primary" [routerLink]="['/doctor', doctor._id]">Ver ficha</button>
-                  <button type="button" class="btn btn-sm  btn-outline-primary">Pedir cita</button>
+                  <button *ngIf="userAuthenticationService.loggedIn()=='patientLogged'"type="button" class="btn btn-sm  btn-outline-primary" [routerLink]="['/pedir-cita']">Pedir cita</button>
                 </div>
                 <small class="text-muted">{{doctor.numOpiniones}} opiniones</small>
               </div>

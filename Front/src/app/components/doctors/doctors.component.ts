@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAuthenticationService } from 'src/app/services/userAuthentication.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { Doctor } from '../../models/doctor';
 import { Global } from '../../services/global';
+import { UserAuthentication } from 'src/app/models/userAuthentication';
 
 @Component({
   selector: 'app-doctors',
   templateUrl: './doctors.component.html',
-  styleUrls: ['./doctors.component.css']
+  styleUrls: ['./doctors.component.css'],
+  providers: [DoctorService,UserAuthenticationService]
 })
 export class DoctorsComponent implements OnInit {
   public doctors: Doctor[];
   public url: string;
 
   constructor(
-    public doctorService: DoctorService) 
+    public doctorService: DoctorService,
+    public userAuthenticationService: UserAuthenticationService
+    ) 
     {
     this.url = Global.url;
     }

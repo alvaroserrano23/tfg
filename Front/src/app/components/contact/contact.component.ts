@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Mail } from 'src/app/models/mail';
 import { MailService } from 'src/app/services/mail.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators , FormControl} from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class ContactComponent implements OnInit {
   returnUrl: string;
 	public title: string;
   public mail: Mail;
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,11 +34,13 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.mail.subject
-    this.form = this.formBuilder.group({
-      email: ['', Validators.required],
-      subject: ['', Validators.required],
-      message: ['',Validators.required]
-  });
+    this.form = new FormGroup({
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      subject: new FormControl('',Validators.required),
+      message: new FormControl('',Validators.required)
+      });
 
   // get return url from route parameters or default to '/'
   this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -67,7 +70,7 @@ export class ContactComponent implements OnInit {
       res => {
         console.log(res);
         this.alertService.success('Tu correo se ha enviado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate(['/contacto'], { relativeTo: this.route });  
+        this.router.navigate(['/contacto']);  
       },
       error =>{
         this.alertService.error(error);

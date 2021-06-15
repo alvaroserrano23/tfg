@@ -60,10 +60,12 @@ export class UserAuthenticationService{
 		return this._http.post<any>(this.url+'login-auth', userAuthentication)
 			.pipe(map(user=>{
 				if(user.patient){
+					user.patient.password = "";
 					localStorage.setItem('patient',JSON.stringify(user.patient));
 					localStorage.setItem('token',user.patient.token);	
 					this.userSubjectP.next(user.patient);
 				}else if(user.doctor){
+					user.doctor.password="";
 					localStorage.setItem('doctor',JSON.stringify(user.doctor));
 					localStorage.setItem('token',user.doctor.token);
 					this.userSubjectD.next(user.doctor);
@@ -98,7 +100,7 @@ export class UserAuthenticationService{
 	}
 
 	generateCode(mail){
-		return this._http.post<any>(this.url+'generate-code',mail);
+		return this._http.put<any>(this.url+'generate-code',mail);
 	}
 
 

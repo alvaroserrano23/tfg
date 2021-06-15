@@ -14,6 +14,7 @@ export class DetailComponent implements OnInit {
   public url: string;
   public doctor: Doctor;
   public confirm: boolean;
+  public userLogged: boolean;
 
   constructor(
     private doctorService: DoctorService,
@@ -22,12 +23,16 @@ export class DetailComponent implements OnInit {
   ) { 
     this.url = Global.url;
     this.confirm = false;
+    this.userLogged = false;
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
       let id = params.id;
       this.getDoctor(id);
+      if(localStorage.getItem('token')){
+        this.userLogged = true;
+      }
     })
   }
   getDoctor(id){
