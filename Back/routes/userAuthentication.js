@@ -12,5 +12,5 @@ router.get('/userAuth/:id?',userAuthenticationController.getUserAuthentication);
 router.get('/userAuths',userAuthenticationController.getUserAuthentications);
 router.put('/userAuth/:id',userAuthenticationController.updateUserAuthentication); 
 router.delete('/userAuth/:id',userAuthenticationController.deleteUserAuthentication); 
-router.post('/generate-code',userAuthenticationController.generateCode);
+router.put('/generate-code',userAuthenticationController.generateCode);
 module.exports = router;

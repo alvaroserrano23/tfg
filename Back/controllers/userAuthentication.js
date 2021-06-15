@@ -3,9 +3,9 @@
 var UserAuthentication = require('../models/userAuthentication'); //Importar modelo
 var Doctor = require('../models/doctor');
 var Patient = require('../models/patient');
-var Utils = require('../Utils');
-
 var jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+const { update } = require('../models/doctor');
 
 var controller = {
 
@@ -88,23 +88,29 @@ var controller = {
 
 			if(!userAuthenticationUpdated) return res.status(404).send({message:'No existe el userAuthentication para actulizar'});
 
-			return res.status(200).send({patient:userAuthenticationUpdated});
+			return res.status(200).send({userAuthenticationUpdated});
 		});
 
 	},
 	generateCode: async function(req,res){
 		var params = req.body;
-		var user = await Doctor.findOne({email : params.email});
+		var user = await UserAuthentication.findOne({email : params.to});
 		var userAuthentication = new UserAuthentication();
-
+		userAuthentication = user;
 		if(!user){
 			return res.status(404).send({message:"Falso: Usuario existe, se envia correo"});
 		}
-		const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		userAuthentication.code= Math.random().toString(36).substring(0,6);
-		UserAuthentication.updateOne(userAuthentication.user,userAuthentication.code);
 
-		return userAuthentication.code;
+		userAuthentication.code=uuidv4(); 
+		UserAuthentication.findByIdAndUpdate(userAuthentication.id,userAuthentication, {new:true} ,(err,userAuthenticationUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!userAuthenticationUpdated) return res.status(404).send({message:'No existe el userAuthentication para actulizar'});
+
+			return res.status(200).send({userAuthenticationUpdated});
+		});
+		
+		
 
 
 	},

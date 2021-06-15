@@ -46,9 +46,9 @@ let transporter = nodemailer.createTransport({
     html: contentHTML, // html body
     }); 
 
-    let info = await transporter.sendMail(mailOptions);
+    //let info = await transporter.sendMail(mailOptions);
     
-    callback(info);
+    callback(mailOptions);
 }
 
 var controller = {
