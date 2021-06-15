@@ -82,7 +82,7 @@
 						<input type="email" formControlName="email" class="form-control"  placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fD.email.errors }" />
 						<div *ngIf="submitted && fD.email.errors" class="invalid-feedback">
 							<div *ngIf="fD.email.errors.required">El email es obligatorio</div>
-							<div *ngIf="fD.email.errors.patern">El email es incorrecto</div>
+							<div *ngIf="fD.email.errors.pattern">El email es incorrecto</div>
 						</div>
 					</div>
 				</div>
@@ -237,7 +237,7 @@
 					<input type="email" formControlName="email" class="form-control"  placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fP.email.errors }" />
 					<div *ngIf="submitted && fP.email.errors" class="invalid-feedback">
 						<div *ngIf="fP.email.errors.required">El email es obligatorio</div>
-						<div *ngIf="fP.email.errors.patern">El email es incorrecto</div>
+						<div *ngIf="fP.email.errors.pattern">El email es incorrecto</div>
 					</div>
 				</div>
 			</div>
@@ -289,11 +289,11 @@
 					<option >Otra aseguradora</option>
 				</select>
 				<div class="invalid-feedback">
-					Por favor, introduce una aseguradora correcta.
+					Por favor, introduce una aseguradora.
 				</div>
 			</div>
 		</div>
-		
+
 		  <hr class="my-4">
 		  <div class="form-group">
 			<button class="w-100 btn btn-primary btn-lg" type="submit">
