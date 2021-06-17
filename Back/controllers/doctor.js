@@ -159,7 +159,7 @@ var controller = {
 	},
 
 	getImageFile: function(req,res){
-		var file = req.params.imagen;
+		var file = req.params.image;
 		var path_file = './imagenes/'+file;
 
 		fs.exists(path_file,(exists)=>{

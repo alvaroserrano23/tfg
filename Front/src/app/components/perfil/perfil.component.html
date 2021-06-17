@@ -1,17 +1,31 @@
 <div class="container" *ngIf="doctor">
 	<div class="bg-light p-5 rounded mt-3">
-		<div class="row">
-			<div class="col">
-				<div class="image" >
-					<img src="{{url+'get-image/'+doctor.imagen}}"/>
-				</div>
+		<div class="row g-3">
+			<div class="col-sm-4 d-flex justify-content-center">
+				<img src="{{url+'get-image/'+doctor.imagen}}" height="150px"/>
+			</div>
+			
+			<div class="col-sm-2">
 				<h1>{{doctor.name}} {{doctor.surname}}</h1>
                 <p>@{{doctor.user}}</p>
+			</div>
+			<div class="col-sm-4">
+				<p>{{doctor.location}} , {{doctor.province}}</p>
+                <p>{{doctor.address}} , {{doctor.cp}}</p>
 				<p>{{doctor.email}}</p>
 			</div>
+		</div>
+		<div class="row d-flex">
+			<div class="col-sm-4 d-flex justify-content-center" >
+				<div class="file-select" id="src-file1" >
+					<input type="file" name="src-file1" aria-label="Archivo">
+				</div>
+			</div>
+			
+		</div>
 		<br>
 		<div class="row">
-			<h3>Opiniones<hr></h3>
+			<h3>Opiniones ({{doctor.numOpiniones}})<hr></h3>
 		</div>
 
 		<div class="row justify-content-md-center">
@@ -21,22 +35,35 @@
 
 	</div>  
 </div>
-</div>
+
 <div class="container" *ngIf="patient">
 	<div class="bg-light p-5 rounded mt-3">
-		<div class="row">
-			<div class="col">
-				<div class="image" >
-					<img src="{{url+'get-image/'+patient.imagen}}"/>
-				</div>
+		<div class="row g-3">
+			<div class="col-sm-4 d-flex justify-content-center">
+				<img src="{{url+'get-image/'+patient.imagen}}" height="150px"/>
+			</div>
+			
+			<div class="col-sm-2">
 				<h1>{{patient.name}} {{patient.surname}}</h1>
                 <p>@{{patient.user}}</p>
+			</div>
+			<div class="col-sm-4">
+				<p>{{patient.location}} , {{patient.province}}</p>
+                <p>{{patient.address}} , {{patient.cp}}</p>
 				<p>{{patient.email}}</p>
 			</div>
 		</div>
+		<div class="row d-flex">
+			<div class="col-sm-4 d-flex justify-content-center" >
+				<div class="file-select" id="src-file1" >
+					<input type="file" name="src-file1" aria-label="Archivo">
+				</div>
+			</div>
+			
+		</div>
 		<br>
 		<div class="row">
-			<h3>Opiniones<hr></h3>
+			<h3>Opiniones ({{patient.numOpiniones}})<hr></h3>
 		</div>
 
 		<div class="row justify-content-md-center">

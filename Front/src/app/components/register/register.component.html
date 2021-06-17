@@ -6,7 +6,7 @@
 	</div>
 	<div class="col-md-2">
 		<div class="card" style="width: 18rem;">
-			<img src="assets/img/perfil1.png" width="100%" height="225">
+			<img src="assets/img/doctor1.png" width="100%" height="225">
 			<div class="card-body">
 			<h5 class="card-title">Médico</h5>
 			<p class="card-text">Selecciona este tipo de cuenta si deseas registrarte como médico,a continuación se le solicitaran una serie de datos.</p>
@@ -16,7 +16,7 @@
 	</div>
 	<div class="col-md-2">
 		<div class="card" style="width: 18rem;">
-			<img src="assets/img/perfil2.png" width="100%" height="225">
+			<img src="assets/img/paciente1.jpg" width="100%" height="225">
 			<div class="card-body">
 			<h5 class="card-title">Paciente</h5>
 			<p class="card-text">Selecciona este tipo de cuenta si deseas registrarte como paciente,a continuación se le solicitaran una serie de datos.</p>
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 				
-					<div class="col-sm-6 form-group">
+					<div class="row g-3">
 						<label for="surname" class="form-label">Apellidos</label>
 						<input type="text" formControlName="surname" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && fD.surname.errors }" />
 						<div *ngIf="submitted && fD.surname.errors" class="invalid-feedback">

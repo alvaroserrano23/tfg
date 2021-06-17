@@ -2,7 +2,8 @@
 
 var Patient = require('../models/patient'); //Importar modelo
 var UserAuthentication = require('../models/userAuthentication');
-
+var fs = require('fs');
+var path = require('path');
 var jwt = require('jsonwebtoken');
 
 var controller = {
@@ -114,6 +115,54 @@ var controller = {
 			if(!patientId) return res.status(404).send({message: 'No existe el paciente'});
 
 			return res.status(200).send({patientRemoved});
+		});
+	},
+
+	uploadImage: function(req,res){
+		var doctorId = req.params.id;
+		var fileName = 'Imagen no subida...';
+
+		if(req.files){
+			var filePath = req.files.imagen.path;
+			var fileSplit = filePath.split('\\');
+			var fileName = fileSplit[1];
+			var extSplit = fileName.split('.');
+			var fileExt = extSplit[1];
+
+			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
+			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
+				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
+				
+				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});
+				return res.status(200).send({
+					doctor: doctorUpdated
+				});
+			});
+			}else{
+				fs.unlink(filePath,(err)=>{
+					return res.status(200).send({message: 'La extension no es valida'});
+				});
+			} 
+
+		}else{
+			return res.status(200).send({
+				message: fileName
+			})
+		}
+	},
+
+	getImageFile: function(req,res){
+		var file = req.params.image;
+		var path_file = './imagenes/'+file;
+
+		fs.exists(path_file,(exists)=>{
+			if(exists){
+				return res.sendFile(path.resolve(path_file));
+			}else{
+				return res.status(200).send({
+					message: "No existe la imagen..."
+				})
+			}
 		});
 	}
 

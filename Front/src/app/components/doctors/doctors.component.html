@@ -4,7 +4,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
         <div class="col" *ngFor="let doctor of doctors">
           <div class="card shadow-sm">
-            <img  src="assets/img/perfil1.png" width="100%" height="225">
+            <img  src="{{url+'get-image/'+doctor.imagen}}" width="100%" height="225">
             <div class="card-body">
               <h2>{{doctor.name}} {{doctor.surname}}</h2>
               <p class="card-text"><b>Especialidad médica:</b> Medicina General</p>

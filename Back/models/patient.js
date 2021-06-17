@@ -15,7 +15,7 @@ var PatientSchema = Schema({
 	cp:String,
 	insurance:String,
 	numOpiniones:Number,
-	imgen:String,
+	imagen:String,
 	token:String
 });
 

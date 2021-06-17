@@ -12,4 +12,5 @@ router.get('/patient/:id?',PatientController.getPatient); //Obtener un paciente 
 router.get('/patients',PatientController.getPatients); //Obtener un listado de los pacientes de la BD
 router.put('/patient/:id',PatientController.updatePatient); //Actualizar un paciente de la BD
 router.delete('/patient/:id',PatientController.deletePatient); //Eliminar un paciente de la BD
+router.get('/get-image/:image',PatientController.getImageFile);
 module.exports = router;

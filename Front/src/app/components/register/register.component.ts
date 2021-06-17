@@ -159,7 +159,7 @@ export class RegisterComponent implements OnInit {
         return;
     }
     this.patient = this.formP.value;
-
+    this.patient.numOpiniones = 0;
     this.patientService.savePatient(this.patient).subscribe(
         res => {
           console.log(res);

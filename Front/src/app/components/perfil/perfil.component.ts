@@ -23,6 +23,7 @@ export class PerfilComponent implements OnInit {
     private patientService: PatientService,
     private router: Router,
     private route: ActivatedRoute
+    
   ) { 
     this.url = Global.url;
   }
@@ -33,6 +34,7 @@ export class PerfilComponent implements OnInit {
       this.getDoctor(id);
       this.getPatient(id);
     })
+    
   }
 
   getDoctor(id){
