@@ -30,7 +30,7 @@ const appRoutes : Routes = [
 	{path: 'datos-doctor/:id', component: DatosComponent},
 	{path: 'citas-patient/:id', component: CitasComponent},
 	{path: 'citas-doctor/:id',component: CitasComponent},
-	{path: 'pedir-cita',component: PedirCitaComponent},
+	{path: 'pedir-cita/:id',component: PedirCitaComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];
