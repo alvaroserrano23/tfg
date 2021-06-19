@@ -75,6 +75,30 @@ var controller = {
 		})
 	},
 
+	getCitasByIdPatient: function(req,res){
+		var id = req.params.id;
+
+		Cita.find({id_paciente:id}).exec((err,citas) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!citas) return res.status(404).send({message: 'No hay citas que mostrar'});
+
+			return res.status(200).send({citas});
+		})
+	},
+
+	getCitasByIdDoctor: function(req,res){
+		var id = req.params.id;
+
+		Cita.find({id_doctor:id}).exec((err,citas) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!citas) return res.status(404).send({message: 'No hay citas que mostrar'});
+
+			return res.status(200).send({citas});
+		})
+	},
+
 	updateCita: function(req,res){
 		var citaId = req.params.id;
 		var update = req.body;

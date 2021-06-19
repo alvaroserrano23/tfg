@@ -17,7 +17,8 @@ import { Patient } from 'src/app/models/patient';
 export class CitasComponent implements OnInit {
 
   public url: string;
-  public citas: Cita[];
+  public citasPaciente: Cita[];
+  public citasDoctor: Cita[];
   public doctor: Doctor;
   public patient: Patient;
   public id:String;
@@ -34,21 +35,37 @@ export class CitasComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getCitas();
+    
     
     this.route.params.subscribe(params =>{
       this.id = params.id;
       this.getDoctor(this.id);
       this.getPatient(this.id);
+      this.getCitasByIdDoctor(this.id);
+      this.getCitasByIdPatient(this.id);
     })
   }
 
-  getCitas(){
-  	this.citasService.getCitas().subscribe(
+  getCitasByIdPatient(id){
+  	this.citasService.getCitasByIdPatient(id).subscribe(
   		response => {
   			if(response.citas){
-  				this.citas = response.citas;
-          console.log(this.citas);
+  				this.citasPaciente = response.citas;
+          console.log(this.citasPaciente);
+  			}
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
+  	);
+  }
+
+  getCitasByIdDoctor(id){
+  	this.citasService.getCitasByIdDoctor(id).subscribe(
+  		response => {
+  			if(response.citas){
+  				this.citasDoctor = response.citas;
+          console.log(this.citasDoctor);
   			}
   		},
   		error => {

@@ -6,7 +6,7 @@ import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
 import { UserAuthenticationService } from '../../services/userAuthentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { MailService } from 'src/app/services/mail.service';
 import { Mail } from 'src/app/models/mail';
@@ -31,7 +31,7 @@ export class PedirCitaComponent implements OnInit {
   public mail:Mail;
   public userLogged;
   public cita:Cita;
-  patientString: String;
+  patientId: Patient;
   form: FormGroup;
 
   constructor(
@@ -63,17 +63,18 @@ export class PedirCitaComponent implements OnInit {
       this.getDoctor(id);
       if(localStorage.getItem('token')){
         this.userLogged = true;
-        //this.patientString = localStorage.getItem('patient._id');
+        var patientId = JSON.parse(localStorage.getItem('patient'));
+        this.patient.id = patientId._id;
+        console.log(this.patient);
       }
     })
 
-    this.form = this.formBuilder.group({
-      asunto: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      fecha: ['', Validators.required],
-      hora: ['',Validators.required],
-      direccion_consutal: ['', Validators.required],
-      telefono: ['', Validators.minLength(9)]
+    this.form = new FormGroup({
+      asunto: new FormControl('',Validators.required),
+      descripcion: new FormControl('',Validators.required),
+      fecha: new FormControl('',Validators.required),
+      hora: new FormControl('',Validators.required),
+      telefono: new FormControl('',Validators.pattern("(\|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}"))
     });
     
   }
@@ -84,6 +85,7 @@ export class PedirCitaComponent implements OnInit {
     this.doctorService.getDoctor(id).subscribe(
       response =>{
         this.doctor = response.doctor;
+        this.doctor.id = response.doctor._id;
       },
       error => {
         console.log(<any>error);
@@ -91,7 +93,7 @@ export class PedirCitaComponent implements OnInit {
     )
   }
 
-  /*getPatient(id){
+  getPatient(id){
     this.patientService.getPatient(id).subscribe(
       response =>{
         this.patient = response.patient;
@@ -101,7 +103,7 @@ export class PedirCitaComponent implements OnInit {
       }
     )
 
-  }*/
+  }
 
   onSubmit(){
     this.submitted = true;
@@ -114,15 +116,16 @@ export class PedirCitaComponent implements OnInit {
         return;
     }
     this.cita = this.form.value;
-    this.cita.estado = "pendiente";
+    this.cita.estado = "Pendiente";
     this.cita.id_doctor = this.doctor.id;
-    this.cita.id_paciente = "";
+    this.cita.id_paciente = this.patient.id;
+    this.cita.direccion_consulta = this.doctor.address+","+this.doctor.location+","+this.doctor.province;
     //telefono
     this.citaService.saveCita(this.cita).subscribe(
       res => {
         console.log(res);
         this.alertService.success('Se ha pedido cita correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate(['/'], { relativeTo: this.route });  
+        this.router.navigate(['/citas-patient',this.patient.id], { relativeTo: this.route });  
         },
       error =>{
         this.alertService.error(error);

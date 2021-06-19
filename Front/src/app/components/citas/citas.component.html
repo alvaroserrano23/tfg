@@ -1,5 +1,5 @@
 <div *ngIf="doctor">
-    <div *ngFor="let cita of citas">
+    <div *ngFor="let cita of citasDoctor">
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -34,7 +34,7 @@
     </div>
 </div>
 <div *ngIf="patient">
-    <div *ngFor="let cita of citas">
+    <div *ngFor="let cita of citasPaciente">
         <table class="table table-hover">
             <thead class="thead-dark">
             <tr>

@@ -21,6 +21,16 @@ export class CitasService {
 		return this._http.get<any>(this.url+'/citas');
 	}
 
+	getCitasByIdPatient(id){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get<any>(this.url+'citas-paciente/'+id,{headers:headers});
+	}
+
+	getCitasByIdDoctor(id){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get<any>(this.url+'citas-doctor/'+id,{headers:headers});
+	}
+
 	getCita(id): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
