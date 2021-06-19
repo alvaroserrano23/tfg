@@ -41,15 +41,15 @@
 				<div class="row g-3">
 					<div class="col-sm-6 form-group">
 						<label for="name" class="form-label">Nombre</label>
-						<input type="text" formControlName="name" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && fD.name.errors }" />
+						<input type="text" formControlName="name" class="form-control" placeholder="Nombre" [ngClass]="{ 'is-invalid': submitted && fD.name.errors }" />
 						<div *ngIf="submitted && fD.name.errors" class="invalid-feedback">
 							<div *ngIf="fD.name.errors.required">El nombre es obligatorio.</div>
 						</div>
 					</div>
 				
-					<div class="row g-3">
+					<div class="col-sm-6 form-group">
 						<label for="surname" class="form-label">Apellidos</label>
-						<input type="text" formControlName="surname" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && fD.surname.errors }" />
+						<input type="text" formControlName="surname" class="form-control"  placeholder="Apellidos" [ngClass]="{ 'is-invalid': submitted && fD.surname.errors }" />
 						<div *ngIf="submitted && fD.surname.errors" class="invalid-feedback">
 							<div *ngIf="fD.surname.errors.required">Los apellidos son obligatorios.</div>
 						</div>
@@ -70,7 +70,7 @@
 					<div class="col-sm-6 form-group">
 						<label for="password" class="form-label">Contraseña</label>
 						<div class="input-group">
-							<input type="password" formControlName="password" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && fD.password.errors }"/>
+							<input type="password" formControlName="password" class="form-control"  placeholder="********" [ngClass]="{ 'is-invalid': submitted && fD.password.errors }"/>
 							<div *ngIf="submitted && fD.password.errors" class="invalid-feedback">
 								<div *ngIf="fD.password.errors.required">La contraseña es obligatoria.</div>
 							</div>
@@ -117,7 +117,7 @@
 
 				<div class="col-6 form-group">
 					<label for="cp" class="form-label">Codigo Postal</label>
-					<input type="text" formControlName="cp" class="form-control" placeholder="37003" [ngClass]="{ 'is-invalid': submitted && fD.cp.errors }"/>
+					<input type="text" formControlName="cp" class="form-control" placeholder="37003" maxlength = "5" [ngClass]="{ 'is-invalid': submitted && fD.cp.errors }"/>
 					<div *ngIf="submitted && fD.cp.errors" class="invalid-feedback">
 						<div *ngIf="fD.cp.errors.required">El codigo postal es obligatorio.</div>
 						<div *ngIf="fD.cp.errors.pattern">El codigo postal es incorrecto.</div>
@@ -130,7 +130,7 @@
 					<div class="row g-3">
 						<div class="col-md-6 form-group">
 							<label for="numColegiado" class="form-label">Nº Colegiado</label>
-							<input type="text" formControlName="numColegiado" class="form-control"  placeholder="XXYYZZZZZ" [ngClass]="{ 'is-invalid': submitted && fD.numColegiado.errors }"/>
+							<input type="text" formControlName="numColegiado" class="form-control"  maxlength = "9" placeholder="XXYYZZZZZ" [ngClass]="{ 'is-invalid': submitted && fD.numColegiado.errors }"/>
 							<div *ngIf="submitted && fD.numColegiado.errors" class="invalid-feedback">
 								<div *ngIf="fD.numColegiado.errors.required">El numero de colegiado es obligatorio.</div>
 								<div *ngIf="fD.numColegiado.errors.minlength">El numero de colegiado es incorrecto.</div>
@@ -196,7 +196,7 @@
 			<div class="row g-3">
 				<div class="col-sm-6 form-group">
 					<label for="name" class="form-label">Nombre</label>
-					<input type="text" formControlName="name" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && fP.name.errors }" />
+					<input type="text" formControlName="name" class="form-control" placeholder="Nombre" [ngClass]="{ 'is-invalid': submitted && fP.name.errors }" />
 					<div *ngIf="submitted && fP.name.errors" class="invalid-feedback">
 						<div *ngIf="fP.name.errors.required">El nombre es obligatorio.</div>
 					</div>
@@ -204,7 +204,7 @@
 			
 				<div class="col-sm-6 form-group">
 					<label for="surname" class="form-label">Apellidos</label>
-					<input type="text" formControlName="surname" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && fP.surname.errors }" />
+					<input type="text" formControlName="surname" class="form-control"  placeholder="Apellidos" [ngClass]="{ 'is-invalid': submitted && fP.surname.errors }" />
 					<div *ngIf="submitted && fP.surname.errors" class="invalid-feedback">
 						<div *ngIf="fP.surname.errors.required">Los apellidos son obligatorios.</div>
 					</div>
@@ -225,7 +225,7 @@
 				<div class="col-sm-6 form-group">
 					<label for="password" class="form-label">Contraseña</label>
 					<div class="input-group">
-						<input type="password" formControlName="password" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && fP.password.errors }"/>
+						<input type="password" formControlName="password" class="form-control"  placeholder="********" [ngClass]="{ 'is-invalid': submitted && fP.password.errors }"/>
 						<div *ngIf="submitted && fP.password.errors" class="invalid-feedback">
 							<div *ngIf="fP.password.errors.required">La contraseña es obligatoria.</div>
 						</div>
@@ -272,7 +272,7 @@
 
 			<div class="col-6 form-group">
 				<label for="cp" class="form-label">Codigo Postal</label>
-				<input type="text" formControlName="cp" class="form-control" placeholder="37003" [ngClass]="{ 'is-invalid': submitted && fP.cp.errors }"/>
+				<input type="text" formControlName="cp" class="form-control" placeholder="37003" maxlength = "5" [ngClass]="{ 'is-invalid': submitted && fP.cp.errors }"/>
 				<div *ngIf="submitted && fP.cp.errors" class="invalid-feedback">
 					<div *ngIf="fP.cp.errors.required">El codigo postal es obligatorio.</div>
 					<div *ngIf="fP.cp.errors.pattern">El codigo postal es incorrecto.</div>

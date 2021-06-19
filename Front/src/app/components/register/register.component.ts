@@ -63,13 +63,13 @@ export class RegisterComponent implements OnInit {
       province: new FormControl('',Validators.required),
       location: new FormControl('',Validators.required),
       address: new FormControl('',Validators.required),
-      cp: new FormControl('',[Validators.required,Validators.pattern("/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/")]),
+      cp: new FormControl('',[Validators.required,Validators.pattern("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}")]),
       numColegiado: new FormControl('',[Validators.required,Validators.minLength(9)]),
       user: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
       especialidad: new FormControl('',Validators.required),
-      insurance: new FormControl('',Validators.required),
-      cv: new FormControl('',Validators.required)
+      insurance: new FormControl('',Validators.required)
+      //cv: new FormControl('',Validators.required)
     });
 
     this.formP = new FormGroup({
@@ -81,7 +81,7 @@ export class RegisterComponent implements OnInit {
       province: new FormControl('',Validators.required),
       location: new FormControl('',Validators.required),
       address: new FormControl('',Validators.required),
-      cp: new FormControl('',[Validators.required,Validators.pattern("/^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/")]),
+      cp: new FormControl('',[Validators.required,Validators.pattern("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}")]),
       user: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
       insurance: new FormControl('',Validators.required)
