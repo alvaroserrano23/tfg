@@ -3,7 +3,6 @@ import { UserAuthenticationService } from 'src/app/services/userAuthentication.s
 import { DoctorService } from 'src/app/services/doctor.service';
 import { Doctor } from '../../models/doctor';
 import { Global } from '../../services/global';
-import { UserAuthentication } from 'src/app/models/userAuthentication';
 
 @Component({
   selector: 'app-doctors',

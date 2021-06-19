@@ -34,7 +34,7 @@
 
 		<div class="row justify-content-md-center">
 			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/medicos']">Volver</button></div>
-			<div class="col-md-1"><button type="button" *ngIf="userLogged" style="width: 100px" class="btn btn-primary" [routerLink]="['/']">Pedir cita</button></div>
+			<div class="col-md-1"><button type="button" *ngIf="userLogged" style="width: 100px" class="btn btn-primary" [routerLink]="['/pedir-cita', doctor._id]">Pedir cita</button></div>
 			
 		</div>
 
