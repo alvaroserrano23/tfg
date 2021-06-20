@@ -44,7 +44,7 @@ export class PedirCitaComponent implements OnInit {
     private alertService: AlertService,
     private mailService: MailService) {
 
-    this.cita = new Cita('','','','','','','','','');
+    this.cita = new Cita('','','','','','','','','','','');
        
     this.patient = new Patient('','','','','','','','','','','',0,'','');
 
@@ -64,6 +64,7 @@ export class PedirCitaComponent implements OnInit {
       if(localStorage.getItem('token')){
         this.userLogged = true;
         var patientId = JSON.parse(localStorage.getItem('patient'));
+        this.patient = patientId;
         this.patient.id = patientId._id;
         console.log(this.patient);
       }
@@ -105,7 +106,7 @@ export class PedirCitaComponent implements OnInit {
 
   }
 
-  onSubmit(){
+  async onSubmit(){
     this.submitted = true;
 
     // reset alerts on submit
@@ -119,11 +120,28 @@ export class PedirCitaComponent implements OnInit {
     this.cita.estado = "Pendiente";
     this.cita.id_doctor = this.doctor.id;
     this.cita.id_paciente = this.patient.id;
+    this.cita.nombre_doctor = this.doctor.name + " " + this.doctor.surname;
+    this.cita.nombre_paciente = this.patient.name + " " + this.patient.surname; 
     this.cita.direccion_consulta = this.doctor.address+","+this.doctor.location+","+this.doctor.province;
     //telefono
+    if(this.form.value.telefono != undefined){
+      
+    }
     this.citaService.saveCita(this.cita).subscribe(
       res => {
         console.log(res);
+        //Enviamos el email
+        this.mail.type = "citaP";
+        this.mail.message = "<h1>Cita solicitada</h1><ul><li><b>Asunto:</b> "+this.cita.asunto+"</li><li><b>Dirección de la consulta:</b> "+this.cita.direccion_consulta+"<li><b>Doctor:</b> "+this.cita.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+this.cita.fecha+this.cita.hora+"</li></ul>";
+        //Mensaje para el paciente
+        this.mail.to = this.patient.email;
+        this.mailService.sendEmail(this.mail).subscribe();
+        //Mensaje para el doctor
+        this.mail.to = this.doctor.email;
+        this.mail.type = "citaD";
+        this.mail.message = "<h1>Cita solicitada</h1><ul><li><b>Asunto:</b> "+this.cita.asunto+"</li><li><b>Paciente:</b> "+this.cita.nombre_paciente+"</li><li><b>Fecha y Hora:</b> "+this.cita.fecha + " " + this.cita.hora+"</li></ul>";
+        this.mailService.sendEmail(this.mail).subscribe();
+
         this.alertService.success('Se ha pedido cita correctamente.', { keepAfterRouteChange: true });
         this.router.navigate(['/citas-patient',this.patient.id], { relativeTo: this.route });  
         },

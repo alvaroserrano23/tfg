@@ -21,6 +21,8 @@ export class CitasComponent implements OnInit {
   public citasDoctor: Cita[];
   public doctor: Doctor;
   public patient: Patient;
+  public doctorCita: Doctor;
+  public patientCita: Patient;
   public id:String;
 
   constructor(
@@ -95,6 +97,5 @@ export class CitasComponent implements OnInit {
       }
     )
   }
-
 
 }

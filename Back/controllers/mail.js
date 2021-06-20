@@ -14,7 +14,7 @@ async function sendMail(mail,callback){
             <li>Mensaje: ${mail.message}</li>
         </ul>
     `;
-  }else if(mail.type="recuperarcontraseña"){
+  }else if(mail.type =="recuperarcontraseña"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "¿Olvidaste tu contraseña?";
     contentHTML = `
@@ -22,8 +22,18 @@ async function sendMail(mail,callback){
     <p>Hola finder, este es tu código de recuperación de contraseña:</p>
     <p>${mail.code}</p>
 `;
-
-  }else{
+  }else if(mail.type == "citaP"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Aqui esta tu cita";
+    contentHTML= mail.message;
+    mail.to = "serviciocorreotfg@gmail.com"; //Para probar
+  }else if(mail.type == "citaD"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Solicitud de cita";
+    contentHTML= mail.message;
+    mail.to = "serviciocorreotfg@gmail.com"; //Para probar
+  }
+  else{
     contentHTML = "";
   }
 // create reusable transporter object using the default SMTP transport

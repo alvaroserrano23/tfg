@@ -8,6 +8,8 @@ var CitaSchema = Schema({
 	descripcion:String,
 	id_paciente:String,
 	id_doctor:String,
+	nombre_doctor:String,
+	nombre_paciente:String,
 	fecha:String,
 	hora:String,
 	direccion_consulta:String,
