@@ -96,7 +96,9 @@ var controller = {
 	updatePatient: function(req,res){
 		var patientId = req.params.id;
 		var update = req.body;
-
+		if(req.body.telefono != undefined){
+			delete update.password;
+		}
 		Patient.findByIdAndUpdate(patientId,update, {new:true} ,(err,patientUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});
 

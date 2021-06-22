@@ -26,6 +26,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosComponent } from './components/datos/datos.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component
     PerfilComponent,
     DatosComponent,
     CitasComponent,
-    PedirCitaComponent
+    PedirCitaComponent,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,
