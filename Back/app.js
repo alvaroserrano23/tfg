@@ -8,6 +8,7 @@ var app = express();
 
 //Archivos de Rutas
 var historial_routes = require('./routes/historial');
+var opinion_routes = require('./routes/opinion');
 var patient_routes = require('./routes/patient');
 var cita_routes = require('./routes/cita');
 var doctor_routes = require('./routes/doctor');
@@ -31,5 +32,7 @@ app.use('/api',doctor_routes);
 app.use('/api',mail_routes);
 //Historial
 app.use('/api',historial_routes);
+//Opinion
+app.use('/api',opinion_routes);
 //exportar
 module.exports = app;

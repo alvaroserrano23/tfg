@@ -27,6 +27,11 @@ export class HistorialService {
 		return this._http.get(this.url+'historial/'+id,{headers:headers});
 	}
 
+	getHistorialsByIdDoctor(id){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get<any>(this.url+'historials-doctor/'+id,{headers:headers});
+	}
+
 	updateHistorial(historial:Historial) :Observable<any>{
 		let params = JSON.stringify(historial);
 		let headers = new HttpHeaders().set('Content-Type','application/json');

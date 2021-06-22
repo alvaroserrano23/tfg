@@ -75,6 +75,18 @@ var controller = {
 		})
 	},
 
+	getHistorialsByIdDoctor: function(req,res){
+		var id = req.params.id;
+
+		Historial.find({id_doctor:id}).exec((err,historials) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!historials) return res.status(404).send({message: 'No hay historials que mostrar'});
+
+			return res.status(200).send({historials});
+		})
+	},
+
 	updateHistorial: function(req,res){
 		var historialId = req.params.id;
 		var update = req.body;

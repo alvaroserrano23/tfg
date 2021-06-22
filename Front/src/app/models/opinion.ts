@@ -1,10 +1,9 @@
 export class Opinion{
 	constructor(
 		public id:string,
-        public doctor:string,
-        public patient:string,
-        public appointment:string,
-        public description:string,
+        public id_doctor:string,
+        public id_patient:string,
+        public descripcion:string,
         public valoracion:number
 		){
 

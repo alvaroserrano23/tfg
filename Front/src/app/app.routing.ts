@@ -14,6 +14,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { DatosComponent } from './components/datos/datos.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component';
+import { HistorialComponent } from './components/historial/historial.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -31,6 +32,7 @@ const appRoutes : Routes = [
 	{path: 'citas-patient/:id', component: CitasComponent},
 	{path: 'citas-doctor/:id',component: CitasComponent},
 	{path: 'pedir-cita/:id',component: PedirCitaComponent},
+	{path: 'historials-doctor/:id',component: HistorialComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];
