@@ -46,7 +46,7 @@ export class PedirCitaComponent implements OnInit {
 
     this.cita = new Cita('','','','','','','','','','','');
        
-    this.patient = new Patient('','','','','','','','','','','',0,'','');
+    this.patient = new Patient('','','','','','','','','','','',0,'','','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','');
     
@@ -117,6 +117,7 @@ export class PedirCitaComponent implements OnInit {
         return;
     }
     this.cita = this.form.value;
+    this.patient.telefono = this.form.value.telefono;
     this.cita.estado = "Pendiente";
     this.cita.id_doctor = this.doctor.id;
     this.cita.id_paciente = this.patient.id;
@@ -125,7 +126,7 @@ export class PedirCitaComponent implements OnInit {
     this.cita.direccion_consulta = this.doctor.address+","+this.doctor.location+","+this.doctor.province;
     //telefono
     if(this.form.value.telefono != undefined){
-      
+      this.patientService.updatePatient(this.patient).subscribe();
     }
     this.citaService.saveCita(this.cita).subscribe(
       res => {

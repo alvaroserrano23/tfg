@@ -26,14 +26,15 @@ async function sendMail(mail,callback){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Aqui esta tu cita";
     contentHTML= mail.message;
-    mail.to = "serviciocorreotfg@gmail.com"; //Para probar
+    //mail.to = "serviciocorreotfg@gmail.com"; //Para probar
+
   }else if(mail.type == "citaD"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Solicitud de cita";
     contentHTML= mail.message;
-    mail.to = "serviciocorreotfg@gmail.com"; //Para probar
-  }
-  else{
+    //mail.to = "serviciocorreotfg@gmail.com"; //Para probar
+
+  }else{
     contentHTML = "";
   }
 // create reusable transporter object using the default SMTP transport

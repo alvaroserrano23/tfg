@@ -13,6 +13,7 @@ export class Patient{
 		public insurance:string,
 		public numOpiniones:number,
 		public imagen:string,
+		public telefono:string,
 		public token:string
 
 	){}	

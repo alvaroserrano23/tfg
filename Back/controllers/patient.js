@@ -42,6 +42,7 @@ var controller = {
 		patient.cp = params.cp;
 		patient.insurance = params.insurance;
 		patient.imagen = params.imagen;
+		patient.telefono = params.telefono;
 
 		patient.save(async (err,patientGuardado) =>{
 			if(err) return res.status(500).send({message: 'Error al guardar el documento.'});
