@@ -27,10 +27,12 @@ var controller = {
 		var params = req.body;
 
 		//Si el user existe no lo damos de alta
-		var user = await Patient.findOne({user : params.user});
-		if(user){
-			return res.status(404).send({message:"El paciente " +"'"+ params.user +"'"+ " ya existe"});
+		var userD = await Doctor.findOne({user : params.user});
+		var userP = await Patient.findOne({user : params.user});
+		if(userD || userP){
+			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
 		}
+		
 		patient.name = params.name;
 		patient.surname = params.surname;
 		patient.user = params.user;

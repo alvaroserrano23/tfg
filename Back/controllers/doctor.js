@@ -1,5 +1,6 @@
 'use strict'
 var Doctor = require('../models/doctor'); //Importar modelo
+var Patient = require('../models/patient');
 var UserAuthentication = require('../models/userAuthentication');
 
 var jwt = require('jsonwebtoken');
@@ -27,9 +28,10 @@ var controller = {
 		var params = req.body;
 
 		//Si el user existe no lo damos de alta
-		var user = await Doctor.findOne({user : params.user});
-		if(user){
-			return res.status(404).send({message:"El doctor " +"'"+ params.user +"'"+ " ya existe"});
+		var userD = await Doctor.findOne({user : params.user});
+		var userP = await Patient.findOne({user : params.user});
+		if(userD || userP){
+			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
 		}
 		
 		doctor.name = params.name;
