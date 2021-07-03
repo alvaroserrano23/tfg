@@ -1,9 +1,11 @@
 export class Opinion{
 	constructor(
-		public id:string,
-        public id_doctor:string,
-        public id_patient:string,
-        public comentario:string,
+		public id:String,
+        public id_doctor:String,
+        public id_patient:String,
+        public nombre_doctor:String,
+        public nombre_patient:String,
+        public comentario:String,
         public valoracion:number
 		){
 

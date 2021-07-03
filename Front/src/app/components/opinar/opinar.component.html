@@ -11,13 +11,26 @@
 		<hr class="my-4">
         <form [formGroup]="form"  (ngSubmit)="onSubmit()">
         <div class="row g-3">
-            <div class="col-12 form-group">
+            <div class="col-sm-12 form-group">
                 <label for="comentario" class="form-label">Comentario</label>
                 <input type="text" formControlName="comentario" class="form-control"  placeholder="" [ngClass]="{ 'is-invalid': submitted && f.comentario.errors }" />
                 <div *ngIf="submitted && f.comentario.errors" class="invalid-feedback">
                     <div *ngIf="f.comentario.errors.required">El comentario es obligatorio.</div>
                 </div>
             </div>
+        
+            <div class="col-12">
+                <label for="valoracion" class="form-label">Valoración</label>
+            </div>
+
+            <div class="col-12 form-group">
+                <ngb-rating max=5 formControlName="valoracion" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.valoracion.errors }"></ngb-rating>
+                <div *ngIf="submitted && f.valoracion.errors" class="invalid-feedback">
+                    <div *ngIf="f.valoracion.errors.required">La valoración es obligatoria.</div>
+                </div>
+            </div>
+                
+            
         </div>
 		<br>
             <div class="form-group">

@@ -29,6 +29,7 @@ import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component
 import { HistorialComponent } from './components/historial/historial.component';
 import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
 import { OpinarComponent } from './components/opinar/opinar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { OpinarComponent } from './components/opinar/opinar.component';
     routing,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     appRoutingProviders,

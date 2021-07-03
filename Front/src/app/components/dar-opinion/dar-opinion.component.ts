@@ -17,6 +17,7 @@ export class DarOpinionComponent implements OnInit {
   public idDoctores: String[] = new Array();
   public patient: Patient;
   public citasPaciente: Cita[];
+  public citasPacienteF: Cita[] = new Array();
   public url: string;
 
   constructor(
@@ -41,13 +42,13 @@ export class DarOpinionComponent implements OnInit {
   		response => {
   			if(response.citas){
   				this.citasPaciente = response.citas;
-          for(let i=0; i<this.citasPaciente.length;i++){
-            var id_doctor = this.citasPaciente[i].id_doctor;
+          this.deleteRepetidos();
+          for(let i=0; i<this.citasPacienteF.length;i++){
+            var id_doctor = this.citasPacienteF[i].id_doctor;
             this.idDoctores.push(id_doctor);
-          }
-          for(let i = 0; i<this.idDoctores.length;i++){
             this.getDoctor(this.idDoctores[i]);
           }
+          
   			}
   		},
   		error => {
@@ -65,5 +66,16 @@ export class DarOpinionComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  deleteRepetidos(){
+
+    for(let i=0; i<this.citasPaciente.length;i++){
+      var idDoctor = this.citasPaciente[i].id_doctor;
+      i+=1;
+      if(idDoctor != this.citasPaciente[i].id_doctor){
+        this.citasPacienteF.push(this.citasPaciente[i]);
+      }
+    }
   }
 }

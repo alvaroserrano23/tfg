@@ -18,14 +18,14 @@ var controller = {
 	saveOpinion: async function(req,res){
         var opinion = new Opinion();
 		var params = req.body;
-        var opinion_bd = await Opinion.findOne({id_doctor :params.id_doctor, id_paciente: params.id_paciente});
+        var opinion_bd = await Opinion.findOne({id_doctor :params.id_doctor, id_patient: params.id_patient});
 
 		if(opinion_bd){
 			return res.status(404).send({message:"Ya existe una opinion con ese doctor y paciente"});
 		}
         
         opinion.id_doctor = params.id_doctor;
-        opinion.id_paciente = params.id_paciente;
+        opinion.id_patient = params.id_patient;
         opinion.comentario = params.comentario;
         opinion.valoracion = params.valoracion;
 		

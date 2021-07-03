@@ -36,6 +36,7 @@ async function sendMail(mail,callback){
 
   }else if(mail.type == "dar opinion"){
     mail.from = "serviciocorreotfg@gmail.com";
+    //mail.to = "serviciocorreotfg@gmail.com";
     mail.subject = "Opinion";
     contentHTML = mail.message;
   }else{
