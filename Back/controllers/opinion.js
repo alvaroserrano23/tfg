@@ -26,6 +26,8 @@ var controller = {
         
         opinion.id_doctor = params.id_doctor;
         opinion.id_patient = params.id_patient;
+		opinion.nombre_patient = params.nombre_patient;
+		opinion.nombre_doctor = params.nombre_doctor;
         opinion.comentario = params.comentario;
         opinion.valoracion = params.valoracion;
 		
@@ -70,7 +72,7 @@ var controller = {
 		})
 	},
 
-	getOpinionesByIdPatient: function(req,res){
+	getOpinionsByIdPatient: function(req,res){
 		var id = req.params.id;
 
 		Opinion.find({id_paciente:id}).exec((err,opiniones) => {
@@ -82,15 +84,15 @@ var controller = {
 		})
 	},
 
-	getOpinionesByIdDoctor: function(req,res){
+	getOpinionsByIdDoctor: function(req,res){
 		var id = req.params.id;
 
-		Opinion.find({id_doctor:id}).exec((err,opiniones) => {
+		Opinion.find({id_doctor:id}).exec((err,opinions) => {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
-			if(!opiniones) return res.status(404).send({message: 'No hay opiniones que mostrar'});
+			if(!opinions) return res.status(404).send({message: 'No hay opiniones que mostrar'});
 
-			return res.status(200).send({opiniones});
+			return res.status(200).send({opinions});
 		})
 	},
 

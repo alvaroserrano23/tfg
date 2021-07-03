@@ -30,6 +30,7 @@ import { HistorialComponent } from './components/historial/historial.component';
 import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
 import { OpinarComponent } from './components/opinar/opinar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PedirCitaComponent,
     HistorialComponent,
     DarOpinionComponent,
-    OpinarComponent
+    OpinarComponent,
+    ValoracionesComponent
   ],
   imports: [
     BrowserModule,

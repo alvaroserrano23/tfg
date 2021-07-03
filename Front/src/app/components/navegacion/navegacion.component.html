@@ -9,19 +9,22 @@
         <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
         <li><a [routerLink]="['/sobre-nosotros']" class="nav-link px-2 link-dark" >Sobre nosotros</a></li>
       </ul>
+      <!--Paciente-->
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'patientLogged'">
         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
         <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark">Médicos</a></li>
         <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
         <li><a [routerLink]="['/dar-opinion']" class="nav-link px-2 link-dark" >Dar opinion</a></li>
       </ul>
+      <!--Doctor-->
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'doctorLogged'">
         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
         <li><a [routerLink]="['/historials-doctor' , doctorLogged._id]" class="nav-link px-2 link-dark">Historial médico pacientes</a></li>
         <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
-        <li><a [routerLink]="['/']" class="nav-link px-2 link-dark" >Valoraciones</a></li>
+        <li><a [routerLink]="['/valoraciones', doctorLogged._id]" class="nav-link px-2 link-dark" >Valoraciones</a></li>
       </ul>
-  
+      
+      <!--Paciente-->
       <div class="col-md-3 text-end">
           <div *ngSwitchCase="''">
             <button type="button" class="btn btn-outline-primary me-2" [routerLink]="['/login']">Iniciar sesión</button>
@@ -38,6 +41,7 @@
               <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
             </ul>
           </div>
+          <!--Doctor-->
           <div class="nav-item dropdown" *ngSwitchCase="'doctorLogged'">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
               {{doctorLogged.user}}

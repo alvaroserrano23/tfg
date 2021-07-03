@@ -17,6 +17,7 @@ import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component
 import { HistorialComponent } from './components/historial/historial.component';
 import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
 import { OpinarComponent } from './components/opinar/opinar.component';
+import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -37,6 +38,7 @@ const appRoutes : Routes = [
 	{path: 'historials-doctor/:id',component: HistorialComponent},
 	{path: 'dar-opinion',component: DarOpinionComponent},
 	{path: 'opinar/:id',component: OpinarComponent},
+	{path: 'valoraciones/:id',component:ValoracionesComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

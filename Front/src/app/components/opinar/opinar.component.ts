@@ -100,6 +100,7 @@ export class OpinarComponent implements OnInit {
         //Update al doctor
         this.doctorService.updateDoctor(this.doctor).subscribe();
         console.log(res);
+        this.router.navigate(['/'], { relativeTo: this.route }); 
       },
       err =>{
         console.log(err);

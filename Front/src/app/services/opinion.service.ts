@@ -17,10 +17,15 @@ export class OpinionService {
 		this.url = Global.url;
 	}
 
-  saveOpinion(opinion: Opinion) :Observable<any>{
+  	saveOpinion(opinion: Opinion) :Observable<any>{
 		let params = JSON.stringify(opinion);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 
 		return this._http.post(this.url+'save-opinion',params,{headers:headers});
+	}
+
+	getOpinionsByIdDoctor(id){
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.get<any>(this.url+'opinions-doctor/'+id,{headers:headers});
 	}
 }
