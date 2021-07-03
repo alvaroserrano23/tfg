@@ -42,7 +42,7 @@ export class DarOpinionComponent implements OnInit {
   		response => {
   			if(response.citas){
   				this.citasPaciente = response.citas;
-          this.deleteRepetidos();
+          this.deleteRepetidos("id_doctor");
           for(let i=0; i<this.citasPacienteF.length;i++){
             var id_doctor = this.citasPacienteF[i].id_doctor;
             this.idDoctores.push(id_doctor);
@@ -68,14 +68,15 @@ export class DarOpinionComponent implements OnInit {
     )
   }
 
-  deleteRepetidos(){
+  deleteRepetidos(prop){
+     var lookupObject  = {};
 
-    for(let i=0; i<this.citasPaciente.length;i++){
-      var idDoctor = this.citasPaciente[i].id_doctor;
-      i+=1;
-      if(idDoctor != this.citasPaciente[i].id_doctor){
-        this.citasPacienteF.push(this.citasPaciente[i]);
-      }
-    }
+     for(var i in this.citasPaciente) {
+        lookupObject[this.citasPaciente[i][prop]] = this.citasPaciente[i];
+     }
+
+     for(i in lookupObject) {
+         this.citasPacienteF.push(lookupObject[i]);
+     }
   }
 }
