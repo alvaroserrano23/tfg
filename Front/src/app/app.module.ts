@@ -27,6 +27,8 @@ import { DatosComponent } from './components/datos/datos.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
+import { OpinarComponent } from './components/opinar/opinar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { HistorialComponent } from './components/historial/historial.component';
     DatosComponent,
     CitasComponent,
     PedirCitaComponent,
-    HistorialComponent
+    HistorialComponent,
+    DarOpinionComponent,
+    OpinarComponent
   ],
   imports: [
     BrowserModule,

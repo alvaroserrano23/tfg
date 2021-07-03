@@ -25,15 +25,19 @@ async function sendMail(mail,callback){
   }else if(mail.type == "citaP"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Aqui esta tu cita";
-    contentHTML= mail.message;
+    contentHTML = mail.message;
     //mail.to = "serviciocorreotfg@gmail.com"; //Para probar
 
   }else if(mail.type == "citaD"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Solicitud de cita";
-    contentHTML= mail.message;
+    contentHTML = mail.message;
     //mail.to = "serviciocorreotfg@gmail.com"; //Para probar
 
+  }else if(mail.type == "dar opinion"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Opinion";
+    contentHTML = mail.message;
   }else{
     contentHTML = "";
   }

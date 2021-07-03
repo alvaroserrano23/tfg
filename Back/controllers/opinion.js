@@ -26,7 +26,7 @@ var controller = {
         
         opinion.id_doctor = params.id_doctor;
         opinion.id_paciente = params.id_paciente;
-        opinion.descripcion = params.descripcion;
+        opinion.comentario = params.comentario;
         opinion.valoracion = params.valoracion;
 		
 		

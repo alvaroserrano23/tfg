@@ -66,7 +66,6 @@ export class PedirCitaComponent implements OnInit {
         var patientId = JSON.parse(localStorage.getItem('patient'));
         this.patient = patientId;
         this.patient.id = patientId._id;
-        console.log(this.patient);
       }
     })
 

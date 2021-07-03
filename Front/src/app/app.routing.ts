@@ -15,6 +15,8 @@ import { DatosComponent } from './components/datos/datos.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PedirCitaComponent } from './components/pedir-cita/pedir-cita.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
+import { OpinarComponent } from './components/opinar/opinar.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -33,6 +35,8 @@ const appRoutes : Routes = [
 	{path: 'citas-doctor/:id',component: CitasComponent},
 	{path: 'pedir-cita/:id',component: PedirCitaComponent},
 	{path: 'historials-doctor/:id',component: HistorialComponent},
+	{path: 'dar-opinion',component: DarOpinionComponent},
+	{path: 'opinar/:id',component: OpinarComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

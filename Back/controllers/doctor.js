@@ -5,6 +5,7 @@ var UserAuthentication = require('../models/userAuthentication');
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
 var path = require('path');
+const doctor = require('../models/doctor');
 
 var controller = {
 
@@ -99,9 +100,14 @@ var controller = {
 		})
 	},
 
-	updateDoctor: function(req,res){
+	updateDoctor: async function(req,res){
 		var doctorId = req.params.id;
 		var update = req.body;
+		var doctorBd = await Doctor.findById(doctorId);
+
+		if(req.body.numOpiniones > doctorBd.numOpiniones){
+			delete update.password;
+		}
 
 		Doctor.findByIdAndUpdate(doctorId,update, {new:true} ,(err,doctorUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});

@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var OpinionSchema = Schema({
     id_paciente:String,
     id_doctor:String,
-    descripcion:String,
+    comentario:String,
     valoracion:Number
 });
 
