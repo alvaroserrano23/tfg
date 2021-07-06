@@ -20,7 +20,11 @@ async function sendMail(mail,callback){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "¿Olvidaste tu contraseña?";
     contentHTML = mail.message;
-
+  }else if(mail.type == "cambio contraseña"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Cambio de contraseña";
+    contentHTML = mail.message;
+  
   }else if(mail.type == "citaP"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Aqui esta tu cita";

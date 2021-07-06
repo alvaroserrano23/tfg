@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   public patient:Patient;
   public doctor: Doctor;
   public userAuthentication: UserAuthentication;
+  public userAuthRecuperacion: UserAuthentication;
   form: FormGroup;
   formPass1: FormGroup;
   formPass2: FormGroup;
@@ -61,6 +62,8 @@ export class LoginComponent implements OnInit {
     this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','');
     
     this.userAuthentication = new UserAuthentication('','','','','','','');
+
+    this.userAuthRecuperacion = new UserAuthentication('','','','','','','');
       
     this.mail = new Mail('','','','','','','');
   }
@@ -113,15 +116,21 @@ export class LoginComponent implements OnInit {
 
     this.alertService.success('Te hemos enviado un correo con un codigo de recuperación', { keepAfterRouteChange: true });
     this.mail.to = this.formPass1.value.email;
+    this.userAuthRecuperacion.email = this.formPass1.value.email;
     this.mail.type = "recuperarcontraseña";
-    this.UserAuthenticationService.generateCode(this.mail).subscribe(
+    
+
+    this.mailService.sendEmailRecuperacion(this.mail).subscribe(
       res=>{
         console.log(res);
+        $("#container_forgot").hide();
+        $("#container_sms").show();
       },
       err=>{
         console.log(err);
       }
-    ) 
+      )
+    
   }
 
   onSubmitCodigoRecuperacionForm(){
@@ -132,9 +141,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    //Validar que el codigo es correcto
-    $("#container_sms").hide();
-    $("#container_newpass").show();
+    this.userAuthRecuperacion.code = this.formPass2.value.code;
+    this.UserAuthenticationService.validarCode(this.userAuthRecuperacion).subscribe(
+      res=>{
+        this.userAuthRecuperacion = res.userAuthenticationUpdated;
+        console.log(res);
+        $("#container_sms").hide();
+        $("#container_newpass").show();
+      },
+      err=>{
+        console.log(err);
+      }
+    )
     
   }
   onSubmitNuevaContrasenaForm(){
@@ -143,6 +161,26 @@ export class LoginComponent implements OnInit {
 
     if(this.formPass3.invalid){
       return;
+    }
+
+    this.userAuthRecuperacion.password = this.formPass3.value.password1;
+    var password2 = this.formPass3.value.password2;
+    
+    if(this.userAuthRecuperacion.password == password2){
+      this.UserAuthenticationService.updateUserAuth(this.userAuthRecuperacion).subscribe(
+        res=>{
+          console.log(res);
+          this.mail.type = "cambio contraseña";
+          this.mail.to = this.userAuthRecuperacion.email;
+          this.mail.message = "<h1>Proceso finalizado</h1><p>Enhorabuena " + this.userAuthentication.user + " , has cambiado tu contraseña correctamente!.</p>";
+          this.mailService.sendEmail(this.mail);
+          this.alertService.success('Has cambiado tu contraseña correctamente', { keepAfterRouteChange: true });
+          this.router.navigate(['/login']);
+        },
+        err=>{
+          console.log(err);
+        }
+      )
     }
 
   }
@@ -173,7 +211,7 @@ export class LoginComponent implements OnInit {
         
         },
         err => {
-          this.alertService.error(err);
+          this.alertService.error(err.message);
           console.log(err);
           this.loading = false;
         }
