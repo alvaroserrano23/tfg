@@ -24,31 +24,32 @@ var controller = {
 	loginAuth: async function(req,res){
 		var params = req.body;
 
-		var user = await Doctor.findOne({user : params.user});
-		if(!user || user.user == ""){ //si doctor no existe probamos con paciente
-			user = await Patient.findOne({user : params.user});
-			if(!user || user.user == ""){ //si no existe ni doctor ni paciente devolvemos error
-				return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
-			}else{
-				//Paciente
-				if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
+		var user = await UserAuthentication.findOne({user: params.user});
+		var userAuthentication = new UserAuthentication();
+		userAuthentication = user;
+
+		if(!user || user.user == ""){
+			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " no existe"});
+		}
+
+		if(userAuthentication.role == "patient"){
+			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
 				var patient = new Patient();
-				patient = user;
+				patient = await Patient.findOne({user: params.user});
 				patient.token = jwt.sign({_id:patient._id},'secret_key');
 				console.log(patient);
 				return res.status(200).send({patient});
 
-			}
+		}else if(userAuthentication.role == "doctor"){
+			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
+			var doctor = new Doctor();
+			doctor = await Doctor.findOne({user: params.user});
+			doctor.token = jwt.sign({_id:doctor._id},'secret_key');
+
+			console.log(doctor);
+			return res.status(200).send({doctor});
 		}
-
-		//Doctor
-		if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-		var doctor = new Doctor();
-		doctor = user;
-		doctor.token = jwt.sign({_id:doctor._id},'secret_key');
-
-		console.log(doctor);
-		return res.status(200).send({doctor});
+		
 		
 	},
 
