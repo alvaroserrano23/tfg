@@ -110,9 +110,26 @@ var controller = {
 			return res.status(200).send({userAuthenticationUpdated});
 		});
 		
-		
+	},
 
+	validarCode: async function(req,res){
+		var params = req.body;
+		var user = await UserAuthentication.findOne({email: params.email,code: params.code});
+		var userAuthentication = new UserAuthentication();
+		userAuthentication = user;
 
+		if(!user){
+			return res.status(404).send({message:"El codigo introducido es incorrecto"});
+		}
+
+		userAuthentication.code = "";
+		UserAuthentication.findByIdAndUpdate(userAuthentication.id,userAuthentication.code, {new:true} ,(err,userAuthenticationUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!userAuthenticationUpdated) return res.status(404).send({message:'No existe el userAuthentication para actulizar'});
+
+			return res.status(200).send({userAuthenticationUpdated});
+		});
 	},
 
 	deleteUserAuthentication: function(req,res){
@@ -126,6 +143,19 @@ var controller = {
 			return res.status(200).send({userAuthenticationRemoved});
 		});
 	},
+
+	updateUserAuthRecuperacion: async function(req,res){
+		var userAuthentication = new UserAuthentication();
+		userAuthentication = req.body;
+		UserAuthentication.findByIdAndUpdate(userAuthentication._id,userAuthentication, {new:true} ,(err,userAuthenticationUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!userAuthenticationUpdated) return res.status(404).send({message:'No existe el userAuthentication para actulizar'});
+
+			return res.status(200).send({userAuthenticationUpdated});
+		});
+		
+	}
 
 };
 

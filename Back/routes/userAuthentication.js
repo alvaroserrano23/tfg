@@ -11,6 +11,7 @@ router.post('/login-auth',userAuthenticationController.loginAuth);
 router.get('/userAuth/:id?',userAuthenticationController.getUserAuthentication); 
 router.get('/userAuths',userAuthenticationController.getUserAuthentications);
 router.put('/userAuth/:id',userAuthenticationController.updateUserAuthentication); 
+router.put('/updateUserAuth',userAuthenticationController.updateUserAuthRecuperacion);
 router.delete('/userAuth/:id',userAuthenticationController.deleteUserAuthentication); 
-router.put('/generate-code',userAuthenticationController.generateCode);
+router.put('/userAuth-code',userAuthenticationController.validarCode);
 module.exports = router;

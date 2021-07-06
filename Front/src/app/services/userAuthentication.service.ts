@@ -99,9 +99,18 @@ export class UserAuthenticationService{
 		return localStorage.getItem('token');
 	}
 
-	generateCode(mail){
-		return this._http.put<any>(this.url+'generate-code',mail);
+	validarCode(userAuthentication:UserAuthentication):Observable<any>{
+		let params = JSON.stringify(userAuthentication);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'userAuth-code',params,{headers: headers});
 	}
 
+	
+	updateUserAuth(userAuthentication:UserAuthentication) :Observable<any>{
+		let params = JSON.stringify(userAuthentication);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
 
+		return this._http.put(this.url+'updateUserAuth',params,{headers:headers});	
+	}
 }

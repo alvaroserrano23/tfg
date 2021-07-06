@@ -1,7 +1,9 @@
 'use strict'
 const nodemailer = require("nodemailer");
 var Mail = require('../models/Mail');
+var UserAuthentication = require('../models/userAuthentication');
 var contentHTML ="";
+const { v4: uuidv4 } = require('uuid');
 
 async function sendMail(mail,callback){
 
@@ -17,11 +19,8 @@ async function sendMail(mail,callback){
   }else if(mail.type =="recuperarcontraseña"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "¿Olvidaste tu contraseña?";
-    contentHTML = `
-    <h1>Recuperación de contraseña</h1>
-    <p>Hola finder, este es tu código de recuperación de contraseña:</p>
-    <p>${mail.code}</p>
-`;
+    contentHTML = mail.message;
+
   }else if(mail.type == "citaP"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "Aqui esta tu cita";
@@ -94,6 +93,38 @@ var controller = {
             console.log("El email se ha enviado correctamente.");
             res.send(info);
         })
+    },
+
+    sendEmailRecuperacion: async function(req,res){
+      var params = req.body;
+      var user = await UserAuthentication.findOne({email : params.to});
+      var userAuthentication = new UserAuthentication();
+      userAuthentication = user;
+      if(!user){
+        return res.status(404).send({message:"Falso: Usuario existe, se envia correo"});
+      }
+      userAuthentication.code=uuidv4(); 
+		UserAuthentication.findByIdAndUpdate(userAuthentication.id,userAuthentication, {new:true} ,(err,userAuthenticationUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!userAuthenticationUpdated) return res.status(404).send({message:'No existe el userAuthentication para actulizar'});
+
+		});
+      var mail = new Mail();
+      mail.code = userAuthentication.code;
+      mail.to = req.body.to;
+      mail.from = req.body.from;
+      mail.subject = req.body.subject;
+      mail.type = req.body.type;
+      mail.message = "<h1>Recuperación de contraseña</h1><p>Introduce el siguiente código para continuar con el proceso de recuperación de contraseña<ul><li><b>Código de recuperación:</b> "+mail.code;
+      
+      
+      
+      sendMail(mail,info => {
+        console.log("El email se ha enviado correctamente.");
+        res.send(info);
+      })
+
     }
 };
 

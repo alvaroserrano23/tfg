@@ -28,6 +28,6 @@ export class MailService {
   }
 
   sendEmailRecuperacion(mail): Observable<any>{
-	  return this._http.post<any>(this.url+'sendEmail', mail);
+	  return this._http.post<any>(this.url+'sendEmailRecuperacion', mail);
   }
 }

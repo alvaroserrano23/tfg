@@ -8,4 +8,5 @@ var router = express.Router();
 router.get('/home',MailController.home);
 router.post('/test',MailController.test);
 router.post('/sendEmail',MailController.sendEmail);
+router.post('/sendEmailRecuperacion',MailController.sendEmailRecuperacion);
 module.exports = router;
