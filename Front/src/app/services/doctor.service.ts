@@ -3,6 +3,7 @@ import { Global } from './global';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Doctor } from '../models/doctor';
 import { Observable } from 'rxjs/Observable';
+import { UserAuthentication } from '../models/userAuthentication';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,12 @@ export class DoctorService {
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 
 		return this._http.put(this.url+'doctor/'+doctor.id,params,{headers:headers});	
+	}
+
+	updateDoctorUserAuth(userAuthentication:UserAuthentication) : Observable<any>{
+		let params = JSON.stringify(userAuthentication);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'updateDoctorUserAuth',params,{headers:headers});		
 	}
 }

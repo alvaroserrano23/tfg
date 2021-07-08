@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   public mail:Mail;
+  public mailFinProceso:Mail;
 
   constructor(
     private patientService: PatientService,
@@ -66,6 +67,8 @@ export class LoginComponent implements OnInit {
     this.userAuthRecuperacion = new UserAuthentication('','','','','','','');
       
     this.mail = new Mail('','','','','','','');
+
+    this.mailFinProceso = new Mail('','','','','','','');
   }
 
   ngOnInit(): void {
@@ -150,7 +153,7 @@ export class LoginComponent implements OnInit {
         $("#container_newpass").show();
       },
       err=>{
-        console.log(err);
+        alert(err.message);
       }
     )
     
@@ -167,20 +170,38 @@ export class LoginComponent implements OnInit {
     var password2 = this.formPass3.value.password2;
     
     if(this.userAuthRecuperacion.password == password2){
-      this.UserAuthenticationService.updateUserAuth(this.userAuthRecuperacion).subscribe(
-        res=>{
-          console.log(res);
-          this.mail.type = "cambio contraseña";
-          this.mail.to = this.userAuthRecuperacion.email;
-          this.mail.message = "<h1>Proceso finalizado</h1><p>Enhorabuena " + this.userAuthentication.user + " , has cambiado tu contraseña correctamente!.</p>";
-          this.mailService.sendEmail(this.mail);
-          this.alertService.success('Has cambiado tu contraseña correctamente', { keepAfterRouteChange: true });
-          this.router.navigate(['/login']);
-        },
-        err=>{
-          console.log(err);
-        }
-      )
+      this.UserAuthenticationService.updateUserAuth(this.userAuthRecuperacion).subscribe();
+      if(this.userAuthRecuperacion.role == "patient"){
+        this.patientService.updatePatientUserAuth(this.userAuthRecuperacion).subscribe(
+          res=>{
+            console.log(res);
+          },
+          err=>{
+            console.log(err);
+          }
+
+        )
+      }else if(this.userAuthRecuperacion.role == "doctor"){
+        this.doctorService.updateDoctorUserAuth(this.userAuthRecuperacion).subscribe(
+          res=>{
+            console.log(res);
+          },
+          err=>{
+            console.log(err);
+          }
+        )
+      }
+
+      this.mailFinProceso.type = "cambio contraseña";
+      this.mailFinProceso.to = this.userAuthRecuperacion.email;
+      this.mailFinProceso.message = "<h1>Proceso finalizado</h1><p>Enhorabuena " + this.userAuthentication.user + " , has cambiado tu contraseña correctamente!.</p>";
+      this.mailService.sendEmail(this.mailFinProceso).subscribe();
+      //this.alertService.success('Has cambiado tu contraseña correctamente', { keepAfterRouteChange: true });
+      alert("Has cambiado tu contraseña correctamente");
+      this.router.navigate(['/login'])
+          .then(() => {
+            window.location.reload();
+          });
     }
 
   }

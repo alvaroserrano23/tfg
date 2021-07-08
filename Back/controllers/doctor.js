@@ -179,6 +179,21 @@ var controller = {
 				})
 			}
 		});
+	},
+
+	updateDoctorUserAuth: async function(req,res){
+		var params = req.body;
+		var doctor = await Doctor.findOne({id:params.id});
+		doctor.password = params.password;
+		
+		Doctor.findByIdAndUpdate(doctor.id,doctor, {new:true} ,(err,doctorUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!doctorUpdated) return res.status(404).send({message:'No existe el doctor para actualizar'});
+
+			return res.status(200).send({doctor:doctorUpdated});
+		});
+
 	}
 
 };

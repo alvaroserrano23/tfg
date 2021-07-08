@@ -17,5 +17,5 @@ router.put('/doctor/:id',DoctorController.updateDoctor); //Actualizar un doctor 
 router.delete('/doctor/:id',DoctorController.deleteDoctor); //Eliminar un doctor de la BD
 router.post('/upload-image/:id', multipartMiddleware,DoctorController.uploadImage);
 router.get('/get-image/:image',DoctorController.getImageFile);
-
+router.put('/updateDoctorUserAuth',DoctorController.updateDoctorUserAuth);
 module.exports = router;

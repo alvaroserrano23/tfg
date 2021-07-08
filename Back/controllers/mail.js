@@ -94,7 +94,7 @@ var controller = {
         mail.type = req.body.type;
         
         sendMail(mail,info => {
-            console.log("El email se ha enviado correctamente.");
+            console.log("El email se ha enviado correctamente."+mail.type);
             res.send(info);
         })
     },
@@ -125,7 +125,7 @@ var controller = {
       
       
       sendMail(mail,info => {
-        console.log("El email se ha enviado correctamente.");
+        console.log("El email se ha enviado correctamente."+mail.type);
         res.send(info);
       })
 

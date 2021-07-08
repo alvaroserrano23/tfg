@@ -169,6 +169,38 @@ var controller = {
 				})
 			}
 		});
+	},
+
+	getPatientByNameAndSurname: async function(req,res){
+		var params = req.body;
+
+		var userP = await Patient.findOne({name : params.name, surname: params.surname});
+		if(!userP){
+			return res.status(404).send({message: 'El paciente no existe.'});
+		}
+
+		Patient.findById(userP.id, (err,patient) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!patient) return res.status(404).send({message: 'El paciente no existe.'});
+
+			return res.status(200).send({patient});
+		});
+	},
+
+	updatePatientUserAuth: async function(req,res){
+		var params = req.body;
+		var patient = await Patient.findOne({id:params.id});
+		patient.password = params.password;
+		
+		Patient.findByIdAndUpdate(patient.id,patient, {new:true} ,(err,patientUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!patientUpdated) return res.status(404).send({message:'No existe el paciente para actualizar'});
+
+			return res.status(200).send({patient:patientUpdated});
+		});
+
 	}
 
 };

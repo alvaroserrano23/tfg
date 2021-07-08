@@ -57,34 +57,21 @@
 			
 				<div class="col-sm-6 form-group">
 					<label for="fecha" class="form-label">Fecha</label>
-					<div class="input-group">
-					<input type="text" formControlName="fecha" class="form-control"  placeholder="10/05/2023" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }" />
+					<input type="date" formControlName="fecha" class="form-control"  min="01-01-1940" max="01-01-2003" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }"/>
 					<div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
-						<div *ngIf="f.fecha.errors.required">La fecha es obligatoria.</div>
-					</div>
+						<div *ngIf="f.fecha.errors.required">La fecha es obligatoria</div>
 					</div>
 				</div>
-
 
 				<div class="col-sm-6 form-group">
 					<label for="hora" class="form-label">Hora</label>
 					<div class="input-group">
-						<input type="hora" formControlName="hora" class="form-control"  placeholder="10:30" [ngClass]="{ 'is-invalid': submitted && f.hora.errors }"/>
+						<input type="time" formControlName="hora" class="form-control" min="09:00" max="18:00" [ngClass]="{ 'is-invalid': submitted && f.hora.errors }"/>
 						<div *ngIf="submitted && f.hora.errors" class="invalid-feedback">
 							<div *ngIf="f.hora.errors.required">La hora es obligatoria.</div>
 						</div>
 					</div>
 				</div>
-				 <!--<div class="col-sm-6 form-group">
-					<label for="fecha" class="form-label">Fecha</label>
-					<div class="input-group">
-					<input id="datepicker" formControlName="fecha" class="form-control"  placeholder="10/05/2023" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }"/>
-					<div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
-						<div *ngIf="f.fecha.errors.required">La fecha es obligatoria.</div>
-					</div>
-					</div>
-					
-				</div>-->
 
 				<div class="col-12 form-group">
 					<label for="telefono" class="form-label">Telefono (Opcional)</label>
