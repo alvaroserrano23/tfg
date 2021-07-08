@@ -1,0 +1,24 @@
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+        <div class="col" *ngFor="let historial of historials">
+          <div class="card shadow-sm">
+            <img  src="{{url+'get-image/'+historial.imagen_paciente}}" width="100%" height="225">
+            <div class="card-body">
+              <h2>{{historial.name}} {{historial.surname}}</h2>
+              <p class="card-text"><b>DNI:</b> {{historial.dni_paciente}}</p>
+              <p class="card-text"><b>Email:</b> {{historial.email_paciente}}</p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm  btn-outline-primary" [routerLink]="['/detail-historial', historial._id]">Ver/Modificar</button>
+                  <button type="button" class="btn btn-sm  btn-outline-danger" (click)="deleteHistorial(historial._id)">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>

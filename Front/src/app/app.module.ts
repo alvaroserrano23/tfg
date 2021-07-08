@@ -31,6 +31,8 @@ import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.compon
 import { OpinarComponent } from './components/opinar/opinar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
+import { VerHistorialComponent } from './components/ver-historial/ver-historial.component';
+import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ValoracionesComponent } from './components/valoraciones/valoraciones.co
     HistorialComponent,
     DarOpinionComponent,
     OpinarComponent,
-    ValoracionesComponent
+    ValoracionesComponent,
+    VerHistorialComponent,
+    DetailHistorialComponent
   ],
   imports: [
     BrowserModule,

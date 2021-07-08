@@ -1,5 +1,6 @@
 'use strict'
 var Historial = require('../models/historial');
+const Patient = require('../models/patient');
 
 var controller = {
 
@@ -19,20 +20,29 @@ var controller = {
         var historial = new Historial();
 		var params = req.body;
         var historial_bd = await Historial.findOne({id_doctor :params.id_doctor, id_paciente: params.id_paciente});
+		var patient_bd = await Patient.findOne({name: params.name,surname:params.surname});
 
+		if(!patient_bd){
+			return res.status(404).send({message:"El paciente no existe"});
+		}
 		if(historial_bd){
 			return res.status(404).send({message:"Ya existe un historial con ese medico y ese paciente"});
 		}
         
         //historial = req.body;
         historial.id_doctor = params.id_doctor;
-        historial.id_paciente = params.id_paciente;
+        historial.id_paciente = patient_bd.id;
+		historial.name = params.name;
+		historial.surname = params.surname;
+		historial.imagen_paciente = patient_bd.imagen;
+		historial.email_paciente = patient_bd.email;
         historial.dni_paciente = params.dni_paciente;
         historial.edad_paciente = params.edad_paciente;
         historial.fecha_nacimiento_paciente = params.fecha_nacimiento_paciente;
         historial.patologias_paciente = params.patologias_paciente;
         historial.alergias_paciente = params.alergias_paciente;
         historial.vacunas_paciente = params.vacunas_paciente;
+		historial.tratamientos = params.tratamientos;
 		
 		
 		historial.save(async (err,historialGuardado) =>{
@@ -87,10 +97,9 @@ var controller = {
 		})
 	},
 
-	updateHistorial: function(req,res){
+	updateHistorial: async function(req,res){
 		var historialId = req.params.id;
 		var update = req.body;
-
 		Historial.findByIdAndUpdate(historialId,update, {new:true} ,(err,historialUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});
 
@@ -103,7 +112,7 @@ var controller = {
 
 	deleteHistorial: function(req,res){
 		var historialId = req.params.id;
-
+		
 		Historial.findByIdAndDelete(historialId,(err,historialRemoved)=>{
 			if(err) return res.status(500).send({message: 'No se ha podido borrar el historial'});
 		

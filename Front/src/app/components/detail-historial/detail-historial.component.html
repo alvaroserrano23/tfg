@@ -1,0 +1,80 @@
+<div class="container" id="containerRegDoc">
+    <div class="py-5 text-center">
+    <h2>Historial médico de <b>{{historial.name}} {{historial.surname}}</b></h2>
+    <p class="lead">Ingresa los datos que se solicitan a continuación para crear un nuevo historial de paciente.</p>
+    </div>
+  
+    <div class="row g-5">
+        <div class=" ">
+            <h4 class="mb-3">Datos personales del paciente</h4>
+            <hr class="my-4">
+            <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+            
+                <div class="row g-3">
+                    <div class="col-sm-6 form-group">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" [ngModel]="historial.name" disabled/>
+                    </div>
+
+                    <div class="col-sm-6 form-group">
+                        <label for="surname" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" [ngModel]="historial.surname" disabled/>
+                    </div>
+
+                    <div class="col-sm-6 form-group">
+                        <label for="dni_paciente" class="form-label">DNI</label>
+                        <input type="text" formControlName="dni_paciente" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.dni_paciente.errors }" [ngModel]="historial.dni_paciente"/>
+                        <div *ngIf="submitted && f.dni_paciente.errors" class="invalid-feedback">
+                            <div *ngIf="f.dni_paciente.errors.pattern">El dni es incorrecto</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 form-group">
+                        <label for="edad_paciente" class="form-label">Edad</label>
+                        <input type="text" maxlength = "2" formControlName="edad_paciente" class="form-control" [ngModel]="historial.edad_paciente" [ngClass]="{ 'is-invalid': submitted && f.edad_paciente.errors }"/>
+                    </div>
+
+                    <div class="col-12 form-group">
+                        <label for="fecha_nacimiento_paciente" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" formControlName="fecha_nacimiento_paciente" class="form-control" [ngModel]="historial.fecha_nacimiento_paciente" min="01-01-1940" max="01-01-2003" [ngClass]="{ 'is-invalid': submitted && f.fecha_nacimiento_paciente.errors }"/>
+                    </div>
+
+                </div>
+                <h4 class="mb-2" style="margin-top: 3%;">Datos sanitarios del paciente</h4>
+            <hr class="my-4">
+            <div class="row g-3">
+
+                <div class="col-6 form-group">
+                    <label for="patologias_paciente" class="form-label">Patologías</label>
+                    <input type="text" formControlName="patologias_paciente" class="form-control"  [ngModel]="historial.patologias_paciente" [ngClass]="{ 'is-invalid': submitted && f.patologias_paciente.errors }"/>
+                </div>
+
+                <div class="col-6 form-group">
+                    <label for="alergias_paciente" class="form-label">Alergias</label>
+                    <input type="text" formControlName="alergias_paciente" class="form-control" [ngModel]="historial.alergias_paciente" [ngClass]="{ 'is-invalid': submitted && f.alergias_paciente.errors }"/>
+                </div>
+            
+                <div class="col-12 form-group">
+                    <label for="vacunas_paciente" class="form-label">Vacunas</label>
+                    <input type="text" formControlName="vacunas_paciente" class="form-control" [ngModel]="historial.vacunas_paciente" [ngClass]="{ 'is-invalid': submitted && f.vacunas_paciente.errors }"/>
+                </div>
+                
+                <div class="col-12 form-group">
+                    <label for="tratamientos" class="form-label">Tratamientos</label>
+                    <input type="text" formControlName="tratamientos" class="form-control" [ngModel]="historial.tratamientos" [ngClass]="{ 'is-invalid': submitted && f.tratamientos.errors }"/>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            
+            <div class="form-group">
+                
+                <button class="w-100 btn btn-primary btn-lg" type="submit">
+                  Guardar
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+  </div>

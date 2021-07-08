@@ -18,6 +18,8 @@ import { HistorialComponent } from './components/historial/historial.component';
 import { DarOpinionComponent } from './components/dar-opinion/dar-opinion.component';
 import { OpinarComponent } from './components/opinar/opinar.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
+import { VerHistorialComponent } from './components/ver-historial/ver-historial.component';
+import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -39,6 +41,8 @@ const appRoutes : Routes = [
 	{path: 'dar-opinion',component: DarOpinionComponent},
 	{path: 'opinar/:id',component: OpinarComponent},
 	{path: 'valoraciones/:id',component:ValoracionesComponent},
+	{path: 'ver-historial/:id',component:VerHistorialComponent},
+	{path: 'detail-historial/:id',component:DetailHistorialComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

@@ -45,4 +45,9 @@ export class HistorialService {
 
 		return this._http.post(this.url+'save-historial',params,{headers:headers});
 	}
+
+	deleteHistorial(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'historial/'+id,{headers:headers});
+	}
 }

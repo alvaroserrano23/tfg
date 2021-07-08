@@ -13,6 +13,5 @@ router.get('/patients',PatientController.getPatients); //Obtener un listado de l
 router.put('/patient/:id',PatientController.updatePatient); //Actualizar un paciente de la BD
 router.delete('/patient/:id',PatientController.deletePatient); //Eliminar un paciente de la BD
 router.get('/get-image/:image',PatientController.getImageFile);
-router.get('/patientNU',PatientController.getPatientByNameAndSurname);
 router.put('/updatePatientUserAuth',PatientController.updatePatientUserAuth);
 module.exports = router;

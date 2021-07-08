@@ -47,13 +47,6 @@ export class PatientService {
 		return this._http.put(this.url+'patient/'+patient.id,params,{headers:headers});	
 	}
 
-	getPatientByNameAndSurname(patient:Patient): Observable<any>{
-		let params = JSON.stringify(patient);
-		let headers = new HttpHeaders().set('Content-Type','application/json');
-
-		return this._http.post(this.url+'patientNU',params,{headers:headers});	
-	}
-
 	updatePatientUserAuth(userAuthentication:UserAuthentication) : Observable<any>{
 		let params = JSON.stringify(userAuthentication);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
