@@ -41,8 +41,12 @@ export class DatosComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
       this.id = params.id;
-      this.getDoctor(this.id);
-      this.getPatient(this.id);
+      if(localStorage.getItem('doctor')){
+        this.getDoctor(this.id);
+      }else if(localStorage.getItem('patient')){
+        this.getPatient(this.id);
+      }
+      
     })
 
     this.formD = this.formBuilder.group({

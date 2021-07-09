@@ -16,9 +16,11 @@ export class DetailHistorialComponent implements OnInit {
   form: FormGroup;
   public url: string;
   public historial: Historial;
+  public historialModificado: Historial;
   loading = false;
   submitted = false;
   returnUrl: string;
+  id:string;
 
   constructor(
     private historialService: HistorialService,
@@ -31,8 +33,8 @@ export class DetailHistorialComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
-      let id = params.id;
-      this.getHistorial(id);
+      this.id = params.id;
+      this.getHistorial(this.id);
     })
 
     this.form = new FormGroup({
@@ -71,8 +73,11 @@ export class DetailHistorialComponent implements OnInit {
         return;
     }
 
-    this.historial = this.form.value;
-      this.historialService.updateHistorial(this.historial).subscribe(
+    this.historialModificado = this.form.value;
+    this.historialModificado.name = this.historial.name;
+    this.historialModificado.surname = this.historial.surname;
+    this.historialModificado.id = this.id;
+      this.historialService.updateHistorial(this.historialModificado).subscribe(
         res => {
           console.log(res);
           this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
