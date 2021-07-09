@@ -15,7 +15,7 @@ router.get('/doctor/:id?',DoctorController.getDoctor); //Obtener un doctor de la
 router.get('/doctors',DoctorController.getDoctors); //Obtener un listado de los doctores de la BD
 router.put('/doctor/:id',DoctorController.updateDoctor); //Actualizar un doctor de la BD
 router.delete('/doctor/:id',DoctorController.deleteDoctor); //Eliminar un doctor de la BD
-router.post('/upload-image/:id', multipartMiddleware,DoctorController.uploadImage);
+router.post('/upload-image/:id',DoctorController.uploadImage);
 router.get('/get-image/:image',DoctorController.getImageFile);
 router.put('/updateDoctorUserAuth',DoctorController.updateDoctorUserAuth);
 module.exports = router;

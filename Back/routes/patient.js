@@ -14,4 +14,5 @@ router.put('/patient/:id',PatientController.updatePatient); //Actualizar un paci
 router.delete('/patient/:id',PatientController.deletePatient); //Eliminar un paciente de la BD
 router.get('/get-image/:image',PatientController.getImageFile);
 router.put('/updatePatientUserAuth',PatientController.updatePatientUserAuth);
+router.post('/upload-image/:id',PatientController.uploadImage);
 module.exports = router;

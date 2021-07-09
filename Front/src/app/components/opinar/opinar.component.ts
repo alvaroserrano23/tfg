@@ -9,6 +9,7 @@ import { Opinion } from 'src/app/models/opinion';
 import { MailService } from 'src/app/services/mail.service';
 import { Mail } from 'src/app/models/mail';
 import { Patient } from 'src/app/models/patient';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-opinar',
@@ -27,6 +28,7 @@ export class OpinarComponent implements OnInit {
 
   constructor(
     private doctorService: DoctorService,
+    private patientService: PatientService,
     private opinionService: OpinionService,
     private alertService: AlertService,
     private router: Router,
@@ -84,6 +86,7 @@ export class OpinarComponent implements OnInit {
     this.opinion.nombre_patient = this.patient.name+ " " + this.patient.surname;
     this.opinion.nombre_doctor = this.doctor.name + " " + this.doctor.surname;
     this.doctor.numOpiniones += 1;
+    this.patient.numOpiniones += 1;
     
     this.opinionService.saveOpinion(this.opinion).subscribe(
       res =>{
@@ -93,6 +96,8 @@ export class OpinarComponent implements OnInit {
         this.mail.message = "<h1>Opinion sobre el doctor "+ this.opinion.nombre_doctor +"</h1><p>Hola " + this.opinion.nombre_patient + " ,tu opinion ha sido registrada correctamente.</p><ul><li><b>Comentario:</b> "+this.opinion.comentario+"</li><li><b>Valoración:</b> "+this.opinion.valoracion+"</li>";
         this.mail.to = this.patient.email;
         this.mailService.sendEmail(this.mail).subscribe();
+        //Update patient
+        this.patientService.updatePatient(this.patient).subscribe();
         //Doctor
         this.mail.message = "<p>Hola " + this.opinion.nombre_doctor + " el paciente "+this.opinion.nombre_patient+ " ,ha dado su opinión sobre ti.</p><ul><li><b>Comentario:</b> "+this.opinion.comentario+"</li><li><b>Valoración:</b> "+this.opinion.valoracion+"</li>";
         this.mail.to = this.doctor.email;
@@ -100,7 +105,7 @@ export class OpinarComponent implements OnInit {
         //Update al doctor
         this.doctorService.updateDoctor(this.doctor).subscribe();
         console.log(res);
-        this.router.navigate(['/'], { relativeTo: this.route }); 
+        this.router.navigate(['/perfil-patient/'+this.patient.id], { relativeTo: this.route }); 
       },
       err =>{
         console.log(err);

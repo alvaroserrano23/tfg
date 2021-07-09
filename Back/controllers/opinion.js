@@ -75,12 +75,12 @@ var controller = {
 	getOpinionsByIdPatient: function(req,res){
 		var id = req.params.id;
 
-		Opinion.find({id_paciente:id}).exec((err,opiniones) => {
+		Opinion.find({id_patient:id}).exec((err,opinions) => {
 			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
 
-			if(!opiniones) return res.status(404).send({message: 'No hay opiniones que mostrar'});
+			if(!opinions) return res.status(404).send({message: 'No hay opiniones que mostrar'});
 
-			return res.status(200).send({opiniones});
+			return res.status(200).send({opinions});
 		})
 	},
 

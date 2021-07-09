@@ -25,9 +25,6 @@
 		</div>
 		<br>
 		<br>
-		<div class="row">
-			<h3>Opiniones ({{doctor.numOpiniones}})<hr></h3>
-		</div>
 
 		<div class="row justify-content-md-center">
 			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/']">Volver</button></div>
@@ -66,6 +63,27 @@
 		<br>
 		<div class="row">
 			<h3>Opiniones ({{patient.numOpiniones}})<hr></h3>
+			<div *ngIf="patient.numOpiniones != 0; else noOpiniones">
+				<table class="table table-hover" >
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">Doctor</th>
+						<th scope="col">Comentario</th>
+						<th scope="col">Valoración</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let opinion of opinions">
+						<th scope="row">{{opinion.nombre_doctor}}</th>
+						<td>{{opinion.comentario}}</td>
+						<td>{{opinion.valoracion}} / 5</td>
+					</tr>
+					</tbody>
+				</table>
+				<ng-template #noOpiniones>
+					El paciente no tiene opiniones.
+				</ng-template>
+			</div>
 		</div>
 
 		<div class="row justify-content-md-center">

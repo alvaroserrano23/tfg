@@ -53,4 +53,10 @@ export class PatientService {
 
 		return this._http.put(this.url+'updatePatientUserAuth',params,{headers:headers});		
 	}
+
+	uploadImage(patient:Patient){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.post(this.url+'upload-image/'+patient.id,patient,{headers:headers});	
+	}
 }

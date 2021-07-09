@@ -58,4 +58,10 @@ export class DoctorService {
 
 		return this._http.put(this.url+'updateDoctorUserAuth',params,{headers:headers});		
 	}
+
+	uploadImage(doctor:Doctor){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.post(this.url+'upload-image/'+doctor.id,doctor,{headers:headers});	
+	}
 }
