@@ -41,8 +41,12 @@ export class CitasComponent implements OnInit {
     
     this.route.params.subscribe(params =>{
       this.id = params.id;
-      this.getDoctor(this.id);
-      this.getPatient(this.id);
+      if(localStorage.getItem('doctor')){
+        this.getDoctor(this.id);
+      }else if(localStorage.getItem('patient')){
+        this.getPatient(this.id);
+      }
+      
       this.getCitasByIdDoctor(this.id);
       this.getCitasByIdPatient(this.id);
     })
@@ -98,4 +102,33 @@ export class CitasComponent implements OnInit {
     )
   }
 
+  public aceptar(cita){
+    var citaAceptada = new Cita('','','','','','','','','','','');
+    citaAceptada = cita;
+    citaAceptada.id = cita._id;
+    citaAceptada.estado = "Aceptada";
+    this.citasService.updateCita(citaAceptada).subscribe(
+      response=>{
+        console.log(response);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  public rechazar(cita){
+    var citaRechazada = new Cita('','','','','','','','','','','');
+    citaRechazada = cita;
+    citaRechazada.id = cita._id;
+    citaRechazada.estado = "Rechazada";
+    this.citasService.updateCita(citaRechazada).subscribe(
+      response=>{
+        console.log(response);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
 }

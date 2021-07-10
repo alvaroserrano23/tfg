@@ -23,8 +23,8 @@
             <td>{{cita.estado}}</td>
             <td style="white-space: nowrap">
                 <div *ngIf="cita.estado == 'Pendiente' ">
-                    <button  class="btn btn-sm btn-primary mr-1">Aceptar</button>
-                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;">Rechazar</button>
+                    <button  class="btn btn-sm btn-primary mr-1" (click)="aceptar(cita)">Aceptar</button>
+                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="rechazar(cita)">Rechazar</button>
                 </div>
             </td>
         </tr>

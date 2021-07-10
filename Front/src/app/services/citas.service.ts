@@ -50,4 +50,11 @@ export class CitasService {
 
 		return this._http.post(this.url+'save-cita',params,{headers:headers});
 	}
+
+	updateCita(cita:Cita): Observable<any>{
+		let params = JSON.stringify(cita);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'cita/'+cita.id,params,{headers:headers});		
+	}
 }
