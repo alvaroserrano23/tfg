@@ -3,6 +3,7 @@ import { Global } from '../../services/global';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HistorialService } from 'src/app/services/historial.service';
 import { Historial } from 'src/app/models/historial';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-ver-historial',
@@ -17,6 +18,7 @@ export class VerHistorialComponent implements OnInit {
 
   constructor(
     public historialService: HistorialService,
+    public alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute
     ) 
@@ -47,9 +49,11 @@ export class VerHistorialComponent implements OnInit {
     this.historialService.deleteHistorial(id).subscribe(
       response=>{
         console.log(response);
+        this.alertService.success("Se ha eliminado el historial correctamente.", { keepAfterRouteChange: true });
       },
       error=>{
         console.log(error);
+        this.alertService.error(error.error.message);
       }
     )
   }

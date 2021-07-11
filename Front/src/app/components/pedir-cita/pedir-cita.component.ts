@@ -146,7 +146,7 @@ export class PedirCitaComponent implements OnInit {
         this.router.navigate(['/citas-patient',this.patient.id], { relativeTo: this.route });  
         },
       error =>{
-        this.alertService.error(error);
+        this.alertService.error(error.error.message);
         this.loading = false;
         }
     );

@@ -45,8 +45,8 @@
       <form [formGroup]="formPass1" (ngSubmit)="onSubmitForgotPassword()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" formControlName="email" class="form-control" placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted && fPass1.email.errors }"/>
-          <div *ngIf="submitted && fPass1.email.errors" class="invalid-feedback">
+          <input type="email" formControlName="email" class="form-control" placeholder="tu@ejemplo.com" [ngClass]="{ 'is-invalid': submitted2 && fPass1.email.errors }"/>
+          <div *ngIf="submitted2 && fPass1.email.errors" class="invalid-feedback">
             <div *ngIf="fPass1.email.errors.required">El email es obligatorio.</div>
             <div *ngIf="fPass1.email.errors.email">Introduce un email correcto.</div>
           </div>
@@ -73,8 +73,8 @@
         <div class="row ">
           <div class="form-group col">
           <label for="code" class="form-label">Codigo de recuperación</label>
-          <input type="text" formControlName="code" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted && fPass2.code.errors }"/>
-          <div *ngIf="submitted && fPass2.code.errors" class="invalid-feedback">
+          <input type="text" formControlName="code" class="form-control" placeholder="" [ngClass]="{ 'is-invalid': submitted3 && fPass2.code.errors }"/>
+          <div *ngIf="submitted3 && fPass2.code.errors" class="invalid-feedback">
             <div *ngIf="fPass2.code.errors.required">El codigo de recuperación es obligatorio.</div>
         </div>
         </div>

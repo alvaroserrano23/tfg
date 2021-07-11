@@ -104,10 +104,11 @@ export class OpinarComponent implements OnInit {
         this.mailService.sendEmail(this.mail).subscribe();
         //Update al doctor
         this.doctorService.updateDoctor(this.doctor).subscribe();
-        console.log(res);
+        this.alertService.success('Tu opinión se ha registrado correctamente', { keepAfterRouteChange: true });
         this.router.navigate(['/perfil-patient/'+this.patient.id], { relativeTo: this.route }); 
       },
       err =>{
+        this.alertService.error(err.error.message);
         console.log(err);
       }
     );

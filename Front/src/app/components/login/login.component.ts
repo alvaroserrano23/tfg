@@ -17,7 +17,7 @@ import { first } from 'rxjs/operators';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [PatientService,DoctorService,UserAuthenticationService,AlertService,MailService]
+  providers: [PatientService,DoctorService,UserAuthenticationService,MailService]
 })
 export class LoginComponent implements OnInit {
   public title:string;
@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
   formPass3: FormGroup;
   loading = false;
   submitted = false;
+  submitted2 = false;
+  submitted3 = false;
+  submitted4 = false;
   public mail:Mail;
   public mailFinProceso:Mail;
 
@@ -110,7 +113,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitForgotPassword(){
 
-    this.submitted = true;
+    this.submitted2 = true;
     this.alertService.clear();
 
     if(this.formPass1.invalid){
@@ -137,7 +140,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitCodigoRecuperacionForm(){
-    this.submitted = true;
+    this.submitted3 = true;
     this.alertService.clear();
 
     if(this.formPass2.invalid){
@@ -153,13 +156,13 @@ export class LoginComponent implements OnInit {
         $("#container_newpass").show();
       },
       err=>{
-        alert(err.message);
+        this.alertService.error(err.message);
       }
     )
     
   }
   onSubmitNuevaContrasenaForm(){
-    this.submitted = true;
+    this.submitted4 = true;
     this.alertService.clear();
 
     if(this.formPass3.invalid){
@@ -187,7 +190,7 @@ export class LoginComponent implements OnInit {
             console.log(res);
           },
           err=>{
-            console.log(err);
+            this.alertService.error(err.error.message);
           }
         )
       }
@@ -196,8 +199,7 @@ export class LoginComponent implements OnInit {
       this.mailFinProceso.to = this.userAuthRecuperacion.email;
       this.mailFinProceso.message = "<h1>Proceso finalizado</h1><p>Enhorabuena " + this.userAuthentication.user + " , has cambiado tu contraseña correctamente!.</p>";
       this.mailService.sendEmail(this.mailFinProceso).subscribe();
-      //this.alertService.success('Has cambiado tu contraseña correctamente', { keepAfterRouteChange: true });
-      alert("Has cambiado tu contraseña correctamente");
+      this.alertService.success('Has cambiado tu contraseña correctamente', { keepAfterRouteChange: true });
       this.router.navigate(['/login'])
           .then(() => {
             window.location.reload();
@@ -232,7 +234,7 @@ export class LoginComponent implements OnInit {
         
         },
         err => {
-          this.alertService.error(err.message);
+          this.alertService.error(err.error.message);
           console.log(err);
           this.loading = false;
         }

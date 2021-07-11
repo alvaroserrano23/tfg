@@ -80,12 +80,12 @@ export class DetailHistorialComponent implements OnInit {
       this.historialService.updateHistorial(this.historialModificado).subscribe(
         res => {
           console.log(res);
-          this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
+          this.alertService.success('Se ha modificado el historial correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate(['/historials-doctor/'+this.historial.id_doctor], { relativeTo: this.route });  
           },
         error =>{
           this.alertService.error(error.error.message);
           console.log(error);
-          this.loading = false;
           }
       );
     

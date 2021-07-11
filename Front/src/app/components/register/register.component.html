@@ -160,10 +160,10 @@
 
 						<div class="col-md-3">
 						<label for="cv" class="form-label">Curriculum</label>
-						<input type="file">
-						<!--<div class="invalid-feedback">
+						<input type="file" formControlName="cv" class="form-control" (change)="fileChangeEvent($event)">
+						<div class="invalid-feedback">
 							Por favor,introduce un curriculum.
-						</div>-->
+						</div>
 						</div>
 				</div>
 			<hr class="my-4">

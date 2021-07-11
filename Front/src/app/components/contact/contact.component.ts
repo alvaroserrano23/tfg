@@ -70,10 +70,11 @@ export class ContactComponent implements OnInit {
       res => {
         console.log(res);
         this.alertService.success('Tu correo se ha enviado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate(['/']);  
+        this.router.navigate(['/'], { relativeTo: this.route });
+                    
       },
       error =>{
-        this.alertService.error(error);
+        this.alertService.error(error.error.message);
         this.loading = false;
         }
     );

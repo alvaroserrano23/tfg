@@ -128,7 +128,7 @@ export class DatosComponent implements OnInit {
         this.router.navigate(['/'], { relativeTo: this.route });  
         },
       error =>{
-        this.alertService.error(error);
+        this.alertService.error(error.error.message);
         this.loading = false;
         }
     );
@@ -155,7 +155,7 @@ export class DatosComponent implements OnInit {
           this.router.navigate(['/'], { relativeTo: this.route });  
           },
         error =>{
-          this.alertService.error(error);
+          this.alertService.error(error.error.message);
           this.loading = false;
           }
       );
