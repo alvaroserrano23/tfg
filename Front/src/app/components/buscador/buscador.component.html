@@ -24,11 +24,14 @@
         <div class="container">
           <div class="carousel-caption">
             <h1>Gestiona tus citas online</h1>
-            <p>Te ofrecemos la posibilidad de solicitar/revisar/cancelar tus citas online.</p>
-            <p><a class="btn btn-lg btn-primary" *ngIf="!patientLogged && !doctorLogged;else logged" [routerLink]="['/login']">Vamos!</a></p>
+            <p *ngIf="!userLogged || !userLogged.especialidad;else loggedD2">Te ofrecemos la posibilidad de solicitar/revisar/cancelar tus citas online.</p>
+            <ng-template #loggedD2>
+              <p>Te ofrecemos la posibilidad de aceptar/rechazar tus citas online.</p>
+            </ng-template>
+            <p><a class="btn btn-lg btn-primary" *ngIf="!userLogged;else logged" [routerLink]="['/login']">Vamos!</a></p>
             <ng-template #logged>
-              <p><a class="btn btn-lg btn-primary" [routerLink]="['/']">Vamos!</a></p>
-
+              <p><a class="btn btn-lg btn-primary" *ngIf="userLogged.especialidad" [routerLink]="['citas-doctor/',userLogged._id]">Vamos!</a></p>
+              <p><a class="btn btn-lg btn-primary" *ngIf="!userLogged.especialidad" [routerLink]="['citas-patient/',userLogged._id]">Vamos!</a></p>
             </ng-template>
           </div>
         </div>
@@ -39,8 +42,12 @@
         <div class="container">
           <div class="carousel-caption text-end">
             <h1>Sistema de opiniones</h1>
-            <p>Da tu opinión sobre un doctor , o si buscas uno consulta las suyas.</p>
-            <p><a class="btn btn-lg btn-primary" [routerLink]="['/medicos']">Ver doctores</a></p>
+            <p *ngIf="!userLogged || !userLogged.especialidad;else loggedD3">Da tu opinión sobre un doctor , o si buscas uno consulta las suyas.</p>
+            <p *ngIf="!userLogged || !userLogged.especialidad"><a class="btn btn-lg btn-primary" [routerLink]="['/dar-opinion']">Ver doctores</a></p>
+            <ng-template #loggedD3>
+              <p>Puedes consultar las opiniones y valoraciones que has recibido</p>
+              <p><a class="btn btn-lg btn-primary" [routerLink]="['valoraciones/',userLogged._id]">Aqui</a></p>
+            </ng-template>
           </div>
         </div>
       </div>

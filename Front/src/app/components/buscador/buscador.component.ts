@@ -11,18 +11,20 @@ selector: 'app-buscador',
 export class BuscadorComponent implements OnInit {
   public doctorLogged: Doctor;
   public patientLogged: Patient;
+  public userLogged;
 
   constructor(public userAuthenticationService: UserAuthenticationService) { 
     if(this.userAuthenticationService.userValueD != null){
-      this.doctorLogged = this.userAuthenticationService.userValueD;
+      this.userLogged = this.userAuthenticationService.userValueD;
     }else if(this.userAuthenticationService.userValueP != null){
-      this.patientLogged = this.userAuthenticationService.userValueP;
+      this.userLogged = this.userAuthenticationService.userValueP;
     }
     //userAuthenticationService.limpiarItems();
 
   }
 
   ngOnInit(): void {
+
   }
 
 }
