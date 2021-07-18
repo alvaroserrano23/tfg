@@ -6,6 +6,9 @@ import { DoctorService } from '../../services/doctor.service';
 import { FormBuilder, FormGroup, Validators ,FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
+import { Global } from '../../services/global';
+import { MailService } from 'src/app/services/mail.service';
+import { Mail } from 'src/app/models/mail';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +27,10 @@ export class RegisterComponent implements OnInit {
   public doctorEnBd : Doctor;
   public patientEnBd : Patient;
   public botonDoctor:string;
-
+  public status: string;
+	public filesToUpload: Array<File>;
+  public url:string;
+  public mail:Mail;
   formD: FormGroup;
   formP: FormGroup;
   loading = false;
@@ -35,11 +41,13 @@ export class RegisterComponent implements OnInit {
     private patientService: PatientService,
     private doctorService: DoctorService,
     private alertService: AlertService,
+    private mailService: MailService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
 
     ) {
+    this.url = Global.url;
     //Titulos
   	this.title = "Tipo de cuenta";
     this.title3 = "Registrarse como Médico";
@@ -68,8 +76,8 @@ export class RegisterComponent implements OnInit {
       user: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
       especialidad: new FormControl('',Validators.required),
-      insurance: new FormControl('',Validators.required)
-      //cv: new FormControl('',Validators.required)
+      insurance: new FormControl('',Validators.required),
+      cv: new FormControl('',Validators.required)
     });
 
     this.formP = new FormGroup({
@@ -132,15 +140,24 @@ export class RegisterComponent implements OnInit {
     this.doctor = this.formD.value;
     this.doctor.numOpiniones = 0;
     this.doctorService.saveDoctor(this.doctor).subscribe(
-      res => {
-        console.log(res);
+      response => {
+        if(response){
+          //this.doctorService.makeFileRequest(Global.url+"upload-image/"+response.doctorGuardado._id, [], this.filesToUpload, 'image')
+          //.then((result:any) => {
+            this.mail.to = this.doctor.email;
+            this.mail.type = "registroD";
+            this.mail.message = "<h1>Hola <b>" + this.doctor.name + this.doctor.surname +"</b> te has registrado correctamente en FindYourDoctor!</h1><p>Ya puedes disfrutar de todos nuestros servicios:</p><ul><li>Búsquedas parametrizables</li><li>Gestión de citas online</li><li>Sistema de opiniones</li><li>Y mucho más</li></ul>";
+            this.mailService.sendEmail(this.mail).subscribe();
+            this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
+            this.router.navigate(['/login'], { relativeTo: this.route }); 
+          //});
+        }
         /*localStorage.setItem('token',res.token);
         localStorage.setItem('doctor',JSON.stringify(this.doctor));*/
-        this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate(['/login'], { relativeTo: this.route });  
+         
         },
       error =>{
-        this.alertService.error(error);
+        this.alertService.error(error.error.message);
         this.loading = false;
         }
     );
@@ -163,13 +180,21 @@ export class RegisterComponent implements OnInit {
     this.patientService.savePatient(this.patient).subscribe(
         res => {
           console.log(res);
+          this.mail.to = this.patient.email;
+          this.mail.type = "registroP";
+          this.mail.message = "<h1>Hola <b>" + this.patient.name + this.patient.surname +"</b> te has registrado correctamente en FindYourDoctor!</h1><p>Ya puedes disfrutar de todos nuestros servicios:</p><ul><li>Búsquedas parametrizables</li><li>Gestión de citas online</li><li>Sistema de opiniones</li><li>Y mucho más</li></ul>";
+          this.mailService.sendEmail(this.mail).subscribe();
           this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
           this.router.navigate(['/login'], { relativeTo: this.route });  
           },
         error =>{
-          this.alertService.error(error);
+          this.alertService.error(error.error.message);
           this.loading = false;
           }
       );
   }
+
+  fileChangeEvent(fileInput: any){
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
 }

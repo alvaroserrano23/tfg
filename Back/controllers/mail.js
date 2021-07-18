@@ -16,6 +16,14 @@ async function sendMail(mail,callback){
             <li>Mensaje: ${mail.message}</li>
         </ul>
     `;
+  }else if(mail.type == "registroD"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Bienvenido a FindYourDoctor";
+    contentHTML = mail.message;
+  }else if(mail.type == "registroP"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Bienvenido a FindYourDoctor";
+    contentHTML = mail.message;
   }else if(mail.type =="recuperarcontraseña"){
     mail.from = "serviciocorreotfg@gmail.com";
     mail.subject = "¿Olvidaste tu contraseña?";
