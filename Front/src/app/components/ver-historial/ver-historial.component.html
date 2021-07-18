@@ -1,7 +1,7 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="historials.length !=0;else noHistorials">
         <div class="col" *ngFor="let historial of historials">
           <div class="card shadow-sm">
             <img  src="{{url+'get-image/'+historial.imagen_paciente}}" width="100%" height="225">
@@ -22,3 +22,6 @@
         </div>
     </div>
   </div>
+  <ng-template #noHistorials>
+    <p style="text-align: center;">No hay historiales aún.</p>
+  </ng-template>

@@ -50,6 +50,10 @@ export class VerHistorialComponent implements OnInit {
       response=>{
         console.log(response);
         this.alertService.success("Se ha eliminado el historial correctamente.", { keepAfterRouteChange: true });
+        this.router.navigate(['/ver-historial/'+this.id])
+          .then(() => {
+            window.location.reload();
+          });
       },
       error=>{
         console.log(error);
