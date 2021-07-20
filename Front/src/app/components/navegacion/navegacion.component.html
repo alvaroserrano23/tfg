@@ -23,6 +23,13 @@
         <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
         <li><a [routerLink]="['/valoraciones', doctorLogged._id]" class="nav-link px-2 link-dark" >Valoraciones</a></li>
       </ul>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'adminLogged'">
+        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Pacientes</a></li>
+        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Médicos</a></li>
+        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Citas</a></li>
+        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Opiniones</a></li>
+        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Historiales</a></li>
+      </ul>
       
       <!--Paciente-->
       <div class="col-md-3 text-end">
@@ -50,6 +57,17 @@
               <li><a class="dropdown-item" [routerLink]="['/perfil-doctor', doctorLogged._id]">Ver perfil</a></li>
               <li><a class="dropdown-item" [routerLink]="['/citas-doctor', doctorLogged._id]">Citas</a></li>
               <li><a class="dropdown-item" [routerLink]="['/datos-doctor', doctorLogged._id]">Datos de la cuenta</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
+            </ul>
+          </div>
+          <!--Admin-->
+          <div class="nav-item dropdown" *ngSwitchCase="'adminLogged'">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
+              {{adminLogged.user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" [routerLink]="['/perfil-admin', adminLogged._id]">Ver perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/datos-admin', adminLogged._id]">Datos de la cuenta</a></li>
               <li><a class="dropdown-item" style="cursor: pointer;" (click)="userAuthenticationService.logout()">Cerrar sesión</a></li>
             </ul>
           </div>

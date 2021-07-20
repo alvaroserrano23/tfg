@@ -7,6 +7,8 @@ import { Global } from '../../services/global';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
 import { OpinionService } from 'src/app/services/opinion.service';
+import { AdminService } from 'src/app/services/admin.service';
+import { Admin } from 'src/app/models/admin';
 
 @Component({
   selector: 'app-perfil',
@@ -17,9 +19,14 @@ export class PerfilComponent implements OnInit {
 
   public url: string;
   public doctor: Doctor;
+  public doctorGuardado: Doctor;
   public patient: Patient;
+  public patientGuardado: Patient;
+  public admin: Admin;
+  public adminGuardado: Admin;
   public confirm: boolean;
   public opinions: Opinion[];
+  public filesToUpload: Array<File>;
   /*public title: string;
 	public save_project;
 	public status: string;
@@ -29,6 +36,7 @@ export class PerfilComponent implements OnInit {
     private doctorService: DoctorService,
     private patientService: PatientService,
     private opinionService: OpinionService,
+    private adminService: AdminService,
     private router: Router,
     private route: ActivatedRoute
     
@@ -44,6 +52,9 @@ export class PerfilComponent implements OnInit {
       }else if(localStorage.getItem('patient')){
         this.getPatient(id);
         this.getOpinionsByIdPatient(id);
+      }else if(localStorage.getItem('admin')){
+        this.getAdmin(id);
+        
       }
     })
     
@@ -71,6 +82,17 @@ export class PerfilComponent implements OnInit {
     )
   }
 
+  getAdmin(id){
+    this.adminService.getAdmin(id).subscribe(
+      response =>{
+        this.admin = response.admin;
+      },
+      error =>{
+        console.log(<any>error);
+      }
+    )
+  }
+
   getOpinionsByIdPatient(id){
     this.opinionService.getOpinionsByIdPatient(id).subscribe(
       response=>{
@@ -81,38 +103,83 @@ export class PerfilComponent implements OnInit {
       }
     )
   }
-
   onSubmit(){
     if(this.doctor != undefined){
-      this.doctorService.uploadImage(this.doctor).subscribe();
+      this.actualizarDoctor();
     }else if(this.patient != undefined){
-      this.patientService.uploadImage(this.patient).subscribe();
-    } 
+      this.actualizarPatient();
+    }else if(this.admin != undefined){
+      this.actualizarAdmin();
+    }
   }
-  /*onSubmit(){
-  	this._projectService.updateProject(this.project).subscribe(
-		response => {
-  			if(response.project){
+  
+  actualizarAdmin(){
+    this.adminService.updateAdmin(this.admin).subscribe(
+      response=>{
+        if(response.adminUpdated){
 				
-				// Subir la imagen
-				if(this.filesToUpload){
-					this._uploadService.makeFileRequest(Global.url+"upload-image/"+response.project._id, [], this.filesToUpload, 'image')
-					.then((result:any) => {
-						this.save_project = result.project;
-						this.status = 'success';
-					});
-				}else{
-					this.save_project = response.project;
-					this.status = 'success';
-				}
+				  // Subir la imagen
+          if(this.filesToUpload){
+            this.adminService.makeFileRequest(Global.url+"upload-image/"+response.adminUpdated._id, [], this.filesToUpload, 'image')
+            .then((result:any) => {
+              this.adminGuardado = result.admin;
+            });
+          }else{
+            this.adminGuardado = response.adminUpdated;
+          }
+        }
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    )
+  }
+
+
+  actualizarDoctor(){
+    this.doctorService.updateDoctor(this.doctor).subscribe(
+      response => {
+  			if(response.doctorUpdated){
 				
-			}else{
-				this.status = 'failed';
-			}
+				  // Subir la imagen
+          if(this.filesToUpload){
+            this.doctorService.makeFileRequest(Global.url+"upload-image/"+response.doctorUpdated._id, [], this.filesToUpload, 'image')
+            .then((result:any) => {
+              this.doctorGuardado = result.doctor;
+            });
+          }else{
+            this.doctorGuardado = response.doctorUpdated;
+          }
+      }
   		},
   		error => {
   			console.log(<any>error);
   		}
-  	);
-  }*/
+    )
+  }
+  actualizarPatient(){
+    this.patientService.updatePatient(this.patient).subscribe(
+      response => {
+  			if(response.patientUpdated){
+				
+				  // Subir la imagen
+          if(this.filesToUpload){
+            this.patientService.makeFileRequest(Global.url+"upload-image/"+response.patientUpdated._id, [], this.filesToUpload, 'image')
+            .then((result:any) => {
+              this.patientGuardado = result.doctor;
+            });
+          }else{
+            this.patientGuardado = response.doctorUpdated;
+          }
+      }
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
+    )
+  }
+
+  fileChangeEvent(fileInput: any){
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
 }

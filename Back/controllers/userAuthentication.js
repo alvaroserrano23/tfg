@@ -3,9 +3,11 @@
 var UserAuthentication = require('../models/userAuthentication'); //Importar modelo
 var Doctor = require('../models/doctor');
 var Patient = require('../models/patient');
+var Admin = require('../models/admin');
 var jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const { update } = require('../models/doctor');
+const admin = require('../models/admin');
 
 var controller = {
 
@@ -42,12 +44,20 @@ var controller = {
 
 		}else if(userAuthentication.role == "doctor"){
 			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-			var doctor = new Doctor();
-			doctor = await Doctor.findOne({user: params.user});
-			doctor.token = jwt.sign({_id:doctor._id},'secret_key');
+				var doctor = new Doctor();
+				doctor = await Doctor.findOne({user: params.user});
+				doctor.token = jwt.sign({_id:doctor._id},'secret_key');
 
-			console.log(doctor);
-			return res.status(200).send({doctor});
+				console.log(doctor);
+				return res.status(200).send({doctor});
+
+		}else if(userAuthentication.role == "admin"){
+			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
+				var admin = new Admin();
+				admin = await Admin.findOne({user: params.user});
+				admin.token = jwt.sign({_id:admin._id},'secret_key');
+
+				return res.status(200).send({admin});
 		}
 		
 		

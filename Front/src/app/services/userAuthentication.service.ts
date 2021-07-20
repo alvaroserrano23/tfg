@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { UserAuthentication } from '../models/userAuthentication';
+import { Admin } from '../models/admin';
 import { Patient } from '../models/patient';
 import { Doctor } from '../models/doctor'
 import { Global } from './global'; 
@@ -15,6 +16,8 @@ export class UserAuthenticationService{
 	public userD: Observable<Doctor>;
 	private userSubjectP: BehaviorSubject<Patient>;
 	public userP: Observable<Patient>;
+	private userSubjectA: BehaviorSubject<Admin>;
+	public userA: Observable<Admin>;
 
 	constructor(
 		private _http: HttpClient,
@@ -25,6 +28,8 @@ export class UserAuthenticationService{
         this.userD = this.userSubjectD.asObservable();
 		this.userSubjectP = new BehaviorSubject<Patient>(JSON.parse(localStorage.getItem('patient')));
         this.userP = this.userSubjectP.asObservable();
+		this.userSubjectA = new BehaviorSubject<Admin>(JSON.parse(localStorage.getItem('admin')));
+        this.userA = this.userSubjectA.asObservable();
 	}
 
 	public get userValueD(): Doctor {
@@ -33,6 +38,10 @@ export class UserAuthenticationService{
 
 	public get userValueP(): Patient {
 		return this.userSubjectP.value;
+	}
+
+	public get userValueA(): Admin {
+		return this.userSubjectA.value;
 	}
 
 	testService(){
@@ -69,6 +78,11 @@ export class UserAuthenticationService{
 					localStorage.setItem('doctor',JSON.stringify(user.doctor));
 					localStorage.setItem('token',user.doctor.token);
 					this.userSubjectD.next(user.doctor);
+				}else if(user.admin){
+					user.admin.password = "";
+					localStorage.setItem('admin',JSON.stringify(user.admin));
+					localStorage.setItem('token',user.admin.token);
+					this.userSubjectA.next(user.admin);
 				}
 				
 				return user;
@@ -81,6 +95,8 @@ export class UserAuthenticationService{
 			return "patientLogged";
 		}else if(localStorage.getItem('doctor') && localStorage.getItem('token')){
 			return "doctorLogged";
+		}else if(localStorage.getItem('admin') && localStorage.getItem('token')){
+			return "adminLogged";
 		}else{
 			return "";
 		}
@@ -90,9 +106,17 @@ export class UserAuthenticationService{
 	
 	logout() {
 		localStorage.removeItem('token');
-		localStorage.removeItem('doctor');
-		localStorage.removeItem('patient');
-		this.router.navigate(['']);
+		if(localStorage.getItem('doctor') != null){
+			localStorage.removeItem('doctor');
+		}else if(localStorage.getItem('patient')){
+			localStorage.removeItem('patient');
+		}else if(localStorage.getItem('admin')){
+			localStorage.removeItem('admin');
+		}
+		this.router.navigate([''])
+          .then(() => {
+            window.location.reload();
+          });
 	}
 
 	getToken() {
