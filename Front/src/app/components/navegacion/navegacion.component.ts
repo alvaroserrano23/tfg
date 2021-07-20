@@ -3,6 +3,7 @@ import { UserAuthenticationService } from '../../services/userAuthentication.ser
 import { Doctor } from '../../models/doctor';
 import { Patient } from '../../models/patient';
 import { Admin } from 'src/app/models/admin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navegacion',
@@ -15,7 +16,8 @@ export class NavegacionComponent implements OnInit {
   public patientLogged: Patient;
   public adminLogged: Admin;
 
-  constructor(public userAuthenticationService: UserAuthenticationService) { 
+  constructor(public userAuthenticationService: UserAuthenticationService,private router: Router) { 
+    
     if(this.userAuthenticationService.userValueD != null){
       this.doctorLogged = this.userAuthenticationService.userValueD;
     }else if(this.userAuthenticationService.userValueP != null){
@@ -27,6 +29,41 @@ export class NavegacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  pacientes(){
+    localStorage.setItem('admin-patients','admin-patients');
+    this.router.navigate(['administrar']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  doctors(){
+    localStorage.setItem('admin-doctors','admin-doctors');
+    this.router.navigate(['administrar']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  citas(){
+    localStorage.setItem('admin-citas','admin-citas');
+    this.router.navigate(['administrar']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  opiniones(){
+    localStorage.setItem('admin-opiniones','admin-opiniones');
+    this.router.navigate(['administrar']).then(() => {
+      window.location.reload();
+    });
+  }
+
+  historiales(){
+    localStorage.setItem('admin-historiales','admin-historiales');
+    this.router.navigate(['administrar']).then(() => {
+      window.location.reload();
+    });
   }
 
 }

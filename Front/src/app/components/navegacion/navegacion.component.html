@@ -24,11 +24,11 @@
         <li><a [routerLink]="['/valoraciones', doctorLogged._id]" class="nav-link px-2 link-dark" >Valoraciones</a></li>
       </ul>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'adminLogged'">
-        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Pacientes</a></li>
-        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Médicos</a></li>
-        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Citas</a></li>
-        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Opiniones</a></li>
-        <li><a [routerLink]="" class="nav-link px-2 link-secondary">Historiales</a></li>
+        <li><a style="cursor: pointer;" (click)="pacientes()" class="nav-link px-2 link-secondary">Pacientes</a></li>
+        <li><a style="cursor: pointer;" (click)="doctors()" class="nav-link px-2 link-secondary">Médicos</a></li>
+        <li><a style="cursor: pointer;" (click)="citas()" class="nav-link px-2 link-secondary">Citas</a></li>
+        <li><a style="cursor: pointer;" (click)="opiniones()" class="nav-link px-2 link-secondary">Opiniones</a></li>
+        <li><a style="cursor: pointer;" (click)="historiales()" class="nav-link px-2 link-secondary">Historiales</a></li>
       </ul>
       
       <!--Paciente-->

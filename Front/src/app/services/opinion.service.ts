@@ -33,4 +33,8 @@ export class OpinionService {
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 		return this._http.get<any>(this.url+'opinions-paciente/'+id,{headers:headers});
 	}
+
+	getOpiniones(){
+		return this._http.get<any>(this.url+'/opiniones');
+	}
 }

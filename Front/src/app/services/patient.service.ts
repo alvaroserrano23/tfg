@@ -40,6 +40,10 @@ export class PatientService {
 		return this._http.get(this.url+'patient/'+id,{headers:headers});
 	}
 
+	getPatients(){
+		return this._http.get<any>(this.url+'/patients');
+	}
+
 	updatePatient(patient:Patient) :Observable<any>{
 		let params = JSON.stringify(patient);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
@@ -58,5 +62,29 @@ export class PatientService {
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 
 		return this._http.post(this.url+'upload-image/'+patient.id,patient,{headers:headers});	
+	}
+
+	makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string){
+		return new Promise(function(resolve, reject){
+			var formData:any = new FormData();
+			var xhr = new XMLHttpRequest();
+
+			for(var i = 0; i < files.length; i++){
+				formData.append(name, files[i], files[i].name);
+			}
+
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					if(xhr.status == 200){
+						resolve(JSON.parse(xhr.response));
+					}else{
+						reject(xhr.response);
+					}
+				}
+			}
+
+			xhr.open('POST', url, true);
+			xhr.send(formData);
+		});
 	}
 }

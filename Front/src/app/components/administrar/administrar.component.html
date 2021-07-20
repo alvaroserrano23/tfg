@@ -1,0 +1,183 @@
+<!--Pacientes-->
+<div class="container" *ngIf="patients">
+    <div class="py-5 text-center">
+        <h2>Pacientes</h2>
+        <hr class="my-4">
+    <div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let patient of patients">
+                <th scope="row">{{patient._id}}</th>
+                <td>{{patient.name}}</td>
+                <td>{{patient.surname}}</td>
+                <td>{{patient.user}}</td>
+                <td>{{patient.email}}</td>
+                <td style="white-space: nowrap">
+                    <div>
+                        <button  class="btn btn-sm btn-primary mr-1" (click)="modificarPatient(patient)">Modificar</button>
+                        <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="eliminarPatient(patient)">Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+<!--Doctores-->
+<div class="container" *ngIf="doctors">
+    <div class="py-5 text-center">
+        <h2>Médicos</h2>
+        <hr class="my-4">
+    <div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let doctor of doctors">
+            <th scope="row">{{doctor._id}}</th>
+            <td>{{doctor.name}}</td>
+            <td>{{doctor.surname}}</td>
+            <td>{{doctor.user}}</td>
+            <td>{{doctor.email}}</td>
+            <td style="white-space: nowrap">
+                <div>
+                    <button  class="btn btn-sm btn-primary mr-1" (click)="modificarDoctor(doctor)">Modificar</button>
+                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="eliminarDoctor(doctor)">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
+
+<!--Citas-->
+<div class="container" *ngIf="citas">
+    <div class="py-5 text-center">
+        <h2>Citas</h2>
+        <hr class="my-4">
+    <div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Asunto</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cita of citas">
+            <th scope="row">{{cita._id}}</th>
+            <td>{{cita.asunto}}</td>
+            <td>{{cita.nombre_doctor}}</td>
+            <td>{{cita.nombre_paciente}}</td>
+            <td>{{cita.fecha}}</td>
+            <td>{{cita.hora}}</td>
+            <td>{{cita.estado}}</td>
+            <td style="white-space: nowrap">
+                <div>
+                    <button  class="btn btn-sm btn-primary mr-1" (click)="modificarCita(cita)">Modificar</button>
+                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="eliminarCita(cita)">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
+<!--Opiniones-->
+<div class="container" *ngIf="opinions">
+    <div class="py-5 text-center">
+        <h2>Opiniones</h2>
+        <hr class="my-4">
+    <div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Doctor</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Comentario</th>
+            <th scope="col">Valoracion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let opinion of opinions">
+            <th scope="row">{{opinion._id}}</th>
+            <td>{{opinion.nombre_doctor}}</td>
+            <td>{{opinion.nombre_patient}}</td>
+            <td>{{opinion.nombre_paciente}}</td>
+            <td>{{opinion.comentario}}</td>
+            <td>{{opinion.valoracion}}</td>
+            <td style="white-space: nowrap">
+                <div>
+                    <button  class="btn btn-sm btn-primary mr-1" (click)="modificarOpinion(opinion)">Modificar</button>
+                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="eliminarOpinion(opinion)">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
+<!--Historiales-->
+<div class="container" *ngIf="historials">
+    <div class="py-5 text-center">
+        <h2>Historiales</h2>
+        <hr class="my-4">
+    <div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fecha de nacimiento</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let historial of historials">
+            <th scope="row">{{historial._id}}</th>
+            <td>{{historial.name}} {{historial.surname}}</td>
+            <td>{{historial.dni_paciente}}</td>
+            <td>{{historial.edad_paciente}}</td>
+            <td>{{historial.email_paciente}}</td>
+            <td>{{historial.fecha_nacimiento_paciente}}</td>
+            <td style="white-space: nowrap">
+                <div>
+                    <button  class="btn btn-sm btn-primary mr-1" (click)="modificarHistorial(historial)">Modificar</button>
+                    <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="eliminarHistorial(historial)">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
