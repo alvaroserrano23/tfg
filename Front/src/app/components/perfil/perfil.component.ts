@@ -54,6 +54,7 @@ export class PerfilComponent implements OnInit {
         this.getOpinionsByIdPatient(id);
       }else if(localStorage.getItem('admin')){
         this.getAdmin(id);
+        localStorage.removeItem('repetido');
         
       }
     })

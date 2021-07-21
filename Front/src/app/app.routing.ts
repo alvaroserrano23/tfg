@@ -20,6 +20,7 @@ import { OpinarComponent } from './components/opinar/opinar.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 import { VerHistorialComponent } from './components/ver-historial/ver-historial.component';
 import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
+import { AdministrarComponent } from './components/administrar/administrar.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -45,6 +46,7 @@ const appRoutes : Routes = [
 	{path: 'valoraciones/:id',component:ValoracionesComponent},
 	{path: 'ver-historial/:id',component:VerHistorialComponent},
 	{path: 'detail-historial/:id',component:DetailHistorialComponent},
+	{path: 'administrar',component:AdministrarComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

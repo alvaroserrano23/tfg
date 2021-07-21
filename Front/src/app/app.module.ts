@@ -33,6 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 import { VerHistorialComponent } from './components/ver-historial/ver-historial.component';
 import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
+import { AdministrarComponent } from './components/administrar/administrar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { DetailHistorialComponent } from './components/detail-historial/detail-h
     OpinarComponent,
     ValoracionesComponent,
     VerHistorialComponent,
-    DetailHistorialComponent
+    DetailHistorialComponent,
+    AdministrarComponent
   ],
   imports: [
     BrowserModule,

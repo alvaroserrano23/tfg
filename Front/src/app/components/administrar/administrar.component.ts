@@ -13,6 +13,7 @@ import { Opinion } from 'src/app/models/opinion';
 import { CitasService } from 'src/app/services/citas.service';
 import { OpinionService } from 'src/app/services/opinion.service';
 import { HistorialService } from 'src/app/services/historial.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrar',
@@ -36,7 +37,8 @@ export class AdministrarComponent implements OnInit {
     public opinionService: OpinionService,
     public historialService: HistorialService,
     public adminService: AdminService,
-    public userAuthenticationService: UserAuthenticationService
+    public userAuthenticationService: UserAuthenticationService,
+    private router: Router
     ) 
     {
     this.url = Global.url;
@@ -62,6 +64,11 @@ export class AdministrarComponent implements OnInit {
     }
   }
 
+  volver(){
+    localStorage.removeItem('repetido');
+    this.router.navigate(['/']);
+  }
+  
   limpiarArrays(){
     this.doctors = null;
     this.patients = null;

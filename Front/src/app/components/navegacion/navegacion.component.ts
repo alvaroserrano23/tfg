@@ -31,39 +31,40 @@ export class NavegacionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  comprobarRepetido(){
+    if(localStorage.getItem('repetido')){
+      this.router.navigate(['administrar']).then(() => {
+        window.location.reload();
+      });
+    }else{
+      this.router.navigate(['administrar']);
+      localStorage.setItem('repetido','repetido');
+    }
+  }
   pacientes(){
     localStorage.setItem('admin-patients','admin-patients');
-    this.router.navigate(['administrar']).then(() => {
-      window.location.reload();
-    });
+    this.comprobarRepetido();
+    
   }
 
   doctors(){
     localStorage.setItem('admin-doctors','admin-doctors');
-    this.router.navigate(['administrar']).then(() => {
-      window.location.reload();
-    });
+    this.comprobarRepetido();
   }
 
   citas(){
     localStorage.setItem('admin-citas','admin-citas');
-    this.router.navigate(['administrar']).then(() => {
-      window.location.reload();
-    });
+    this.comprobarRepetido();
   }
 
   opiniones(){
     localStorage.setItem('admin-opiniones','admin-opiniones');
-    this.router.navigate(['administrar']).then(() => {
-      window.location.reload();
-    });
+    this.comprobarRepetido();
   }
 
   historiales(){
     localStorage.setItem('admin-historiales','admin-historiales');
-    this.router.navigate(['administrar']).then(() => {
-      window.location.reload();
-    });
+    this.comprobarRepetido();
   }
 
 }

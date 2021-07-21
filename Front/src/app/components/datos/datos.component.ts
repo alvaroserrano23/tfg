@@ -59,6 +59,7 @@ export class DatosComponent implements OnInit {
         this.getPatient(this.id);
       }else if(localStorage.getItem('admin')){
         this.getAdmin(this.id);
+        localStorage.removeItem('repetido');
       }
       
     })

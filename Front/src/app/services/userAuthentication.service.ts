@@ -112,6 +112,7 @@ export class UserAuthenticationService{
 			localStorage.removeItem('patient');
 		}else if(localStorage.getItem('admin')){
 			localStorage.removeItem('admin');
+			localStorage.removeItem('repetido');
 		}
 		this.router.navigate([''])
           .then(() => {
