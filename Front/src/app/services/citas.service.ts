@@ -57,4 +57,9 @@ export class CitasService {
 
 		return this._http.put(this.url+'cita/'+cita.id,params,{headers:headers});		
 	}
+
+	deletCita(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'cita/'+id,{headers:headers});
+	}
 }

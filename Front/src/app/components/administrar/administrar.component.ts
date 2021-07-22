@@ -14,6 +14,7 @@ import { CitasService } from 'src/app/services/citas.service';
 import { OpinionService } from 'src/app/services/opinion.service';
 import { HistorialService } from 'src/app/services/historial.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-administrar',
@@ -38,6 +39,7 @@ export class AdministrarComponent implements OnInit {
     public historialService: HistorialService,
     public adminService: AdminService,
     public userAuthenticationService: UserAuthenticationService,
+    public alertService: AlertService,
     private router: Router
     ) 
     {
@@ -64,11 +66,112 @@ export class AdministrarComponent implements OnInit {
     }
   }
 
+  modificarPatient(patient){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-patient','admin-patient');
+    this.router.navigate(['admin-modificar-patient/'+patient._id]);
+  }
+
+  modificarDoctor(doctor){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-doctor','admin-doctor');
+    this.router.navigate(['admin-modificar-doctor/'+doctor._id]);
+  }
+
+  modificarCita(cita){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-cita','admin-cita');
+    this.router.navigate(['admin-modificar-cita/'+cita._id]);
+  }
+
+  modificarOpinion(opinion){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-opinion','admin-opinion');
+    this.router.navigate(['admin-modificar-opinion/'+opinion._id]);
+  }
+
+  modificarHistorial(historial){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-historial','admin-historial');
+    this.router.navigate(['admin-modificar-historial/'+historial._id]);
+  }
+  
+  eliminarPatient(patient){
+    localStorage.removeItem('repetido');
+    this.patientService.deletePatient(patient._id).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('El paciente se ha borrado correctamente.');
+        this.router.navigate(['/']);
+      },
+      error=>{
+        console.log(error);
+        this.alertService.error(error.error.message);
+      }
+    )
+  }
+
+  eliminarDoctor(doctor){
+    localStorage.removeItem('repetido');
+    this.doctorService.deleteDoctor(doctor._id).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('El doctor se ha borrado correctamente.');
+        this.router.navigate(['/']);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  eliminarCita(cita){
+    localStorage.removeItem('repetido');
+    this.citaService.deletCita(cita._id).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('La cita se ha borrado correctamente.');
+        this.router.navigate(['/']);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  eliminarOpinion(opinion){
+    localStorage.removeItem('repetido');
+    this.opinionService.deleteOpinion(opinion._id).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('La opinion se ha borrado correctamente.');
+        this.router.navigate(['/']);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  eliminarHistorial(historial){
+    localStorage.removeItem('repetido');
+    this.historialService.deleteHistorial(historial._id).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('El historil se ha borrado correctamente.');
+        this.router.navigate(['/']);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
   volver(){
     localStorage.removeItem('repetido');
     this.router.navigate(['/']);
   }
-  
+
   limpiarArrays(){
     this.doctors = null;
     this.patients = null;

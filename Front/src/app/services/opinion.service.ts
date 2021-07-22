@@ -37,4 +37,15 @@ export class OpinionService {
 	getOpiniones(){
 		return this._http.get<any>(this.url+'/opiniones');
 	}
+
+	deleteOpinion(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'opinion/'+id,{headers:headers});
+	}
+
+	getOpinion(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'opinion/'+id,{headers:headers});
+	}
 }

@@ -138,4 +138,5 @@ export class UserAuthenticationService{
 
 		return this._http.put(this.url+'updateUserAuth',params,{headers:headers});	
 	}
+
 }

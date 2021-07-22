@@ -58,6 +58,11 @@ export class PatientService {
 		return this._http.put(this.url+'updatePatientUserAuth',params,{headers:headers});		
 	}
 
+	deletePatient(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'patient/'+id,{headers:headers});
+	}
+
 	uploadImage(patient:Patient){
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 

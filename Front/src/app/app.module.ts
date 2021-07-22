@@ -34,6 +34,7 @@ import { ValoracionesComponent } from './components/valoraciones/valoraciones.co
 import { VerHistorialComponent } from './components/ver-historial/ver-historial.component';
 import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
 import { AdministrarComponent } from './components/administrar/administrar.component';
+import { AdminModificarComponent } from './components/admin-modificar/admin-modificar.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AdministrarComponent } from './components/administrar/administrar.compo
     ValoracionesComponent,
     VerHistorialComponent,
     DetailHistorialComponent,
-    AdministrarComponent
+    AdministrarComponent,
+    AdminModificarComponent
   ],
   imports: [
     BrowserModule,
