@@ -131,4 +131,19 @@ export class CitasComponent implements OnInit {
       }
     )
   }
+
+  public finalizar(cita){
+    var citaFinalizada = new Cita('','','','','','','','','','','');
+    citaFinalizada = cita;
+    citaFinalizada.id = cita._id;
+    citaFinalizada.estado = "Finalizada";
+    this.citasService.updateCita(citaFinalizada).subscribe(
+      response=>{
+        console.log(response);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
 }

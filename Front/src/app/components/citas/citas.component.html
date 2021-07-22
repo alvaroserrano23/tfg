@@ -22,10 +22,14 @@
             <td>{{cita.direccion_consulta}}</td>
             <td>{{cita.estado}}</td>
             <td style="white-space: nowrap">
-                <div *ngIf="cita.estado == 'Pendiente' ">
+                <div *ngIf="cita.estado == 'Pendiente'">
                     <button  class="btn btn-sm btn-primary mr-1" (click)="aceptar(cita)">Aceptar</button>
                     <button class="btn btn-sm btn-danger btn-delete-user" style="margin-left: 10px;" (click)="rechazar(cita)">Rechazar</button>
                 </div>
+                <div *ngIf="cita.estado == 'Aceptada'">
+                    <button class="btn btn-sm btn-success" (click)="finalizar(cita)">Finalizar</button>
+                </div>
+
             </td>
         </tr>
         </tbody>
