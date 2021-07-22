@@ -5,7 +5,7 @@ import { PatientService } from 'src/app/services/patient.service';
 import { Global } from '../../services/global';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators , FormControl } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserAuthenticationService } from 'src/app/services/userAuthentication.service';
 import { UserAuthentication } from 'src/app/models/userAuthentication';
@@ -79,10 +79,67 @@ export class AdminModificarComponent implements OnInit {
         this.getHistorial(id);
       }
     })
+
+    //Formularios
+    this.formD = new FormGroup({
+      name: new FormControl('',Validators.required),
+      surname: new FormControl('',Validators.required),
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      province: new FormControl('',Validators.required),
+      location: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      cp: new FormControl('',[Validators.required,Validators.pattern("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}")]),
+      numColegiado: new FormControl('',[Validators.required,Validators.minLength(9)]),
+      user: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
+      especialidad: new FormControl('',Validators.required),
+      insurance: new FormControl('',Validators.required),
+      cv: new FormControl('',Validators.required)
+    });
+
+    this.formP = new FormGroup({
+      name: new FormControl('',Validators.required),
+      surname: new FormControl('',Validators.required),
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      province: new FormControl('',Validators.required),
+      location: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
+      cp: new FormControl('',[Validators.required,Validators.pattern("0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}")]),
+      user: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required),
+      insurance: new FormControl('',Validators.required)
+    });
+
+
+    this.formH = new FormGroup({
+      edad_paciente: new FormControl(''),
+      dni_paciente: new FormControl('',Validators.pattern("^[0-9]{8,8}[A-Za-z]$")),
+      fecha_nacimiento_paciente : new FormControl(''),
+      patologias_paciente: new FormControl(),
+      alergias_paciente: new FormControl (),
+      vacunas_paciente: new FormControl (),
+      tratamientos: new FormControl ()
+    });
+
   }
+  get fP() { return this.formP.controls; }
+  get fD() { return this.formD.controls; }
+  get fC() { return this.formC.controls; }
+  get fO() { return this.formO.controls; }
+  get fH() { return this.formH.controls; }
 
   borrarToken(token){
     localStorage.removeItem(token);
+  }
+
+  volver(rol){
+    localStorage.setItem('admin-'+rol,'admin-'+rol);
+    localStorage.setItem('repetido','repetido');
+    this.router.navigate(['administrar']);
   }
 
   getPatient(id){
