@@ -161,7 +161,7 @@ export class DatosComponent implements OnInit {
         this.userAuth.password = this.admin.password;
         this.userAuth.email = this.admin.email;
         this.userAuth.role = "admin";
-        this.userAuthenticationService.updateUserAuth(this.userAuth).subscribe();
+        this.userAuthenticationService.updateUser(this.userAuth).subscribe();
         this.alertService.success('Se ha modificado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate([''])
           .then(() => {
@@ -197,7 +197,7 @@ export class DatosComponent implements OnInit {
         this.userAuth.password = this.doctor.password;
         this.userAuth.email = this.doctor.email;
         this.userAuth.role = "doctor";
-        this.userAuthenticationService.updateUserAuth(this.userAuth).subscribe();
+        this.userAuthenticationService.updateUser(this.userAuth).subscribe();
         this.alertService.success('Se ha modificado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate([''])
           .then(() => {
@@ -232,14 +232,7 @@ export class DatosComponent implements OnInit {
           this.userAuth.password = this.patient.password;
           this.userAuth.email = this.patient.email;
           this.userAuth.role = "patient";
-          this.userAuthenticationService.updateUserAuth(this.userAuth).subscribe(
-            res=>{
-              console.log(res);
-            },
-            err=>{
-              console.log(err);
-            }
-          );
+          this.userAuthenticationService.updateUser(this.userAuth).subscribe();
           this.alertService.success('Se ha modificado correctamente.', { keepAfterRouteChange: true });
           this.router.navigate(['/'], { relativeTo: this.route });  
           },

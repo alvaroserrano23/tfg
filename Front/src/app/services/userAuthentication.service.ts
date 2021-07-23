@@ -8,6 +8,7 @@ import { Global } from './global';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { param } from 'jquery';
 
 @Injectable()
 export class UserAuthenticationService{
@@ -131,7 +132,12 @@ export class UserAuthenticationService{
 		return this._http.put(this.url+'userAuth-code',params,{headers: headers});
 	}
 
-	
+	updateUser(userAuth:UserAuthentication) :Observable<any>{
+		let params = JSON.stringify(userAuth);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'userAuth/'+userAuth.id,params,{headers:headers});	
+	}
 	updateUserAuth(userAuthentication:UserAuthentication) :Observable<any>{
 		let params = JSON.stringify(userAuthentication);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
