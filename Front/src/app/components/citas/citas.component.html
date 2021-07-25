@@ -1,5 +1,5 @@
 <div class="container" *ngIf="doctor">
-    <div *ngIf="citasDoctor!=0;else noCitas">
+    <div *ngIf="citasDoctor!=0;else noCitasD">
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -36,12 +36,13 @@
         </tbody>
     </table>
 </div>
-</div>
-<ng-template #noCitas>
+<ng-template #noCitasD>
     <p style="text-align: center;">Aún no tienes citas.</p>
 </ng-template>
+</div>
+
 <div class="container" *ngIf="patient">
-    <div *ngIf="citasDoctor!=0;else noCitas">
+    <div *ngIf="citasPacie!=0;else noCitasP">
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -67,7 +68,7 @@
         </tbody>
     </table>  
 </div>
-<ng-template #noCitas>
+<ng-template #noCitasP>
     Aún no tienes citas.
 </ng-template> 
 </div>
