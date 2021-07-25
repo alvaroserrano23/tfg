@@ -33,13 +33,17 @@ export class AdminModificarComponent implements OnInit {
   public opinion: Opinion;
   public historial: Historial;
   public id:String;
-  formD: FormGroup;
   formP: FormGroup;
-  formO: FormGroup;
+  formD: FormGroup;
   formC: FormGroup;
+  formO: FormGroup;
   formH: FormGroup;
   loading = false;
-  submitted = false;
+  submittedP = false;
+  submittedD = false;
+  submittedC = false;
+  submittedO = false;
+  submittedH = false;
   returnUrl: String;
   
   constructor(
@@ -61,22 +65,22 @@ export class AdminModificarComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>{
-      let id = params.id;
+       this.id = params.id;
       if(localStorage.getItem('admin') && localStorage.getItem('admin-patient')){
         this.borrarToken('admin-patient');
-        this.getPatient(id);
+        this.getPatient();
       }else if(localStorage.getItem('admin') && localStorage.getItem('admin-doctor')){
         this.borrarToken('admin-doctor');
-        this.getDoctor(id);
+        this.getDoctor();
       }else if(localStorage.getItem('admin') && localStorage.getItem('admin-cita')){
         this.borrarToken('admin-cita');
-        this.getCita(id);
+        this.getCita();
       }else if(localStorage.getItem('admin') && localStorage.getItem('admin-opinion')){
         this.borrarToken('admin-opinion');
-        this.getOpinion(id);
+        this.getOpinion();
       }else if(localStorage.getItem('admin') && localStorage.getItem('admin-historial')){
         this.borrarToken('admin-historial');
-        this.getHistorial(id);
+        this.getHistorial();
       }
     })
 
@@ -96,7 +100,7 @@ export class AdminModificarComponent implements OnInit {
       password: new FormControl('',Validators.required),
       especialidad: new FormControl('',Validators.required),
       insurance: new FormControl('',Validators.required),
-      cv: new FormControl('',Validators.required)
+      //cv: new FormControl('',Validators.required)
     });
 
     this.formP = new FormGroup({
@@ -114,6 +118,18 @@ export class AdminModificarComponent implements OnInit {
       insurance: new FormControl('',Validators.required)
     });
 
+    this.formC = new FormGroup({
+      asunto: new FormControl('',Validators.required),
+      descripcion: new FormControl('',Validators.required),
+      fecha: new FormControl('',Validators.required),
+      hora: new FormControl('',Validators.required),
+      estado: new FormControl('',)
+    });
+
+    this.formO = new FormGroup({
+      comentario: new FormControl('',Validators.required),
+      valoracion: new FormControl('',Validators.required)
+    });
 
     this.formH = new FormGroup({
       edad_paciente: new FormControl(''),
@@ -124,6 +140,7 @@ export class AdminModificarComponent implements OnInit {
       vacunas_paciente: new FormControl (),
       tratamientos: new FormControl ()
     });
+
 
   }
   get fP() { return this.formP.controls; }
@@ -142,8 +159,8 @@ export class AdminModificarComponent implements OnInit {
     this.router.navigate(['administrar']);
   }
 
-  getPatient(id){
-    this.patientService.getPatient(id).subscribe(
+  getPatient(){
+    this.patientService.getPatient(this.id).subscribe(
       response =>{
         this.patient = response.patient;
       },
@@ -153,8 +170,8 @@ export class AdminModificarComponent implements OnInit {
     )
   }
 
-  getDoctor(id){
-    this.doctorService.getDoctor(id).subscribe(
+  getDoctor(){
+    this.doctorService.getDoctor(this.id).subscribe(
       response =>{
         this.doctor = response.doctor;
       },
@@ -164,10 +181,11 @@ export class AdminModificarComponent implements OnInit {
     )
   }
 
-  getCita(id){
-    this.citaService.getCita(id).subscribe(
+  getCita(){
+    this.citaService.getCita(this.id).subscribe(
       response =>{
         this.cita = response.cita;
+        console.log(response);
       },
       error => {
         console.log(<any>error);
@@ -175,8 +193,8 @@ export class AdminModificarComponent implements OnInit {
     )
   }
 
-  getOpinion(id){
-    this.opinionService.getOpinion(id).subscribe(
+  getOpinion(){
+    this.opinionService.getOpinion(this.id).subscribe(
       response =>{
         this.opinion = response.opinion;
       },
@@ -186,8 +204,8 @@ export class AdminModificarComponent implements OnInit {
     )
   }
 
-  getHistorial(id){
-    this.historialService.getHistorial(id).subscribe(
+  getHistorial(){
+    this.historialService.getHistorial(this.id).subscribe(
       response =>{
         this.historial = response.historial;
       },
@@ -197,4 +215,143 @@ export class AdminModificarComponent implements OnInit {
     )
   }
 
+  onSubmitD(){
+    this.submittedD = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formD.invalid) {
+        return;
+    }
+    this.doctor = this.formD.value;
+    this.doctor.id = this.id;
+    this.doctorService.updateDoctor(this.doctor).subscribe(
+      res => {
+        console.log(res);
+        this.userAuth.id = this.doctor.id;
+        this.userAuth.user = this.doctor.user;
+        this.userAuth.password = this.doctor.password;
+        this.userAuth.email = this.doctor.email;
+        this.userAuth.role = "doctor";
+        this.userAuthenticationService.updateUser(this.userAuth).subscribe();
+        this.alertService.success('El doctor con id ' + this.doctor.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
+        },
+      error =>{
+        this.alertService.error(error.error.message);
+        this.loading = false;
+        }
+    );
+  }
+
+  onSubmitP(){
+    this.submittedP = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formP.invalid) {
+        return;
+    }
+    this.patient = this.formP.value;
+    this.patient.id = this.id;
+    this.patientService.updatePatient(this.patient).subscribe(
+        res => {
+          console.log(res);
+          this.userAuth.id = this.patient.id;
+          this.userAuth.user = this.patient.user;
+          this.userAuth.password = this.patient.password;
+          this.userAuth.email = this.patient.email;
+          this.userAuth.role = "patient";
+          this.userAuthenticationService.updateUser(this.userAuth).subscribe();
+          this.alertService.success('El paciente con id ' + this.patient.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate(['/'], { relativeTo: this.route });  
+          },
+        error =>{
+          this.alertService.error(error.error.message);
+          this.loading = false;
+          }
+      );
+  }
+
+  onSubmitC(){
+    this.submittedC = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formC.invalid) {
+        return;
+    }
+
+    this.cita = this.formC.value;
+    this.cita.id = this.id;
+    this.citaService.updateCita(this.cita).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('La cita con id ' + this.cita.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route }); 
+      },
+      error=>{
+        console.log(error);
+      }
+
+    )
+  }
+
+  onSubmitO(){
+    this.submittedO = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formO.invalid) {
+        return;
+    }
+
+    this.opinion = this.formO.value;
+    this.opinion.id = this.id;
+    this.opinionService.updateOpinion(this.opinion).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('La opinion con id ' + this.opinion.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route }); 
+      },
+      error=>{
+        console.log(error);
+      }
+
+    )
+  }
+
+  onSubmitH(){
+    this.submittedH = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formH.invalid) {
+        return;
+    }
+
+    this.historial = this.formH.value;
+    this.historial.id = this.id;
+    this.historialService.updateHistorial(this.historial).subscribe(
+      response=>{
+        console.log(response);
+        this.alertService.success('El historial con id ' + this.historial.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route }); 
+      },
+      error=>{
+        console.log(error);
+      }
+
+    )
+  }
 }

@@ -40,7 +40,8 @@ export class AdministrarComponent implements OnInit {
     public adminService: AdminService,
     public userAuthenticationService: UserAuthenticationService,
     public alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) 
     {
     this.url = Global.url;
@@ -101,8 +102,8 @@ export class AdministrarComponent implements OnInit {
     this.patientService.deletePatient(patient._id).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('El paciente se ha borrado correctamente.');
-        this.router.navigate(['/']);
+        this.alertService.success('El paciente se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
         console.log(error);
@@ -116,8 +117,8 @@ export class AdministrarComponent implements OnInit {
     this.doctorService.deleteDoctor(doctor._id).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('El doctor se ha borrado correctamente.');
-        this.router.navigate(['/']);
+        this.alertService.success('El doctor se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
         console.log(error);
@@ -130,8 +131,8 @@ export class AdministrarComponent implements OnInit {
     this.citaService.deletCita(cita._id).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('La cita se ha borrado correctamente.');
-        this.router.navigate(['/']);
+        this.alertService.success('La cita se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
         console.log(error);
@@ -144,8 +145,8 @@ export class AdministrarComponent implements OnInit {
     this.opinionService.deleteOpinion(opinion._id).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('La opinion se ha borrado correctamente.');
-        this.router.navigate(['/']);
+        this.alertService.success('La opinion se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
         console.log(error);
@@ -158,8 +159,8 @@ export class AdministrarComponent implements OnInit {
     this.historialService.deleteHistorial(historial._id).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('El historil se ha borrado correctamente.');
-        this.router.navigate(['/']);
+        this.alertService.success('El historil se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
         console.log(error);

@@ -48,4 +48,11 @@ export class OpinionService {
 
 		return this._http.get(this.url+'opinion/'+id,{headers:headers});
 	}
+
+	updateOpinion(opinion:Opinion) :Observable<any>{
+		let params = JSON.stringify(opinion);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'opinion/'+opinion.id,params,{headers:headers});	
+	}
 }

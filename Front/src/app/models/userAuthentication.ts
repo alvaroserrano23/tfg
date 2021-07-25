@@ -1,6 +1,6 @@
 export class UserAuthentication{
 	constructor(
-		public id:string,
+		public id:String,
 		public user:string,
 		public password:string,
 		public email:string,
