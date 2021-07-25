@@ -36,10 +36,10 @@
         </tbody>
     </table>
 </div>
-<ng-template #noCitas>
-    Aún no tienes citas.
-</ng-template>
 </div>
+<ng-template #noCitas>
+    <p style="text-align: center;">Aún no tienes citas.</p>
+</ng-template>
 <div class="container" *ngIf="patient">
     <div *ngIf="citasDoctor!=0;else noCitas">
     <table class="table table-hover">

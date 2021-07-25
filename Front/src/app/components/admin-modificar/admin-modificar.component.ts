@@ -27,6 +27,7 @@ export class AdminModificarComponent implements OnInit {
   public url: string;
   public doctor: Doctor;
   public patient: Patient;
+  public patientCita: Patient;
   public admin: Admin;
   public userAuth: UserAuthentication;
   public cita: Cita;
@@ -128,6 +129,7 @@ export class AdminModificarComponent implements OnInit {
       descripcion: new FormControl('',Validators.required),
       fecha: new FormControl('',Validators.required),
       hora: new FormControl('',Validators.required),
+      //telefono: new FormControl(''),
       estado: new FormControl('')
     });
 
@@ -180,6 +182,28 @@ export class AdminModificarComponent implements OnInit {
       }
     )
   }
+
+  /*getPatientForCita(){
+    this.citaService.getCita(this.id).subscribe(
+      response =>{
+        this.cita = response.cita;
+        this.patientService.getPatient(this.cita.id_paciente).subscribe(
+          response =>{
+            this.patientCita = response.patientCita;
+            console.log(response);
+          },
+          error => {
+            console.log(<any>error);
+          }
+        );
+
+        console.log(response);
+      },
+      error => {
+        console.log(<any>error);
+      }
+    )
+  }*/
 
   getDoctor(){
     this.doctorService.getDoctor(this.id).subscribe(
@@ -293,6 +317,7 @@ export class AdminModificarComponent implements OnInit {
           this.router.navigate(['/'], { relativeTo: this.route });  
           },
         error =>{
+          //$("#id").animate({"scrollTop": $("#id").scrollTop() + 100});
           this.alertService.error(error.error.message);
           this.loading = false;
           }
@@ -309,13 +334,13 @@ export class AdminModificarComponent implements OnInit {
     if (this.formC.invalid) {
         return;
     }
-
-    this.cita = this.formC.value;
-    this.cita.id = this.id;
-    this.citaService.updateCita(this.cita).subscribe(
+    let cita = this.formC.value;
+    cita.estado = this.cita.estado;
+    cita.id = this.id;
+    this.citaService.updateCita(cita).subscribe(
       response=>{
         console.log(response);
-        this.alertService.success('La cita con id ' + this.cita.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+        this.alertService.success('La cita con id ' + this.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate(['/'], { relativeTo: this.route }); 
       },
       error=>{

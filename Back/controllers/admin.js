@@ -1,4 +1,6 @@
 'use strict'
+var Doctor = require('../models/doctor'); //Importar modelo
+var Patient = require('../models/patient');
 var Admin = require('../models/admin');
 var UserAuthentication = require('../models/userAuthentication');
 var jwt = require('jsonwebtoken');
@@ -23,9 +25,14 @@ var controller = {
         var userAuthentication = new UserAuthentication();
 
 		//Si el user existe no lo damos de alta
-		var userA = await Admin.findOne({user : params.user});
+		var userD = await Doctor.findOne({user : params.user});
+		var userP = await Patient.findOne({user : params.user});
+		var userA = await Admin.findOne({user: params.user});
+		var emailD = await Doctor.findOne({email : params.email});
+		var emailP = await Patient.findOne({email : params.email});
+		var emailA = await Admin.findOne({email: params.email});
 
-		if(userA){
+		if(userD || userP || userA || emailD || emailP || emailA){
 			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
 		}
 		
@@ -90,6 +97,14 @@ var controller = {
 	updateAdmin: async function(req,res){
 		var adminId = req.params.id;
 		var update = req.body;
+		var adminBd = await Admin.findOne({user: update.user});
+		var adminBd2 = await Admin.findOne({email: update.email});
+
+		if(adminBd != null && adminBd.id != update.id){
+			return res.status(404).send({message:'Nombre de usuario ya en uso.'});
+		}else if(adminBd2 != null && adminBd2.id != update.id){
+			return res.status(404).send({message:'Email ya en uso.'});
+		}
 
 		Admin.findByIdAndUpdate(adminId,update, {new:true} ,(err,adminUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});

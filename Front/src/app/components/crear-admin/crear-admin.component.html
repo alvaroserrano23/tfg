@@ -53,6 +53,7 @@
 					<input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && fA.email.errors }"/>
 					<div *ngIf="submitted && fA.email.errors" class="invalid-feedback">
 						<div *ngIf="fA.email.errors.required">El email es obligatorio</div>
+                        <div *ngIf="fA.email.errors.pattern">El email es incorrecto</div>
 					</div>
 				</div>
 			</div>

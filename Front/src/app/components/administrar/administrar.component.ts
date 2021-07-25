@@ -211,6 +211,7 @@ export class AdministrarComponent implements OnInit {
     this.citas = null;
     this.opinions = null;
     this.historials = null;
+    this.admins = null;
   }
   getPatients(){
   	this.patientService.getPatients().subscribe(

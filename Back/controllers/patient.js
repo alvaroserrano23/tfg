@@ -1,6 +1,8 @@
 'use strict'
 
 var Patient = require('../models/patient'); //Importar modelo
+var Doctor = require('../models/doctor'); //Importar modelo
+var Admin = require('../models/admin');
 var UserAuthentication = require('../models/userAuthentication');
 var fs = require('fs');
 var path = require('path');
@@ -29,7 +31,12 @@ var controller = {
 		//Si el user existe no lo damos de alta
 		var userD = await Doctor.findOne({user : params.user});
 		var userP = await Patient.findOne({user : params.user});
-		if(userD || userP){
+		var userA = await Admin.findOne({user: params.user});
+		var emailD = await Doctor.findOne({email : params.email});
+		var emailP = await Patient.findOne({email : params.email});
+		var emailA = await Admin.findOne({email: params.email});
+
+		if(userD || userP || userA || emailD || emailP || emailA){
 			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
 		}
 		
@@ -43,7 +50,7 @@ var controller = {
 		patient.address = params.address;
 		patient.cp = params.cp;
 		patient.insurance = params.insurance;
-		patient.imagen = params.imagen;
+		patient.imagen = 'perfil1.png';
 		patient.telefono = params.telefono;
 
 		patient.save(async (err,patientGuardado) =>{
@@ -95,9 +102,17 @@ var controller = {
 		})
 	},
 
-	updatePatient: function(req,res){
+	updatePatient: async function(req,res){
 		var patientId = req.params.id;
 		var update = req.body;
+		var userA = await Patient.findOne({user : update.user});
+		var userB = await Patient.findOne({email : update.email});
+
+		if(userA != null && userA.id != update.id){
+			return res.status(404).send({message:'Nombre de usuario ya en uso'});
+		}else if(userB != null && userB.id != update.id){
+			return res.status(404).send({message:'Email ya en uso'});
+		} 
 		if(req.body.telefono != undefined){
 			delete update.password;
 		}
@@ -124,7 +139,7 @@ var controller = {
 	},
 
 	uploadImage: function(req,res){
-		var doctorId = req.params.id;
+		var patientId = req.body._id;
 		var fileName = 'Imagen no subida...';
 
 		if(req.files){
@@ -135,12 +150,12 @@ var controller = {
 			var fileExt = extSplit[1];
 
 			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
-			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
+			Patient.findByIdAndUpdate(patientId,{image:fileName},{new:true},(err,patientUpdated)=>{
 				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
 				
-				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});
+				if(!patientUpdated) return res.status(404).send({message:'El paciente no existe y no se ha asignado imagen'});
 				return res.status(200).send({
-					doctor: doctorUpdated
+					patient: patientUpdated
 				});
 			});
 			}else{

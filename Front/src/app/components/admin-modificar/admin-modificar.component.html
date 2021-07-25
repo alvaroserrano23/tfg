@@ -307,7 +307,7 @@
 
               <!--<div class="col-12 form-group">
                   <label for="telefono" class="form-label">Telefono (Opcional)</label>
-                  <input type="text"  maxlength = "9" formControlName="telefono" class="form-control"  placeholder="623 10 82 36" [ngClass]="{ 'is-invalid': submitted && fC.telefono.errors }" [ngModel]="cita.telefono"/>
+                  <input type="text"  maxlength = "9" formControlName="telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && fC.telefono.errors }" [ngModel]="patientCita.telefono"/>
                   <div *ngIf="submitted && fC.telefono.errors" class="invalid-feedback">
                       <div *ngIf="fC.telefono.errors.pattern">El telefono no es correcto.</div>
                   </div>

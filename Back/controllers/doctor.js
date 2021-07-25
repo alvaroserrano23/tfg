@@ -1,12 +1,14 @@
 'use strict'
 var Doctor = require('../models/doctor'); //Importar modelo
 var Patient = require('../models/patient');
+var Admin = require('../models/admin');
 var UserAuthentication = require('../models/userAuthentication');
 
 var jwt = require('jsonwebtoken');
 var fs = require('fs');
 var path = require('path');
 const doctor = require('../models/doctor');
+const admin = require('../models/admin');
 
 var controller = {
 
@@ -27,10 +29,15 @@ var controller = {
 		var userAuthentication = new UserAuthentication();
 		var params = req.body;
 
-		//Si el user existe no lo damos de alta
+		//Si el user/email existe no lo damos de alta
 		var userD = await Doctor.findOne({user : params.user});
 		var userP = await Patient.findOne({user : params.user});
-		if(userD || userP){
+		var userA = await Admin.findOne({user: params.user});
+		var emailD = await Doctor.findOne({email : params.email});
+		var emailP = await Patient.findOne({email : params.email});
+		var emailA = await Admin.findOne({email: params.email});
+
+		if(userD || userP || userA || emailD || emailP || emailA){
 			return res.status(404).send({message:"El usuario " +"'"+ params.user +"'"+ " ya existe"});
 		}
 		
@@ -69,7 +76,7 @@ var controller = {
 
 			const token = await jwt.sign({_id: userAuthentication._id}, 'secretkey');
 			
-			return res.status(200).json({token});
+			return res.status(200).json({doctorGuardado});
 			
 		});
 
@@ -107,6 +114,15 @@ var controller = {
 		var update = req.body;
 		var doctorBd = await Doctor.findById(doctorId);
 
+		var userA = await Doctor.findOne({user : update.user});
+		var userB = await Doctor.findOne({email : update.email});
+
+		if(userA != null && userA.id != update.id){
+			return res.status(404).send({message:'Nombre de usuario ya en uso'});
+		}else if(userB != null && userB.id != update.id){
+			return res.status(404).send({message:'Email ya en uso'});
+		} 
+
 		if(req.body.numOpiniones > doctorBd.numOpiniones){
 			delete update.password;
 		}
@@ -136,6 +152,39 @@ var controller = {
 	uploadImage: function(req,res){
 		var doctorId = req.params.id;
 		var fileName = 'Imagen no subida...';
+
+		if(req.files){
+			var filePath = req.files.imagen.path;
+			var fileSplit = filePath.split('\\');
+			var fileName = fileSplit[1];
+			var extSplit = fileName.split('.');
+			var fileExt = extSplit[1];
+
+			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
+			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
+				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
+				
+				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});
+				return res.status(200).send({
+					doctor: doctorUpdated
+				});
+			});
+			}else{
+				fs.unlink(filePath,(err)=>{
+					return res.status(200).send({message: 'La extension no es valida'});
+				});
+			} 
+
+		}else{
+			return res.status(200).send({
+				message: fileName
+			})
+		}
+	},
+
+	uploadCv: function(req,res){
+		var doctorId = req.params.id;
+		var fileName = 'CV no subido...';
 
 		if(req.files){
 			var filePath = req.files.imagen.path;
