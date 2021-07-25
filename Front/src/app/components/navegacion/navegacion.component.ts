@@ -67,4 +67,9 @@ export class NavegacionComponent implements OnInit {
     this.comprobarRepetido();
   }
 
+  admins(){
+    localStorage.setItem('admin-admins','admin-admins');
+    this.comprobarRepetido();
+  }
+
 }

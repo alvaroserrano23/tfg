@@ -64,6 +64,9 @@ export class AdministrarComponent implements OnInit {
     }else if(localStorage.getItem('admin-historiales')){
       this.getHistoriales();
       localStorage.removeItem('admin-historiales');
+    }else if(localStorage.getItem('admin-admins')){
+      this.getAdmins();
+      localStorage.removeItem('admin-admins');
     }
   }
 
@@ -97,11 +100,24 @@ export class AdministrarComponent implements OnInit {
     this.router.navigate(['admin-modificar-historial/'+historial._id]);
   }
   
+  modificarAdmin(admin){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('admin-admin','admin-admin');
+    this.router.navigate(['admin-modificar-admin/'+admin._id]); 
+  }
+
+  addAdmin(){
+    localStorage.removeItem('repetido');
+    localStorage.setItem('nuevo-admin','nuevo-admin');
+    this.router.navigate(['crear-admin/']);
+  }
+
   eliminarPatient(patient){
     localStorage.removeItem('repetido');
     this.patientService.deletePatient(patient._id).subscribe(
       response=>{
         console.log(response);
+        this.userAuthenticationService.deleteUserAuth(patient._id).subscribe;
         this.alertService.success('El paciente se ha borrado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate(['/'], { relativeTo: this.route });  
       },
@@ -117,6 +133,7 @@ export class AdministrarComponent implements OnInit {
     this.doctorService.deleteDoctor(doctor._id).subscribe(
       response=>{
         console.log(response);
+        this.userAuthenticationService.deleteUserAuth(doctor._id).subscribe;
         this.alertService.success('El doctor se ha borrado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate(['/'], { relativeTo: this.route });  
       },
@@ -160,6 +177,21 @@ export class AdministrarComponent implements OnInit {
       response=>{
         console.log(response);
         this.alertService.success('El historil se ha borrado correctamente.', { keepAfterRouteChange: true });
+        this.router.navigate(['/'], { relativeTo: this.route });  
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  eliminarAdmin(admin){
+    localStorage.removeItem('repetido');
+    this.adminService.deleteAdmin(admin._id).subscribe(
+      response=>{
+        console.log(response);
+        this.userAuthenticationService.deleteUserAuth(admin._id).subscribe;
+        this.alertService.success('El admin se ha borrado correctamente.', { keepAfterRouteChange: true });
         this.router.navigate(['/'], { relativeTo: this.route });  
       },
       error=>{
@@ -242,6 +274,20 @@ export class AdministrarComponent implements OnInit {
   			if(response.historials){
   				this.historials = response.historials;
           console.log(this.historials);
+  			}
+  		},
+  		error => {
+  			console.log(<any>error);
+  		}
+  	);
+  }
+
+  getAdmins(){
+    this.adminService.getAdmins().subscribe(
+  		response => {
+  			if(response.admins){
+  				this.admins = response.admins;
+          console.log(this.admins);
   			}
   		},
   		error => {

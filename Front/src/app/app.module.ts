@@ -35,6 +35,7 @@ import { VerHistorialComponent } from './components/ver-historial/ver-historial.
 import { DetailHistorialComponent } from './components/detail-historial/detail-historial.component';
 import { AdministrarComponent } from './components/administrar/administrar.component';
 import { AdminModificarComponent } from './components/admin-modificar/admin-modificar.component';
+import { CrearAdminComponent } from './components/crear-admin/crear-admin.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AdminModificarComponent } from './components/admin-modificar/admin-modi
     VerHistorialComponent,
     DetailHistorialComponent,
     AdministrarComponent,
-    AdminModificarComponent
+    AdminModificarComponent,
+    CrearAdminComponent
   ],
   imports: [
     BrowserModule,

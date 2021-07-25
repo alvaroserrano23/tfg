@@ -17,7 +17,7 @@ export class AdminService {
 		this.url = Global.url;
 	}
 
-  getAdmins(){
+  	getAdmins(){
 		return this._http.get<any>(this.url+'/admins');
 	}
 
@@ -39,6 +39,11 @@ export class AdminService {
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 
 		return this._http.post(this.url+'save-admin',params,{headers:headers});
+	}
+
+	deleteAdmin(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'admin/'+id,{headers:headers});
 	}
 
   makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string){

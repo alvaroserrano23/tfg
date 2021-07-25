@@ -476,3 +476,65 @@
     </div>
 
   </div>
+
+  <!--Admin-->
+  <div class="container" *ngIf="admin">
+	<div class="py-5 text-center">
+	  <h2>Datos de la cuenta</h2>
+	</div>
+
+	<div class="row g-5">
+	  
+	  <div class=" ">
+		<h4 class="mb-3">Datos personales</h4>
+		<hr class="my-4">
+		<form [formGroup]="formA"  (ngSubmit)="onSubmitA()">
+			
+			<div class="row g-3">
+				<div class="col-sm-6 form-group">
+					<label for="name" class="form-label">Nombre</label>
+					<input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submittedA && fA.name.errors }" [(ngModel)]="admin.name"/>
+					<div *ngIf="submittedA && fA.name.errors" class="invalid-feedback">
+						<div *ngIf="fA.name.errors.required">El nombre es obligatorio.</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 form-group">
+					<label for="surname" class="form-label">Apellidos</label>
+					<input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submittedA && fA.surname.errors }" [(ngModel)]="admin.surname"/>
+					<div *ngIf="submittedA && fA.surname.errors" class="invalid-feedback">
+						<div *ngIf="fA.surname.errors.required">Los apellidos son obligatorios.</div>
+					</div>
+				</div>
+			
+				<div class="col-12 form-group">
+					<label for="user" class="form-label">Usuario</label>
+					<div class="input-group">
+					<span class="input-group-text">@</span>
+					<input type="text" formControlName="user" class="form-control" [ngClass]="{ 'is-invalid': submittedA && fA.user.errors }" [(ngModel)]="admin.user"/>
+					<div *ngIf="submittedA && fA.user.errors" class="invalid-feedback">
+						<div *ngIf="fA.user.errors.required">El usuario es obligatorio.</div>
+					</div>
+					</div>
+				</div> 
+
+				<div class="col-12 form-group">
+					<label for="email" class="form-label">Email</label>
+					<input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submittedA && fA.email.errors }" [(ngModel)]="admin.email"/>
+					<div *ngIf="submittedA && fA.email.errors" class="invalid-feedback">
+						<div *ngIf="fA.email.errors.required">El email es obligatorio</div>
+					</div>
+				</div>
+			</div>
+
+
+		  <br>
+			<div class="row justify-content-md-center">
+				<div class="col-md-1"><button type="button" class="btn btn-primary" (click)="volver('admins')">Volver</button></div>
+				<div class="col-md-1"><button type="submit" class="btn btn-primary" >Guardar</button></div>
+			</div>
+		</form>
+	  </div>
+	</div>
+
+</div>

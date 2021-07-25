@@ -38,12 +38,14 @@ export class AdminModificarComponent implements OnInit {
   formC: FormGroup;
   formO: FormGroup;
   formH: FormGroup;
+  formA: FormGroup;
   loading = false;
   submittedP = false;
   submittedD = false;
   submittedC = false;
   submittedO = false;
   submittedH = false;
+  submittedA = false;
   returnUrl: String;
   
   constructor(
@@ -81,6 +83,9 @@ export class AdminModificarComponent implements OnInit {
       }else if(localStorage.getItem('admin') && localStorage.getItem('admin-historial')){
         this.borrarToken('admin-historial');
         this.getHistorial();
+      }else if(localStorage.getItem('admin') && localStorage.getItem('admin-admin')){
+        this.borrarToken('admin-admin');
+        this.getAdmin();
       }
     })
 
@@ -123,7 +128,7 @@ export class AdminModificarComponent implements OnInit {
       descripcion: new FormControl('',Validators.required),
       fecha: new FormControl('',Validators.required),
       hora: new FormControl('',Validators.required),
-      estado: new FormControl('',)
+      estado: new FormControl('')
     });
 
     this.formO = new FormGroup({
@@ -141,6 +146,12 @@ export class AdminModificarComponent implements OnInit {
       tratamientos: new FormControl ()
     });
 
+    this.formA = new FormGroup({
+      name: new FormControl('',Validators.required),
+      surname: new FormControl('',Validators.required),
+      user: new FormControl('',Validators.required),
+      email: new FormControl('',Validators.required),
+    });
 
   }
   get fP() { return this.formP.controls; }
@@ -212,6 +223,17 @@ export class AdminModificarComponent implements OnInit {
       error => {
         console.log(<any>error);
       }
+    )
+  }
+
+  getAdmin(){
+    this.adminService.getAdmin(this.id).subscribe(
+      response =>{
+        this.admin = response.admin;
+      },
+      error => {
+        console.log(<any>error);
+      } 
     )
   }
 
@@ -353,5 +375,37 @@ export class AdminModificarComponent implements OnInit {
       }
 
     )
+  }
+
+  onSubmitA(){
+    this.submittedA = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formA.invalid) {
+        return;
+    }
+    this.admin = this.formA.value;
+    this.admin.id = this.id;
+    this.adminService.updateAdmin(this.admin).subscribe(
+        res => {
+          console.log(res);
+          this.userAuth.id = this.admin.id;
+          this.userAuth.user = this.admin.user;
+          this.userAuth.password = this.admin.password;
+          this.userAuth.email = this.admin.email;
+          this.userAuth.role = "admin";
+          this.userAuthenticationService.updateUser(this.userAuth).subscribe();
+          this.alertService.success('El admin con id ' + this.admin.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate(['/'], { relativeTo: this.route });  
+          },
+        error =>{
+          this.alertService.error(error.error.message);
+          console.log(error);
+          this.loading = false;
+          }
+      );
   }
 }

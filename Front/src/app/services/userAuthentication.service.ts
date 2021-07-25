@@ -145,4 +145,9 @@ export class UserAuthenticationService{
 		return this._http.put(this.url+'updateUserAuth',params,{headers:headers});	
 	}
 
+	deleteUserAuth(id){
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+		return this._http.delete(this.url+'userAuth/'+id,{headers:headers});
+	}
+
 }
