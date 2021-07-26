@@ -11,7 +11,7 @@
         </div>
           <!--<input type="text" class="form-control" name="filterDoctorPrecioConsulta" placeholder="Especialidad..." [(ngModel)]="filterDoctorPrecioConsulta">-->
         <div class="col-sm-3 form-group">
-          <input type="text" class="form-control" name="filterDoctorLocalidad" placeholder="Localidad..." [(ngModel)]="filterDoctorLocalidad">
+          <input type="text" class="form-control" name="filterDoctorComunidad" placeholder="Localidad..." [(ngModel)]="filterDoctorComunidad">
         </div>
         <div class="col-sm-3 form-group">
           <input type="text" class="form-control" name="filterDoctorProvincia" placeholder="Provincia..." [(ngModel)]="filterDoctorProvincia">
@@ -25,7 +25,7 @@
             <tr>
               <th>Nombre</th>
               <th>Especialidad</th>
-              <th>Localidad</th>
+              <th>Comunidad Autónoma</th>
               <th>Provincia</th>
               
             </tr>
@@ -34,11 +34,11 @@
             <tr *ngFor="let doctor of doctors | filtroNombre:filterDoctorNombre 
                                               | filtroEspecialidad:filterDoctorEspecialidad 
                                               
-                                              | filtroLocalidad:filterDoctorLocalidad
+                                              | filterComunidad:filterDoctorComunidad
                                               | filtroProvincia:filterDoctorProvincia">
               <td>{{doctor.name}} {{doctor.surname}}</td>
               <td>{{doctor.especialidad}}</td>
-              <td>{{doctor.location}}</td>
+              <td>{{doctor.comunidad}}</td>
               <td>{{doctor.province}}</td>
               
             </tr>

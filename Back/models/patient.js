@@ -10,7 +10,7 @@ var PatientSchema = Schema({
 	email:String,
 	password:String,
 	province:String,
-	location:String,
+	comunidad:String,
 	address:String,
 	cp:String,
 	insurance:String,

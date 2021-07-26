@@ -15,7 +15,7 @@ export class BuscarComponent implements OnInit {
   filterDoctorNombre = '';
   filterDoctorEspecialidad = '';
   filterDoctorPrecioConsulta = '';
-  filterDoctorLocalidad = '';
+  filterDoctorComunidad = '';
   filterDoctorProvincia = '';
   doctors = [];
 

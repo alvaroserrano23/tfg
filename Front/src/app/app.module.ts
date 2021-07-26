@@ -40,8 +40,8 @@ import { BuscarComponent } from './components/buscar/buscar.component';
 import { FiltroNombrePipe } from './pipes/filtro-nombre.pipe';
 import { FiltroEspecialidadPipe } from './pipes/filtro-especialidad.pipe';
 import { FiltroPrecioPipe } from './pipes/filtro-precio.pipe';
-import { FiltroLocalidadPipe } from './pipes/filtro-localidad.pipe';
 import { FiltroProvinciaPipe } from './pipes/filtro-provincia.pipe';
+import { FiltroComunidadPipe } from './pipes/filtro-comunidad.pipe';
 
 @NgModule({
   declarations: [
@@ -73,8 +73,8 @@ import { FiltroProvinciaPipe } from './pipes/filtro-provincia.pipe';
     FiltroNombrePipe,
     FiltroEspecialidadPipe,
     FiltroPrecioPipe,
-    FiltroLocalidadPipe,
-    FiltroProvinciaPipe
+    FiltroProvinciaPipe,
+    FiltroComunidadPipe
   ],
   imports: [
     BrowserModule,

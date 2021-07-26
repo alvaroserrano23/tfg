@@ -122,7 +122,7 @@ export class PedirCitaComponent implements OnInit {
     this.cita.id_paciente = this.patient.id;
     this.cita.nombre_doctor = this.doctor.name + " " + this.doctor.surname;
     this.cita.nombre_paciente = this.patient.name + " " + this.patient.surname; 
-    this.cita.direccion_consulta = this.doctor.address+","+this.doctor.location+","+this.doctor.province;
+    this.cita.direccion_consulta = this.doctor.address+","+this.doctor.comunidad+","+this.doctor.province;
     //telefono
     if(this.form.value.telefono != undefined){
       this.patientService.updatePatient(this.patient).subscribe();

@@ -71,10 +71,10 @@
 				</div>
 
 				<div class="col-6 form-group">
-					<label for="location" class="form-label">Localidad</label>
-					<input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submittedD && fD.location.errors }" [(ngModel)]="doctor.location"/>
-					<div *ngIf="submittedD && fD.location.errors"class="invalid-feedback">
-						<div *ngIf="fD.location.errors.required">La localidad es obligatoria.</div>
+					<label for="comunidad" class="form-label">Comunidad Autónoma</label>
+					<input type="text" formControlName="comunidad" class="form-control" [ngClass]="{ 'is-invalid': submittedD && fD.comunidad.errors }" [(ngModel)]="doctor.comunidad"/>
+					<div *ngIf="submittedD && fD.comunidad.errors"class="invalid-feedback">
+						<div *ngIf="fD.comunidad.errors.required">La comunidad es obligatoria.</div>
 					</div>
 				</div>
 			
@@ -218,10 +218,10 @@
 			</div>
 
 			<div class="col-6 form-group">
-				<label for="location" class="form-label">Localidad</label>
-				<input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submittedP && fP.location.errors }" [ngModel]="patient.location"/>
-				<div *ngIf="submittedP && fP.location.errors"class="invalid-feedback">
-					<div *ngIf="fP.location.errors.required">La localidad es obligatoria.</div>
+				<label for="comunidad" class="form-label">Comunidad Autónoma</label>
+				<input type="text" formControlName="comunidad" class="form-control" [ngClass]="{ 'is-invalid': submittedP && fP.comunidad.errors }" [ngModel]="patient.comunidad"/>
+				<div *ngIf="submittedP && fP.comunidad.errors"class="invalid-feedback">
+					<div *ngIf="fP.comunidad.errors.required">La localidad es obligatoria.</div>
 				</div>
 			</div>
 		
