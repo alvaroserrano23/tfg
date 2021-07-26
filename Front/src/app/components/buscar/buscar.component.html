@@ -1,33 +1,50 @@
 <div class="container">
     <div class="py-5 text-center">
-        <h2>Búsqueda por Nombre</h2>
+        <h2>Búsqueda parametrizable</h2>
         <hr class="my-4">
-    <div>
     <div class="row">
-      <div class="col">
-        <div class="form-group">
-          <input type="text" class="form-control" name="filterDoctor" placeholder="Search..." [(ngModel)]="filterDoctor">
+      <div class="col-sm-3 form-group">
+          <input type="text" class="form-control" name="filterDoctorNombre" placeholder="Nombre..." [(ngModel)]="filterDoctorNombre">
         </div>
-      </div>
+        <div class="col-sm-3 form-group">
+          <input type="text" class="form-control" name="filterDoctorEspecialidad" placeholder="Especialidad..." [(ngModel)]="filterDoctorEspecialidad">
+        </div>
+          <!--<input type="text" class="form-control" name="filterDoctorPrecioConsulta" placeholder="Especialidad..." [(ngModel)]="filterDoctorPrecioConsulta">-->
+        <div class="col-sm-3 form-group">
+          <input type="text" class="form-control" name="filterDoctorLocalidad" placeholder="Localidad..." [(ngModel)]="filterDoctorLocalidad">
+        </div>
+        <div class="col-sm-3 form-group">
+          <input type="text" class="form-control" name="filterDoctorProvincia" placeholder="Provincia..." [(ngModel)]="filterDoctorProvincia">
+        </div>
     </div>
+    <br>
     <div class="row">
       <div class="col">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Nombre</th>
               <th>Especialidad</th>
+              <th>Localidad</th>
+              <th>Provincia</th>
+              
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let doctor of doctors ">
-              <td>{{doctor._id}}</td>
-              <td>{{doctor.name}}</td>
+            <tr *ngFor="let doctor of doctors | filtroNombre:filterDoctorNombre 
+                                              | filtroEspecialidad:filterDoctorEspecialidad 
+                                              
+                                              | filtroLocalidad:filterDoctorLocalidad
+                                              | filtroProvincia:filterDoctorProvincia">
+              <td>{{doctor.name}} {{doctor.surname}}</td>
               <td>{{doctor.especialidad}}</td>
+              <td>{{doctor.location}}</td>
+              <td>{{doctor.province}}</td>
+              
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+  </div>
   </div>

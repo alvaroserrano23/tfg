@@ -57,9 +57,7 @@ const appRoutes : Routes = [
 	{path: 'admin-modificar-historial/:id',component:AdminModificarComponent},
 	{path: 'admin-modificar-admin/:id',component:AdminModificarComponent},
 	{path: 'crear-admin',component:CrearAdminComponent},
-	{path: 'buscar-por-nombre',component:BuscarComponent},
-	{path: 'buscar-por-especialidad',component:BuscarComponent},
-	{path: 'buscar-por-precio-consulta',component:BuscarComponent},
+	{path: 'buscar',component:BuscarComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

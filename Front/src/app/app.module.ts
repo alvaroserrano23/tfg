@@ -37,7 +37,11 @@ import { AdministrarComponent } from './components/administrar/administrar.compo
 import { AdminModificarComponent } from './components/admin-modificar/admin-modificar.component';
 import { CrearAdminComponent } from './components/crear-admin/crear-admin.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
-import { FilterPipe } from './pipes/filter.pipe';
+import { FiltroNombrePipe } from './pipes/filtro-nombre.pipe';
+import { FiltroEspecialidadPipe } from './pipes/filtro-especialidad.pipe';
+import { FiltroPrecioPipe } from './pipes/filtro-precio.pipe';
+import { FiltroLocalidadPipe } from './pipes/filtro-localidad.pipe';
+import { FiltroProvinciaPipe } from './pipes/filtro-provincia.pipe';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,11 @@ import { FilterPipe } from './pipes/filter.pipe';
     AdminModificarComponent,
     CrearAdminComponent,
     BuscarComponent,
-    FilterPipe
+    FiltroNombrePipe,
+    FiltroEspecialidadPipe,
+    FiltroPrecioPipe,
+    FiltroLocalidadPipe,
+    FiltroProvinciaPipe
   ],
   imports: [
     BrowserModule,
