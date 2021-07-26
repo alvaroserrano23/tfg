@@ -23,6 +23,7 @@ import { DetailHistorialComponent } from './components/detail-historial/detail-h
 import { AdministrarComponent } from './components/administrar/administrar.component';
 import { AdminModificarComponent } from './components/admin-modificar/admin-modificar.component';
 import { CrearAdminComponent } from './components/crear-admin/crear-admin.component';
+import { BuscarComponent } from './components/buscar/buscar.component';
 
 //Rutas
 const appRoutes : Routes = [
@@ -56,6 +57,9 @@ const appRoutes : Routes = [
 	{path: 'admin-modificar-historial/:id',component:AdminModificarComponent},
 	{path: 'admin-modificar-admin/:id',component:AdminModificarComponent},
 	{path: 'crear-admin',component:CrearAdminComponent},
+	{path: 'buscar-por-nombre',component:BuscarComponent},
+	{path: 'buscar-por-especialidad',component:BuscarComponent},
+	{path: 'buscar-por-precio-consulta',component:BuscarComponent},
 	{path: '**' , component : ErrorComponent}
 
 ];

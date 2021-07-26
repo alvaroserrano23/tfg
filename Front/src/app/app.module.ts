@@ -36,6 +36,8 @@ import { DetailHistorialComponent } from './components/detail-historial/detail-h
 import { AdministrarComponent } from './components/administrar/administrar.component';
 import { AdminModificarComponent } from './components/admin-modificar/admin-modificar.component';
 import { CrearAdminComponent } from './components/crear-admin/crear-admin.component';
+import { BuscarComponent } from './components/buscar/buscar.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { CrearAdminComponent } from './components/crear-admin/crear-admin.compon
     DetailHistorialComponent,
     AdministrarComponent,
     AdminModificarComponent,
-    CrearAdminComponent
+    CrearAdminComponent,
+    BuscarComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

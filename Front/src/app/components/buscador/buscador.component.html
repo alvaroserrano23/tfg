@@ -68,7 +68,7 @@
         <div class="collapse navbar-collapse justify-content-md-center" >
         <form class="d-flex w-50 me-3">
           <input class="form-control me-2" type="search" placeholder="¿En busca del profesional sanitario a tu gusto?" aria-label="Search">
-          <button type="button" class="btn btn-outline-primary">Buscar</button>
+          <button type="button" class="btn btn-outline-primary" id="boton_buscar">Buscar</button>
         </form>
       </div>
     </div>
@@ -88,3 +88,17 @@
     </div>
     </div>
 </ng-template>
+<!--Buscadores-->
+<div class="row justify-content-center" id="buscadores">
+  <div class="col-md-1">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/buscar-por-nombre']">Buscar por nombre médico</button>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/buscar-por-especialidad']">Buscar por especialidad</button>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/buscar-por-precio-consulta']">Buscar por precio consulta</button>
+  </div>
+</div>
+
+

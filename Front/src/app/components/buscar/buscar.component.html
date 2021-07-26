@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>Búsqueda por Nombre</h2>
+        <hr class="my-4">
+    <div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input type="text" class="form-control" name="filterDoctor" placeholder="Search..." [(ngModel)]="filterDoctor">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Especialidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doctor of doctors ">
+              <td>{{doctor._id}}</td>
+              <td>{{doctor.name}}</td>
+              <td>{{doctor.especialidad}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

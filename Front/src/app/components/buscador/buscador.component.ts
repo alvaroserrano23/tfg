@@ -28,7 +28,11 @@ export class BuscadorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-  }
 
+    /*$("#button_buscar").click(function(e){
+      $("#myCarousel").hide(500);
+      $("#buscador").hide(500);
+      $("#buscadores").show();
+    });*/
+  }
 }
