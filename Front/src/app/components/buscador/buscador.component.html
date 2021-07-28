@@ -63,6 +63,7 @@
     </button>
   </div>
   <!--Buscador-->
+  <div *ngIf="!userLogged.especialidad">
   <nav class="navbar navbar-expand-lg navbar-light bg-light" id="buscador">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-md-center" >
@@ -73,6 +74,7 @@
       </div>
     </div>
   </nav>
+  </div>
 </div>
 
 <ng-template #noAdmin>

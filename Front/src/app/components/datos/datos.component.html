@@ -214,10 +214,10 @@
 			</div>
 
 			<div class="col-6 form-group">
-				<label for="comunidad" class="form-label">Localidad</label>
+				<label for="comunidad" class="form-label">Comunidad Autónoma</label>
 				<input type="text" formControlName="comunidad" class="form-control" [ngClass]="{ 'is-invalid': submitted && fP.comunidad.errors }" [ngModel]="patient.comunidad"/>
 				<div *ngIf="submitted && fP.comunidad.errors"class="invalid-feedback">
-					<div *ngIf="fP.comunidad.errors.required">La localidad es obligatoria.</div>
+					<div *ngIf="fP.comunidad.errors.required">La comunidad es obligatoria.</div>
 				</div>
 			</div>
 		

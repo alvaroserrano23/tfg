@@ -101,9 +101,9 @@
 
 				<div class="col-6 form-group">
 					<label for="comunidad" class="form-label">Comunidad Autónoma</label>
-					<input type="text" formControlName="comunidad" class="form-control" placeholder="Salamanca" [ngClass]="{ 'is-invalid': submitted && fD.comunidad.errors }"/>
+					<input type="text" formControlName="comunidad" class="form-control" placeholder="Castilla y León" [ngClass]="{ 'is-invalid': submitted && fD.comunidad.errors }"/>
 					<div *ngIf="submitted && fD.comunidad.errors"class="invalid-feedback">
-						<div *ngIf="fD.comunidad.errors.required">La localidad es obligatoria.</div>
+						<div *ngIf="fD.comunidad.errors.required">La comunidad es obligatoria.</div>
 					</div>
 				</div>
 			
@@ -256,9 +256,9 @@
 
 			<div class="col-6 form-group">
 				<label for="comunidad" class="form-label">Comunidad Autónoma</label>
-				<input type="text" formControlName="comunidad" class="form-control" placeholder="Salamanca" [ngClass]="{ 'is-invalid': submitted && fP.comunidad.errors }"/>
+				<input type="text" formControlName="comunidad" class="form-control" placeholder="Castilla y León" [ngClass]="{ 'is-invalid': submitted && fP.comunidad.errors }"/>
 				<div *ngIf="submitted && fP.comunidad.errors"class="invalid-feedback">
-					<div *ngIf="fP.comunidad.errors.required">La localidad es obligatoria.</div>
+					<div *ngIf="fP.comunidad.errors.required">La comunidad es obligatoria.</div>
 				</div>
 			</div>
 		
