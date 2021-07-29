@@ -17,6 +17,8 @@ export class BuscarComponent implements OnInit {
   filterDoctorPrecioConsulta = '';
   filterDoctorComunidad = '';
   filterDoctorProvincia = '';
+  filterDoctorAseguradora = '';
+  filterDoctorValoracion = '';
   doctors = [];
 
   ngOnInit(): void {

@@ -3,18 +3,24 @@
         <h2>Búsqueda parametrizable</h2>
         <hr class="my-4">
     <div class="row">
-      <div class="col-sm-3 form-group">
+      <div class="col-sm-2 form-group">
           <input type="text" class="form-control" name="filterDoctorNombre" placeholder="Nombre..." [(ngModel)]="filterDoctorNombre">
         </div>
-        <div class="col-sm-3 form-group">
+        <div class="col-sm-2 form-group">
           <input type="text" class="form-control" name="filterDoctorEspecialidad" placeholder="Especialidad..." [(ngModel)]="filterDoctorEspecialidad">
         </div>
           <!--<input type="text" class="form-control" name="filterDoctorPrecioConsulta" placeholder="Especialidad..." [(ngModel)]="filterDoctorPrecioConsulta">-->
-        <div class="col-sm-3 form-group">
+        <div class="col-sm-2 form-group">
           <input type="text" class="form-control" name="filterDoctorComunidad" placeholder="Comunidad..." [(ngModel)]="filterDoctorComunidad">
         </div>
-        <div class="col-sm-3 form-group">
+        <div class="col-sm-2 form-group">
           <input type="text" class="form-control" name="filterDoctorProvincia" placeholder="Provincia..." [(ngModel)]="filterDoctorProvincia">
+        </div>
+        <div class="col-sm-2 form-group">
+          <input type="text" class="form-control" name="filterDoctorAseguradora" placeholder="Aseguradora..." [(ngModel)]="filterDoctorAseguradora">
+        </div>
+        <div class="col-sm-2 form-group">
+          <input type="text" class="form-control" name="filterDoctorValoracion" placeholder="Valoración..." [(ngModel)]="filterDoctorValoracion">
         </div>
     </div>
     <br>
@@ -27,19 +33,24 @@
               <th>Especialidad</th>
               <th>Comunidad Autónoma</th>
               <th>Provincia</th>
+              <th>Aseguradora</th>
+              <th>Valoración</th>
               
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let doctor of doctors | filtroNombre:filterDoctorNombre 
                                               | filtroEspecialidad:filterDoctorEspecialidad 
-                                              
                                               | filtroComunidad:filterDoctorComunidad
-                                              | filtroProvincia:filterDoctorProvincia">
+                                              | filtroProvincia:filterDoctorProvincia
+                                              | filtroAseguradora:filterDoctorAseguradora
+                                              | filtroValoracion:filterDoctorValoracion">
               <td>{{doctor.name}} {{doctor.surname}}</td>
               <td>{{doctor.especialidad}}</td>
               <td>{{doctor.comunidad}}</td>
               <td>{{doctor.province}}</td>
+              <td>{{doctor.insurance}}</td>
+              <td>{{doctor.valoracion_media}}</td>
               
             </tr>
           </tbody>

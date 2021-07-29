@@ -34,14 +34,12 @@
 				<table class="table table-hover" >
 					<thead class="thead-dark">
 					<tr>
-						<th scope="col">Paciente</th>
 						<th scope="col">Comentario</th>
 						<th scope="col">Valoración</th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr *ngFor="let opinion of opinions">
-						<th scope="row">{{opinion.nombre_patient}}</th>
 						<td>{{opinion.comentario}}</td>
 						<td>{{opinion.valoracion}} / 5</td>
 					</tr>

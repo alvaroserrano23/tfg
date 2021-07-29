@@ -25,6 +25,7 @@ export class OpinarComponent implements OnInit {
   public patient: Patient;
   public mail:Mail;
   currentRate = 0;
+  opiniones = [];
 
   constructor(
     private doctorService: DoctorService,
@@ -43,6 +44,7 @@ export class OpinarComponent implements OnInit {
     this.route.params.subscribe(params =>{
       let id = params.id;
       this.getDoctor(id);
+      this.getOpinionesByIdDoctor(id);
       if(localStorage.getItem('token')){
         var patientId = JSON.parse(localStorage.getItem('patient'));
         this.patient = patientId;
@@ -57,6 +59,17 @@ export class OpinarComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
+  getOpinionesByIdDoctor(id){
+    this.opinionService.getOpinionsByIdDoctor(id).subscribe(
+      response=>{
+        console.log(response);
+        this.opiniones = response.opinions;
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
   getDoctor(id){
     this.doctorService.getDoctor(id).subscribe(
       response =>{
@@ -67,6 +80,15 @@ export class OpinarComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+
+  calcularMediaValoraciones(){
+    var suma=0;
+    for(let i = 0 ;i<this.opiniones.length;i++){
+      suma = suma + this.opiniones[i].valoracion;
+    }
+    suma = suma + this.opinion.valoracion;
+    this.doctor.valoracion_media = suma / this.doctor.numOpiniones;
   }
 
   async onSubmit(){
@@ -86,6 +108,7 @@ export class OpinarComponent implements OnInit {
     this.opinion.nombre_patient = this.patient.name+ " " + this.patient.surname;
     this.opinion.nombre_doctor = this.doctor.name + " " + this.doctor.surname;
     this.doctor.numOpiniones += 1;
+    this.calcularMediaValoraciones();
     this.patient.numOpiniones += 1;
     
     this.opinionService.saveOpinion(this.opinion).subscribe(
@@ -99,7 +122,7 @@ export class OpinarComponent implements OnInit {
         //Update patient
         this.patientService.updatePatient(this.patient).subscribe();
         //Doctor
-        this.mail.message = "<p>Hola " + this.opinion.nombre_doctor + " el paciente "+this.opinion.nombre_patient+ " ,ha dado su opinión sobre ti.</p><ul><li><b>Comentario:</b> "+this.opinion.comentario+"</li><li><b>Valoración:</b> "+this.opinion.valoracion+"</li>";
+        this.mail.message = "<p>Hola " + this.opinion.nombre_doctor + " , has recibido una nueva opinión con los siguientes datos:</p><ul><li><b>Comentario:</b> "+this.opinion.comentario+"</li><li><b>Valoración:</b> "+this.opinion.valoracion+"</li>"+"<p>Puedes verla con mayor detalle iniciando sesión en Find Your Doctor</p>";
         this.mail.to = this.doctor.email;
         this.mailService.sendEmail(this.mail).subscribe();
         //Update al doctor

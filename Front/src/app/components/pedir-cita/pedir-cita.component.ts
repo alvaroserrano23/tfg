@@ -19,7 +19,7 @@ import { CitasService } from 'src/app/services/citas.service';
   selector: 'app-pedir-cita',
   templateUrl: './pedir-cita.component.html',
   styleUrls: ['./pedir-cita.component.css'],
-  providers: [PatientService,DoctorService,UserAuthenticationService,AlertService,MailService]
+  providers: [PatientService,DoctorService,UserAuthenticationService,MailService]
 })
 export class PedirCitaComponent implements OnInit {
   
@@ -48,7 +48,7 @@ export class PedirCitaComponent implements OnInit {
        
     this.patient = new Patient('','','','','','','','','','','',0,'','','');
 
-    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','');
+    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','',0);
     
     this.userAuthentication = new UserAuthentication('','','','','','','');
       
