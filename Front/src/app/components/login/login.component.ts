@@ -12,6 +12,7 @@ import { MailService } from 'src/app/services/mail.service';
 import { Mail } from 'src/app/models/mail';
 import { error } from 'jquery';
 import { first } from 'rxjs/operators';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
     private patientService: PatientService,
     private doctorService: DoctorService,
     private UserAuthenticationService: UserAuthenticationService,
+    private adminService: AdminService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -156,7 +158,7 @@ export class LoginComponent implements OnInit {
         $("#container_newpass").show();
       },
       err=>{
-        this.alertService.error(err.message);
+        this.alertService.error(err.error.message);
       }
     )
     
@@ -180,12 +182,21 @@ export class LoginComponent implements OnInit {
             console.log(res);
           },
           err=>{
-            console.log(err);
+            console.log(err.error.message);
           }
 
         )
       }else if(this.userAuthRecuperacion.role == "doctor"){
         this.doctorService.updateDoctorUserAuth(this.userAuthRecuperacion).subscribe(
+          res=>{
+            console.log(res);
+          },
+          err=>{
+            this.alertService.error(err.error.message);
+          }
+        )
+      }else if(this.userAuthRecuperacion.role == "admin"){
+        this.adminService.updateAdminUserAuth(this.userAuthRecuperacion).subscribe(
           res=>{
             console.log(res);
           },

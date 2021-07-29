@@ -3,6 +3,7 @@ import { Global } from './global';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Admin } from '../models/admin';
+import { UserAuthentication } from '../models/userAuthentication';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,13 @@ export class AdminService {
 	deleteAdmin(id){
 		let headers = new HttpHeaders().set('Content-Type','application/json');
 		return this._http.delete(this.url+'admin/'+id,{headers:headers});
+	}
+
+	updateAdminUserAuth(userAuthentication:UserAuthentication) : Observable<any>{
+		let params = JSON.stringify(userAuthentication);
+		let headers = new HttpHeaders().set('Content-Type','application/json');
+
+		return this._http.put(this.url+'updateAdminUserAuth',params,{headers:headers});		
 	}
 
   makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string){

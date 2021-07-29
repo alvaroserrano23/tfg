@@ -143,6 +143,21 @@ var controller = {
 		});
 	},
 
+	updateAdminUserAuth: async function(req,res){
+		var params = req.body;
+		var admin = await Admin.findOne({id:params.id});
+		admin.password = params.password;
+		
+		Admin.findByIdAndUpdate(admin.id,admin, {new:true} ,(err,adminUpdated)=>{
+			if(err) return res.status(500).send({message:'Error al actualizar'});
+
+			if(!adminUpdated) return res.status(404).send({message:'No existe el admin para actualizar'});
+
+			return res.status(200).send({admin:adminUpdated});
+		});
+
+	},
+
 	uploadImage: function(req,res){
 		var adminId = req.params.id;
 		var fileName = 'Imagen no subida...';
