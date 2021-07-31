@@ -51,6 +51,11 @@
               <td>{{doctor.province}}</td>
               <td>{{doctor.insurance}}</td>
               <td>{{doctor.valoracion_media}}</td>
+              <td style="white-space: nowrap">
+                <div>
+                    <button  class="btn btn-sm btn-primary mr-1" [routerLink]="['/doctor', doctor._id]">Ver ficha</button>
+                </div>
+            </td>
               
             </tr>
           </tbody>
