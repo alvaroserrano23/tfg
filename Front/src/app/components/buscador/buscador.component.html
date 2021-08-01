@@ -63,7 +63,11 @@
     </button>
   </div>
   <!--Buscador-->
-  
+  <div class="row justify-content-center" id="buscadores" *ngIf="!userLogged || !userLogged.especialidad">
+    <div class="col-md-1">
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['/buscar']">Búsqueda parametrizable</button>
+    </div>
+  </div>
 </div>
 
 <ng-template #noAdmin>
@@ -80,10 +84,5 @@
     </div>
 </ng-template>
 <!--Buscadores-->
-<div class="row justify-content-center" id="buscadores">
-  <div class="col-md-1">
-    <button type="button" class="btn btn-outline-primary" [routerLink]="['/buscar']">Búsqueda parametrizable</button>
-  </div>
-</div>
 
 
