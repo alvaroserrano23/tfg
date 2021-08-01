@@ -111,6 +111,17 @@ var controller = {
 		})
 	},
 
+	getDoctorsValidados: function(req,res){
+
+		Doctor.find({cv_validado:true}).exec((err,doctors) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!doctors) return res.status(404).send({message: 'No hay doctores que mostrar'});
+
+			return res.status(200).send({doctors});
+		})
+	},
+
 	updateDoctor: async function(req,res){
 		var doctorId = req.params.id;
 		var update = req.body;
