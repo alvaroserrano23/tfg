@@ -124,7 +124,10 @@
 						<div class="col-md-3">
 						<label for="cv" class="form-label">Curriculum</label>
 						<input type="file">
-                        {{doctor.cv}}
+						<a href="{{url+'get-cv/'+doctor.cv}}" download="{{doctor.name + doctor.surname}} CV">
+							{{doctor.cv}}
+						</a>
+						
 						<!--<div class="invalid-feedback">
 							Por favor,introduce un curriculum.
 						</div>-->

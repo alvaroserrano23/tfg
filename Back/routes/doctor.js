@@ -6,7 +6,7 @@ var DoctorController = require('../controllers/doctor');
 var router = express.Router();
 
 var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart({uploadDir:'./uploads'});
+var multipartMiddleware = multipart({uploadDir:'./cvs'});
 
 router.get('/home',DoctorController.home);
 router.post('/test',DoctorController.test);
@@ -15,7 +15,8 @@ router.get('/doctor/:id?',DoctorController.getDoctor); //Obtener un doctor de la
 router.get('/doctors',DoctorController.getDoctors); //Obtener un listado de los doctores de la BD
 router.put('/doctor/:id',DoctorController.updateDoctor); //Actualizar un doctor de la BD
 router.delete('/doctor/:id',DoctorController.deleteDoctor); //Eliminar un doctor de la BD
-router.post('/upload-image/:id',DoctorController.uploadImage);
+router.post('/upload-image/:id',multipartMiddleware,DoctorController.uploadImage);
 router.get('/get-image/:image',DoctorController.getImageFile);
+router.get('/get-cv/:cv',DoctorController.getCVFile);
 router.put('/updateDoctorUserAuth',DoctorController.updateDoctorUserAuth);
 module.exports = router;

@@ -15,7 +15,8 @@
 				<p><b>Especialidad:</b> {{doctor.especialidad}}</p>
 				<p><b>Nº Colegiado:</b> {{doctor.numColegiado}}</p>
 				<p><b>Aseguradora:</b> {{doctor.insurance}}</p>
-				<p><b>CV:</b> {{doctor.cv}}</p>
+				<p><b>CV:</b> <a href="{{url+'get-cv/'+doctor.cv}}" download="{{doctor.name + doctor.surname}} CV">{{doctor.cv}}
+				</a></p>
 				
 			</div>
 		</div>

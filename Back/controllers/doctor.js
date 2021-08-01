@@ -231,6 +231,21 @@ var controller = {
 		});
 	},
 
+	getCVFile: function(req,res){
+		var file = req.params.cv;
+		var path_file = './cvs/'+file;
+
+		fs.exists(path_file,(exists)=>{
+			if(exists){
+				return res.sendFile(path.resolve(path_file));
+			}else{
+				return res.status(200).send({
+					message: "No existe el CV..."
+				})
+			}
+		});
+	},
+
 	updateDoctorUserAuth: async function(req,res){
 		var params = req.body;
 		var doctor = await Doctor.findOne({id:params.id});
