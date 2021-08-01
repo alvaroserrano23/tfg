@@ -4,6 +4,7 @@ import { Doctor } from '../../models/doctor';
 import { Patient } from '../../models/patient';
 import { Admin } from 'src/app/models/admin';
 import { Router } from '@angular/router';
+import { Global } from '../../services/global';
 
 @Component({
   selector: 'app-navegacion',
@@ -15,6 +16,7 @@ export class NavegacionComponent implements OnInit {
   public doctorLogged: Doctor;
   public patientLogged: Patient;
   public adminLogged: Admin;
+  public url: string;
 
   constructor(public userAuthenticationService: UserAuthenticationService,private router: Router) { 
     
@@ -25,7 +27,8 @@ export class NavegacionComponent implements OnInit {
     }else if(this.userAuthenticationService.userValueA != null){
       this.adminLogged = this.userAuthenticationService.userValueA;
     }
-    
+
+    this.url = Global.url;
   }
 
   ngOnInit(): void {

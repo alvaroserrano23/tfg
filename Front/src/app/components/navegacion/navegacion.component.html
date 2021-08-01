@@ -7,31 +7,31 @@
       </div>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="''">
         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark">Médicos</a></li>
-        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
-        <li><a [routerLink]="['/sobre-nosotros']" class="nav-link px-2 link-dark" >Sobre nosotros</a></li>
+        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark"><img src="assets/img/medico_icon.png" style="height: 30px;width: 30px;">Médicos</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" ><img src="assets/img/contacto_icon.png" style="height: 30px;width: 30px;">Contacto</a></li>
+        <li><a [routerLink]="['/sobre-nosotros']" class="nav-link px-2 link-dark" ><img src="assets/img/sobre-nosotros_icon.png" style="height: 30px;width: 30px;">Sobre nosotros</a></li>
       </ul>
       <!--Paciente-->
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'patientLogged'">
         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark">Médicos</a></li>
-        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
-        <li><a [routerLink]="['/dar-opinion']" class="nav-link px-2 link-dark" >Dar opinion</a></li>
+        <li><a [routerLink]="['/medicos']" class="nav-link px-2 link-dark"><img src="assets/img/medico_icon.png" style="height: 30px;width: 30px;">Médicos</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" ><img src="assets/img/contacto_icon.png" style="height: 30px;width: 30px;">Contacto</a></li>
+        <li><a [routerLink]="['/dar-opinion']" class="nav-link px-2 link-dark" ><img src="assets/img/opinar_icon.png" style="height: 30px;width: 30px;">Dar opinion</a></li>
       </ul>
       <!--Doctor-->
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'doctorLogged'">
         <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
-        <li><a [routerLink]="['/historials-doctor' , doctorLogged._id]" class="nav-link px-2 link-dark">Historial médico pacientes</a></li>
-        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" >Contacto</a></li>
-        <li><a [routerLink]="['/valoraciones', doctorLogged._id]" class="nav-link px-2 link-dark" >Valoraciones</a></li>
+        <li><a [routerLink]="['/historials-doctor' , doctorLogged._id]" class="nav-link px-2 link-dark"><img src="assets/img/historial_icon.png" style="height: 30px;width: 30px;">Historial médico pacientes</a></li>
+        <li><a [routerLink]="['/contacto']" class="nav-link px-2 link-dark" ><img src="assets/img/contacto_icon.png" style="height: 30px;width: 30px;">Contacto</a></li>
+        <li><a [routerLink]="['/valoraciones', doctorLogged._id]" class="nav-link px-2 link-dark" ><img src="assets/img/valoracion_icon.png" style="height: 30px;width: 30px;">Valoraciones</a></li>
       </ul>
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" *ngSwitchCase="'adminLogged'">
-        <li><a style="cursor: pointer;" (click)="pacientes()" class="nav-link px-2 link-secondary">Pacientes</a></li>
-        <li><a style="cursor: pointer;" (click)="doctors()" class="nav-link px-2 link-secondary">Médicos</a></li>
-        <li><a style="cursor: pointer;" (click)="citas()" class="nav-link px-2 link-secondary">Citas</a></li>
-        <li><a style="cursor: pointer;" (click)="opiniones()" class="nav-link px-2 link-secondary">Opiniones</a></li>
-        <li><a style="cursor: pointer;" (click)="historiales()" class="nav-link px-2 link-secondary">Historiales</a></li>
-        <li><a style="cursor: pointer;" (click)="admins()" class="nav-link px-2 link-secondary">Admins</a></li>
+        <li><a style="cursor: pointer;" (click)="pacientes()" class="nav-link px-2 link-secondary"><img src="assets/img/pacientes_icon.png" style="height: 30px;width: 30px;">Pacientes</a></li>
+        <li><a style="cursor: pointer;" (click)="doctors()" class="nav-link px-2 link-secondary"><img src="assets/img/medico_icon.png" style="height: 30px;width: 30px;">Médicos</a></li>
+        <li><a style="cursor: pointer;" (click)="citas()" class="nav-link px-2 link-secondary"><img src="assets/img/cita_icon.png" style="height: 30px;width: 30px;">Citas</a></li>
+        <li><a style="cursor: pointer;" (click)="opiniones()" class="nav-link px-2 link-secondary"><img src="assets/img/valoracion_icon.png" style="height: 30px;width: 30px;">Opiniones</a></li>
+        <li><a style="cursor: pointer;" (click)="historiales()" class="nav-link px-2 link-secondary"><img src="assets/img/historial_icon.png" style="height: 30px;width: 30px;">Historiales</a></li>
+        <li><a style="cursor: pointer;" (click)="admins()" class="nav-link px-2 link-secondary"><img src="assets/img/admin_icon.png" style="height: 30px;width: 30px;">Admins</a></li>
       </ul>
       
       <!--Paciente-->
@@ -42,7 +42,7 @@
           </div>
           <div class="nav-item dropdown" *ngSwitchCase="'patientLogged'">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
-              {{patientLogged.user}}
+              <img src="{{url+'get-image/'+patientLogged.imagen}}" style="border-radius: 100%;padding-right: 1px; height: 50px;width: 50px;"/>{{patientLogged.user}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
               <li><a class="dropdown-item" [routerLink]="['/perfil-patient', patientLogged._id]">Ver perfil</a></li>
@@ -54,7 +54,7 @@
           <!--Doctor-->
           <div class="nav-item dropdown" *ngSwitchCase="'doctorLogged'">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
-              {{doctorLogged.user}}
+              <img src="{{url+'get-image/'+doctorLogged.imagen}}" style="border-radius: 100%;padding-right: 1px; height: 50px;width: 50px;"/>{{doctorLogged.user}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
               <li><a class="dropdown-item" [routerLink]="['/perfil-doctor', doctorLogged._id]">Ver perfil</a></li>
@@ -66,7 +66,7 @@
           <!--Admin-->
           <div class="nav-item dropdown" *ngSwitchCase="'adminLogged'">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: left;">
-              {{adminLogged.user}}
+              <img src="{{url+'get-image/'+adminLogged.imagen}}" style="border-radius: 100%;padding-right: 1px; height: 50px;width: 50px;"/>{{adminLogged.user}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown01">
               <li><a class="dropdown-item" [routerLink]="['/perfil-admin', adminLogged._id]">Ver perfil</a></li>

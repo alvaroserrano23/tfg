@@ -104,7 +104,11 @@
             <td>{{cita.nombre_paciente}}</td>
             <td>{{cita.fecha}}</td>
             <td>{{cita.hora}}</td>
-            <td>{{cita.estado}}</td>
+            <td *ngIf="cita.estado == 'Rechazada'"><a style="color: red;">{{cita.estado}}</a></td>
+            <td *ngIf="cita.estado == 'Pendiente'"><a style="color: grey;">{{cita.estado}}</a></td>
+            <td *ngIf="cita.estado == 'Aceptada'"><a style="color:green;">{{cita.estado}}</a></td>
+            <td *ngIf="cita.estado == 'Finalizada'"><a style="color: blue;">{{cita.estado}}</a></td>
+
             <td style="white-space: nowrap">
                 <div>
                     <button  class="btn btn-sm btn-primary mr-1" (click)="modificarCita(cita)">Modificar</button>
