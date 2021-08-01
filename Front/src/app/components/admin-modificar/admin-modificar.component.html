@@ -138,6 +138,7 @@
             <div class="row justify-content-md-center">
 				<div class="col-md-1"><button type="button" class="btn btn-primary" (click)="volver('doctors')">Volver</button></div>
 				<div class="col-md-1"><button type="submit" class="btn btn-primary" >Guardar</button></div>
+				<div class="col-md-1" *ngIf="!doctor.cv_validado"><button type="button" class="btn btn-success" (click)="validarCV(doctor)">ValidarCV</button></div>
 			</div>
 			</form>
 		</div>

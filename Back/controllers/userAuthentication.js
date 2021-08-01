@@ -43,13 +43,18 @@ var controller = {
 				return res.status(200).send({patient});
 
 		}else if(userAuthentication.role == "doctor"){
-			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
-				var doctor = new Doctor();
-				doctor = await Doctor.findOne({user: params.user});
+			var doctor = new Doctor();
+			doctor = await Doctor.findOne({user: params.user});
+			if(user.password !== params.password){ 
+				return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});
+			}else if(doctor.cv_validado == false){
+				return res.status(401).send({message:'El usuario no está dado de alta'});
+			}else{
+				
 				doctor.token = jwt.sign({_id:doctor._id},'secret_key');
-
 				console.log(doctor);
 				return res.status(200).send({doctor});
+			}
 
 		}else if(userAuthentication.role == "admin"){
 			if(user.password !== params.password) return res.status(401).send({message:'La contraseña o el usuario son incorrectos'});

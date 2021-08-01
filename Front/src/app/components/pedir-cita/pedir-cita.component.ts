@@ -48,7 +48,7 @@ export class PedirCitaComponent implements OnInit {
        
     this.patient = new Patient('','','','','','','','','','','',0,'','','');
 
-    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','',0);
+    this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','',0,false);
     
     this.userAuthentication = new UserAuthentication('','','','','','','');
       

@@ -20,7 +20,8 @@ var DoctorSchema = Schema({
 	imagen:String,
 	especialidad:String,
 	token:String,
-	valoracion_media:Number
+	valoracion_media:Number,
+	cv_validado:Boolean
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

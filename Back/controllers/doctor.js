@@ -58,6 +58,7 @@ var controller = {
 		doctor.numOpiniones = params.numOpiniones;
 		doctor.imagen = 'perfil1.png';
 		doctor.valoracion_media = 0;
+		doctor.cv_validado = false;
 		
 		
 		doctor.save(async (err,doctorGuardado) =>{

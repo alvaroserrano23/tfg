@@ -17,7 +17,8 @@ export class Doctor{
 		public imagen:string,
 		public especialidad:string,
 		public token:string,
-		public valoracion_media:number
+		public valoracion_media:number,
+		public cv_validado:boolean
 		){
 		
 	}

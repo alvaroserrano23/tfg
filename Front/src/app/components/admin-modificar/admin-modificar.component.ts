@@ -162,6 +162,20 @@ export class AdminModificarComponent implements OnInit {
   get fO() { return this.formO.controls; }
   get fH() { return this.formH.controls; }
 
+  validarCV(doctor){
+    doctor.cv_validado = true;
+    doctor.id = doctor._id;
+    this.doctorService.updateDoctor(doctor).subscribe(
+      response=>{
+        console.log(response);
+        this.volver('doctors');
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
   borrarToken(token){
     localStorage.removeItem(token);
   }
