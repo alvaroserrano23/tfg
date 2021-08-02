@@ -17,11 +17,20 @@ var controller = {
 
 	saveCita: async function(req,res){
         var cita = new Cita();
+		var horas_disponibles = ['16:45','17:25','18:00','21:23'];
 		var params = req.body;
-        var cita_bd = await Cita.findOne({fecha : params.fecha , hora : params.hora});
+		var message1;
+        var cita_bd = await Cita.findOne({fecha : params.fecha , hora : params.hora, id_doctor: params.id_doctor});
 
 		if(cita_bd){
-			return res.status(404).send({message:"Ya existe una cita con esa fecha y esa hora"});
+			for(let i=0;i<horas_disponibles.length;i++){
+				if(cita_bd.hora == horas_disponibles[i]){
+					horas_disponibles[i] == ''
+				}
+			}
+			message1="Ya existe una cita con esa fecha y esa hora. *Sugerencias:"+horas_disponibles[0]+","+horas_disponibles[1]+","+horas_disponibles[2]+","+horas_disponibles[3];
+
+			return res.status(404).send({message:message1});
 		}
         
 	
@@ -31,6 +40,8 @@ var controller = {
         cita.id_doctor = params.id_doctor;
 		cita.nombre_doctor = params.nombre_doctor;
 		cita.nombre_paciente = params.nombre_paciente;
+		cita.email_doctor = params.email_doctor;
+		cita.email_paciente = params.email_paciente;
         cita.fecha = params.fecha;
         cita.hora = params.hora;
         cita.direccion_consulta = params.direccion_consulta;

@@ -7,6 +7,8 @@ export class Cita{
         public id_doctor:String,
         public nombre_doctor:String,
         public nombre_paciente:String,
+        public email_doctor:String,
+        public email_paciente:String,
         public fecha:String,
         public hora:String,
         public direccion_consulta:String,

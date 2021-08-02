@@ -31,7 +31,7 @@ export class HistorialComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
     ) { 
-      this.patient = new Patient('','','','','','','','','','','',0,'','','');
+      this.patient = new Patient('','','','','','','','','','','',0,'','');
     }
 
   ngOnInit(): void {

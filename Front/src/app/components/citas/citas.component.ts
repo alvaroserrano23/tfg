@@ -103,7 +103,7 @@ export class CitasComponent implements OnInit {
   }
 
   public aceptar(cita){
-    var citaAceptada = new Cita('','','','','','','','','','','');
+    var citaAceptada = new Cita('','','','','','','','','','','','','');
     citaAceptada = cita;
     citaAceptada.id = cita._id;
     citaAceptada.estado = "Aceptada";
@@ -118,7 +118,7 @@ export class CitasComponent implements OnInit {
   }
 
   public rechazar(cita){
-    var citaRechazada = new Cita('','','','','','','','','','','');
+    var citaRechazada = new Cita('','','','','','','','','','','','','');
     citaRechazada = cita;
     citaRechazada.id = cita._id;
     citaRechazada.estado = "Rechazada";
@@ -133,7 +133,7 @@ export class CitasComponent implements OnInit {
   }
 
   public finalizar(cita){
-    var citaFinalizada = new Cita('','','','','','','','','','','');
+    var citaFinalizada = new Cita('','','','','','','','','','','','','');
     citaFinalizada = cita;
     citaFinalizada.id = cita._id;
     citaFinalizada.estado = "Finalizada";

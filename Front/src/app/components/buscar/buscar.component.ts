@@ -26,7 +26,7 @@ export class BuscarComponent implements OnInit {
   }
 
   getDoctors(){
-    this.doctorService.getDoctors().subscribe(
+    this.doctorService.getDoctorsValidados().subscribe(
   		response => {
   			if(response.doctors){
   				this.doctors = response.doctors;

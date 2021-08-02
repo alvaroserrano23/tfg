@@ -113,9 +113,6 @@ var controller = {
 		}else if(userB != null && userB.id != update.id){
 			return res.status(404).send({message:'Email ya en uso'});
 		} 
-		if(req.body.telefono != undefined){
-			delete update.password;
-		}
 		Patient.findByIdAndUpdate(patientId,update, {new:true} ,(err,patientUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});
 

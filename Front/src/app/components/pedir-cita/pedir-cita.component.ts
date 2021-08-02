@@ -33,6 +33,8 @@ export class PedirCitaComponent implements OnInit {
   public cita:Cita;
   patientId: Patient;
   form: FormGroup;
+  public no_disponible:boolean = false;
+  citasNoDisponibles = [];
 
   constructor(
     private patientService: PatientService,
@@ -44,9 +46,9 @@ export class PedirCitaComponent implements OnInit {
     private alertService: AlertService,
     private mailService: MailService) {
 
-    this.cita = new Cita('','','','','','','','','','','');
+    this.cita = new Cita('','','','','','','','','','','','','');
        
-    this.patient = new Patient('','','','','','','','','','','',0,'','','');
+    this.patient = new Patient('','','','','','','','','','','',0,'','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','',0,false);
     
@@ -73,14 +75,14 @@ export class PedirCitaComponent implements OnInit {
       asunto: new FormControl('',Validators.required),
       descripcion: new FormControl('',Validators.required),
       fecha: new FormControl('',Validators.required),
-      hora: new FormControl('',Validators.required),
-      telefono: new FormControl('',Validators.pattern("(\|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}"))
+      hora: new FormControl('',Validators.required)
     });
     
   }
 
   get f() { return this.form.controls; }
 
+  
   getDoctor(id){
     this.doctorService.getDoctor(id).subscribe(
       response =>{
@@ -104,6 +106,7 @@ export class PedirCitaComponent implements OnInit {
     )
 
   }
+  
 
   async onSubmit(){
     this.submitted = true;
@@ -115,18 +118,18 @@ export class PedirCitaComponent implements OnInit {
     if (this.form.invalid) {
         return;
     }
+
     this.cita = this.form.value;
-    this.patient.telefono = this.form.value.telefono;
     this.cita.estado = "Pendiente";
     this.cita.id_doctor = this.doctor.id;
     this.cita.id_paciente = this.patient.id;
     this.cita.nombre_doctor = this.doctor.name + " " + this.doctor.surname;
+    this.cita.email_doctor = this.doctor.email;
+    this.cita.email_paciente = this.patient.email;
     this.cita.nombre_paciente = this.patient.name + " " + this.patient.surname; 
     this.cita.direccion_consulta = this.doctor.address+","+this.doctor.comunidad+","+this.doctor.province;
-    //telefono
-    if(this.form.value.telefono != undefined){
-      this.patientService.updatePatient(this.patient).subscribe();
-    }
+    
+    
     this.citaService.saveCita(this.cita).subscribe(
       res => {
         console.log(res);
@@ -146,6 +149,7 @@ export class PedirCitaComponent implements OnInit {
         this.router.navigate(['/citas-patient',this.patient.id], { relativeTo: this.route });  
         },
       error =>{
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }

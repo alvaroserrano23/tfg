@@ -57,11 +57,12 @@
 			
 				<div class="col-sm-6 form-group">
 					<label for="fecha" class="form-label">Fecha</label>
-					<input type="date" formControlName="fecha" class="form-control"  min="01-01-1940" max="01-01-2003" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }"/>
+					<input type="date" formControlName="fecha" class="form-control"  min="02-08-2021" [ngClass]="{ 'is-invalid': submitted && f.fecha.errors }"/>
 					<div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
 						<div *ngIf="f.fecha.errors.required">La fecha es obligatoria</div>
 					</div>
 				</div>
+
 
 				<div class="col-sm-6 form-group">
 					<label for="hora" class="form-label">Hora</label>
@@ -70,14 +71,6 @@
 						<div *ngIf="submitted && f.hora.errors" class="invalid-feedback">
 							<div *ngIf="f.hora.errors.required">La hora es obligatoria.</div>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-12 form-group">
-					<label for="telefono" class="form-label">Telefono (Opcional)</label>
-					<input type="text"  maxlength = "9" formControlName="telefono" class="form-control"  placeholder="623 10 82 36" [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
-					<div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
-						<div *ngIf="f.telefono.errors.pattern">El telefono no es correcto.</div>
 					</div>
 				</div>
 			</div>
