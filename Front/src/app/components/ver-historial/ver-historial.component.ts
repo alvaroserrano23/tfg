@@ -56,6 +56,7 @@ export class VerHistorialComponent implements OnInit {
           });
       },
       error=>{
+        window.scrollTo(0,-10000);
         console.log(error);
         this.alertService.error(error.error.message);
       }

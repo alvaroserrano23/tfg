@@ -123,6 +123,7 @@ export class AdministrarComponent implements OnInit {
       },
       error=>{
         console.log(error);
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
       }
     )

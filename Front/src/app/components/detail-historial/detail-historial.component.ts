@@ -84,6 +84,7 @@ export class DetailHistorialComponent implements OnInit {
           this.router.navigate(['/historials-doctor/'+this.historial.id_doctor], { relativeTo: this.route });  
           },
         error =>{
+          window.scrollTo(0,-10000);
           this.alertService.error(error.error.message);
           console.log(error);
           }

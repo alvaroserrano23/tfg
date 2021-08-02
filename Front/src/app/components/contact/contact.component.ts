@@ -74,6 +74,7 @@ export class ContactComponent implements OnInit {
                     
       },
       error =>{
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }

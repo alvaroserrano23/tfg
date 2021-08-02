@@ -157,6 +157,7 @@ export class RegisterComponent implements OnInit {
          
         },
       error =>{
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }
@@ -188,6 +189,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login'], { relativeTo: this.route });  
           },
         error =>{
+          window.scrollTo(0,-10000);
           this.alertService.error(error.error.message);
           this.loading = false;
           }

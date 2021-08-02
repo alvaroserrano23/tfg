@@ -78,6 +78,7 @@ export class CrearAdminComponent implements OnInit {
         this.router.navigate(['']);
         },
       error =>{
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }

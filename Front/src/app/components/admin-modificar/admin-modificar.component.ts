@@ -300,6 +300,7 @@ export class AdminModificarComponent implements OnInit {
         this.router.navigate(['/'], { relativeTo: this.route });  
         },
       error =>{
+        window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }
@@ -332,6 +333,7 @@ export class AdminModificarComponent implements OnInit {
           },
         error =>{
           //$("#id").animate({"scrollTop": $("#id").scrollTop() + 100});
+          window.scrollTo(0,-10000);
           this.alertService.error(error.error.message);
           this.loading = false;
           }
@@ -441,6 +443,7 @@ export class AdminModificarComponent implements OnInit {
           this.router.navigate(['/'], { relativeTo: this.route });  
           },
         error =>{
+          window.scrollTo(0,-10000);
           this.alertService.error(error.error.message);
           console.log(error);
           this.loading = false;

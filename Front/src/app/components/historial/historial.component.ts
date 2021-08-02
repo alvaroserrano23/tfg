@@ -88,6 +88,7 @@ export class HistorialComponent implements OnInit {
           this.router.navigate(['/ver-historial/'+this.doctor.id]);
           },
         error =>{
+          window.scrollTo(0,-10000);
           this.alertService.error(error.error.message);
           console.log(error);
           this.loading = false;
