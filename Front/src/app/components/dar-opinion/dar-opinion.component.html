@@ -25,5 +25,6 @@
     </div>
   </div>
   <ng-template #noDoctores>
-    <p style="text-align: center;">No has tenido ninguna cita con ningún doctor por lo que no puedes opinar.</p>
+    <p style="text-align: center;">No tienes doctores sobre los que opinar.</p>
+    <p style="text-align: center;">Si deseas consultar tus opiniones haz click <a [routerLink]="['/perfil-patient', patient.id]">aquí</a></p>
   </ng-template>
