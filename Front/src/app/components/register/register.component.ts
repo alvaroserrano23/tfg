@@ -57,6 +57,8 @@ export class RegisterComponent implements OnInit {
     this.patient = new Patient('','','','','','','','','','','',0,'','');
 
     this.doctor = new Doctor('','','','','','','','','','','','','',0,'','','',0,false);
+    
+    this.mail = new Mail('','','','','','','');
 
    }
  
@@ -141,19 +143,21 @@ export class RegisterComponent implements OnInit {
     this.doctor.numOpiniones = 0;
     this.doctorService.saveDoctor(this.doctor).subscribe(
       response => {
-        if(response){
-          //this.doctorService.makeFileRequest(Global.url+"upload-image/"+response.doctorGuardado._id, [], this.filesToUpload, 'image')
-          //.then((result:any) => {
-            this.mail.to = this.doctor.email;
-            this.mail.type = "registroD";
-            this.mail.message = "<h1>Hola <b>" + this.doctor.name + this.doctor.surname +"</b> te has registrado correctamente en FindYourDoctor!</h1><p>Ya puedes disfrutar de todos nuestros servicios:</p><ul><li>Búsquedas parametrizables</li><li>Gestión de citas online</li><li>Sistema de opiniones</li><li>Y mucho más</li></ul>";
-            this.mailService.sendEmail(this.mail).subscribe();
-            this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
-            this.router.navigate(['/login'], { relativeTo: this.route }); 
-          //});
+        if(response.doctorGuardado){
+          if(this.filesToUpload){
+            this.doctorService.makeFileRequest(Global.url+"upload-cv/"+response.doctorGuardado._id,[],this.filesToUpload,'cv')
+              .then((result:any)=>{
+
+                this.doctor = result.doctor;
+                this.mail.to = this.doctor.email;
+                this.mail.type = "registroD";
+                this.mail.message = "<h1>Hola <b>" + this.doctor.name + this.doctor.surname +"</b> te has registrado correctamente en FindYourDoctor!</h1><p>Ya puedes disfrutar de todos nuestros servicios:</p><ul><li>Búsquedas parametrizables</li><li>Gestión de citas online</li><li>Sistema de opiniones</li><li>Y mucho más</li></ul>";
+                this.mailService.sendEmail(this.mail).subscribe();
+                this.alertService.success('Se ha registrado correctamente.', { keepAfterRouteChange: true });
+                this.router.navigate(['/login'], { relativeTo: this.route });
+              });
+          }
         }
-        /*localStorage.setItem('token',res.token);
-        localStorage.setItem('doctor',JSON.stringify(this.doctor));*/
          
         },
       error =>{

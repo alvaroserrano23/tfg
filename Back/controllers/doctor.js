@@ -200,17 +200,17 @@ var controller = {
 		var fileName = 'CV no subido...';
 
 		if(req.files){
-			var filePath = req.files.imagen.path;
+			var filePath = req.files.cv.path;
 			var fileSplit = filePath.split('\\');
 			var fileName = fileSplit[1];
 			var extSplit = fileName.split('.');
 			var fileExt = extSplit[1];
 
-			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
-			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
-				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
+			if(fileExt == 'pdf' || fileExt == 'doc' || fileExt == 'docx'){
+			Doctor.findByIdAndUpdate(doctorId,{cv:fileName},{new:true},(err,doctorUpdated)=>{
+				if(err) return res.status(200).send({message: 'El CV no se ha subido'});
 				
-				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});
+				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado cv'});
 				return res.status(200).send({
 					doctor: doctorUpdated
 				});
@@ -223,7 +223,7 @@ var controller = {
 
 		}else{
 			return res.status(200).send({
-				message: fileName
+				message: nombreCV
 			})
 		}
 	},

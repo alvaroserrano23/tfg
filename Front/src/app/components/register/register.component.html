@@ -158,12 +158,12 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
-						<label for="cv" class="form-label">Curriculum</label>
-						<input type="file" formControlName="cv" class="form-control" (change)="fileChangeEvent($event)">
-						<div class="invalid-feedback">
-							Por favor,introduce un curriculum.
-						</div>
+						<div class="col-md-3 form-group">
+							<label for="cv" class="form-label">Curriculum</label>
+							<input type="file" formControlName="cv" class="form-control" (change)="fileChangeEvent($event)">
+							<div class="invalid-feedback">
+								El Curriculum es obligatorio.
+							</div>
 						</div>
 				</div>
 			<hr class="my-4">

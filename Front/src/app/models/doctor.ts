@@ -10,7 +10,7 @@ export class Doctor{
 		public comunidad:string,
 		public address:string,
 		public cp:string,
-		public curriculum:string,
+		public cv:string,
 		public insurance:string,
 		public numColegiado:string,
 		public numOpiniones:number,

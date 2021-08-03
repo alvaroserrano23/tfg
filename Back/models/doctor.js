@@ -13,7 +13,7 @@ var DoctorSchema = Schema({
 	comunidad:String,
 	address:String,
 	cp:String,
-	curriculum:String,
+	cv:String,
 	insurance:String,
 	numColegiado:String,
 	numOpiniones:Number,
