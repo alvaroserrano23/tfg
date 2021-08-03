@@ -164,17 +164,17 @@ var controller = {
 
 	uploadImage: function(req,res){
 		var doctorId = req.params.id;
-		var fileName = 'Imagen no subida...';
+		var fileName = 'No se ha seleccionado ninguna imagen';
 
 		if(req.files){
-			var filePath = req.files.imagen.path;
+			var filePath = req.files.image.path;
 			var fileSplit = filePath.split('\\');
 			var fileName = fileSplit[1];
 			var extSplit = fileName.split('.');
 			var fileExt = extSplit[1];
 
 			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
-			Doctor.findByIdAndUpdate(doctorId,{image:fileName},{new:true},(err,doctorUpdated)=>{
+			Doctor.findByIdAndUpdate(doctorId,{imagen:fileName},{new:true},(err,doctorUpdated)=>{
 				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
 				
 				if(!doctorUpdated) return res.status(404).send({message:'El doctor no existe y no se ha asignado imagen'});

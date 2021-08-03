@@ -4,6 +4,8 @@ var express = require('express');
 var PatientController = require('../controllers/patient');
 
 var router = express.Router();
+var multipart = require('connect-multiparty');
+var multipartMiddleware2 = multipart({uploadDir: './imagenes'});
 
 router.get('/home',PatientController.home);
 router.post('/test',PatientController.test);
@@ -14,5 +16,5 @@ router.put('/patient/:id',PatientController.updatePatient); //Actualizar un paci
 router.delete('/patient/:id',PatientController.deletePatient); //Eliminar un paciente de la BD
 router.get('/get-image/:image',PatientController.getImageFile);
 router.put('/updatePatientUserAuth',PatientController.updatePatientUserAuth);
-router.post('/upload-image/:id',PatientController.uploadImage);
+router.post('/upload-imageP/:id',multipartMiddleware2,PatientController.uploadImage);
 module.exports = router;

@@ -163,14 +163,14 @@ var controller = {
 		var fileName = 'Imagen no subida...';
 
 		if(req.files){
-			var filePath = req.files.imagen.path;
+			var filePath = req.files.image.path;
 			var fileSplit = filePath.split('\\');
 			var fileName = fileSplit[1];
 			var extSplit = fileName.split('.');
 			var fileExt = extSplit[1];
 
 			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
-			Admin.findByIdAndUpdate(adminId,{image:fileName},{new:true},(err,adminUpdated)=>{
+			Admin.findByIdAndUpdate(adminId,{imagen:fileName},{new:true},(err,adminUpdated)=>{
 				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
 				
 				if(!adminUpdated) return res.status(404).send({message:'El admin no existe y no se ha asignado imagen'});

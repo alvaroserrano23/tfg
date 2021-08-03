@@ -145,7 +145,7 @@ export class RegisterComponent implements OnInit {
       response => {
         if(response.doctorGuardado){
           if(this.filesToUpload){
-            this.doctorService.makeFileRequest(Global.url+"upload-cv/"+response.doctorGuardado._id,[],this.filesToUpload,'cv')
+            this.doctorService.makeFileRequestD(Global.url+"upload-cv/"+response.doctorGuardado._id,[],this.filesToUpload,'cv')
               .then((result:any)=>{
 
                 this.doctor = result.doctor;

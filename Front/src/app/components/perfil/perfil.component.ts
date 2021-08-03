@@ -9,6 +9,10 @@ import { Patient } from 'src/app/models/patient';
 import { OpinionService } from 'src/app/services/opinion.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { Admin } from 'src/app/models/admin';
+import { FormBuilder, FormGroup, Validators ,FormControl } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert.service';
+import { UserAuthentication } from 'src/app/models/userAuthentication';
+import { UserAuthenticationService } from 'src/app/services/userAuthentication.service';
 
 @Component({
   selector: 'app-perfil',
@@ -27,6 +31,11 @@ export class PerfilComponent implements OnInit {
   public confirm: boolean;
   public opinions: Opinion[];
   public filesToUpload: Array<File>;
+  formD: FormGroup;
+  formP: FormGroup;
+  formA: FormGroup;
+  public id:String;
+  public userAuth:UserAuthentication;
   /*public title: string;
 	public save_project;
 	public status: string;
@@ -36,7 +45,9 @@ export class PerfilComponent implements OnInit {
     private doctorService: DoctorService,
     private patientService: PatientService,
     private opinionService: OpinionService,
+    private userAuthenticacionService: UserAuthenticationService,
     private adminService: AdminService,
+    private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute
     
@@ -58,8 +69,26 @@ export class PerfilComponent implements OnInit {
         
       }
     })
+
+    this.formD = new FormGroup({
+      imagen: new FormControl('',Validators.required)
+    });
+
+    this.formP = new FormGroup({
+      imagen: new FormControl('',Validators.required)
+    });
+
+    this.formA = new FormGroup({
+      imagen: new FormControl('',Validators.required)
+    });
     
   }
+
+  get fD() { return this.formD.controls; }
+
+  get fP() { return this.formP.controls; }
+
+  get fA() { return this.formA.controls; }
 
   getDoctor(id){
     this.doctorService.getDoctor(id).subscribe(
@@ -106,81 +135,74 @@ export class PerfilComponent implements OnInit {
   }
   onSubmit(){
     if(this.doctor != undefined){
-      this.actualizarDoctor();
+      this.actualizarDoctor(this.doctor);
     }else if(this.patient != undefined){
-      this.actualizarPatient();
+      this.actualizarPatient(this.patient);
     }else if(this.admin != undefined){
-      this.actualizarAdmin();
+      this.actualizarAdmin(this.admin);
     }
   }
   
-  actualizarAdmin(){
-    this.adminService.updateAdmin(this.admin).subscribe(
-      response=>{
-        if(response.adminUpdated){
-				
-				  // Subir la imagen
-          if(this.filesToUpload){
-            this.adminService.makeFileRequest(Global.url+"upload-image/"+response.adminUpdated._id, [], this.filesToUpload, 'image')
-            .then((result:any) => {
-              this.adminGuardado = result.admin;
-            });
-          }else{
-            this.adminGuardado = response.adminUpdated;
-          }
-        }
-      },
-      error=>{
-        console.log(<any>error);
-      }
-    )
+  actualizarDoctor(doctor){
+    // Subir la imagen
+    if(this.filesToUpload){
+      this.doctorService.makeFileRequestD(Global.url+"upload-imageD/"+doctor._id, [], this.filesToUpload, 'image')
+      .then((result:any) => {
+        this.doctor = result.patient;
+        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
+        this.userAuthenticacionService.logout();
+        this.userAuth.id = this.doctor.id;
+        this.userAuth.user = this.doctor.user;
+        this.userAuth.password = this.doctor.password;
+        this.userAuth.email = this.doctor.email;
+        this.userAuthenticacionService.loginAuth(this.userAuth);
+      });
+    }else{
+      window.scrollTo(0,-10000);
+      this.alertService.error("No has seleccionado ninguna imagen", { keepAfterRouteChange: true });
+    }
   }
 
 
-  actualizarDoctor(){
-    this.doctorService.updateDoctor(this.doctor).subscribe(
-      response => {
-  			if(response.doctorUpdated){
-				
-				  // Subir la imagen
-          if(this.filesToUpload){
-            this.doctorService.makeFileRequest(Global.url+"upload-image/"+response.doctorUpdated._id, [], this.filesToUpload, 'image')
-            .then((result:any) => {
-              this.doctorGuardado = result.doctor;
-            });
-          }else{
-            this.doctorGuardado = response.doctorUpdated;
-          }
-      }
-  		},
-  		error => {
-  			console.log(<any>error);
-  		}
-    )
+  actualizarPatient(patient){
+    // Subir la imagen
+    if(this.filesToUpload){
+      this.patientService.makeFileRequestP(Global.url+"upload-imageP/"+patient._id, [], this.filesToUpload, 'image')
+      .then((result:any) => {
+        this.patient = result.patient;
+        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
+        this.router.navigate([''])
+          .then(() => {
+            window.location.reload();
+          });
+      });
+    }else{
+      window.scrollTo(0,-10000);
+      this.alertService.error("No has seleccionado ninguna imagen", { keepAfterRouteChange: true });
+    }
   }
-  actualizarPatient(){
-    this.patientService.updatePatient(this.patient).subscribe(
-      response => {
-  			if(response.patientUpdated){
-				
-				  // Subir la imagen
-          if(this.filesToUpload){
-            this.patientService.makeFileRequest(Global.url+"upload-image/"+response.patientUpdated._id, [], this.filesToUpload, 'image')
-            .then((result:any) => {
-              this.patientGuardado = result.doctor;
-            });
-          }else{
-            this.patientGuardado = response.doctorUpdated;
-          }
-      }
-  		},
-  		error => {
-  			console.log(<any>error);
-  		}
-    )
+  actualizarAdmin(admin){
+    // Subir la imagen
+    if(this.filesToUpload){
+      this.adminService.makeFileRequestA(Global.url+"upload-imageA/"+admin._id, [], this.filesToUpload, 'image')
+      .then((result:any) => {
+        this.admin = result.patient;
+        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
+        this.router.navigate([''])
+          .then(() => {
+            window.location.reload();
+          });
+      });
+    }else{
+      window.scrollTo(0,-10000);
+      this.alertService.error("No has seleccionado ninguna imagen", { keepAfterRouteChange: true });
+    }
   }
+  
 
   fileChangeEvent(fileInput: any){
 		this.filesToUpload = <Array<File>>fileInput.target.files;
+    window.scrollTo(0,-10000);
+    this.alertService.success("Imagen seleccionada:"+this.filesToUpload[0].name);
 	}
 }

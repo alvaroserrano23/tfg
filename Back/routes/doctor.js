@@ -18,7 +18,7 @@ router.get('/doctors-validados',DoctorController.getDoctorsValidados); //Obtener
 router.put('/doctor/:id',DoctorController.updateDoctor); //Actualizar un doctor de la BD
 router.delete('/doctor/:id',DoctorController.deleteDoctor); //Eliminar un doctor de la BD
 router.post('/upload-cv/:id',multipartMiddleware,DoctorController.uploadCv);
-router.post('/upload-image/:id',multipartMiddleware2,DoctorController.uploadImage);
+router.post('/upload-imageD/:id',multipartMiddleware2,DoctorController.uploadImage);
 router.get('/get-image/:image',DoctorController.getImageFile);
 router.get('/get-cv/:cv',DoctorController.getCVFile);
 router.put('/updateDoctorUserAuth',DoctorController.updateDoctorUserAuth);

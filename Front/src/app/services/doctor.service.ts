@@ -74,7 +74,7 @@ export class DoctorService {
 		return this._http.post(this.url+'upload-image/'+doctor.id,doctor,{headers:headers});	
 	}
 
-	makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string){
+	makeFileRequestD(url: string, params: Array<string>, files: Array<File>, name: string){
 		return new Promise(function(resolve, reject){
 			var formData:any = new FormData();
 			var xhr = new XMLHttpRequest();

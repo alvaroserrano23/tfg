@@ -54,7 +54,7 @@ export class AdminService {
 		return this._http.put(this.url+'updateAdminUserAuth',params,{headers:headers});		
 	}
 
-  makeFileRequest(url: string, params: Array<string>, files: Array<File>, name: string){
+  makeFileRequestA(url: string, params: Array<string>, files: Array<File>, name: string){
 		return new Promise(function(resolve, reject){
 			var formData:any = new FormData();
 			var xhr = new XMLHttpRequest();

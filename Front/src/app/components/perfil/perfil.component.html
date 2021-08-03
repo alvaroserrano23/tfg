@@ -16,10 +16,10 @@
 			</div>
 		</div>
 		<div class="row d-flex">
-			<form [formGroup]="form"  (ngSubmit)="onSubmit()">
-				<div class="col-sm-4 d-flex justify-content-center" >
+			<form [formGroup]="formD"  (ngSubmit)="onSubmit()">
+				<div class="col-sm-4 d-flex justify-content-center form-group" >
 					<div class="file-select" id="src-file1" >
-						<input type="file" name="src-file1" aria-label="Archivo" (change)="fileChangeEvent($event)">
+						<input type="file" name="src-file1" aria-label="Archivo" formControlName="imagen" class="form-control" (change)="fileChangeEvent($event)">
 					</div>
 				</div>
 			
@@ -40,7 +40,7 @@
 	<div class="bg-light p-5 rounded mt-3">
 		<div class="row g-3">
 			<div class="col-sm-4 d-flex justify-content-center">
-				<img src="{{url+'get-image/'+patient.imagen}}" height="150px"/>
+				<img src="{{url+'get-image/'+patient.imagen}}" style="border-radius: 100px; height: 150px;"/>
 			</div>
 			
 			<div class="col-sm-3">
@@ -54,13 +54,14 @@
 			</div>
 		</div>
 		<div class="row d-flex">
-			<div class="col-sm-4 d-flex justify-content-center" >
-				<div class="file-select" id="src-file1" >
-					<input type="file" name="src-file1" aria-label="Archivo">
+			<form [formGroup]="formD"  (ngSubmit)="onSubmit()">
+				<div class="col-sm-4 d-flex justify-content-center form-group" >
+					<div class="file-select" id="src-file1" >
+						<input type="file" name="src-file1" aria-label="Archivo" formControlName="imagen" class="form-control" (change)="fileChangeEvent($event)">
+					</div>
 				</div>
-			</div>
 			
-		</div>
+		
 		<br>
 		<br>
 		<div class="row">
@@ -92,7 +93,8 @@
 			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/']">Volver</button></div>
 			<div class="col-md-1"><button type="submit" class="btn btn-primary" >Guardar</button></div>
 		</div>
-
+		</form>
+		</div>
 	</div>  
 </div>
 
@@ -100,7 +102,7 @@
 	<div class="bg-light p-5 rounded mt-3">
 		<div class="row g-3">
 			<div class="col-sm-4 d-flex justify-content-center">
-				<img src="{{url+'get-image/'+admin.imagen}}" height="150px"/>
+				<img src="{{url+'get-image/'+admin.imagen}}" style="border-radius: 100px; height: 150px;"/>
 			</div>
 			
 			<div class="col-sm-3">
@@ -112,19 +114,20 @@
 			</div>
 		</div>
 		<div class="row d-flex">
-			<div class="col-sm-4 d-flex justify-content-center" >
-				<div class="file-select" id="src-file1" >
-					<input type="file" name="src-file1" aria-label="Archivo">
+			<form [formGroup]="formD"  (ngSubmit)="onSubmit()">
+				<div class="col-sm-4 d-flex justify-content-center form-group" >
+					<div class="file-select" id="src-file1" >
+						<input type="file" name="src-file1" aria-label="Archivo" formControlName="imagen" class="form-control" (change)="fileChangeEvent($event)">
+					</div>
 				</div>
-			</div>
 			
-		</div>
 		<br>
 		<br>
 		<div class="row justify-content-md-center">
 			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/']">Volver</button></div>
 			<div class="col-md-1"><button type="submit" class="btn btn-primary" >Guardar</button></div>
 		</div>
-
+	</form>
+	</div>
 	</div>  
 </div>
