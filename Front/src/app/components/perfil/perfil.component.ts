@@ -11,8 +11,6 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Admin } from 'src/app/models/admin';
 import { FormBuilder, FormGroup, Validators ,FormControl } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
-import { UserAuthentication } from 'src/app/models/userAuthentication';
-import { UserAuthenticationService } from 'src/app/services/userAuthentication.service';
 
 @Component({
   selector: 'app-perfil',
@@ -35,7 +33,6 @@ export class PerfilComponent implements OnInit {
   formP: FormGroup;
   formA: FormGroup;
   public id:String;
-  public userAuth:UserAuthentication;
   /*public title: string;
 	public save_project;
 	public status: string;
@@ -45,7 +42,6 @@ export class PerfilComponent implements OnInit {
     private doctorService: DoctorService,
     private patientService: PatientService,
     private opinionService: OpinionService,
-    private userAuthenticacionService: UserAuthenticationService,
     private adminService: AdminService,
     private alertService: AlertService,
     private router: Router,
@@ -149,13 +145,8 @@ export class PerfilComponent implements OnInit {
       this.doctorService.makeFileRequestD(Global.url+"upload-imageD/"+doctor._id, [], this.filesToUpload, 'image')
       .then((result:any) => {
         this.doctor = result.patient;
-        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
-        this.userAuthenticacionService.logout();
-        this.userAuth.id = this.doctor.id;
-        this.userAuth.user = this.doctor.user;
-        this.userAuth.password = this.doctor.password;
-        this.userAuth.email = this.doctor.email;
-        this.userAuthenticacionService.loginAuth(this.userAuth);
+        this.alertService.success("Se ha actualizado la imagen con éxito, para ver correctamente tu imagen, cierra y vuelve a iniciar sesión", { keepAfterRouteChange: true });
+        this.router.navigate(['']);
       });
     }else{
       window.scrollTo(0,-10000);
@@ -170,11 +161,8 @@ export class PerfilComponent implements OnInit {
       this.patientService.makeFileRequestP(Global.url+"upload-imageP/"+patient._id, [], this.filesToUpload, 'image')
       .then((result:any) => {
         this.patient = result.patient;
-        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
-        this.router.navigate([''])
-          .then(() => {
-            window.location.reload();
-          });
+        this.alertService.success("Se ha actualizado la imagen con éxito, para ver correctamente tu imagen, cierra y vuelve a iniciar sesión", { keepAfterRouteChange: true });
+        this.router.navigate(['']);
       });
     }else{
       window.scrollTo(0,-10000);
@@ -187,11 +175,8 @@ export class PerfilComponent implements OnInit {
       this.adminService.makeFileRequestA(Global.url+"upload-imageA/"+admin._id, [], this.filesToUpload, 'image')
       .then((result:any) => {
         this.admin = result.patient;
-        this.alertService.success("Se ha actualizado la imagen con éxito", { keepAfterRouteChange: true });
-        this.router.navigate([''])
-          .then(() => {
-            window.location.reload();
-          });
+        this.alertService.success("Se ha actualizado la imagen con éxito, para ver correctamente tu imagen, cierra y vuelve a iniciar sesión", { keepAfterRouteChange: true });
+        this.router.navigate(['']);
       });
     }else{
       window.scrollTo(0,-10000);
