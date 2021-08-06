@@ -48,6 +48,7 @@ export class AdminModificarComponent implements OnInit {
   submittedH = false;
   submittedA = false;
   returnUrl: String;
+  public filesToUpload: Array<File>;
   
   constructor(
     private doctorService: DoctorService,
@@ -276,6 +277,8 @@ export class AdminModificarComponent implements OnInit {
   }
 
   onSubmitD(){
+    
+
     this.submittedD = true;
 
     // reset alerts on submit
@@ -289,23 +292,31 @@ export class AdminModificarComponent implements OnInit {
     this.doctor.id = this.id;
     this.doctorService.updateDoctor(this.doctor).subscribe(
       res => {
-        console.log(res);
-        this.userAuth.id = this.doctor.id;
-        this.userAuth.user = this.doctor.user;
-        this.userAuth.password = this.doctor.password;
-        this.userAuth.email = this.doctor.email;
-        this.userAuth.role = "doctor";
-        this.userAuthenticationService.updateUser(this.userAuth).subscribe();
-        this.alertService.success('El doctor con id ' + this.doctor.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate(['/'], { relativeTo: this.route });  
-        },
+        if(this.filesToUpload){
+        this.doctorService.makeFileRequestD(Global.url+"upload-cv/"+res.doctorUpdated._id,[],this.filesToUpload,'cv')
+              .then((result:any)=>{
+                this.doctor = result.doctor;});
+        }
+          this.userAuth.user = this.doctor.user;
+          this.userAuth.password = this.doctor.password;
+          this.userAuth.email = this.doctor.email;
+          this.userAuth.role = "doctor";
+          this.userAuthenticationService.updateUser(this.userAuth).subscribe();
+          this.alertService.success('El doctor con id ' + this.doctor.id + ' se ha modificado correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate(['/'], { relativeTo: this.route });  
+      },
       error =>{
         window.scrollTo(0,-10000);
         this.alertService.error(error.error.message);
         this.loading = false;
         }
     );
+    
   }
+
+  fileChangeEvent(fileInput: any){
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
 
   onSubmitP(){
     this.submittedP = true;

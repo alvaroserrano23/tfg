@@ -32,6 +32,7 @@ export class DatosComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: String;
+  public filesToUpload: Array<File>;
   
 
   constructor(
@@ -177,42 +178,7 @@ export class DatosComponent implements OnInit {
     
   }
 
-  onSubmitRegD(){
-    
-
-    this.submitted = true;
-
-    // reset alerts on submit
-    this.alertService.clear();
-
-    // stop here if form is invalid
-    if (this.formD.invalid) {
-        return;
-    }
-    this.doctor = this.formD.value;
-    this.doctor.id = this.id;
-    this.doctorService.updateDoctor(this.doctor).subscribe(
-      res => {
-        console.log(res);
-        this.userAuth.user = this.doctor.user;
-        this.userAuth.password = this.doctor.password;
-        this.userAuth.email = this.doctor.email;
-        this.userAuth.role = "doctor";
-        this.userAuthenticationService.updateUser(this.userAuth).subscribe();
-        this.alertService.success('Se ha modificado correctamente.', { keepAfterRouteChange: true });
-        this.router.navigate([''])
-          .then(() => {
-            window.location.reload();
-          });
-        },
-      error =>{
-        window.scrollTo(0,-10000);
-        this.alertService.error(error.error.message);
-        this.loading = false;
-        }
-    );
-    
-  }
+  
    onSubmitRegP(){
     
 
@@ -245,4 +211,50 @@ export class DatosComponent implements OnInit {
           }
       );
   }
+
+  onSubmitRegD(){
+    
+
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.formD.invalid) {
+        return;
+    }
+    this.doctor = this.formD.value;
+    this.doctor.id = this.id;
+    this.doctorService.updateDoctor(this.doctor).subscribe(
+      res => {
+        if(this.filesToUpload){
+        this.doctorService.makeFileRequestD(Global.url+"upload-cv/"+res.doctorUpdated._id,[],this.filesToUpload,'cv')
+              .then((result:any)=>{
+                this.doctor = result.doctor;});
+        }
+          this.userAuth.user = this.doctor.user;
+          this.userAuth.password = this.doctor.password;
+          this.userAuth.email = this.doctor.email;
+          this.userAuth.role = "doctor";
+          this.userAuthenticationService.updateUser(this.userAuth).subscribe();
+          this.alertService.success('Se ha modificado correctamente.', { keepAfterRouteChange: true });
+          this.router.navigate([''])
+            .then(() => {
+              window.location.reload();
+          });
+      },
+      error =>{
+        window.scrollTo(0,-10000);
+        this.alertService.error(error.error.message);
+        this.loading = false;
+        }
+    );
+    
+  }
+
+  fileChangeEvent(fileInput: any){
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+	}
 }
+
