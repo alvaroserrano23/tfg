@@ -58,7 +58,6 @@ export class PerfilComponent implements OnInit {
         this.getDoctor(id);
       }else if(localStorage.getItem('patient')){
         this.getPatient(id);
-        this.getOpinionsByIdPatient(id);
       }else if(localStorage.getItem('admin')){
         this.getAdmin(id);
         localStorage.removeItem('repetido');
@@ -119,16 +118,6 @@ export class PerfilComponent implements OnInit {
     )
   }
 
-  getOpinionsByIdPatient(id){
-    this.opinionService.getOpinionsByIdPatient(id).subscribe(
-      response=>{
-        this.opinions = response.opinions;
-      },
-      error=>{
-        console.log(error);
-      }
-    )
-  }
   onSubmit(){
     if(this.doctor != undefined){
       this.actualizarDoctor(this.doctor);

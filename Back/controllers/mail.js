@@ -113,7 +113,7 @@ var controller = {
       var userAuthentication = new UserAuthentication();
       userAuthentication = user;
       if(!user){
-        return res.status(404).send({message:"Falso: Usuario existe, se envia correo"});
+        return res.status(404).send({message:"No existe ningun usuario con ese email"});
       }
       userAuthentication.code=uuidv4(); 
 		UserAuthentication.findByIdAndUpdate(userAuthentication.id,userAuthentication, {new:true} ,(err,userAuthenticationUpdated)=>{

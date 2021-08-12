@@ -5,6 +5,8 @@ import { Opinion } from 'src/app/models/opinion';
 import { OpinionService } from 'src/app/services/opinion.service';
 import { Doctor } from 'src/app/models/doctor';
 import { DoctorService } from 'src/app/services/doctor.service';
+import { PatientService } from 'src/app/services/patient.service';
+import { Patient } from 'src/app/models/patient';
 
 @Component({
   selector: 'app-valoraciones',
@@ -14,12 +16,15 @@ import { DoctorService } from 'src/app/services/doctor.service';
 export class ValoracionesComponent implements OnInit {
   public url: string;
   public opinionsDoctor: Opinion[];
+  public opinionsPatient: Opinion[];
   public doctor: Doctor;
+  public patient: Patient;
   public id:String;
 
   constructor(
     private opinionService: OpinionService,
     private doctorService: DoctorService,
+    private patientService: PatientService,
     private router: Router,
     private route: ActivatedRoute
     ) 
@@ -31,8 +36,13 @@ export class ValoracionesComponent implements OnInit {
 
     this.route.params.subscribe(params =>{
       this.id = params.id;
-      this.getDoctor(this.id);
-      this.getOpinionsByIdDoctor(this.id);
+      if(localStorage.getItem('doctor') && localStorage.getItem('token')){
+        this.getDoctor(this.id);
+        this.getOpinionsByIdDoctor(this.id);
+      }else if(localStorage.getItem('patient') && localStorage.getItem('token')){
+        this.getPatient(this.id);
+        this.getOpinionsByIdPatient(this.id);
+      }
     })
   }
 
@@ -61,4 +71,31 @@ export class ValoracionesComponent implements OnInit {
     )
   }
 
+  getPatient(id){
+      this.patientService.getPatient(id).subscribe(
+        response =>{
+          this.patient = response.patient;
+        },
+        error => {
+          console.log(<any>error);
+        }
+      )
+    }
+
+    getOpinionsByIdPatient(id){
+      this.opinionService.getOpinionsByIdPatient(id).subscribe(
+        response => {
+          if(response.opinions){
+            this.opinionsPatient = response.opinions;
+            console.log(this.opinionsPatient);
+          }
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
+    }
+
 }
+
+  
