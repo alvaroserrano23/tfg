@@ -20,11 +20,15 @@
           <input type="text" class="form-control" name="filterDoctorAseguradora" placeholder="Aseguradora..." [(ngModel)]="filterDoctorAseguradora">
         </div>
         <div class="col-sm-2 form-group">
-          <input type="text" class="form-control" name="filterDoctorValoracion" placeholder="Valoración..." [(ngModel)]="filterDoctorValoracion">
+          <input type="text" class="form-control" name="filterDoctorValoracion" placeholder="Valoración (0-5)" [(ngModel)]="filterDoctorValoracion">
         </div>
     </div>
     <br>
-    <div class="row">
+    <div class="row justify-content-md-center" id="btn-buscar">
+      <div class="col-md-1"><button class="btn btn-primary" (click)="buscar()">Buscar</button></div>
+    </div>
+    <br>
+    <div class="row" *ngIf="buscarFlag">
       <div class="col">
         <table class="table table-striped">
           <thead>

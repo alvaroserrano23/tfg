@@ -1,4 +1,4 @@
-<div class="album py-5 bg-light">
+<div class="album py-5 bg-light" *ngIf="patient;else noLogged">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" *ngIf="doctorsOpinar.length != 0;else noDoctores">
@@ -27,4 +27,10 @@
   <ng-template #noDoctores>
     <p style="text-align: center;">No tienes doctores sobre los que opinar.</p>
     <p style="text-align: center;">Si deseas consultar tus opiniones haz click <a [routerLink]="['/valoraciones/', patient.id]">aquí</a></p>
+  </ng-template>
+  <ng-template #noLogged>
+    <p style="text-align: center;">No has iniciado sesión por lo que no puedes opinar.</p>
+    <div class="row justify-content-md-center">
+			<div class="col-md-1"><button type="button" class="btn btn-primary" [routerLink]="['/login']">Iniciar sesión</button></div>
+		</div>
   </ng-template>

@@ -33,8 +33,9 @@ export class DarOpinionComponent implements OnInit {
       var patientId = JSON.parse(localStorage.getItem('patient'));
       this.patient = patientId;
       this.patient.id = patientId._id;
+      this.getCitasByIdPatient(this.patient.id);
     }
-    this.getCitasByIdPatient(this.patient.id);
+    
   }
 
   async getCitasByIdPatient(id){

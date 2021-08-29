@@ -10,6 +10,7 @@ import { Global } from '../../services/global';
 })
 export class BuscarComponent implements OnInit {
 
+  public buscarFlag:boolean = false;
   constructor(public doctorService: DoctorService) { }
   
   filterDoctorNombre = '';
@@ -37,5 +38,20 @@ export class BuscarComponent implements OnInit {
   			console.log(<any>error);
   		}
   	);
+  }
+
+  buscar(){
+    this.buscarFlag = true;
+    $("#btn-buscar").hide(500);
+  }
+
+  limpiarFiltros(){
+    this.filterDoctorNombre = '';
+    this.filterDoctorEspecialidad = '';
+    this.filterDoctorPrecioConsulta = '';
+    this.filterDoctorComunidad = '';
+    this.filterDoctorProvincia = '';
+    this.filterDoctorAseguradora = '';
+    this.filterDoctorValoracion = '';
   }
 }
