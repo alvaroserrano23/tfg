@@ -122,7 +122,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.alertService.success('Te hemos enviado un correo con un codigo de recuperación', { keepAfterRouteChange: true });
+    
     this.mail.to = this.formPass1.value.email;
     this.userAuthRecuperacion.email = this.formPass1.value.email;
     this.mail.type = "recuperarcontraseña";
@@ -131,11 +131,12 @@ export class LoginComponent implements OnInit {
     this.mailService.sendEmailRecuperacion(this.mail).subscribe(
       res=>{
         console.log(res);
+        this.alertService.success('Te hemos enviado un correo con un codigo de recuperación', { keepAfterRouteChange: true });
         $("#container_forgot").hide();
         $("#container_sms").show();
       },
       err=>{
-        console.log(err);
+        this.alertService.error(err.error.message);
       }
       )
     

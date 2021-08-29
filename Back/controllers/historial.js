@@ -20,7 +20,7 @@ var controller = {
         var historial = new Historial();
 		var params = req.body;
         var historial_bd = await Historial.findOne({id_doctor :params.id_doctor, id_paciente: params.id_paciente});
-		var patient_bd = await Patient.findOne({name: params.name,surname:params.surname});
+		var patient_bd = await Patient.findOne({name: params.name,surname:params.surname,email:params.email_paciente});
 
 		if(!patient_bd){
 			return res.status(404).send({message:"El paciente no existe"});

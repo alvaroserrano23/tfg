@@ -4,9 +4,11 @@ var Patient = require('../models/patient'); //Importar modelo
 var Doctor = require('../models/doctor'); //Importar modelo
 var Admin = require('../models/admin');
 var UserAuthentication = require('../models/userAuthentication');
+var Historial = require('../models/historial');
 var fs = require('fs');
 var path = require('path');
 var jwt = require('jsonwebtoken');
+const historial = require('../models/historial');
 
 var controller = {
 
@@ -135,7 +137,7 @@ var controller = {
 		});
 	},
 
-	uploadImage: function(req,res){
+	uploadImage: async function(req,res){
 		var patientId = req.params.id;
 		var fileName = 'Imagen no subida...';
 
@@ -146,14 +148,23 @@ var controller = {
 			var extSplit = fileName.split('.');
 			var fileExt = extSplit[1];
 
-			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'gif'){
+			if(fileExt == 'png' || fileExt == 'jpg' || fileExt == 'jpeg' || fileExt == 'PNG'){
+				//Si se modifica la imagen, modificamos la del historial del paciente tambien
+				var historialbd = await Historial.findOne({id_paciente:patientId});
+				if(historialbd){
+					historialbd.imagen_paciente = fileName;
+					Historial.findByIdAndUpdate(historialbd.id,{imagen_paciente:fileName},{new:true},(err,historialUpdated)=>{
+						if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
+						
+						if(!historialUpdated) return res.status(404).send({message:'El paciente no existe y no se ha asignado imagen'});
+					});
+				}
 			Patient.findByIdAndUpdate(patientId,{imagen:fileName},{new:true},(err,patientUpdated)=>{
 				if(err) return res.status(200).send({message: 'La imagen no se ha subido'});
 				
 				if(!patientUpdated) return res.status(404).send({message:'El paciente no existe y no se ha asignado imagen'});
-				return res.status(200).send({
-					patient: patientUpdated
-				});
+				
+				return res.status(200).send({patient: patientUpdated});
 			});
 			}else{
 				fs.unlink(filePath,(err)=>{
@@ -183,12 +194,13 @@ var controller = {
 		var params = req.body;
 		var patient = await Patient.findOne({id:params.id});
 		patient.password = params.password;
-		
+
 		Patient.findByIdAndUpdate(patient.id,patient, {new:true} ,(err,patientUpdated)=>{
 			if(err) return res.status(500).send({message:'Error al actualizar'});
 
 			if(!patientUpdated) return res.status(404).send({message:'No existe el paciente para actualizar'});
 
+			
 			return res.status(200).send({patient:patientUpdated});
 		});
 

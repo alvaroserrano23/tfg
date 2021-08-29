@@ -49,7 +49,10 @@ export class HistorialComponent implements OnInit {
       patologias_paciente: new FormControl(),
       alergias_paciente: new FormControl (),
       vacunas_paciente: new FormControl (),
-      tratamientos: new FormControl ()
+      tratamientos: new FormControl (),
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])
     });
 
     //JQUERY
@@ -79,7 +82,7 @@ export class HistorialComponent implements OnInit {
     this.historial = this.form.value;
     this.patient.name = this.form.value.name;
     this.patient.surname = this.form.value.surname;
-      this.historial.email_paciente = this.patient.email;
+      this.historial.email_paciente = this.form.value.email;
       this.historial.id_doctor = this.doctor.id;
       this.historialService.saveHistorial(this.historial).subscribe(
         res => {
