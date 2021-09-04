@@ -5,6 +5,8 @@ import { DoctorService } from 'src/app/services/doctor.service';
 import { Doctor } from '../../models/doctor';
 import { Cita } from '../../models/cita';
 import { Global } from '../../services/global';
+import { OpinionService } from 'src/app/services/opinion.service';
+import { Opinion } from 'src/app/models/opinion';
 
 @Component({
   selector: 'app-dar-opinion',
@@ -19,10 +21,12 @@ export class DarOpinionComponent implements OnInit {
   public citasPaciente: Cita[];
   public citasPacienteF: Cita[] = new Array();
   public url: string;
+  public opinionsPaciente: Opinion[];
 
   constructor(
     public doctorService: DoctorService,
-    public citasService: CitasService
+    public citasService: CitasService,
+    public opinionService: OpinionService
     ) 
     {
     this.url = Global.url;
@@ -33,11 +37,22 @@ export class DarOpinionComponent implements OnInit {
       var patientId = JSON.parse(localStorage.getItem('patient'));
       this.patient = patientId;
       this.patient.id = patientId._id;
+      this.getOpinionsByIdPatient(this.patient.id);
       this.getCitasByIdPatient(this.patient.id);
     }
     
   }
 
+  getOpinionsByIdPatient(id){
+    this.opinionService.getOpinionsByIdPatient(id).subscribe(
+      response=>{
+        this.opinionsPaciente = response.opinions;
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
   async getCitasByIdPatient(id){
   	this.citasService.getCitasByIdPatient(id).subscribe(
   		response => {
@@ -78,10 +93,26 @@ export class DarOpinionComponent implements OnInit {
 
   obtenerDoctores(){
     for(let i=0; i<this.citasPacienteF.length;i++){
-      if(this.citasPacienteF[i].estado == "Finalizada"){
-        var id_doctor = this.citasPacienteF[i].id_doctor;
-        this.getDoctor(id_doctor);
+      for(let j=0;j<this.opinionsPaciente.length;j++){
+        if(this.citasPacienteF[i].estado == "Finalizada" && this.citasPacienteF[i].id_doctor == this.opinionsPaciente[j].id_doctor){
+          this.removeItemFromArr(this.citasPacienteF,this.citasPacienteF[i]);
+          
+        }
+      } 
+    }
+    
+    for(var k in this.citasPacienteF){
+      if(this.citasPacienteF[k].estado == "Finalizada"){
+        this.getDoctor(this.citasPacienteF[k].id_doctor);
       }
     }
   }
+
+   removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+ 
+    if ( i !== -1 ) {
+        arr.splice( i, 1 );
+    }
+}
 }
