@@ -135,7 +135,7 @@ export class PedirCitaComponent implements OnInit {
         console.log(res);
         //Enviamos el email
         this.mail.type = "citaP";
-        this.mail.message = "<h1>Cita solicitada</h1><ul><li><b>Asunto:</b> "+this.cita.asunto+"</li><li><b>Dirección de la consulta:</b> "+this.cita.direccion_consulta+"<li><b>Doctor:</b> "+this.cita.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+this.cita.fecha + " " + this.cita.hora+"</li></ul>";
+        this.mail.message = "<h1>Cita solicitada</h1><ul><li><b>Asunto:</b> "+this.cita.asunto+"</li><li><b>Dirección de la consulta:</b> "+this.cita.direccion_consulta+"<li><b>Doctor:</b> "+this.cita.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+this.cita.fecha + " " + this.cita.hora+"</li></ul><p><b>IMPORTANTE:</b>Hasta que el doctor no acepte la cita no podrás asistir a ella, cuando el doctor la acepte se le notificará vía email.</p><p>Un saludo,gracias</p>";
         //Mensaje para el paciente
         this.mail.to = this.patient.email;
         this.mailService.sendEmail(this.mail).subscribe();

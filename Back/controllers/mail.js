@@ -44,7 +44,18 @@ async function sendMail(mail,callback){
     mail.subject = "Solicitud de cita";
     contentHTML = mail.message;
     //mail.to = "serviciocorreotfg@gmail.com"; //Para probar
-
+  }else if(mail.type == "citaA"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Cita Aceptada";
+    contentHTML = mail.message;
+  }else if(mail.type == "citaR"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Cita Rechazada";
+    contentHTML = mail.message;
+  }else if(mail.type == "citaF"){
+    mail.from = "serviciocorreotfg@gmail.com";
+    mail.subject = "Cita Finalizada";
+    contentHTML = mail.message;
   }else if(mail.type == "dar opinion"){
     mail.from = "serviciocorreotfg@gmail.com";
     //mail.to = "serviciocorreotfg@gmail.com";

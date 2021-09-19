@@ -7,6 +7,8 @@ import { Doctor } from 'src/app/models/doctor';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { Patient } from 'src/app/models/patient';
+import { Mail } from 'src/app/models/mail';
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-citas',
@@ -24,16 +26,19 @@ export class CitasComponent implements OnInit {
   public doctorCita: Doctor;
   public patientCita: Patient;
   public id:String;
+  public mail:Mail;
 
   constructor(
     public citasService: CitasService,
     private doctorService: DoctorService,
     private patientService: PatientService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mailService: MailService
     ) 
     {
     this.url = Global.url;
+    this.mail = new Mail('','','','','','','');
     }
 
   ngOnInit(): void {
@@ -109,6 +114,11 @@ export class CitasComponent implements OnInit {
     citaAceptada.estado = "Aceptada";
     this.citasService.updateCita(citaAceptada).subscribe(
       response=>{
+        this.mail.type = "citaA";
+        this.mail.message = "<p>Tu cita ha sido <b>aceptada</b>,a continuación se muestran los datos referentes a la cita</p><h2>Datos de la cita</h2><ul><li><b>Asunto:</b> "+ citaAceptada.asunto+"</li><li><b>Dirección de la consulta:</b> "+ citaAceptada.direccion_consulta+"<li><b>Doctor:</b> "+ citaAceptada.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+ citaAceptada.fecha + " " + citaAceptada.hora+"</li></ul><p>Ya puedes asistir a la cita</p><p><p>Un saludo,gracias</p>";
+        //Mensaje para el paciente
+        this.mail.to = cita.email_paciente;
+        this.mailService.sendEmail(this.mail).subscribe();
         console.log(response);
       },
       error=>{
@@ -124,6 +134,11 @@ export class CitasComponent implements OnInit {
     citaRechazada.estado = "Rechazada";
     this.citasService.updateCita(citaRechazada).subscribe(
       response=>{
+        this.mail.type = "citaR";
+        this.mail.message = "<p>Tu cita ha sido <b>rechazada</b>,a continuación se muestran los datos referentes a la cita</p><h2>Datos de la cita</h2><ul><li><b>Asunto:</b> "+ citaRechazada.asunto+"</li><li><b>Dirección de la consulta:</b> "+ citaRechazada.direccion_consulta+"<li><b>Doctor:</b> "+ citaRechazada.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+ citaRechazada.fecha + " " + citaRechazada.hora+"</li></ul><p>El doctor ha rechazado la cita por lo que no podrás asistir a ella.</p><p><p>Un saludo,gracias</p>";
+        //Mensaje para el paciente
+        this.mail.to = cita.email_paciente;
+        this.mailService.sendEmail(this.mail).subscribe();
         console.log(response);
       },
       error=>{
@@ -139,6 +154,11 @@ export class CitasComponent implements OnInit {
     citaFinalizada.estado = "Finalizada";
     this.citasService.updateCita(citaFinalizada).subscribe(
       response=>{
+        this.mail.type = "citaF";
+        this.mail.message = "<p>Tu cita ha sido <b>finalizada</b>,a continuación se muestran los datos referentes a la cita</p><h2>Datos de la cita</h2><ul><li><b>Asunto:</b> "+ citaFinalizada.asunto+"</li><li><b>Dirección de la consulta:</b> "+ citaFinalizada.direccion_consulta+"<li><b>Doctor:</b> "+ citaFinalizada.nombre_doctor+"</li><li><b>Fecha y Hora:</b> "+ citaFinalizada.fecha + " " + citaFinalizada.hora+"</li></ul><p>Ha finalizado la cita, esperamos que haya sido productiva, si deaseas dar tu opinión sobre el doctor, accede al apartado de <b>Dar opinión</b> en la web.</p><p><p>Un saludo,gracias</p>";
+        //Mensaje para el paciente
+        this.mail.to = cita.email_paciente;
+        this.mailService.sendEmail(this.mail).subscribe();
         console.log(response);
       },
       error=>{
