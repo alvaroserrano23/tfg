@@ -169,6 +169,7 @@ export class AdminModificarComponent implements OnInit {
     this.doctorService.updateDoctor(doctor).subscribe(
       response=>{
         console.log(response);
+        this.alertService.success('Se ha validado el CV correctamente.', { keepAfterRouteChange: true });
         this.volver('doctors');
       },
       error=>{
